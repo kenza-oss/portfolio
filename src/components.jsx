@@ -118,67 +118,64 @@ export const Hero = () => {
           {/* ── Content area ── */}
           <motion.div variants={stagger} initial="hidden" animate="show" className="pt-4 relative">
             
-            {/* ── Professional IT Monitoring Visual (Responsive) ── */}
-            <div className="lg:absolute lg:-right-10 xl:-right-16 lg:top-32 xl:top-40 w-full max-w-sm mx-auto lg:mx-0 lg:w-72 mt-12 lg:mt-0 pointer-events-none">
+            {/* ── Premium Tech Particle Network (Plexus Visual) ── */}
+            <div className="lg:absolute lg:-right-10 xl:-right-16 lg:top-32 xl:top-40 w-full max-w-sm mx-auto lg:mx-0 lg:w-80 mt-12 lg:mt-0 pointer-events-none min-h-[300px]">
               <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1 }}
-                className="bg-white rounded-2xl border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.1)] p-6 relative overflow-hidden mx-auto lg:mx-0"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="relative w-full h-64 lg:h-80"
               >
-                {/* Header Style */}
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex gap-1.5">
-                    <div className="w-2 h-2 rounded-full bg-red-400" />
-                    <div className="w-2 h-2 rounded-full bg-yellow-400" />
-                    <div className="w-2 h-2 rounded-full bg-green-400" />
-                  </div>
-                  <div className="text-[10px] font-mono text-gray-400 font-bold uppercase tracking-widest">System Health</div>
-                </div>
-
-                {/* Animated Metric Bars */}
-                <div className="space-y-4">
-                  {[
-                    { label: 'Cloud CPU', val: '42%', color: 'bg-blue-600', delay: 0 },
-                    { label: 'Security', val: '100%', color: 'bg-green-500', delay: 0.2 },
-                    { label: 'Network', val: '89%', color: 'bg-blue-400', delay: 0.4 }
-                  ].map((m, i) => (
-                    <div key={i} className="space-y-1.5">
-                      <div className="flex justify-between items-end">
-                        <span className="text-[10px] font-bold text-gray-500 uppercase">{m.label}</span>
-                        <span className="text-[11px] font-mono font-black text-gray-900">{m.val}</span>
-                      </div>
-                      <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
-                        <motion.div 
-                          initial={{ width: 0 }}
-                          animate={{ width: m.val }}
-                          transition={{ duration: 1.5, delay: m.delay, repeat: Infinity, repeatType: "reverse" }}
-                          className={`h-full ${m.color}`}
-                        />
-                      </div>
-                    </div>
+                {/* Background Glow */}
+                <div className="absolute inset-0 bg-blue-100/20 blur-[80px] rounded-full" />
+                
+                {/* Interactive Tech Core */}
+                <div className="relative w-full h-full">
+                  {[...Array(8)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      animate={{ 
+                        x: [Math.sin(i) * 20, Math.cos(i) * 40, Math.sin(i) * 20],
+                        y: [Math.cos(i) * 30, Math.sin(i) * 50, Math.cos(i) * 30],
+                        scale: [1, 1.2, 1],
+                        opacity: [0.4, 0.8, 0.4]
+                      }}
+                      transition={{ 
+                        duration: 8 + i, 
+                        repeat: Infinity, 
+                        ease: "easeInOut" 
+                      }}
+                      className="absolute w-2 h-2 bg-blue-600 rounded-full"
+                      style={{ 
+                        left: `${40 + Math.random() * 20}%`,
+                        top: `${40 + Math.random() * 20}%`,
+                        boxShadow: '0 0 10px rgba(37,99,235,0.5)'
+                      }}
+                    />
                   ))}
-                </div>
 
-                {/* Live Pulse Indicator */}
-                <div className="mt-8 pt-4 border-t border-gray-50 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <div className="relative">
-                      <div className="w-2 h-2 rounded-full bg-blue-600" />
-                      <div className="absolute inset-0 w-2 h-2 rounded-full bg-blue-600 animate-ping" />
-                    </div>
-                    <span className="text-[9px] font-mono text-gray-400 uppercase font-bold tracking-tighter">Live Connection</span>
-                  </div>
-                  <div className="flex gap-1">
-                    {[...Array(4)].map((_, i) => (
-                      <motion.div 
-                        key={i}
-                        animate={{ height: [4, 12, 4] }}
-                        transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.1 }}
-                        className="w-1 bg-blue-100 rounded-full"
-                      />
-                    ))}
-                  </div>
+                  {/* SVG Connecting Lines */}
+                  <svg className="absolute inset-0 w-full h-full opacity-30">
+                    <motion.g
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+                      style={{ transformOrigin: 'center' }}
+                    >
+                      <circle cx="50%" cy="50%" r="25%" fill="none" stroke="#2563EB" strokeWidth="0.5" strokeDasharray="4 4" />
+                      <circle cx="50%" cy="50%" r="35%" fill="none" stroke="#2563EB" strokeWidth="0.5" strokeDasharray="8 8" />
+                      
+                      {/* Abstract Tech Vectors */}
+                      <path d="M 50% 10% L 90% 50% L 50% 90% L 10% 50% Z" fill="none" stroke="#2563EB" strokeWidth="1" className="opacity-20" />
+                    </motion.g>
+                  </svg>
+
+                  {/* Tech Floating Label */}
+                  <motion.div 
+                    animate={{ y: [0, -10, 0] }}
+                    transition={{ duration: 4, repeat: Infinity }}
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-sm border border-blue-100 px-4 py-2 rounded-full shadow-lg z-20"
+                  >
+                    <span className="text-[10px] font-black text-blue-600 tracking-widest uppercase">System Core</span>
+                  </motion.div>
                 </div>
               </motion.div>
             </div>
