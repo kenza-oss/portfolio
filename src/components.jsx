@@ -104,7 +104,7 @@ export const Hero = () => {
           >
             <div className="w-40 h-52 xl:w-48 xl:h-64 rounded-xl overflow-hidden border border-gray-200 shadow-lg relative z-10 bg-gray-50">
               <img 
-                src="/src/assets/profile_v4.png" 
+                src="/profile_v4.png" 
                 alt="Kenza Mahleb" 
                 className="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-500" 
               />
