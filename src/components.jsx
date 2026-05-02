@@ -118,64 +118,61 @@ export const Hero = () => {
           {/* ── Content area ── */}
           <motion.div variants={stagger} initial="hidden" animate="show" className="pt-4 relative">
             
-            {/* ── Premium Tech Particle Network (Plexus Visual) ── */}
+            {/* ── Dark Blue Isometric Tech Core (Professional & Subtle) ── */}
             <div className="lg:absolute lg:-right-10 xl:-right-16 lg:top-32 xl:top-40 w-full max-w-sm mx-auto lg:mx-0 lg:w-80 mt-12 lg:mt-0 pointer-events-none min-h-[300px]">
               <motion.div 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="relative w-full h-64 lg:h-80"
+                className="relative w-full h-64 lg:h-80 flex items-center justify-center"
               >
-                {/* Background Glow */}
-                <div className="absolute inset-0 bg-blue-100/20 blur-[80px] rounded-full" />
+                {/* Subtle Radial Glow */}
+                <div className="absolute inset-0 bg-blue-900/5 blur-[100px] rounded-full" />
                 
-                {/* Interactive Tech Core */}
-                <div className="relative w-full h-full">
-                  {[...Array(8)].map((_, i) => (
-                    <motion.div
+                <motion.div
+                  animate={{ 
+                    rotateY: [0, 360],
+                    y: [0, -10, 0]
+                  }}
+                  transition={{ 
+                    rotateY: { duration: 30, repeat: Infinity, ease: "linear" },
+                    y: { duration: 6, repeat: Infinity, ease: "easeInOut" }
+                  }}
+                  style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
+                  className="relative w-40 h-40"
+                >
+                  {/* Isometric Cube Layers (Dark Blue) */}
+                  {[...Array(3)].map((_, i) => (
+                    <div 
                       key={i}
-                      animate={{ 
-                        x: [Math.sin(i) * 20, Math.cos(i) * 40, Math.sin(i) * 20],
-                        y: [Math.cos(i) * 30, Math.sin(i) * 50, Math.cos(i) * 30],
-                        scale: [1, 1.2, 1],
-                        opacity: [0.4, 0.8, 0.4]
-                      }}
-                      transition={{ 
-                        duration: 8 + i, 
-                        repeat: Infinity, 
-                        ease: "easeInOut" 
-                      }}
-                      className="absolute w-2 h-2 bg-blue-600 rounded-full"
+                      className="absolute inset-0 border-2 border-blue-900/30 rounded-xl"
                       style={{ 
-                        left: `${40 + Math.random() * 20}%`,
-                        top: `${40 + Math.random() * 20}%`,
-                        boxShadow: '0 0 10px rgba(37,99,235,0.5)'
+                        transform: `translateZ(${i * 20}px) rotate(${i * 15}deg)`,
+                        background: i === 1 ? 'rgba(30, 58, 138, 0.05)' : 'transparent',
+                        boxShadow: i === 1 ? '0 0 40px rgba(30, 58, 138, 0.1)' : 'none'
                       }}
-                    />
+                    >
+                      {/* Internal Grid in Dark Blue */}
+                      <div className="absolute inset-2 bg-[linear-gradient(to_right,#1E3A8A20_1px,transparent_1px),linear-gradient(to_bottom,#1E3A8A20_1px,transparent_1px)] bg-[size:10px_10px] opacity-40" />
+                      
+                      {/* Corner Accents */}
+                      <div className="absolute top-0 left-0 w-2 h-2 bg-blue-900 rounded-full" />
+                      <div className="absolute bottom-0 right-0 w-2 h-2 bg-blue-800 rounded-full" />
+                    </div>
                   ))}
 
-                  {/* SVG Connecting Lines */}
-                  <svg className="absolute inset-0 w-full h-full opacity-30">
-                    <motion.g
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-                      style={{ transformOrigin: 'center' }}
-                    >
-                      <circle cx="50%" cy="50%" r="25%" fill="none" stroke="#2563EB" strokeWidth="0.5" strokeDasharray="4 4" />
-                      <circle cx="50%" cy="50%" r="35%" fill="none" stroke="#2563EB" strokeWidth="0.5" strokeDasharray="8 8" />
-                      
-                      {/* Abstract Tech Vectors */}
-                      <path d="M 50% 10% L 90% 50% L 50% 90% L 10% 50% Z" fill="none" stroke="#2563EB" strokeWidth="1" className="opacity-20" />
-                    </motion.g>
-                  </svg>
-
-                  {/* Tech Floating Label */}
+                  {/* Pulsing Core Node */}
                   <motion.div 
-                    animate={{ y: [0, -10, 0] }}
-                    transition={{ duration: 4, repeat: Infinity }}
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-sm border border-blue-100 px-4 py-2 rounded-full shadow-lg z-20"
-                  >
-                    <span className="text-[10px] font-black text-blue-600 tracking-widest uppercase">System Core</span>
-                  </motion.div>
+                    animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-blue-900 rounded-full z-20 shadow-[0_0_20px_rgba(30,58,138,0.8)]"
+                  />
+                </motion.div>
+
+                {/* Technical Coordinates (Static/Subtle) */}
+                <div className="absolute top-4 right-4 text-[8px] font-mono text-blue-900/40 uppercase tracking-widest leading-tight text-right">
+                  System.Secure_Core<br />
+                  Encrypted_Node.v4<br />
+                  0x7F.00.01
                 </div>
               </motion.div>
             </div>
