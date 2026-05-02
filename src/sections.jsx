@@ -178,7 +178,7 @@ export const Experience = () => (
           5 YEARS OF<br /><span className="text-blue-600">EXCELLENCE</span>
         </motion.h2>
       </motion.div>
-      <div style={{ display:'grid', gridTemplateColumns:'240px 1fr', gap:64 }}>
+      <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-12 lg:gap-16">
         {/* Sidebar */}
         <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
           {[
@@ -309,7 +309,7 @@ export const Certifications = () => (
         <motion.p variants={fadeUp} className="section-label text-blue-600" style={{ marginBottom:20 }}>Credentials</motion.p>
         <motion.h2 variants={fadeUp} className="font-heading font-black text-gray-900 tracking-[-0.04em]" style={{ fontSize:'clamp(2.5rem,5vw,5rem)' }}>CERTIFICATIONS</motion.h2>
       </motion.div>
-      <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:16 }}>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
         {certs.map((c,i) => (
           <motion.div key={i} initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }}
             viewport={{ once:true }} transition={{ delay:i*0.08 }}
@@ -332,7 +332,7 @@ export const Certifications = () => (
 export const Footer = () => (
   <footer id="contact" className="relative py-32 pb-12 z-10 border-t border-gray-200 bg-gray-50">
     <div style={{ maxWidth:1280, margin:'0 auto', padding:'0 24px' }}>
-      <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:80, alignItems:'start', marginBottom:80 }}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start mb-20">
         <div>
           <p className="section-label text-blue-600 mb-6">Let's Connect</p>
           <h2 className="font-heading font-black text-gray-900 leading-none mb-10 tracking-[-0.04em]" style={{ fontSize:'clamp(2.5rem,6vw,5rem)' }}>

@@ -118,13 +118,13 @@ export const Hero = () => {
           {/* ── Content area ── */}
           <motion.div variants={stagger} initial="hidden" animate="show" className="pt-4 relative">
             
-            {/* ── Professional IT Monitoring Visual (Higher End) ── */}
-            <div className="absolute -right-16 top-40 w-72 pointer-events-none hidden xl:block">
+            {/* ── Professional IT Monitoring Visual (Responsive) ── */}
+            <div className="lg:absolute lg:-right-10 xl:-right-16 lg:top-32 xl:top-40 w-full max-w-sm mx-auto lg:mx-0 lg:w-72 mt-12 lg:mt-0 pointer-events-none">
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1 }}
-                className="bg-white rounded-2xl border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.1)] p-6 relative overflow-hidden"
+                className="bg-white rounded-2xl border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.1)] p-6 relative overflow-hidden mx-auto lg:mx-0"
               >
                 {/* Header Style */}
                 <div className="flex items-center justify-between mb-6">
@@ -180,9 +180,6 @@ export const Hero = () => {
                     ))}
                   </div>
                 </div>
-
-                {/* Abstract Tech Overlay */}
-                <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-blue-50 rounded-full blur-3xl -z-10" />
               </motion.div>
             </div>
 
