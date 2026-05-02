@@ -1,10 +1,6 @@
 services:
-  - type: static
+  - type: web
     name: portfolio-kenza
-    env: static
+    runtime: static
     buildCommand: npm install && npm run build
-    publishDir: dist
-    headers:
-      - path: /*
-        name: Cache-Control
-        value: max-age=31536000
+    staticPublishPath: ./dist
