@@ -91,7 +91,13 @@ export const Navbar = () => {
 
 /* ─────────────── HERO ─────────────── */
 export const Hero = () => {
-  const typed = useTypewriter(['System & Network Engineer', 'Cloud & DevOps Specialist', 'Full-Stack Developer', 'IT Project Manager', 'Cybersecurity Analyst']);
+  const typed = useTypewriter([
+    'Systems & Cloud Administrator',
+    'Network & Security Engineer',
+    'Cisco CCNA Certified (Score 94%)',
+    'DevOps & Infrastructure Lead',
+    'Full-Stack Developer (Django, React)'
+  ]);
   
   return (
     <section id="about" className="relative min-h-[90vh] flex items-center pt-32 pb-16 overflow-hidden">
@@ -112,7 +118,7 @@ export const Hero = () => {
           >
             <div className="w-40 h-52 xl:w-48 xl:h-64 rounded-xl overflow-hidden border border-gray-200 shadow-lg relative z-10 bg-gray-50">
               <img 
-                src="/profile_v4.png" 
+                src="/profile_v4.webp" 
                 alt="Kenza Mahleb" 
                 className="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-500" 
               />
@@ -187,7 +193,7 @@ export const Hero = () => {
 
             <motion.div variants={fadeUp} className="flex items-center gap-3 mb-6">
               <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-              <span className="font-mono text-[11px] font-bold tracking-[0.3em] uppercase text-blue-600">Senior IT Lead</span>
+              <span className="font-mono text-[11px] font-bold tracking-[0.3em] uppercase text-blue-600">Cisco CCNA (94%) · ESGI Paris</span>
             </motion.div>
 
             <motion.h1 variants={fadeUp} className="font-heading font-black tracking-[-0.04em] mb-6 leading-tight text-gray-900" style={{ fontSize: 'clamp(2.5rem,5.5vw,4.5rem)' }}>
@@ -203,8 +209,7 @@ export const Hero = () => {
             </motion.div>
 
             <motion.p variants={fadeUp} className="max-w-xl leading-relaxed mb-10 text-lg text-gray-500">
-              Graduate from <strong className="text-gray-900">ESGI Paris</strong>. I design and build high-performance,
-              secure infrastructures and intelligent applications — bridging software engineering with cloud architecture.
+              Bachelor in Computer Engineering graduate from <strong className="text-gray-900">ESGI Paris</strong> and <strong className="text-blue-600">Cisco CCNA Certified (94%)</strong>. I specialize in administering complex network architectures, deploying secure cloud environments (Render, Supabase), and building automated CI/CD pipelines.
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4 items-center">
@@ -289,10 +294,11 @@ function OrbitTool({ tool, index, total, r, counterClass }) {
 
 export const Skills = () => {
   const cats = [
-    { cat:'Cloud & DevOps',     items:['AWS · Azure · GCP','Kubernetes · Docker','Terraform · Ansible','CI/CD Pipelines'] },
-    { cat:'Network & Security', items:['Network Architecture','Pen Testing / VA','ISO 27001 · SOC2','Firewalls · VPN'] },
-    { cat:'Full-Stack Dev',     items:['React · Next.js','Node.js · Python','Django · FastAPI','PostgreSQL · Redis'] },
-    { cat:'AI & Automation',    items:['LLM Integration','Process Automation','Data Pipelines','Monitoring & Alerting'] },
+    { cat:'Systems & Administration', items:['Linux (Debian, Kali, Ubuntu)', 'Windows Server & Active Directory', 'Docker Containerization', 'IAM & Access Control (RBAC)'] },
+    { cat:'Networks & Infrastructure', items:['Routing & Switching (OSPF, BGP)', 'VLAN, STP & Network Segmentation', 'Wireshark & Packet Capture', 'Cisco Packet Tracer Architecture'] },
+    { cat:'Cloud Computing & DevOps', items:['CI/CD Pipelines (GitHub Actions)', 'Render, Supabase & Cloud Hosting', 'Cloudinary CDN Optimization', 'DNS Management & cPanel'] },
+    { cat:'Cybersecurity & Audit', items:['OWASP Top 10 Mitigation', 'JWT, OAuth2 & API Hardening', 'Nmap, Metasploit & Pentesting', 'Vulnerability Assessments'] },
+    { cat:'Development & Scripting', items:['Python & Shell Scripting', 'RESTful API Engineering', 'Django & PostgreSQL Backend', 'React & Flutter Interfaces'] },
   ];
   return (
     <section id="skills" className="relative py-32 overflow-hidden border-t border-gray-100 bg-gray-50">
@@ -301,37 +307,39 @@ export const Skills = () => {
           <motion.p variants={fadeUp} className="font-mono text-[11px] font-bold tracking-[0.3em] uppercase text-blue-600 mb-6" style={{ display:'flex', justifyContent:'center' }}>Capabilities</motion.p>
           <motion.h2 variants={fadeUp} className="font-heading font-black text-gray-900 tracking-[-0.04em]" style={{ fontSize:'clamp(2.5rem,5vw,5rem)' }}>TECHNICAL STACK</motion.h2>
           <motion.p variants={fadeUp} className="text-gray-500 text-sm max-w-md mx-auto mt-4">
-            An ecosystem of tools and technologies orbiting my core expertise.
+            An ecosystem of tools, protocols, and technologies powering my infrastructure and security architecture.
           </motion.p>
         </motion.div>
 
-        {/* ── Orbit diagram ── */}
-        <div style={{ position:'relative', width:'100%', height:600, display:'flex', alignItems:'center', justifyContent:'center', marginBottom:64 }}>
-          {/* Static ring guides */}
-          <div style={{ position:'absolute', width:300, height:300, borderRadius:'50%', border:'1px dashed rgba(0,0,0,0.05)' }} />
-          <div style={{ position:'absolute', width:540, height:540, borderRadius:'50%', border:'1px solid rgba(0,0,0,0.03)' }} />
+        {/* ── Orbit diagram (Mobile Responsive Scale) ── */}
+        <div className="relative w-full h-[420px] sm:h-[520px] md:h-[600px] flex items-center justify-center mb-16 overflow-hidden">
+          <div className="scale-[0.55] sm:scale-75 md:scale-100 transition-transform origin-center flex items-center justify-center relative w-[560px] h-[560px]">
+            {/* Static ring guides */}
+            <div style={{ position:'absolute', width:300, height:300, borderRadius:'50%', border:'1px dashed rgba(0,0,0,0.08)' }} />
+            <div style={{ position:'absolute', width:540, height:540, borderRadius:'50%', border:'1px solid rgba(0,0,0,0.05)' }} />
 
-          {/* Spinning rings */}
-          <div className="orbit-ring-1" style={{ position:'absolute', width:300, height:300 }}>
-            {tools1.map((t,i) => <OrbitTool key={t.name} tool={t} index={i} total={tools1.length} r={150} counterClass="counter-rotate-1" />)}
-          </div>
-          <div className="orbit-ring-2" style={{ position:'absolute', width:540, height:540 }}>
-            {tools2.map((t,i) => <OrbitTool key={t.name} tool={t} index={i} total={tools2.length} r={270} counterClass="counter-rotate-2" />)}
-          </div>
+            {/* Spinning rings */}
+            <div className="orbit-ring-1" style={{ position:'absolute', width:300, height:300 }}>
+              {tools1.map((t,i) => <OrbitTool key={t.name} tool={t} index={i} total={tools1.length} r={150} counterClass="counter-rotate-1" />)}
+            </div>
+            <div className="orbit-ring-2" style={{ position:'absolute', width:540, height:540 }}>
+              {tools2.map((t,i) => <OrbitTool key={t.name} tool={t} index={i} total={tools2.length} r={270} counterClass="counter-rotate-2" />)}
+            </div>
 
-          {/* Center KM */}
-          <div style={{
-            position:'absolute', zIndex:20,
-            width:120, height:120, borderRadius:'50%',
-            background:'#FFF',
-            border:'1px solid rgba(59,130,246,0.1)',
-            boxShadow:'0 10px 30px rgba(0,0,0,0.08)',
-            display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center',
-          }}>
-            <span style={{ fontFamily:'Outfit,sans-serif', fontWeight:900, fontSize:30, color:'#111827', letterSpacing:'-0.05em', lineHeight:1 }}>
-              KM<span className="text-blue-600">.</span>
-            </span>
-            <span className="text-blue-600" style={{ fontFamily:'Space Mono,monospace', fontSize:8, letterSpacing:'0.25em', textTransform:'uppercase', marginTop:4 }}>Engineer</span>
+            {/* Center KM */}
+            <div style={{
+              position:'absolute', zIndex:20,
+              width:120, height:120, borderRadius:'50%',
+              background:'#FFF',
+              border:'1px solid rgba(59,130,246,0.15)',
+              boxShadow:'0 10px 30px rgba(0,0,0,0.08)',
+              display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center',
+            }}>
+              <span style={{ fontFamily:'Outfit,sans-serif', fontWeight:900, fontSize:30, color:'#111827', letterSpacing:'-0.05em', lineHeight:1 }}>
+                KM<span className="text-blue-600">.</span>
+              </span>
+              <span className="text-blue-600" style={{ fontFamily:'Space Mono,monospace', fontSize:8, letterSpacing:'0.25em', textTransform:'uppercase', marginTop:4 }}>Engineer</span>
+            </div>
           </div>
         </div>
 

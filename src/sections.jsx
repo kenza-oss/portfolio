@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Briefcase, GraduationCap, Award, ArrowRight, Mail, Linkedin, MapPin, Github, Send, CheckCircle2, ExternalLink } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Briefcase, GraduationCap, Award, ArrowRight, Mail, Linkedin, MapPin, Github, Send, CheckCircle2, ExternalLink, Phone, X, ZoomIn } from 'lucide-react';
 import { fadeUp, stagger } from './components.jsx';
 
 const D = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons';
@@ -194,16 +194,44 @@ export const Projects = () => {
   );
 };
 
-/* ── EXPERIENCE ── */
+/* ── EXPERIENCE (From Official CV) ── */
 const exps = [
-  { role:'IT Project Manager & Tech Lead', company:'ESGI — Paris, France', period:'2023 — Present', type:'Full-Time', dot:'#22D3EE',
-    items:['Led 8+ cross-functional teams delivering cloud migration projects on time and under budget','Architected hybrid cloud strategy (AWS + Azure) reducing infra costs by 35%','Managed international remote collaborations across 4 countries'] },
-  { role:'Cloud & Network Security Engineer', company:'Enterprise Security Division', period:'2022 — 2023', type:'Internship × 2', dot:'#3B82F6',
-    items:['Conducted full VA/PT assessments on critical infrastructure for 2 major clients','Deployed Zero-Trust network segmentation across 1200+ endpoints','Hardened Linux/Windows servers; reduced attack surface by 78%'] },
-  { role:'Senior Full-Stack Developer', company:'Freelance — International Clients', period:'2021 — 2023', type:'Freelance', dot:'#8B5CF6',
-    items:['Delivered 15+ production-grade web apps for French, Algerian, and Canadian clients','Built Kleer Infini SaaS: React/Next.js + Django + PostgreSQL serving 500+ students','Maintained 4.9★ client satisfaction across all engagements'] },
-  { role:'Full-Stack Developer', company:'Tech Startup — Paris', period:'2020 — 2021', type:'Full-Time', dot:'#10B981',
-    items:['Built REST APIs in Node.js handling 50k+ requests/day at < 100ms P99','Migrated monolith to microservices, cutting deploy time by 70%','Set up first CI/CD pipeline (GitHub Actions + Docker) for the team'] },
+  { 
+    role: 'Responsable Infrastructure & Support Technique', 
+    company: 'Kleer Infini • Projet B2B Export', 
+    period: 'Janv. 2026 — Avril 2026', 
+    type: 'Full-Time', 
+    dot: '#2563EB',
+    items: [
+      'Architecture Cloud & Admin : Déploiement et gestion de l\'infrastructure Cloud complète (Render, Supabase, Cloudinary) avec monitoring proactif.',
+      'Sécurité des Accès : Sécurisation des endpoints API (REST, OAuth2/JWT) et politique de contrôle d\'accès strict (RBAC).',
+      'Optimisation des Performances : Distribution CDN et optimisation des flux médias, réduisant la latence globale de 45 %.',
+      'Supervision & Encadrement : Formation technique des développeurs et stagiaires aux standards de sécurité et déploiement continu.'
+    ] 
+  },
+  { 
+    role: 'Administratrice Réseau & Intégratrice Système', 
+    company: 'Kleergo • Plateforme Logistique Intelligente', 
+    period: '2025 — 2026', 
+    type: 'Contract', 
+    dot: '#0891B2',
+    items: [
+      'DevOps & CI/CD : Automatisation complète des pipelines de test et déploiement continu via GitHub Actions.',
+      'Flux Temps Réel : Configuration et supervision des communications temps réel (WebSockets & APIs REST) pour la géolocalisation.',
+      'Supervision & Haute Disponibilité : Tests d\'intégration et suivi des performances système assurant une haute disponibilité du service.'
+    ] 
+  },
+  { 
+    role: 'Analyste Sécurité Réseau & Auditeuse', 
+    company: 'Keystone • Audit & Cybersécurité', 
+    period: '2025', 
+    type: 'Stage', 
+    dot: '#7C3AED',
+    items: [
+      'Hardening & Correctifs : Détection des failles logiques et réseau, implémentation des correctifs de sécurité prioritaires.',
+      'Conformité OWASP : Rédaction de rapports d\'audit exhaustifs et préconisations d\'atténuation basées sur l\'OWASP Top 10.'
+    ] 
+  }
 ];
 
 export const Experience = () => (
@@ -212,27 +240,28 @@ export const Experience = () => (
       <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }} style={{ marginBottom:80 }}>
         <motion.p variants={fadeUp} className="section-label text-blue-600" style={{ marginBottom:20 }}>Career Path</motion.p>
         <motion.h2 variants={fadeUp} className="font-heading font-black text-gray-900 tracking-[-0.04em]" style={{ fontSize:'clamp(2.5rem,5vw,5rem)' }}>
-          5 YEARS OF<br /><span className="text-blue-600">EXCELLENCE</span>
+          PROFESSIONAL<br /><span className="text-blue-600">EXPERIENCE</span>
         </motion.h2>
       </motion.div>
-      <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-12 lg:gap-16">
+      <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-12 lg:gap-16">
         {/* Sidebar */}
         <div style={{ display:'flex', flexDirection:'column', gap:16 }}>
           {[
-            { Icon:GraduationCap, title:'ESGI Paris', sub:"Master's Level \u00B7 Computer Engineering" },
-            { Icon:MapPin, title:'Paris, France', sub:'Remote available worldwide' },
+            { Icon:GraduationCap, title:'ESGI Paris', sub:"Bachelor en Ingénierie Informatique · Systèmes, Réseaux & Cloud (2025)" },
+            { Icon:Award, title:'Cisco Certified CCNA', sub:"Score Exceptionnel : 94% (Certification 2026)" },
+            { Icon:MapPin, title:'Alger, Algérie', sub:'Sidi M\'Hamed, Birtouta · Remote disponible monde entier' },
           ].map(({ Icon, title, sub }) => (
-            <div key={title} className="glass-card bg-gray-50 border border-gray-200" style={{ padding:24 }}>
-              <Icon size={26} className="text-blue-600 mb-3" />
-              <p className="font-heading font-bold text-gray-900 mb-1">{title}</p>
-              <p className="text-xs text-gray-500">{sub}</p>
+            <div key={title} className="glass-card bg-gray-50 border border-gray-200" style={{ padding:20 }}>
+              <Icon size={24} className="text-blue-600 mb-2" />
+              <p className="font-heading font-bold text-gray-900 mb-1 text-sm">{title}</p>
+              <p className="text-xs text-gray-500 leading-relaxed">{sub}</p>
             </div>
           ))}
-          <div className="glass-card bg-gray-50 border border-gray-200" style={{ padding:24 }}>
-            {[['5+','Years Exp.'],['30+','Projects'],['4','Countries']].map(([n,l]) => (
+          <div className="glass-card bg-gray-50 border border-gray-200" style={{ padding:20 }}>
+            {[['94%','Cisco CCNA Score'],['100%','Uptime & Security'],['3+','Years Tech Practice']].map(([n,l]) => (
               <div key={l} style={{ display:'flex', justifyContent:'space-between', alignItems:'center', padding:'8px 0', borderBottom:'1px solid rgba(0,0,0,0.05)' }}>
                 <span className="text-xs text-gray-500">{l}</span>
-                <span className="font-heading font-black text-xl text-blue-600">{n}</span>
+                <span className="font-heading font-black text-lg text-blue-600">{n}</span>
               </div>
             ))}
           </div>
@@ -252,7 +281,7 @@ export const Experience = () => (
                 <div style={{ display:'flex', justifyContent:'space-between', flexWrap:'wrap', gap:8, marginBottom:16 }}>
                   <div>
                     <h3 className="font-heading font-black text-gray-900 text-[1.15rem]">{e.role}</h3>
-                    <p className="text-[13px] text-gray-500 mt-1">{e.company}</p>
+                    <p className="text-[13px] text-gray-500 mt-1 font-medium">{e.company}</p>
                   </div>
                   <div style={{ textAlign:'right' }}>
                     <span style={{ ...S }} className="text-[11px] text-blue-600 font-bold block">{e.period}</span>
@@ -319,51 +348,140 @@ export const Testimonials = () => (
   </section>
 );
 
-/* ── CERTIFICATIONS ── */
+/* ── CERTIFICATIONS & CREDENTIALS ── */
 const certs = [
-  { title:'AWS Solutions Architect — Associate', issuer:'Amazon Web Services', year:'2024', accent:'#22D3EE' },
-  { title:'Cisco CCNA — Network Associate',      issuer:'Cisco Systems',       year:'2023', accent:'#3B82F6' },
-  { title:'Azure Fundamentals AZ-900',            issuer:'Microsoft',           year:'2023', accent:'#60A5FA' },
-  { title:'Cybersecurity Analyst Professional',   issuer:'IBM / Coursera',      year:'2022', accent:'#818CF8' },
-  { title:'Google Cloud Associate Engineer',      issuer:'Google Cloud',        year:'2023', accent:'#34D399' },
-  { title:'Certified Ethical Hacker (CEH)',       issuer:'EC-Council',          year:'2022', accent:'#F87171' },
+  { 
+    title: 'Cisco Certified Network Associate (CCNA)', 
+    issuer: 'Cisco Systems', 
+    year: '2026', 
+    accent: '#2563EB',
+    score: 'Score : 94%',
+    desc: 'Protocoles de routage & commutation (OSPF, BGP, VLAN, STP), sécurité réseau et transport de données.' 
+  },
+  { 
+    title: 'Bachelor en Ingénierie Informatique', 
+    issuer: 'ESGI Paris, France', 
+    year: '2025', 
+    accent: '#0891B2',
+    score: 'Diplômée 2025',
+    desc: 'Spécialité : Systèmes, Réseaux, Cloud Computing & Sécurité des Infrastructures.' 
+  },
+  { 
+    title: 'Audit de Sécurité Réseau & OWASP', 
+    issuer: 'Keystone Cybersécurité', 
+    year: '2025', 
+    accent: '#7C3AED',
+    score: 'Auditeuse Réseau',
+    desc: 'Détection des failles logiques et réseau, hardening et préconisations basées sur OWASP Top 10.' 
+  },
+  { 
+    title: 'Cloud Infrastructure & CI/CD Pipelines', 
+    issuer: 'Render · Supabase · GitHub Actions', 
+    year: '2026', 
+    accent: '#10B981',
+    score: 'Haute Disponibilité',
+    desc: 'Architecture Cloud complète, politique de contrôle RBAC et réduction de 45% de latence.' 
+  },
+  { 
+    title: 'Administration Systèmes Linux & Docker', 
+    issuer: 'Debian · Kali · Ubuntu Server', 
+    year: '2025', 
+    accent: '#F59E0B',
+    score: 'Systèmes & Réseaux',
+    desc: 'Hardening serveurs, gestion des droits IAM, conteneurisation Docker et scripting Shell/Python.' 
+  },
+  { 
+    title: 'Intégration Systèmes & Flux Temps Réel', 
+    issuer: 'Kleergo · Logistique Intelligente', 
+    year: '2026', 
+    accent: '#EC4899',
+    score: 'Production Proven',
+    desc: 'WebSockets temps réel, APIs REST, monitoring de géolocalisation et tests d\'intégration.' 
+  },
 ];
 
-export const Certifications = () => (
-  <section id="certifications" className="relative py-32 z-10 border-t border-gray-100 bg-transparent">
-    <div style={{ maxWidth:1280, margin:'0 auto', padding:'0 24px' }}>
-      
-      {/* ── Image Gallery (Professional & Small) ── */}
-      <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }} className="mb-24 flex flex-col md:flex-row gap-4 md:gap-8 items-center">
-        {['/screenshots/cert-1.png', '/screenshots/cert-2.png', '/screenshots/cert-3.png'].map((src, idx) => (
-          <motion.div key={idx} variants={fadeUp} className="glass-card flex-1 w-full rounded-2xl overflow-hidden group border border-gray-200 hover:border-blue-600/30 transition-all cursor-pointer shadow-lg p-2 bg-gray-50">
-             <img src={src} alt={`Certification Preview ${idx + 1}`} className="w-full h-auto object-contain rounded-xl group-hover:scale-[1.02] transition-transform duration-500" />
-          </motion.div>
-        ))}
-      </motion.div>
+export const Certifications = () => {
+  const [selectedImage, setSelectedImage] = useState(null);
 
-      <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }} style={{ marginBottom:80 }}>
-        <motion.p variants={fadeUp} className="section-label text-blue-600" style={{ marginBottom:20 }}>Credentials</motion.p>
-        <motion.h2 variants={fadeUp} className="font-heading font-black text-gray-900 tracking-[-0.04em]" style={{ fontSize:'clamp(2.5rem,5vw,5rem)' }}>CERTIFICATIONS</motion.h2>
-      </motion.div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
-        {certs.map((c,i) => (
-          <motion.div key={i} initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }}
-            viewport={{ once:true }} transition={{ delay:i*0.08 }}
-            className="glass-card group bg-white border border-gray-100 shadow-sm" style={{ padding:28, position:'relative', overflow:'hidden' }}>
-            <div style={{ position:'absolute', top:0, left:0, right:0, height:3, borderRadius:'14px 14px 0 0', background:c.accent }} />
-            <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:20 }}>
-              <Award size={28} style={{ color:c.accent }} />
-              <span style={{ ...S }} className="text-[11px] text-gray-400">{c.year}</span>
-            </div>
-            <h3 className="font-heading font-bold text-gray-900 mb-2 leading-[1.3] text-[15px] group-hover:text-blue-600 transition-colors">{c.title}</h3>
-            <p style={{ ...S }} className="text-[10px] text-gray-500 uppercase tracking-[0.15em]">{c.issuer}</p>
-          </motion.div>
-        ))}
+  return (
+    <section id="certifications" className="relative py-32 z-10 border-t border-gray-100 bg-transparent">
+      <div style={{ maxWidth:1280, margin:'0 auto', padding:'0 24px' }}>
+        
+        {/* ── Image Gallery with Lightbox Zoom ── */}
+        <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }} className="mb-24 flex flex-col md:flex-row gap-6 md:gap-8 items-center">
+          {['/screenshots/cert-1.png', '/screenshots/cert-2.png', '/screenshots/cert-3.png'].map((src, idx) => (
+            <motion.div 
+              key={idx} 
+              variants={fadeUp} 
+              onClick={() => setSelectedImage(src)}
+              className="glass-card flex-1 w-full rounded-2xl overflow-hidden group border border-gray-200 hover:border-blue-600 transition-all cursor-pointer shadow-md hover:shadow-xl p-2.5 bg-gray-50 relative"
+            >
+              <div className="relative overflow-hidden rounded-xl">
+                <img src={src} alt={`Certification Preview ${idx + 1}`} className="w-full h-auto object-contain rounded-xl group-hover:scale-[1.03] transition-transform duration-500" />
+                <div className="absolute inset-0 bg-blue-900/0 group-hover:bg-blue-900/20 transition-all flex items-center justify-center">
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-white/90 text-blue-600 px-3.5 py-1.5 rounded-full text-xs font-bold shadow-md flex items-center gap-1.5">
+                    <ZoomIn size={14} /> Agrandir
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* ── Lightbox Modal ── */}
+        <AnimatePresence>
+          {selectedImage && (
+            <motion.div 
+              initial={{ opacity: 0 }} 
+              animate={{ opacity: 1 }} 
+              exit={{ opacity: 0 }} 
+              onClick={() => setSelectedImage(null)}
+              className="fixed inset-0 z-[200] bg-black/85 backdrop-blur-md flex items-center justify-center p-4 md:p-8 cursor-zoom-out"
+            >
+              <motion.div 
+                initial={{ scale: 0.9, opacity: 0 }} 
+                animate={{ scale: 1, opacity: 1 }} 
+                exit={{ scale: 0.9, opacity: 0 }} 
+                onClick={e => e.stopPropagation()} 
+                className="relative max-w-4xl max-h-[90vh] bg-white rounded-2xl overflow-hidden p-3 shadow-2xl"
+              >
+                <button 
+                  onClick={() => setSelectedImage(null)} 
+                  className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-gray-900/80 hover:bg-black text-white flex items-center justify-center transition-all shadow-md"
+                >
+                  <X size={18} />
+                </button>
+                <img src={selectedImage} alt="Certificat Agrandissement" className="max-h-[82vh] w-auto object-contain rounded-xl" />
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }} style={{ marginBottom:80 }}>
+          <motion.p variants={fadeUp} className="section-label text-blue-600" style={{ marginBottom:20 }}>Credentials</motion.p>
+          <motion.h2 variants={fadeUp} className="font-heading font-black text-gray-900 tracking-[-0.04em]" style={{ fontSize:'clamp(2.5rem,5vw,5rem)' }}>CERTIFICATIONS</motion.h2>
+        </motion.div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+          {certs.map((c,i) => (
+            <motion.div key={i} initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }}
+              viewport={{ once:true }} transition={{ delay:i*0.08 }}
+              className="glass-card group bg-white border border-gray-100 shadow-sm hover:border-blue-600/40 hover:shadow-lg transition-all" style={{ padding:28, position:'relative', overflow:'hidden' }}>
+              <div style={{ position:'absolute', top:0, left:0, right:0, height:3, borderRadius:'14px 14px 0 0', background:c.accent }} />
+              <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:18 }}>
+                <Award size={28} style={{ color:c.accent }} />
+                <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-600 border border-blue-100">{c.score}</span>
+              </div>
+              <h3 className="font-heading font-bold text-gray-900 mb-2 leading-[1.3] text-[15px] group-hover:text-blue-600 transition-colors">{c.title}</h3>
+              <p style={{ ...S }} className="text-[10px] text-gray-500 uppercase tracking-[0.15em] mb-3">{c.issuer} · {c.year}</p>
+              <p className="text-xs text-gray-600 leading-relaxed">{c.desc}</p>
+            </motion.div>
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 /* ── CONTACT FORM COMPONENT ── */
 const ContactForm = () => {
@@ -486,24 +604,32 @@ export const Footer = () => (
         <div>
           <p className="section-label text-blue-600 mb-6">Let's Connect</p>
           <h2 className="font-heading font-black text-gray-900 leading-none mb-10 tracking-[-0.04em]" style={{ fontSize:'clamp(2.5rem,6vw,5rem)' }}>
-            LET'S BUILD<br /><span className="text-blue-600">FUTURE</span><br />SYSTEMS.
+            LET'S BUILD<br /><span className="text-blue-600">SECURE & SCALABLE</span><br />SYSTEMS.
           </h2>
-          {[{ Icon:Mail, label:'mahlebkenza1@gmail.com', href:'mailto:mahlebkenza1@gmail.com' },
-            { Icon:Linkedin, label:'linkedin.com/in/kenza-mahleb', href:'https://www.linkedin.com/in/kenza-mahleb-9860b5279' },
-          ].map(({ Icon, label, href }) => (
-            <a key={label} href={href} className="flex items-center gap-4 text-gray-600 mb-4 transition-all hover:text-blue-600 text-[15px]">
-              <span className="w-10 h-10 border border-gray-200 rounded-lg flex items-center justify-center flex-shrink-0 bg-white"><Icon size={16} /></span>
-              {label}
-            </a>
-          ))}
+          <div className="space-y-3.5 mb-8">
+            {[{ Icon:Phone, label:'+213 660 17 28 78', href:'tel:+213660172878' },
+              { Icon:Mail, label:'mahlebkenza1@gmail.com', href:'mailto:mahlebkenza1@gmail.com' },
+              { Icon:Linkedin, label:'linkedin.com/in/kenza-mahleb', href:'https://www.linkedin.com/in/kenza-mahleb-9860b5279' },
+              { Icon:Github, label:'github.com/kenza-oss', href:'https://github.com/kenza-oss' },
+              { Icon:MapPin, label:'Sidi M\'Hamed, Birtouta · Alger, Algérie', href:'#about' },
+            ].map(({ Icon, label, href }) => (
+              <a key={label} href={href} target={href.startsWith('http') ? '_blank' : '_self'} rel="noopener noreferrer" 
+                className="flex items-center gap-4 text-gray-600 transition-all hover:text-blue-600 text-[14px]">
+                <span className="w-10 h-10 border border-gray-200 rounded-lg flex items-center justify-center flex-shrink-0 bg-white shadow-sm">
+                  <Icon size={16} className="text-blue-600" />
+                </span>
+                <span className="font-medium">{label}</span>
+              </a>
+            ))}
+          </div>
         </div>
         <ContactForm />
       </div>
       <div className="border-t border-gray-200 pt-6 flex justify-between items-center flex-wrap gap-3">
-        <p style={{ ...S }} className="text-[11px] text-gray-400">© 2026 Kenza Mahleb · Senior Systems Engineer · Paris, France</p>
+        <p style={{ ...S }} className="text-[11px] text-gray-400">© 2026 Kenza Mahleb · Administratrice Systèmes, Réseaux & Cloud · Alger & Paris</p>
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-          <span style={{ ...S }} className="text-[11px] text-gray-500">Open to remote & international projects</span>
+          <span style={{ ...S }} className="text-[11px] text-gray-500">Disponible pour missions, CDI & projets internationaux</span>
         </div>
       </div>
     </div>
