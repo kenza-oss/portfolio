@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Briefcase, GraduationCap, Award, ArrowRight, Mail, Linkedin, MapPin } from 'lucide-react';
+import { Briefcase, GraduationCap, Award, ArrowRight, Mail, Linkedin, MapPin, Github, Send, CheckCircle2, ExternalLink } from 'lucide-react';
 import { fadeUp, stagger } from './components.jsx';
 
 const D = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons';
@@ -9,65 +9,92 @@ const projects = [
   { 
     title: 'Wear Plakkies', 
     category: 'Web Apps',
-    description: 'Development and Maintenance of e-commerce Website',
+    description: 'Development and maintenance of a modern high-conversion e-commerce platform with responsive UI and optimized checkout.',
     tags: ['React', 'Next.js', 'Tailwind CSS', 'Shopify'],
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&fit=crop'
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&fit=crop',
+    liveUrl: '#',
+    githubUrl: 'https://github.com/kenza-oss'
   },
   { 
     title: 'AI Voice Chatbot', 
     category: 'AI',
-    description: 'Implemented advanced algorithms for TTS and STT to achieve human-like voice quality and accuracy.',
-    tags: ['Speech Synthesis', 'API Integration'],
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&fit=crop'
+    description: 'Implemented advanced speech synthesis (TTS) and recognition (STT) pipeline achieving human-like conversational fluidity.',
+    tags: ['Python', 'Speech Synthesis', 'FastAPI', 'OpenAI'],
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&fit=crop',
+    liveUrl: '#',
+    githubUrl: 'https://github.com/kenza-oss'
   },
   { 
-    title: 'Laxmi Hyundai - Chatbot', 
+    title: 'Laxmi Hyundai - AI Assistant', 
     category: 'AI',
-    description: 'Chatbot integration for a website, it improves the interaction with site visitors',
-    tags: ['Chatbot', 'OpenAI', 'GPT-4o', 'React'],
-    image: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=800&fit=crop'
+    description: 'Conversational AI integration for an automotive portal, improving visitor engagement, customer support, and lead qualification.',
+    tags: ['Chatbot', 'OpenAI', 'GPT-4o', 'React', 'Node.js'],
+    image: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=800&fit=crop',
+    liveUrl: '#',
+    githubUrl: 'https://github.com/kenza-oss'
   },
   { 
-    title: 'Learning Management System', 
-    category: 'Web Apps',
-    description: 'Developed a comprehensive Learning Management System (LMS) using Next.js and TypeScript to deliver a seamless and scalable platform.',
-    tags: ['Next.js', 'React', 'TypeScript', 'NodeJS Framework', 'Redux'],
-    image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=800&fit=crop'
+    title: 'Learning Management System (LMS)', 
+    category: 'Backend',
+    description: 'Engineered a scalable LMS backend architecture with role-based access control, progress tracking, and secure RESTful endpoints.',
+    tags: ['Node.js', 'Express', 'PostgreSQL', 'TypeScript', 'Docker'],
+    image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=800&fit=crop',
+    liveUrl: '#',
+    githubUrl: 'https://github.com/kenza-oss'
   },
   { 
-    title: 'FlirtBox', 
+    title: 'Enterprise Microservices & Cloud API', 
+    category: 'Backend',
+    description: 'High-throughput microservices architecture with distributed Redis caching, JWT security, and Docker containerization.',
+    tags: ['Node.js', 'Docker', 'Redis', 'PostgreSQL', 'Microservices'],
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&fit=crop',
+    liveUrl: '#',
+    githubUrl: 'https://github.com/kenza-oss'
+  },
+  { 
+    title: 'FlirtBox Mobile App', 
     category: 'Mobile',
-    description: 'Flirt Box is a matchmaking app that combines audio rooms and live streams, offering a unique platform for real-time audience interaction through live audio.',
+    description: 'Matchmaking mobile application combining real-time audio rooms and live streams with low-latency WebRTC infrastructure.',
     tags: ['Flutter', 'React Native', 'Dart', 'Firebase', 'PostgreSQL'],
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&fit=crop'
+    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&fit=crop',
+    liveUrl: '#',
+    githubUrl: 'https://github.com/kenza-oss'
   },
   { 
-    title: 'Tesla Website', 
+    title: 'Financial Analytics & Market Dashboard', 
     category: 'Web Apps',
-    description: 'An interactive dashboard for financial data visualization, portfolio management, and investment tracking with real-time updates.',
+    description: 'Interactive analytics dashboard for real-time market data visualization, portfolio tracking, and automated performance reporting.',
     tags: ['React', 'Next.js', 'TypeScript', 'TailwindCSS', 'ExpressJS'],
-    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&fit=crop'
+    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&fit=crop',
+    liveUrl: '#',
+    githubUrl: 'https://github.com/kenza-oss'
   },
   { 
-    title: 'RAE Engineering - Web3', 
+    title: 'RAE Engineering - Web3 Integrity', 
     category: 'Web3',
-    description: 'At RAE Engineering, our focus is on determining and managing the integrity of pressure equipment, pressure piping, tanks and related mechanical equipment.',
-    tags: ['Web3', 'Next.js', 'TypeScript', 'TailwindCSS', 'ExpressJS'],
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&fit=crop'
+    description: 'Decentralized asset integrity registry and verification platform for critical mechanical equipment and pressure piping.',
+    tags: ['Web3', 'Solidity', 'Next.js', 'TypeScript', 'Ethereum'],
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&fit=crop',
+    liveUrl: '#',
+    githubUrl: 'https://github.com/kenza-oss'
   },
   { 
     title: 'MCP for Memorization - Mem0.ai', 
     category: 'AI',
-    description: 'Mem0 remembers user preferences, adapts to individual needs, and continuously improves over time.',
-    tags: ['LangFlow', 'Next.js', 'AWS', 'Vercel'],
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&fit=crop'
+    description: 'Model Context Protocol integration providing persistent memory and personalized context recall for autonomous AI agents.',
+    tags: ['Python', 'FastAPI', 'LangChain', 'AWS', 'Vector DB'],
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&fit=crop',
+    liveUrl: '#',
+    githubUrl: 'https://github.com/kenza-oss'
   },
   { 
-    title: 'Thealtmanbrothers - Real Estate', 
+    title: 'The Altman Brothers - Luxury Real Estate', 
     category: 'Web Apps',
-    description: 'The Altman Brothers is a real estate company that provides a wide range of services to their clients.',
-    tags: ['React', 'Next.js', 'Tailwind CSS', 'Hubspot'],
-    image: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=800&fit=crop'
+    description: 'High-performance real estate portal with custom MLS search filters, interactive property maps, and CRM integration.',
+    tags: ['React', 'Next.js', 'Tailwind CSS', 'HubSpot API'],
+    image: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=800&fit=crop',
+    liveUrl: '#',
+    githubUrl: 'https://github.com/kenza-oss'
   }
 ];
 
@@ -139,13 +166,23 @@ export const Projects = () => {
                   ))}
                 </div>
 
-                {/* Buttons (NeonNexus Style) */}
+                {/* Buttons (Connected & Functional) */}
                 <div className="flex gap-4">
-                  <a href="#" className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-[13px] font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md">
-                    Live Demo <ArrowRight size={14} />
+                  <a 
+                    href={p.liveUrl !== '#' ? p.liveUrl : '#contact'} 
+                    target={p.liveUrl !== '#' ? "_blank" : "_self"} 
+                    rel="noopener noreferrer" 
+                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-[13px] font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md"
+                  >
+                    {p.liveUrl !== '#' ? 'Live Demo' : 'Request Demo'} <ArrowRight size={14} />
                   </a>
-                  <a href="#" className="flex-1 border border-gray-200 hover:border-blue-600 text-gray-700 text-[13px] font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all hover:bg-blue-50">
-                    Source Code
+                  <a 
+                    href={p.githubUrl || 'https://github.com/kenza-oss'} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="flex-1 border border-gray-200 hover:border-blue-600 text-gray-700 hover:text-blue-600 text-[13px] font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all hover:bg-blue-50 shadow-sm"
+                  >
+                    <Github size={14} /> Source Code
                   </a>
                 </div>
               </div>
@@ -328,6 +365,119 @@ export const Certifications = () => (
   </section>
 );
 
+/* ── CONTACT FORM COMPONENT ── */
+const ContactForm = () => {
+  const [formState, setFormState] = useState({ name: '', email: '', message: '' });
+  const [status, setStatus] = useState('idle'); // 'idle' | 'sending' | 'success' | 'error'
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!formState.name.trim() || !formState.email.trim() || !formState.message.trim()) {
+      setErrorMessage('Please fill in all fields before sending.');
+      setStatus('error');
+      return;
+    }
+    
+    setStatus('sending');
+    
+    // Construct pre-filled email client link
+    const subject = encodeURIComponent(`[Portfolio Inquiry] From ${formState.name.trim()}`);
+    const body = encodeURIComponent(
+      `Hello Kenza,\n\n${formState.message.trim()}\n\n---\nBest regards,\n${formState.name.trim()}\nEmail: ${formState.email.trim()}`
+    );
+    const mailtoUrl = `mailto:mahlebkenza1@gmail.com?subject=${subject}&body=${body}`;
+    
+    // Trigger user mail client
+    window.location.href = mailtoUrl;
+
+    setTimeout(() => {
+      setStatus('success');
+    }, 400);
+  };
+
+  return (
+    <div className="bg-white border border-gray-200 rounded-2xl p-8 flex flex-col gap-4 shadow-sm relative overflow-hidden">
+      <div className="flex justify-between items-center mb-1">
+        <h3 className="font-heading font-bold text-[20px] text-gray-900">Send a Message</h3>
+        <span className="text-[11px] font-mono text-blue-600 font-bold bg-blue-50 px-2.5 py-1 rounded-full border border-blue-100">
+          Direct Email
+        </span>
+      </div>
+      <p className="text-xs text-gray-500 mb-2">
+        Have a project, job opportunity, or inquiry? Send me a message and I will reply within 24 hours.
+      </p>
+
+      {status === 'success' ? (
+        <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="p-6 rounded-xl bg-green-50 border border-green-200 text-center space-y-3">
+          <div className="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto">
+            <CheckCircle2 size={24} />
+          </div>
+          <h4 className="font-bold text-green-900 text-sm">Message Prepared & Email Client Opened!</h4>
+          <p className="text-xs text-green-700 leading-relaxed">
+            Your default email app has been opened with your pre-filled inquiry. You can also write to me directly at:
+          </p>
+          <a href="mailto:mahlebkenza1@gmail.com" className="inline-block font-mono text-xs font-bold text-blue-600 bg-white px-3 py-1.5 rounded-lg border border-green-200 hover:underline">
+            mahlebkenza1@gmail.com
+          </a>
+          <div className="pt-2">
+            <button 
+              type="button"
+              onClick={() => { setStatus('idle'); setFormState({ name: '', email: '', message: '' }); }} 
+              className="text-xs text-gray-500 hover:text-gray-900 underline"
+            >
+              Send another message
+            </button>
+          </div>
+        </motion.div>
+      ) : (
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3.5">
+          <div>
+            <input 
+              type="text"
+              required
+              placeholder="Your Name *"
+              value={formState.name}
+              onChange={e => setFormState({ ...formState, name: e.target.value })}
+              className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-[13px] text-gray-900 outline-none focus:border-blue-600 focus:bg-white transition-all" 
+            />
+          </div>
+          <div>
+            <input 
+              type="email"
+              required
+              placeholder="Email Address *"
+              value={formState.email}
+              onChange={e => setFormState({ ...formState, email: e.target.value })}
+              className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-[13px] text-gray-900 outline-none focus:border-blue-600 focus:bg-white transition-all" 
+            />
+          </div>
+          <div>
+            <textarea 
+              rows={4}
+              required
+              placeholder="Tell me about your project, timeline, or inquiry... *"
+              value={formState.message}
+              onChange={e => setFormState({ ...formState, message: e.target.value })}
+              className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-[13px] text-gray-900 outline-none resize-none focus:border-blue-600 focus:bg-white transition-all" 
+            />
+          </div>
+          {status === 'error' && (
+            <p className="text-xs text-red-600 font-medium">{errorMessage}</p>
+          )}
+          <button 
+            type="submit"
+            disabled={status === 'sending'}
+            className="bg-blue-600 hover:bg-blue-700 text-white border-none rounded-lg p-3.5 font-heading font-bold text-[13px] tracking-[0.06em] uppercase cursor-pointer flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg disabled:opacity-70"
+          >
+            {status === 'sending' ? 'Preparing...' : 'Send Message'} <Send size={15} />
+          </button>
+        </form>
+      )}
+    </div>
+  );
+};
+
 /* ── FOOTER ── */
 export const Footer = () => (
   <footer id="contact" className="relative py-32 pb-12 z-10 border-t border-gray-200 bg-gray-50">
@@ -347,16 +497,7 @@ export const Footer = () => (
             </a>
           ))}
         </div>
-        <div className="bg-white border border-gray-200 rounded-2xl p-8 flex flex-col gap-[14px] shadow-sm">
-          <h3 className="font-heading font-bold text-[20px] text-gray-900 mb-1">Send a Message</h3>
-          {['Your Name','Email Address'].map(ph => (
-            <input key={ph} placeholder={ph} className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-[13px] text-gray-900 outline-none focus:border-blue-600 transition-all" />
-          ))}
-          <textarea rows={4} placeholder="Tell me about your project..." className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-[13px] text-gray-900 outline-none resize-none focus:border-blue-600 transition-all" />
-          <button className="bg-blue-600 hover:bg-blue-700 text-white border-none rounded-lg p-3.5 font-heading font-bold text-[13px] tracking-[0.06em] uppercase cursor-pointer flex items-center justify-center gap-2 transition-all shadow-md">
-            Send Message <ArrowRight size={16} />
-          </button>
-        </div>
+        <ContactForm />
       </div>
       <div className="border-t border-gray-200 pt-6 flex justify-between items-center flex-wrap gap-3">
         <p style={{ ...S }} className="text-[11px] text-gray-400">© 2026 Kenza Mahleb · Senior Systems Engineer · Paris, France</p>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, Linkedin, Mail, ArrowRight, Code2, Shield, Cpu, Cloud, Menu, X } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowRight, Code2, Shield, Cpu, Cloud, Menu, X, FileText, Download } from 'lucide-react';
 
 /* ─────────────── SHARED VARIANTS ─────────────── */
 export const fadeUp = {
@@ -45,13 +45,17 @@ export const Navbar = () => {
         </a>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-7">
           {['About', 'Projects', 'Experience', 'Testimonials', 'Contact'].map(item => (
             <a key={item} href={`#${item.toLowerCase()}`} 
               className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-blue-600 transition-colors">
               {item}
             </a>
           ))}
+          <a href="/cv-kenza-mahleb.pdf" download="CV_Kenza_Mahleb.pdf" target="_blank" rel="noopener noreferrer"
+            className="border border-gray-200 text-gray-700 hover:border-blue-600 hover:text-blue-600 px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-1.5 shadow-sm bg-white">
+            <Download size={13} className="text-blue-600" /> CV
+          </a>
           <a href="#contact" className="bg-blue-600 text-white px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-blue-700 transition-all shadow-md">
             Hire Me
           </a>
@@ -70,10 +74,14 @@ export const Navbar = () => {
             className="absolute top-full left-0 w-full bg-white border-b border-gray-100 p-6 flex flex-col gap-4 md:hidden shadow-xl">
             {['About', 'Projects', 'Experience', 'Testimonials', 'Contact'].map(item => (
               <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setIsOpen(false)}
-                className="text-sm font-bold uppercase tracking-widest text-gray-500">
+                className="text-sm font-bold uppercase tracking-widest text-gray-500 hover:text-blue-600 transition-colors">
                 {item}
               </a>
             ))}
+            <a href="/cv-kenza-mahleb.pdf" download="CV_Kenza_Mahleb.pdf" target="_blank" rel="noopener noreferrer" onClick={() => setIsOpen(false)}
+              className="border border-blue-200 text-blue-600 px-4 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 bg-blue-50/50">
+              <Download size={15} /> Download CV (PDF)
+            </a>
           </motion.div>
         )}
       </AnimatePresence>
@@ -200,16 +208,19 @@ export const Hero = () => {
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4 items-center">
-              <a href="#projects" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-sm transition-all shadow-md hover:shadow-xl">
-                View My Work <ArrowRight size={16} className="inline ml-2" />
+              <a href="#projects" className="bg-blue-600 hover:bg-blue-700 text-white px-7 py-3.5 rounded-lg font-bold text-sm transition-all shadow-md hover:shadow-xl flex items-center gap-2">
+                View My Work <ArrowRight size={16} />
               </a>
-              <a href="#contact" className="border border-gray-200 hover:border-blue-600 text-gray-700 hover:text-blue-600 px-8 py-4 rounded-lg font-bold text-sm transition-all bg-white">
+              <a href="/cv-kenza-mahleb.pdf" download="CV_Kenza_Mahleb.pdf" target="_blank" rel="noopener noreferrer" className="bg-gray-900 hover:bg-black text-white px-6 py-3.5 rounded-lg font-bold text-sm transition-all shadow-md hover:shadow-xl flex items-center gap-2">
+                <Download size={16} className="text-blue-400" /> Download CV
+              </a>
+              <a href="#contact" className="border border-gray-200 hover:border-blue-600 text-gray-700 hover:text-blue-600 px-6 py-3.5 rounded-lg font-bold text-sm transition-all bg-white shadow-sm">
                 Contact Me
               </a>
-              <div className="flex gap-3 ml-2">
+              <div className="flex gap-2.5 ml-2">
                 {[{ Icon: Github, href: 'https://github.com/kenza-oss' }, { Icon: Linkedin, href: 'https://www.linkedin.com/in/kenza-mahleb-9860b5279' }, { Icon: Mail, href: 'mailto:mahlebkenza1@gmail.com' }].map(({ Icon, href }, i) => (
                   <a key={i} href={href} target="_blank" rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-lg border flex items-center justify-center transition-all border-gray-100 text-gray-400 hover:text-blue-600 hover:bg-blue-50">
+                    className="w-10 h-10 rounded-lg border flex items-center justify-center transition-all border-gray-100 text-gray-400 hover:text-blue-600 hover:bg-blue-50 shadow-sm">
                     <Icon size={18} />
                   </a>
                 ))}
@@ -279,7 +290,7 @@ function OrbitTool({ tool, index, total, r, counterClass }) {
 export const Skills = () => {
   const cats = [
     { cat:'Cloud & DevOps',     items:['AWS · Azure · GCP','Kubernetes · Docker','Terraform · Ansible','CI/CD Pipelines'] },
-    { cat:'Network & Security', items:['Architecture réseau','Pen Testing / VA','ISO 27001 · SOC2','Firewalls · VPN'] },
+    { cat:'Network & Security', items:['Network Architecture','Pen Testing / VA','ISO 27001 · SOC2','Firewalls · VPN'] },
     { cat:'Full-Stack Dev',     items:['React · Next.js','Node.js · Python','Django · FastAPI','PostgreSQL · Redis'] },
     { cat:'AI & Automation',    items:['LLM Integration','Process Automation','Data Pipelines','Monitoring & Alerting'] },
   ];
