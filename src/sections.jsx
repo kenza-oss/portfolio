@@ -49,10 +49,13 @@ const projects = [
     pills: ['Sub-Second Checkout Flow', 'Headless Shopify GraphQL', 'Dynamic Cart State Sync', 'Multi-Device Responsive'],
     tags: ['React', 'Next.js', 'Tailwind CSS', 'Shopify', 'Node.js'],
     metric: '< 0.8s Checkout Speed',
-    image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800&fit=crop',
+    screens: [
+      { label: 'Storefront & Hero Catalog', badge: 'Primary Kiosk', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800&fit=crop' },
+      { label: 'Dynamic Cart & Checkout Flow', badge: 'POS Terminal', image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=800&fit=crop' },
+      { label: 'Mobile Responsive Experience', badge: 'Mobile View', image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800&fit=crop' }
+    ],
     liveUrl: '/demos/wear-plakkies.html',
-    githubUrl: 'https://github.com/kenza-oss',
-    deviceType: 'desktop'
+    githubUrl: 'https://github.com/kenza-oss'
   },
   { 
     id: '02',
@@ -64,10 +67,13 @@ const projects = [
     pills: ['Sub-200ms Voice Latency', 'Whisper STT & Neural TTS', 'FastAPI WebSocket Stream', 'Contextual Dialogue Memory'],
     tags: ['Python', 'FastAPI', 'React', 'TypeScript', 'Node.js'],
     metric: '< 200ms Audio Latency',
-    image: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=800&fit=crop',
+    screens: [
+      { label: 'Acoustic Waveform & Mic Capture', badge: 'Audio Engine', image: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=800&fit=crop' },
+      { label: 'Whisper STT Real-Time Dialogue', badge: 'Neural Pipeline', image: 'https://images.unsplash.com/photo-1589254065878-42c9da997008?q=80&w=800&fit=crop' },
+      { label: 'FastAPI WebSocket Latency Log', badge: 'Live Metrics', image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&fit=crop' }
+    ],
     liveUrl: '/demos/ai-voice-chatbot.html',
-    githubUrl: 'https://github.com/kenza-oss',
-    deviceType: 'terminal'
+    githubUrl: 'https://github.com/kenza-oss'
   },
   { 
     id: '03',
@@ -79,10 +85,13 @@ const projects = [
     pills: ['GPT-4o Guided Sales', 'Automated Test-Drive Booking', 'Multi-Model Spec Comparison', 'CRM Webhook Integration'],
     tags: ['React', 'Node.js', 'TypeScript', 'Tailwind CSS', 'Express'],
     metric: '+40% Lead Conversion',
-    image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=800&fit=crop',
+    screens: [
+      { label: 'Vehicle Virtual Showroom', badge: 'Main Display', image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=800&fit=crop' },
+      { label: 'GPT-4o Diagnostic Assistant', badge: 'Chatbot UI', image: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=800&fit=crop' },
+      { label: 'Test-Drive Booking Workflow', badge: 'Lead Engine', image: 'https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=800&fit=crop' }
+    ],
     liveUrl: '/demos/ai-chatbot-automotive.html',
-    githubUrl: 'https://github.com/kenza-oss',
-    deviceType: 'desktop'
+    githubUrl: 'https://github.com/kenza-oss'
   },
   { 
     id: '04',
@@ -94,10 +103,13 @@ const projects = [
     pills: ['Strict RBAC Permissions', 'PostgreSQL Connection Pooling', 'JWT & Refresh Token Auth', 'Modular Micro-Courses API'],
     tags: ['Node.js', 'Express', 'PostgreSQL', 'TypeScript', 'Docker'],
     metric: '99.9% Uptime Guarantee',
-    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&fit=crop',
+    screens: [
+      { label: 'Admin Course Analytics Dashboard', badge: 'KDS / Live View', image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&fit=crop' },
+      { label: 'Student Learning & Progress Tracker', badge: 'Portal UI', image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&fit=crop' },
+      { label: 'REST API & Access Token Monitor', badge: 'Backend Terminal', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&fit=crop' }
+    ],
     liveUrl: '/demos/lms-backend.html',
-    githubUrl: 'https://github.com/kenza-oss',
-    deviceType: 'desktop'
+    githubUrl: 'https://github.com/kenza-oss'
   },
   { 
     id: '05',
@@ -109,10 +121,13 @@ const projects = [
     pills: ['28K Requests/sec Throughput', 'Distributed Redis Caching (94% Hit Rate)', 'Containerized Docker Swarm', 'Zero-Trust JWT Security'],
     tags: ['Docker', 'Redis', 'PostgreSQL', 'Node.js', 'Express'],
     metric: '28K req/s Throughput',
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&fit=crop',
+    screens: [
+      { label: 'Cluster Topology & Health Monitor', badge: 'Datacenter Grid', image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&fit=crop' },
+      { label: 'Distributed Redis Hit-Rate Stream', badge: 'Cache Layer', image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&fit=crop' },
+      { label: 'Docker Swarm Node Terminal', badge: 'Live Logs', image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=800&fit=crop' }
+    ],
     liveUrl: '/demos/microservices-api.html',
-    githubUrl: 'https://github.com/kenza-oss',
-    deviceType: 'terminal'
+    githubUrl: 'https://github.com/kenza-oss'
   },
   { 
     id: '06',
@@ -124,10 +139,13 @@ const projects = [
     pills: ['Sub-50ms WebRTC Audio Rooms', 'Cross-Platform Flutter/Dart', 'Realtime Firebase Sync', 'Smart Compatibility Engine'],
     tags: ['Flutter', 'Dart', 'Firebase', 'PostgreSQL', 'React Native'],
     metric: 'Sub-50ms WebRTC Rooms',
-    image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=800&fit=crop',
+    screens: [
+      { label: 'Smart Discovery & Match Feed', badge: 'Mobile App', image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=800&fit=crop' },
+      { label: 'WebRTC Live Audio Rooms', badge: 'Audio Stream', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&fit=crop' },
+      { label: 'Live Video Broadcast & Chat', badge: 'Overlay UI', image: 'https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?q=80&w=800&fit=crop' }
+    ],
     liveUrl: '/demos/flirtbox-mobile.html',
-    githubUrl: 'https://github.com/kenza-oss',
-    deviceType: 'mobile'
+    githubUrl: 'https://github.com/kenza-oss'
   },
   { 
     id: '07',
@@ -139,10 +157,13 @@ const projects = [
     pills: ['Real-Time Ticker Streaming', 'Sharpe Ratio & Risk Metrics', 'Interactive Canvas Visualizations', 'Automated Portfolio Audit'],
     tags: ['React', 'Next.js', 'TypeScript', 'TailwindCSS', 'ExpressJS'],
     metric: 'Real-Time Tick Streaming',
-    image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=800&fit=crop',
+    screens: [
+      { label: 'Quantitative Candlestick Chart', badge: 'Market Desk', image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=800&fit=crop' },
+      { label: 'Asset Allocation Breakdown Pie', badge: 'Risk Engine', image: 'https://images.unsplash.com/photo-1642543492481-44e81e3914a7?q=80&w=800&fit=crop' },
+      { label: 'Real-Time Order Book & Ticker', badge: 'Live Stream', image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?q=80&w=800&fit=crop' }
+    ],
     liveUrl: '/demos/financial-dashboard.html',
-    githubUrl: 'https://github.com/kenza-oss',
-    deviceType: 'desktop'
+    githubUrl: 'https://github.com/kenza-oss'
   },
   { 
     id: '08',
@@ -154,10 +175,13 @@ const projects = [
     pills: ['Ethereum Sepolia Smart Contracts', 'Cryptographic Merkle Proofs', '-38% Gas Optimization via Calldata', 'Zero-Knowledge Compliance Audit'],
     tags: ['Solidity', 'Web3', 'Ethereum', 'Next.js', 'TypeScript'],
     metric: '100% On-Chain Proofs',
-    image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=800&fit=crop',
+    screens: [
+      { label: 'Industrial Equipment Inspection Stage', badge: 'Asset Registry', image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=800&fit=crop' },
+      { label: 'Ethereum Smart Contract Verifier', badge: 'Sepolia Block', image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=800&fit=crop' },
+      { label: 'Merkle Root Cryptographic Ledger', badge: 'Proof Log', image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&fit=crop' }
+    ],
     liveUrl: '/demos/web3-integrity.html',
-    githubUrl: 'https://github.com/kenza-oss',
-    deviceType: 'terminal'
+    githubUrl: 'https://github.com/kenza-oss'
   },
   { 
     id: '09',
@@ -169,10 +193,13 @@ const projects = [
     pills: ['Model Context Protocol (MCP) Standard', 'Vector Database Embeddings (Qdrant)', 'Sub-15ms Similarity Search', 'Episodic Memory Graph'],
     tags: ['Python', 'FastAPI', 'LangChain', 'AWS', 'Vector DB'],
     metric: 'Sub-15ms Vector Recall',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=800&fit=crop',
+    screens: [
+      { label: 'Episodic Memory Vector Graph', badge: 'Neural Recall', image: 'https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=800&fit=crop' },
+      { label: 'Qdrant Embedding Space Clusters', badge: 'Vector DB', image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&fit=crop' },
+      { label: 'MCP Protocol Tool Schema', badge: 'RPC Server', image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=800&fit=crop' }
+    ],
     liveUrl: '/demos/mem0-ai.html',
-    githubUrl: 'https://github.com/kenza-oss',
-    deviceType: 'terminal'
+    githubUrl: 'https://github.com/kenza-oss'
   },
   { 
     id: '10',
@@ -184,37 +211,25 @@ const projects = [
     pills: ['MLS Real-Time Synchronization', 'Interactive Ultra-HD Galleries', 'VIP Inquiry Routing System', 'Ultra-Fast Lighthouse 98+ Score'],
     tags: ['React', 'Next.js', 'Tailwind CSS', 'HubSpot API', 'TypeScript'],
     metric: 'Lighthouse 98/100 Score',
-    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800&fit=crop',
+    screens: [
+      { label: 'Bel Air Architectural Villa Showcase', badge: 'Ultra-Prime Estate', image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800&fit=crop' },
+      { label: 'Luxury Sunset Terrace & Interior', badge: 'HD Tour', image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&fit=crop' },
+      { label: 'Interactive MLS Floor Plan & Map', badge: 'Client Portal', image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=800&fit=crop' }
+    ],
     liveUrl: '/demos/luxury-real-estate.html',
-    githubUrl: 'https://github.com/kenza-oss',
-    deviceType: 'desktop'
+    githubUrl: 'https://github.com/kenza-oss'
   }
 ];
 
 const S = { fontFamily:'Space Mono,monospace' };
 
-export const Projects = () => {
-  const [filter, setFilter] = useState('All Projects');
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [viewMode, setViewMode] = useState('behance'); // 'behance' | 'grid'
-  const filters = ['All Projects', 'Web Apps', 'Mobile', 'Backend', 'AI', 'Web3'];
-  
-  const filteredProjects = filter === 'All Projects' 
-    ? projects 
-    : projects.filter(p => p.category === filter);
+// Individual Case Study Component with Otter OS Multi-Screen Collage Stage
+const BehanceProjectCard = ({ project, index }) => {
+  const [activeScreenIndex, setActiveScreenIndex] = useState(0);
+  const activeScreen = project.screens[activeScreenIndex] || project.screens[0];
+  const nextScreen1 = project.screens[(activeScreenIndex + 1) % project.screens.length];
+  const nextScreen2 = project.screens[(activeScreenIndex + 2) % project.screens.length];
 
-  // Keep index within filtered bounds
-  const currentProject = filteredProjects[selectedIndex % filteredProjects.length] || filteredProjects[0];
-
-  const handlePrev = () => {
-    setSelectedIndex((prev) => (prev === 0 ? filteredProjects.length - 1 : prev - 1));
-  };
-
-  const handleNext = () => {
-    setSelectedIndex((prev) => (prev + 1) % filteredProjects.length);
-  };
-
-  // Format bold markdown within string safely
   const renderFormattedText = (text) => {
     const parts = text.split(/(\*\*.*?\*\*)/g);
     return parts.map((part, idx) => {
@@ -226,6 +241,240 @@ export const Projects = () => {
   };
 
   return (
+    <motion.div 
+      initial={{ opacity:0, y:30 }}
+      whileInView={{ opacity:1, y:0 }}
+      viewport={{ once:true, margin: "-100px" }}
+      transition={{ duration:0.6, delay: 0.1 }}
+      className="bg-[#0b0d13] border border-white/10 rounded-3xl p-6 sm:p-10 lg:p-14 relative overflow-hidden shadow-2xl group"
+    >
+      {/* Background Subtle Geometric Curves */}
+      <div className="absolute -top-32 -left-32 w-80 h-80 rounded-full border border-white/5 pointer-events-none" />
+      <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full border border-white/5 pointer-events-none" />
+
+      {/* ── TOP BAR: Title & Number + Tech Stack Cloud ── */}
+      <div className="flex flex-col lg:flex-row justify-between items-start gap-8 mb-10 pb-8 border-b border-white/10 relative z-10">
+        <div className="max-w-xl">
+          <div className="flex items-center gap-3 mb-2">
+            <span className="text-blue-400 font-mono text-sm tracking-widest uppercase font-bold">
+              {project.id} / CASE STUDY
+            </span>
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+            <span className="text-gray-400 text-xs font-semibold uppercase tracking-wider">
+              {project.category}
+            </span>
+            <span className="px-3 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold font-mono">
+              ⚡ {project.metric}
+            </span>
+          </div>
+          <h3 className="font-heading font-black text-white text-3xl sm:text-4xl lg:text-5xl tracking-tight mb-2">
+            {project.behanceTitle}
+          </h3>
+          <p className="text-blue-300 font-medium text-sm sm:text-base">
+            {project.tagline}
+          </p>
+        </div>
+
+        {/* Floating Tech Stack Icon Grid (Behance Cloud) */}
+        <div className="flex flex-col items-start lg:items-end w-full lg:w-auto">
+          <span className="text-gray-400 text-[11px] font-mono tracking-widest uppercase mb-3 font-semibold">
+            Core Technologies
+          </span>
+          <div className="flex flex-wrap lg:justify-end gap-2.5 max-w-sm">
+            {project.tags.map((tag) => (
+              <div 
+                key={tag}
+                className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-blue-400/50 hover:bg-white/10 transition-all shadow-sm"
+              >
+                <img 
+                  src={getTechIcon(tag)} 
+                  alt={tag} 
+                  className="w-4 h-4 object-contain" 
+                  onError={(e) => { e.target.style.display = 'none'; }}
+                />
+                <span className="text-xs font-semibold text-gray-200">{tag}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── MIDDLE ROW: Narrative & Multi-Screen Collage Stage ── */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
+        
+        {/* Left Column: Narrative, Screen View Pills & Architecture Badges */}
+        <div className="lg:col-span-5 flex flex-col justify-between">
+          <div className="text-gray-300 text-[15px] sm:text-[16px] leading-relaxed mb-6">
+            {renderFormattedText(project.description)}
+          </div>
+
+          {/* Otter OS-Style Screen View Pills (Interactive Switcher) */}
+          <div className="mb-6">
+            <span className="text-gray-400 text-[11px] font-mono tracking-widest uppercase mb-3 block font-semibold flex items-center gap-1.5">
+              <Layers size={13} className="text-blue-400" /> Multi-Screen Viewport Selector
+            </span>
+            <div className="flex flex-col gap-2">
+              {project.screens.map((screen, sIdx) => {
+                const isSelected = activeScreenIndex === sIdx;
+                return (
+                  <button
+                    key={sIdx}
+                    onClick={() => setActiveScreenIndex(sIdx)}
+                    className={`text-left px-4 py-2.5 rounded-full text-xs font-semibold transition-all flex items-center justify-between border ${
+                      isSelected
+                        ? 'border-blue-400 bg-blue-500/20 text-white shadow-md shadow-blue-500/20'
+                        : 'border-white/20 bg-white/[0.03] text-gray-300 hover:border-white/40 hover:text-white'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <span className={`w-2 h-2 rounded-full ${isSelected ? 'bg-blue-400 animate-pulse' : 'bg-gray-500'}`} />
+                      <span>{screen.label}</span>
+                    </div>
+                    <span className="text-[10px] font-mono uppercase text-gray-400 tracking-wider">
+                      {screen.badge}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Architecture Badges */}
+          <div className="mb-8">
+            <span className="text-gray-400 text-[11px] font-mono tracking-widest uppercase mb-2.5 block font-semibold">
+              Key Engineering Deliverables
+            </span>
+            <div className="flex flex-wrap gap-2">
+              {project.pills.map((pill, idx) => (
+                <div 
+                  key={idx}
+                  className="border border-white/20 text-gray-200 font-medium text-xs px-3.5 py-1.5 rounded-full bg-white/[0.03] backdrop-blur-sm"
+                >
+                  {pill}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Action CTAs */}
+          <div className="flex flex-wrap gap-4 pt-4 border-t border-white/10">
+            <a 
+              href={project.liveUrl} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex-1 sm:flex-initial bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold px-7 py-3 rounded-full flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-600/30 hover:scale-[1.02]"
+            >
+              <span>Explore Live Demo</span>
+              <ExternalLink size={15} />
+            </a>
+            <a 
+              href={project.githubUrl} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="flex-1 sm:flex-initial border border-white/20 hover:border-white text-gray-200 hover:text-white text-sm font-bold px-6 py-3 rounded-full flex items-center justify-center gap-2 transition-all hover:bg-white/10"
+            >
+              <Github size={15} /> Source Code
+            </a>
+          </div>
+        </div>
+
+        {/* Right Column: Otter OS Multi-Device Collage Stage */}
+        <div className="lg:col-span-7 relative min-h-[380px] sm:min-h-[460px] flex items-center justify-center">
+          
+          {/* Main Primary Screen (Center-Left) */}
+          <div className="w-[85%] sm:w-[80%] rounded-2xl overflow-hidden border border-white/20 bg-[#12151e] shadow-2xl relative z-20 transition-all duration-500">
+            {/* Window Top Bar */}
+            <div className="bg-[#181c28] px-4 py-2.5 border-b border-white/10 flex items-center justify-between">
+              <div className="flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-rose-500/90" />
+                <span className="w-2.5 h-2.5 rounded-full bg-amber-500/90" />
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/90" />
+              </div>
+              <div className="bg-black/50 border border-white/10 text-gray-400 text-[10px] font-mono px-3 py-0.5 rounded-full truncate max-w-[200px]">
+                {activeScreen.badge} · {project.title}
+              </div>
+              <div className="flex items-center gap-1.5 text-emerald-400 text-[10px] font-bold">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Live View
+              </div>
+            </div>
+
+            {/* Screen Image with smooth transition */}
+            <div className="relative aspect-[16/10] overflow-hidden bg-black">
+              <motion.img 
+                key={activeScreen.image}
+                src={activeScreen.image} 
+                alt={activeScreen.label} 
+                initial={{ opacity:0, scale:1.04 }}
+                animate={{ opacity:1, scale:1 }}
+                transition={{ duration:0.4 }}
+                className="w-full h-full object-cover filter brightness-[0.95]" 
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-50" />
+              
+              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                <span className="px-3 py-1 rounded-full bg-black/85 backdrop-blur-md border border-white/20 text-white font-mono text-[11px] font-bold">
+                  {activeScreen.label}
+                </span>
+                <a 
+                  href={project.liveUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="px-3.5 py-1 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-bold text-[11px] flex items-center gap-1 shadow-lg"
+                >
+                  Test Demo <ArrowRight size={11} />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Secondary Floating Screen (Top-Right Angle) - Clickable to switch */}
+          <div 
+            onClick={() => setActiveScreenIndex((activeScreenIndex + 1) % project.screens.length)}
+            className="absolute top-2 right-0 w-[48%] sm:w-[45%] rounded-xl overflow-hidden border border-white/20 bg-[#161a26] shadow-2xl z-10 cursor-pointer transform hover:scale-105 hover:z-30 transition-all duration-300 opacity-90 hover:opacity-100"
+            title="Click to view this screen"
+          >
+            <div className="bg-[#1f2434] px-3 py-1.5 border-b border-white/10 flex items-center justify-between text-[10px] text-gray-300 font-mono">
+              <span className="truncate">{nextScreen1.badge}</span>
+              <span className="text-blue-400 font-bold">View ↗</span>
+            </div>
+            <div className="aspect-[16/10] bg-black overflow-hidden relative">
+              <img src={nextScreen1.image} alt={nextScreen1.label} className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-black/30 hover:bg-transparent transition-colors" />
+            </div>
+          </div>
+
+          {/* Tertiary Floating Device (Bottom-Right Angle) - Clickable to switch */}
+          <div 
+            onClick={() => setActiveScreenIndex((activeScreenIndex + 2) % project.screens.length)}
+            className="absolute -bottom-4 right-4 sm:right-6 w-[42%] sm:w-[38%] rounded-xl overflow-hidden border border-white/25 bg-[#121622] shadow-2xl z-30 cursor-pointer transform hover:scale-105 transition-all duration-300 hover:border-blue-400"
+            title="Click to view this screen"
+          >
+            <div className="bg-[#181d2a] px-3 py-1 border-b border-white/10 flex items-center justify-between text-[10px] text-gray-300 font-mono">
+              <span className="truncate">{nextScreen2.badge}</span>
+              <span className="text-blue-400 font-bold">View ↗</span>
+            </div>
+            <div className="aspect-[16/10] bg-black overflow-hidden relative">
+              <img src={nextScreen2.image} alt={nextScreen2.label} className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-black/25 hover:bg-transparent transition-colors" />
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </motion.div>
+  );
+};
+
+export const Projects = () => {
+  const [filter, setFilter] = useState('All Projects');
+  const filters = ['All Projects', 'Web Apps', 'Mobile', 'Backend', 'AI', 'Web3'];
+  
+  const filteredProjects = filter === 'All Projects' 
+    ? projects 
+    : projects.filter(p => p.category === filter);
+
+  return (
     <section id="projects" className="relative py-28 z-10 border-t border-gray-100 bg-[#07090e] text-white overflow-hidden">
       {/* Background Ambient Glows & Tech Grid */}
       <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#2563eb_1px,transparent_1px)] [background-size:24px_24px]" />
@@ -235,7 +484,7 @@ export const Projects = () => {
       <div style={{ maxWidth:1320, margin:'0 auto', padding:'0 24px' }} className="relative z-10">
         
         {/* Header Section */}
-        <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }} className="flex flex-col items-center text-center mb-12">
+        <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }} className="flex flex-col items-center text-center mb-16">
           <motion.div variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-bold tracking-widest uppercase mb-4 shadow-inner">
             <Sparkles size={14} className="text-blue-400" /> Executive Engineering Case Studies
           </motion.div>
@@ -245,318 +494,31 @@ export const Projects = () => {
           </motion.h2>
 
           <motion.p variants={fadeUp} className="text-gray-400 text-[15px] max-w-2xl leading-relaxed mb-8">
-            Detailed breakdown of production systems, architecture patterns, and live deliverables presented in Behance executive case-study format.
+            Complete portfolio of production systems, architecture patterns, and multi-device interactive deliverables presented in Behance executive case-study format.
           </motion.p>
           
-          {/* Controls: Category Filter + View Switcher */}
-          <div className="flex flex-wrap items-center justify-center gap-4 w-full max-w-3xl">
-            {/* Category Filter Pills */}
-            <div className="flex flex-wrap justify-center gap-2">
-              {filters.map(f => (
-                <button key={f} 
-                  onClick={() => { setFilter(f); setSelectedIndex(0); }}
-                  className={`px-4 py-2 rounded-full text-xs font-bold transition-all border ${
-                    filter === f 
-                    ? 'bg-blue-600 border-blue-500 text-white shadow-lg shadow-blue-600/30' 
-                    : 'bg-white/5 border-white/10 text-gray-400 hover:text-white hover:border-white/30'
-                  }`}>
-                  {f}
-                </button>
-              ))}
-            </div>
-
-            {/* Toggle Showcase vs Grid View */}
-            <div className="flex items-center bg-white/5 border border-white/10 rounded-full p-1 ml-auto">
-              <button 
-                onClick={() => setViewMode('behance')}
-                className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 ${
-                  viewMode === 'behance' ? 'bg-blue-600 text-white shadow' : 'text-gray-400 hover:text-white'
-                }`}
-              >
-                <Layers size={13} /> Case Study
+          {/* Category Filter Pills */}
+          <div className="flex flex-wrap justify-center gap-2.5">
+            {filters.map(f => (
+              <button key={f} 
+                onClick={() => setFilter(f)}
+                className={`px-5 py-2 rounded-full text-xs font-bold transition-all border ${
+                  filter === f 
+                  ? 'bg-blue-600 border-blue-500 text-white shadow-lg shadow-blue-600/30 scale-105' 
+                  : 'bg-white/5 border-white/10 text-gray-400 hover:text-white hover:border-white/30'
+                }`}>
+                {f} {f === 'All Projects' && `(${projects.length})`}
               </button>
-              <button 
-                onClick={() => setViewMode('grid')}
-                className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 ${
-                  viewMode === 'grid' ? 'bg-blue-600 text-white shadow' : 'text-gray-400 hover:text-white'
-                }`}
-              >
-                <Monitor size={13} /> Grid
-              </button>
-            </div>
+            ))}
           </div>
         </motion.div>
 
-        {/* ── BEHANCE EXECUTIVE CASE-STUDY SHOWCASE VIEW ── */}
-        {viewMode === 'behance' && currentProject && (
-          <div className="relative">
-            {/* Master Showcase Card (Exact Behance Case Study Style) */}
-            <motion.div 
-              key={currentProject.id}
-              initial={{ opacity:0, y:20 }}
-              animate={{ opacity:1, y:0 }}
-              transition={{ duration:0.45 }}
-              className="bg-[#0b0d13] border border-white/10 rounded-3xl p-6 sm:p-10 lg:p-14 relative overflow-hidden shadow-2xl"
-            >
-              {/* Subtle Geometric Graphic Curves in Background */}
-              <div className="absolute -top-24 -left-24 w-80 h-80 rounded-full border border-white/5 pointer-events-none" />
-              <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full border border-white/5 pointer-events-none" />
-              
-              {/* Top Row: Title & Number + Tech Stack Cloud */}
-              <div className="flex flex-col lg:flex-row justify-between items-start gap-8 mb-10 pb-8 border-b border-white/10">
-                <div className="max-w-xl">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="text-blue-400 font-mono text-sm tracking-widest uppercase font-bold">
-                      {currentProject.id} / CASE STUDY
-                    </span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-                    <span className="text-gray-400 text-xs font-semibold uppercase tracking-wider">
-                      {currentProject.category}
-                    </span>
-                    <span className="ml-auto lg:hidden px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[11px] font-bold">
-                      {currentProject.metric}
-                    </span>
-                  </div>
-                  <h3 className="font-heading font-black text-white text-3xl sm:text-4xl lg:text-5xl tracking-tight mb-3">
-                    {currentProject.behanceTitle}
-                  </h3>
-                  <p className="text-blue-300 font-medium text-sm sm:text-base">
-                    {currentProject.tagline}
-                  </p>
-                </div>
-
-                {/* Tech Stack Icon Grid (Behance Floating Cloud) */}
-                <div className="flex flex-col items-start lg:items-end w-full lg:w-auto">
-                  <span className="text-gray-400 text-[11px] font-mono tracking-widest uppercase mb-3 font-semibold">
-                    Core Technologies
-                  </span>
-                  <div className="flex flex-wrap lg:justify-end gap-2.5 max-w-sm">
-                    {currentProject.tags.map((tag) => (
-                      <div 
-                        key={tag}
-                        className="group flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-blue-400/50 hover:bg-white/10 transition-all shadow-sm"
-                        title={tag}
-                      >
-                        <img 
-                          src={getTechIcon(tag)} 
-                          alt={tag} 
-                          className="w-4 h-4 object-contain filter group-hover:scale-110 transition-transform" 
-                          onError={(e) => { e.target.style.display = 'none'; }}
-                        />
-                        <span className="text-xs font-semibold text-gray-200">{tag}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Middle Row: Content & Mockup Stage */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-                
-                {/* Left Column: Narrative & Pill Badges */}
-                <div className="lg:col-span-5 flex flex-col justify-between">
-                  <div className="text-gray-300 text-[15px] sm:text-[16px] leading-relaxed mb-8">
-                    {renderFormattedText(currentProject.description)}
-                  </div>
-
-                  {/* Behance-Style Pill Badges (White Outline Badges) */}
-                  <div className="mb-8">
-                    <span className="text-gray-400 text-[11px] font-mono tracking-widest uppercase mb-3 block font-semibold">
-                      Key Architecture Deliverables
-                    </span>
-                    <div className="flex flex-wrap gap-2.5">
-                      {currentProject.pills.map((pill, idx) => (
-                        <div 
-                          key={idx}
-                          className="border border-white/25 hover:border-blue-400 text-white font-medium text-xs sm:text-[13px] px-4 py-2 rounded-full bg-white/[0.03] backdrop-blur-sm transition-all hover:bg-white/10 shadow-sm flex items-center gap-2"
-                        >
-                          <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
-                          <span>{pill}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="flex flex-wrap gap-4 pt-4 border-t border-white/10">
-                    <a 
-                      href={currentProject.liveUrl} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="flex-1 sm:flex-initial bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold px-7 py-3.5 rounded-full flex items-center justify-center gap-2.5 transition-all shadow-lg shadow-blue-600/30 hover:scale-[1.02] active:scale-[0.98]"
-                    >
-                      <span>Explore Live Demo</span>
-                      <ExternalLink size={16} />
-                    </a>
-                    <a 
-                      href={currentProject.githubUrl} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="flex-1 sm:flex-initial border border-white/20 hover:border-white text-gray-200 hover:text-white text-sm font-bold px-6 py-3.5 rounded-full flex items-center justify-center gap-2 transition-all hover:bg-white/10"
-                    >
-                      <Github size={16} /> Source Code
-                    </a>
-                  </div>
-                </div>
-
-                {/* Right Column: Multi-Device Realistic Mockup Showcase */}
-                <div className="lg:col-span-7 relative">
-                  <div className="relative rounded-2xl overflow-hidden border border-white/15 bg-black/40 shadow-2xl group">
-                    {/* Top Browser / System Chrome Bar */}
-                    <div className="bg-[#141721] px-4 py-3 border-b border-white/10 flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block" />
-                        <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
-                        <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
-                      </div>
-                      <div className="bg-black/40 border border-white/10 text-gray-400 text-[11px] font-mono px-4 py-1 rounded-full truncate max-w-[260px]">
-                        https://portfolio-kenza.onrender.com{currentProject.liveUrl}
-                      </div>
-                      <div className="hidden sm:flex items-center gap-1.5 text-emerald-400 text-[11px] font-bold">
-                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> Live System
-                      </div>
-                    </div>
-
-                    {/* Main High-Resolution Preview Image with Zoom & Hover */}
-                    <div className="relative aspect-[16/10] overflow-hidden bg-gray-900">
-                      <img 
-                        src={currentProject.image} 
-                        alt={currentProject.title} 
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter brightness-[0.95] group-hover:brightness-100" 
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
-                      
-                      {/* Floating Key Performance Pill (Bottom Left of Mockup) */}
-                      <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                        <span className="px-3.5 py-1.5 rounded-full bg-black/80 backdrop-blur-md border border-white/20 text-white font-mono text-xs font-bold shadow-lg">
-                          ⚡ {currentProject.metric}
-                        </span>
-                        
-                        <a 
-                          href={currentProject.liveUrl} 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          className="px-4 py-1.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-lg shadow-blue-500/40 transition-all hover:scale-105"
-                        >
-                          Launch App <ArrowRight size={13} />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Perspective Decorative Layer (Behance Depth Effect) */}
-                  <div className="absolute -bottom-3 -right-3 -z-10 w-full h-full rounded-2xl border border-white/5 bg-blue-500/5 blur-sm" />
-                </div>
-
-              </div>
-
-              {/* Navigation Rail inside Showcase (Previous / Next) */}
-              <div className="flex items-center justify-between mt-10 pt-6 border-t border-white/10">
-                <button 
-                  onClick={handlePrev}
-                  className="flex items-center gap-2 text-xs font-bold text-gray-400 hover:text-white px-4 py-2 rounded-full border border-white/10 hover:border-white/30 transition-all"
-                >
-                  <ChevronLeft size={16} /> Previous Project
-                </button>
-
-                <div className="flex items-center gap-2 font-mono text-xs text-gray-400">
-                  <span className="text-white font-bold">{currentProject.id}</span>
-                  <span>/</span>
-                  <span>{filteredProjects.length < 10 ? `0${filteredProjects.length}` : filteredProjects.length}</span>
-                </div>
-
-                <button 
-                  onClick={handleNext}
-                  className="flex items-center gap-2 text-xs font-bold text-gray-400 hover:text-white px-4 py-2 rounded-full border border-white/10 hover:border-white/30 transition-all"
-                >
-                  Next Project <ChevronRight size={16} />
-                </button>
-              </div>
-            </motion.div>
-
-            {/* Quick-Switch Thumbnail Ribbon */}
-            <div className="mt-8 grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-10 gap-2.5">
-              {filteredProjects.map((p, idx) => {
-                const isActive = (selectedIndex % filteredProjects.length) === idx;
-                return (
-                  <button
-                    key={p.id}
-                    onClick={() => setSelectedIndex(idx)}
-                    className={`flex flex-col items-start p-2.5 rounded-xl border text-left transition-all ${
-                      isActive 
-                      ? 'bg-blue-600/20 border-blue-500 shadow-md shadow-blue-600/20' 
-                      : 'bg-white/5 border-white/10 hover:border-white/20 hover:bg-white/10 opacity-70 hover:opacity-100'
-                    }`}
-                  >
-                    <span className="font-mono text-[10px] text-blue-400 font-bold">{p.id}</span>
-                    <span className="text-xs font-bold text-white truncate w-full">{p.title}</span>
-                    <span className="text-[10px] text-gray-400 truncate w-full">{p.category}</span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        )}
-
-        {/* ── ALTERNATIVE GRID VIEW (Full Catalog) ── */}
-        {viewMode === 'grid' && (
-          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(320px, 1fr))', gap:28 }}>
-            {filteredProjects.map((p) => (
-              <motion.div key={p.title}
-                initial={{ opacity:0, y:20 }} whileInView={{ opacity:1, y:0 }}
-                viewport={{ once:true }}
-                className="flex flex-col rounded-2xl overflow-hidden border border-white/10 bg-[#0d0f17] hover:border-blue-500/40 hover:shadow-2xl transition-all group h-full">
-
-                {/* Project Image */}
-                <div className="relative h-[220px] overflow-hidden bg-black/40">
-                  <img src={p.image} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" />
-                  <div className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-black/75 border border-white/20 text-white font-mono text-[11px] font-bold">
-                    {p.id}
-                  </div>
-                  <div className="absolute top-3 right-3 px-2.5 py-0.5 rounded-full bg-blue-600/90 text-white text-[11px] font-bold">
-                    {p.category}
-                  </div>
-                </div>
-
-                {/* Project Content */}
-                <div className="p-6 flex flex-col flex-grow">
-                  <h3 className="font-heading font-bold text-white text-[20px] mb-2 group-hover:text-blue-400 transition-colors">{p.title}</h3>
-                  <p className="text-blue-300 text-xs font-medium mb-3">{p.tagline}</p>
-                  <p className="text-gray-400 text-[13px] leading-relaxed mb-5 flex-grow">{p.description.replace(/\*\*/g, '')}</p>
-                  
-                  {/* Pills */}
-                  <div className="flex flex-wrap gap-1.5 mb-6">
-                    {p.pills.slice(0, 2).map((pill) => (
-                      <span key={pill} className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold border border-white/20 text-gray-300">
-                        {pill}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Buttons */}
-                  <div className="flex gap-3 mt-auto">
-                    <a 
-                      href={p.liveUrl} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="flex-1 bg-blue-600 hover:bg-blue-500 text-white text-[12px] font-bold py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition-all shadow-md"
-                    >
-                      <span>Live Demo</span> <ExternalLink size={13} />
-                    </a>
-                    <a 
-                      href={p.githubUrl} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="flex-1 border border-white/20 hover:border-white text-gray-300 hover:text-white text-[12px] font-bold py-2.5 rounded-xl flex items-center justify-center gap-1.5 transition-all hover:bg-white/5"
-                    >
-                      <Github size={13} /> Source
-                    </a>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        )}
+        {/* ── ALL PROJECTS STACKED IN BEHANCE MULTI-SCREEN FORMAT ── */}
+        <div className="flex flex-col gap-20 sm:gap-28">
+          {filteredProjects.map((project, idx) => (
+            <BehanceProjectCard key={project.id} project={project} index={idx} />
+          ))}
+        </div>
 
       </div>
     </section>
