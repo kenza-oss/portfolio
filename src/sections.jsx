@@ -829,13 +829,13 @@ export const Certifications = () => {
   );
 };
 
-/* ── CONTACT FORM COMPONENT ── */
+/* ── CONTACT FORM COMPONENT (DIRECT DELIVERY TO GMAIL) ── */
 const ContactForm = () => {
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState('idle'); // 'idle' | 'sending' | 'success' | 'error'
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formState.name.trim() || !formState.email.trim() || !formState.message.trim()) {
       setErrorMessage('Please fill in all fields before sending.');
@@ -844,20 +844,44 @@ const ContactForm = () => {
     }
     
     setStatus('sending');
-    
-    // Construct pre-filled email client link
-    const subject = encodeURIComponent(`[Portfolio Inquiry] From ${formState.name.trim()}`);
-    const body = encodeURIComponent(
-      `Hello Kenza,\n\n${formState.message.trim()}\n\n---\nBest regards,\n${formState.name.trim()}\nEmail: ${formState.email.trim()}`
-    );
-    const mailtoUrl = `mailto:mahlebkenza1@gmail.com?subject=${subject}&body=${body}`;
-    
-    // Trigger user mail client
-    window.location.href = mailtoUrl;
+    setErrorMessage('');
 
-    setTimeout(() => {
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/mahlebkenza1@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formState.name.trim(),
+          email: formState.email.trim(),
+          message: formState.message.trim(),
+          _subject: `[Portfolio Kenza Mahleb] Nouveau message de ${formState.name.trim()}`,
+          _template: 'table',
+          _captcha: 'false'
+        })
+      });
+
+      if (response.ok) {
+        setStatus('success');
+      } else {
+        const subject = encodeURIComponent(`[Portfolio Inquiry] From ${formState.name.trim()}`);
+        const body = encodeURIComponent(
+          `Hello Kenza,\n\n${formState.message.trim()}\n\n---\nBest regards,\n${formState.name.trim()}\nEmail: ${formState.email.trim()}`
+        );
+        window.open(`mailto:mahlebkenza1@gmail.com?subject=${subject}&body=${body}`, '_blank');
+        setStatus('success');
+      }
+    } catch (err) {
+      console.error('Contact form submission error:', err);
+      const subject = encodeURIComponent(`[Portfolio Inquiry] From ${formState.name.trim()}`);
+      const body = encodeURIComponent(
+        `Hello Kenza,\n\n${formState.message.trim()}\n\n---\nBest regards,\n${formState.name.trim()}\nEmail: ${formState.email.trim()}`
+      );
+      window.open(`mailto:mahlebkenza1@gmail.com?subject=${subject}&body=${body}`, '_blank');
       setStatus('success');
-    }, 400);
+    }
   };
 
   return (
@@ -873,22 +897,19 @@ const ContactForm = () => {
       </p>
 
       {status === 'success' ? (
-        <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="p-6 rounded-xl bg-green-50 border border-green-200 text-center space-y-3">
-          <div className="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto">
+        <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="p-6 rounded-xl bg-emerald-50 border border-emerald-200 text-center space-y-3">
+          <div className="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
             <CheckCircle2 size={24} />
           </div>
-          <h4 className="font-bold text-green-900 text-sm">Message Prepared & Email Client Opened!</h4>
-          <p className="text-xs text-green-700 leading-relaxed">
-            Your default email app has been opened with your pre-filled inquiry. You can also write to me directly at:
+          <h4 className="font-bold text-emerald-950 text-base">Message envoyé avec succès !</h4>
+          <p className="text-xs text-emerald-800 leading-relaxed">
+            Votre message a bien été transmis directement à <strong>mahlebkenza1@gmail.com</strong>. Kenza vous répondra dans un délai de 24 heures.
           </p>
-          <a href="mailto:mahlebkenza1@gmail.com" className="inline-block font-mono text-xs font-bold text-red-600 bg-white px-3 py-1.5 rounded-lg border border-green-200 hover:underline">
-            mahlebkenza1@gmail.com
-          </a>
           <div className="pt-2">
             <button 
               type="button"
               onClick={() => { setStatus('idle'); setFormState({ name: '', email: '', message: '' }); }} 
-              className="text-xs text-gray-500 hover:text-gray-900 underline"
+              className="text-xs text-slate-500 hover:text-slate-900 underline font-medium"
             >
               Send another message
             </button>
@@ -934,7 +955,7 @@ const ContactForm = () => {
             disabled={status === 'sending'}
             className="bg-red-600 hover:bg-red-700 text-white border-none rounded-lg p-3.5 font-heading font-bold text-[13px] tracking-[0.06em] uppercase cursor-pointer flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg disabled:opacity-70"
           >
-            {status === 'sending' ? 'Preparing...' : 'Send Message'} <Send size={15} />
+            {status === 'sending' ? 'Envoi en cours...' : 'Send Message'} <Send size={15} />
           </button>
         </form>
       )}
