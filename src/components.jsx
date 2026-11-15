@@ -40,23 +40,23 @@ export const Navbar = () => {
     }`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <a href="#about" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 bg-gradient-to-tr from-blue-700 via-indigo-600 to-sky-500 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-indigo-600/20 group-hover:scale-105 transition-transform">K</div>
-          <span className="font-heading font-black text-lg tracking-tighter text-slate-900 group-hover:text-indigo-600 transition-colors">KENZA.</span>
+          <div className="w-10 h-10 bg-gradient-to-tr from-blue-800 via-blue-600 to-sky-500 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-blue-600/20 group-hover:scale-105 transition-transform">K</div>
+          <span className="font-heading font-black text-lg tracking-tighter text-slate-900 group-hover:text-blue-600 transition-colors">KENZA.</span>
         </a>
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-7">
           {['About', 'Projects', 'Experience', 'Testimonials', 'Contact'].map(item => (
             <a key={item} href={`#${item.toLowerCase()}`} 
-              className="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-indigo-600 transition-colors">
+              className="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-blue-600 transition-colors">
               {item}
             </a>
           ))}
           <a href="/cv-kenza-mahleb.pdf" download="CV_Kenza_Mahleb.pdf" target="_blank" rel="noopener noreferrer"
-            className="border border-slate-200 text-slate-700 hover:border-indigo-600 hover:text-indigo-600 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-1.5 shadow-sm bg-white">
-            <Download size={13} className="text-indigo-600" /> CV
+            className="border border-slate-200 text-slate-700 hover:border-blue-600 hover:text-blue-600 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-1.5 shadow-sm bg-white">
+            <Download size={13} className="text-blue-600" /> CV
           </a>
-          <a href="#contact" className="bg-gradient-to-r from-blue-700 to-indigo-700 text-white px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest hover:from-blue-800 hover:to-indigo-800 transition-all shadow-md shadow-indigo-700/20 hover:scale-[1.02]">
+          <a href="#contact" className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all shadow-md shadow-blue-600/20 hover:scale-[1.02]">
             Hire Me
           </a>
         </div>
@@ -109,34 +109,26 @@ export const Hero = () => {
       <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
         <div className="grid lg:grid-cols-[auto_1fr] gap-16 items-start">
           
-          {/* ── Smaller Rectangular Photo at TOP LEFT ── */}
+          {/* ── Circular Profile Photo at TOP LEFT ── */}
           <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
-            className="relative group mt-4"
+            className="relative mt-2"
           >
-            <div className="w-40 h-52 xl:w-48 xl:h-64 rounded-2xl overflow-hidden border border-slate-200/80 shadow-xl relative z-10 bg-slate-900/5 group-hover:shadow-2xl transition-all duration-500">
+            <div className="w-44 h-44 xl:w-52 xl:h-52 rounded-full overflow-hidden border-4 border-white shadow-2xl ring-2 ring-slate-200/80 bg-slate-50 relative z-10 group">
               <img 
                 src="/profile_v5.webp" 
                 alt="Kenza Mahleb" 
-                className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" 
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent pointer-events-none" />
-            </div>
-            
-            {/* Elegant Tech Accents */}
-            <div className="absolute -top-2 -right-2 w-7 h-7 border-t-2 border-r-2 border-indigo-600/50 rounded-tr-xl" />
-            <div className="absolute -bottom-2 -left-2 w-7 h-7 border-b-2 border-l-2 border-blue-600/50 rounded-bl-xl" />
-            <div className="absolute -bottom-3 right-4 px-2.5 py-0.5 rounded-full bg-slate-900 text-white font-mono text-[10px] font-bold shadow-md z-20 flex items-center gap-1.5 border border-slate-700">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Available
             </div>
           </motion.div>
 
           {/* ── Content area ── */}
           <motion.div variants={stagger} initial="hidden" animate="show" className="pt-4 relative">
             
-            {/* ── Advanced 3D AI Neural Matrix & Live Code Core ── */}
+            {/* ── Advanced 3D AI Neural Matrix & Live Code Core (Pure Cyber Blue & Slate) ── */}
             <div className="lg:absolute lg:-right-8 xl:-right-14 lg:top-20 xl:top-24 w-full max-w-sm mx-auto lg:mx-0 lg:w-96 mt-12 lg:mt-0 pointer-events-none min-h-[360px] z-20">
               <motion.div 
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -145,7 +137,7 @@ export const Hero = () => {
                 className="relative w-full h-80 flex items-center justify-center"
               >
                 {/* Deep Ambient Energy Glow */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/10 via-indigo-600/15 to-cyan-500/10 blur-[80px] rounded-full pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/10 via-sky-600/10 to-blue-900/10 blur-[80px] rounded-full pointer-events-none" />
                 
                 {/* 3D Gyroscopic Neural Sphere Stage */}
                 <div className="relative w-56 h-56 flex items-center justify-center [perspective:1000px]">
@@ -154,7 +146,7 @@ export const Hero = () => {
                   <motion.div 
                     animate={{ rotateZ: [0, 360], rotateX: [65, 75, 65] }}
                     transition={{ rotateZ: { duration: 18, repeat: Infinity, ease: "linear" }, rotateX: { duration: 6, repeat: Infinity, ease: "easeInOut" } }}
-                    className="absolute inset-0 rounded-full border-2 border-dashed border-indigo-500/40 shadow-[0_0_20px_rgba(99,102,241,0.2)]"
+                    className="absolute inset-0 rounded-full border-2 border-dashed border-blue-500/40 shadow-[0_0_20px_rgba(37,99,235,0.2)]"
                   >
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]" />
                   </motion.div>
@@ -165,14 +157,14 @@ export const Hero = () => {
                     transition={{ rotateZ: { duration: 24, repeat: Infinity, ease: "linear" }, rotateY: { duration: 8, repeat: Infinity, ease: "easeInOut" } }}
                     className="absolute inset-3 rounded-full border border-blue-400/30"
                   >
-                    <div className="absolute bottom-2 right-4 w-2.5 h-2.5 rounded-full bg-indigo-400 shadow-[0_0_8px_#818cf8]" />
+                    <div className="absolute bottom-2 right-4 w-2.5 h-2.5 rounded-full bg-sky-400 shadow-[0_0_8px_#38bdf8]" />
                   </motion.div>
 
                   {/* Central Neural Quantum Core (AI Processing Center) */}
                   <motion.div 
                     animate={{ scale: [1, 1.15, 1], rotate: [0, 90, 180, 270, 360] }}
                     transition={{ scale: { duration: 3, repeat: Infinity, ease: "easeInOut" }, rotate: { duration: 30, repeat: Infinity, ease: "linear" } }}
-                    className="relative w-20 h-20 rounded-2xl bg-gradient-to-tr from-slate-950 via-blue-900 to-indigo-900 border border-blue-400/50 shadow-[0_0_40px_rgba(37,99,235,0.4)] flex items-center justify-center backdrop-blur-md"
+                    className="relative w-20 h-20 rounded-2xl bg-gradient-to-tr from-slate-950 via-slate-900 to-blue-950 border border-blue-400/50 shadow-[0_0_40px_rgba(37,99,235,0.4)] flex items-center justify-center backdrop-blur-md"
                   >
                     <div className="w-10 h-10 rounded-xl border border-cyan-400/40 flex items-center justify-center font-mono text-[9px] text-cyan-300 font-bold bg-cyan-950/40 shadow-inner">
                       AI_v4
@@ -183,7 +175,7 @@ export const Hero = () => {
                   <motion.div 
                     animate={{ y: [0, -8, 0], opacity: [0.7, 1, 0.7] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute -top-4 left-6 px-3 py-1 rounded-full bg-slate-900/90 border border-indigo-500/40 text-[10px] font-mono text-indigo-300 font-bold shadow-lg backdrop-blur-md"
+                    className="absolute -top-4 left-6 px-3 py-1 rounded-full bg-slate-900/90 border border-blue-500/40 text-[10px] font-mono text-sky-300 font-bold shadow-lg backdrop-blur-md"
                   >
                     Softmax(QKᵀ / √d)
                   </motion.div>
@@ -221,14 +213,14 @@ export const Hero = () => {
 
             <motion.div variants={fadeUp} className="flex items-center gap-3 mb-6">
               <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-              <span className="font-mono text-[11px] font-bold tracking-[0.3em] uppercase text-slate-700 bg-slate-100 border border-slate-200 px-3 py-1 rounded-full">
+              <span className="font-mono text-[11px] font-bold tracking-[0.3em] uppercase text-blue-700 bg-blue-50 border border-blue-200/80 px-3 py-1 rounded-full">
                 Cisco CCNA (94%) · ESGI Paris
               </span>
             </motion.div>
 
             <motion.h1 variants={fadeUp} className="font-heading font-black tracking-[-0.04em] mb-6 leading-tight text-slate-900" style={{ fontSize: 'clamp(2.5rem,5.5vw,4.5rem)' }}>
               DRIVING DIGITAL<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-indigo-600 to-sky-600">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-blue-600 to-sky-600">
                 RESILIENCE.
               </span>
             </motion.h1>
@@ -236,16 +228,16 @@ export const Hero = () => {
             <motion.div variants={fadeUp} className="h-10 flex items-center mb-8">
               <span className="text-xl font-medium text-slate-600">
                 I am a{' '}
-                <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-indigo-600 underline decoration-indigo-200 underline-offset-4">{typed}</span>
+                <span className="font-bold text-blue-600 underline decoration-blue-200 underline-offset-4">{typed}</span>
               </span>
             </motion.div>
 
             <motion.p variants={fadeUp} className="max-w-xl leading-relaxed mb-10 text-lg text-slate-600">
-              Bachelor in Computer Engineering graduate from <strong className="text-slate-900 font-bold">ESGI Paris</strong> and <strong className="text-indigo-600 font-bold">Cisco CCNA Certified (Score 94%)</strong>. I specialize in architecting resilient cloud infrastructures, automating zero-downtime CI/CD pipelines, and integrating intelligent AI agent systems.
+              Bachelor in Computer Engineering graduate from <strong className="text-slate-900 font-bold">ESGI Paris</strong> and <strong className="text-blue-600 font-bold">Cisco CCNA Certified (Score 94%)</strong>. I specialize in architecting resilient cloud infrastructures, automating zero-downtime CI/CD pipelines, and integrating intelligent AI agent systems.
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4 items-center">
-              <a href="#projects" className="bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-800 hover:to-indigo-800 text-white px-7 py-3.5 rounded-xl font-bold text-sm transition-all shadow-md hover:shadow-xl hover:scale-[1.02] flex items-center gap-2">
+              <a href="#projects" className="bg-blue-600 hover:bg-blue-700 text-white px-7 py-3.5 rounded-xl font-bold text-sm transition-all shadow-md hover:shadow-xl hover:scale-[1.02] flex items-center gap-2">
                 Explore Projects <ArrowRight size={16} />
               </a>
               <a href="/cv-kenza-mahleb.pdf" download="CV_Kenza_Mahleb.pdf" target="_blank" rel="noopener noreferrer" className="bg-slate-900 hover:bg-black text-white px-6 py-3.5 rounded-xl font-bold text-sm transition-all shadow-md hover:shadow-xl flex items-center gap-2">
