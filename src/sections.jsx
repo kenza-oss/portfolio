@@ -194,7 +194,7 @@ const projects = [
     tags: ['Python', 'FastAPI', 'LangChain', 'AWS', 'Vector DB'],
     metric: 'Sub-15ms Vector Recall',
     screens: [
-      { label: 'Episodic Memory Vector Graph', badge: 'Neural Recall', image: 'https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=800&fit=crop' },
+      { label: 'Episodic Memory Vector Graph', badge: 'Neural Recall', image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=800&fit=crop' },
       { label: 'Qdrant Embedding Space Clusters', badge: 'Vector DB', image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&fit=crop' },
       { label: 'MCP Protocol Tool Schema', badge: 'RPC Server', image: 'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=800&fit=crop' }
     ],

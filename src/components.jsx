@@ -1,6 +1,6 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, Linkedin, Mail, ArrowRight, Code2, Shield, Cpu, Cloud, Menu, X, FileText, Download } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowRight, Code2, Shield, Cpu, Cloud, Menu, X, FileText, Download, Server, Terminal, Network, ShieldCheck, Sparkles, Activity } from 'lucide-react';
 
 /* ─────────────── SHARED VARIANTS ─────────────── */
 export const fadeUp = {
@@ -316,70 +316,275 @@ function OrbitTool({ tool, index, total, r, counterClass }) {
 
 export const Skills = () => {
   const cats = [
-    { cat:'Systems & Administration', items:['Linux (Debian, Kali, Ubuntu)', 'Windows Server & Active Directory', 'Docker Containerization', 'IAM & Access Control (RBAC)'] },
-    { cat:'Networks & Infrastructure', items:['Routing & Switching (OSPF, BGP)', 'VLAN, STP & Network Segmentation', 'Wireshark & Packet Capture', 'Cisco Packet Tracer Architecture'] },
-    { cat:'Cloud Computing & DevOps', items:['CI/CD Pipelines (GitHub Actions)', 'Render, Supabase & Cloud Hosting', 'Cloudinary CDN Optimization', 'DNS Management & cPanel'] },
-    { cat:'Cybersecurity & Audit', items:['OWASP Top 10 Mitigation', 'JWT, OAuth2 & API Hardening', 'Nmap, Metasploit & Pentesting', 'Vulnerability Assessments'] },
-    { cat:'Development & Scripting', items:['Python & Shell Scripting', 'RESTful API Engineering', 'Django & PostgreSQL Backend', 'React & Flutter Interfaces'] },
+    { 
+      id: 'SYS.01',
+      cat: 'Systems & Administration', 
+      tagline: 'Linux Kernel & Enterprise AD',
+      icon: Terminal,
+      status: 'ONLINE',
+      metric: 'Reliability: 99.98% · RBAC Ready',
+      items: ['Linux (Debian, Kali, Ubuntu)', 'Windows Server & Active Directory', 'Docker Containerization', 'IAM & Access Control (RBAC)'] 
+    },
+    { 
+      id: 'NET.02',
+      cat: 'Networks & Infrastructure', 
+      tagline: 'Cisco Routing & Dynamic Switching',
+      icon: Network,
+      status: 'CCNA 94%',
+      metric: 'Protocols: OSPF · BGP · VLAN 802.1Q',
+      items: ['Routing & Switching (OSPF, BGP)', 'VLAN, STP & Network Segmentation', 'Wireshark & Deep Packet Capture', 'Cisco Packet Tracer Architecture'] 
+    },
+    { 
+      id: 'CLD.03',
+      cat: 'Cloud Computing & DevOps', 
+      tagline: 'Zero-Downtime CI/CD & Cloud Orchestration',
+      icon: Cloud,
+      status: 'OPTIMIZED',
+      metric: 'Deployments: GitHub Actions · Supabase',
+      items: ['CI/CD Pipelines (GitHub Actions)', 'Render, Supabase & Cloud Hosting', 'Cloudinary CDN Optimization', 'DNS Management & High-Availability'] 
+    },
+    { 
+      id: 'SEC.04',
+      cat: 'Cybersecurity & Audit', 
+      tagline: 'Zero-Trust Defense & Vulnerability Mitigation',
+      icon: ShieldCheck,
+      status: 'HARDENED',
+      metric: 'Standards: OWASP Top 10 · JWT · OAuth2',
+      items: ['OWASP Top 10 Mitigation', 'JWT, OAuth2 & API Hardening', 'Nmap, Metasploit & Pentesting', 'Vulnerability & Surface Assessments'] 
+    },
+    { 
+      id: 'DEV.05',
+      cat: 'Development & Scripting', 
+      tagline: 'Full-Stack Architecture & AI Integration',
+      icon: Code2,
+      status: 'PRODUCTION',
+      metric: 'Engines: Django REST · React 18 · Python',
+      items: ['Python & Automated Shell Scripting', 'RESTful API Engineering', 'Django & PostgreSQL Backend', 'React & Modern Reactive Interfaces'] 
+    },
   ];
+
   return (
-    <section id="skills" className="relative py-32 overflow-hidden border-t border-gray-100 bg-gray-50">
-      <div style={{ maxWidth:1280, margin:'0 auto', padding:'0 24px', position: 'relative', zIndex: 10 }}>
-        <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }} style={{ textAlign:'center', marginBottom:80 }}>
-          <motion.p variants={fadeUp} className="font-mono text-[11px] font-bold tracking-[0.3em] uppercase text-red-600 mb-6" style={{ display:'flex', justifyContent:'center' }}>Capabilities</motion.p>
-          <motion.h2 variants={fadeUp} className="font-heading font-black text-gray-900 tracking-[-0.04em]" style={{ fontSize:'clamp(2.5rem,5vw,5rem)' }}>TECHNICAL STACK</motion.h2>
-          <motion.p variants={fadeUp} className="text-gray-500 text-sm max-w-md mx-auto mt-4">
-            An ecosystem of tools, protocols, and technologies powering my infrastructure and security architecture.
+    <section id="skills" className="relative py-32 overflow-hidden border-t border-slate-100 bg-slate-900/[0.02]">
+      
+      {/* ── High-Degree AI Neural Matrix & Cybernetic Lattice Background ── */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        {/* Deep Ambient AI Red Glow */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-red-600/10 via-rose-500/5 to-transparent blur-[140px] rounded-full" />
+        
+        {/* Subtle Tech Cyber Grid */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000006_1px,transparent_1px),linear-gradient(to_bottom,#00000006_1px,transparent_1px)] bg-[size:32px_32px]" />
+
+        {/* Concentric AI Radar Rings & Crosshairs behind Orbit */}
+        <div className="absolute top-[380px] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[750px] rounded-full border border-red-500/10 flex items-center justify-center">
+          <div className="w-[600px] h-[600px] rounded-full border border-dashed border-red-500/15 animate-[spin_120s_linear_infinite]" />
+          <div className="w-[450px] h-[450px] rounded-full border border-red-500/10" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-red-500/20 to-transparent" />
+            <div className="absolute h-full w-[1px] bg-gradient-to-b from-transparent via-red-500/20 to-transparent" />
+          </div>
+          {/* Radar Telemetry Labels */}
+          <span className="absolute top-4 left-1/2 -translate-x-1/2 font-mono text-[9px] text-red-600/50 tracking-[0.3em] font-bold">RADAR // 000° TENSOR_SPACE</span>
+          <span className="absolute bottom-4 left-1/2 -translate-x-1/2 font-mono text-[9px] text-red-600/50 tracking-[0.3em] font-bold">DIM: 1536 · METRIC: COSINE</span>
+          <span className="absolute left-4 top-1/2 -translate-y-1/2 font-mono text-[9px] text-red-600/50 tracking-[0.3em] -rotate-90 font-bold">WEIGHTS: SYNC</span>
+          <span className="absolute right-4 top-1/2 -translate-y-1/2 font-mono text-[9px] text-red-600/50 tracking-[0.3em] rotate-90 font-bold">NEURAL_BUS: ONLINE</span>
+        </div>
+      </div>
+
+      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '0 24px', position: 'relative', zIndex: 10 }}>
+        
+        {/* ── Section Header ── */}
+        <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }} style={{ textAlign: 'center', marginBottom: 60 }}>
+          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200/80 mb-5">
+            <Sparkles size={12} className="text-red-600 animate-pulse" />
+            <span className="font-mono text-[11px] font-bold tracking-[0.25em] uppercase text-red-700">High-Performance Ecosystem</span>
+          </motion.div>
+          <motion.h2 variants={fadeUp} className="font-heading font-black text-slate-900 tracking-[-0.04em]" style={{ fontSize: 'clamp(2.5rem,5vw,5rem)' }}>
+            TECHNICAL ARCHITECTURE
+          </motion.h2>
+          <motion.p variants={fadeUp} className="text-slate-600 text-sm max-w-lg mx-auto mt-4 font-normal leading-relaxed">
+            A battle-tested synergy of cloud infrastructure, network protocols, cybersecurity frameworks, and intelligent autonomous workflows.
           </motion.p>
         </motion.div>
 
-        {/* ── Orbit diagram (Mobile Responsive Scale) ── */}
-        <div className="relative w-full h-[420px] sm:h-[520px] md:h-[600px] flex items-center justify-center mb-16 overflow-hidden">
+        {/* ── 3D Multi-Ring Orbit with Central Cyber Core ── */}
+        <div className="relative w-full h-[440px] sm:h-[540px] md:h-[620px] flex items-center justify-center mb-24 overflow-hidden">
+          
+          {/* Orbital Depth Glow */}
+          <div className="absolute w-[400px] h-[400px] rounded-full bg-red-600/5 blur-[90px] pointer-events-none" />
+
           <div className="scale-[0.55] sm:scale-75 md:scale-100 transition-transform origin-center flex items-center justify-center relative w-[560px] h-[560px]">
-            {/* Static ring guides */}
-            <div style={{ position:'absolute', width:300, height:300, borderRadius:'50%', border:'1px dashed rgba(0,0,0,0.08)' }} />
-            <div style={{ position:'absolute', width:540, height:540, borderRadius:'50%', border:'1px solid rgba(0,0,0,0.05)' }} />
+            {/* Geometric Ring Guides with High-Tech Dash Marks */}
+            <div style={{ position: 'absolute', width: 300, height: 300, borderRadius: '50%', border: '1.5px dashed rgba(220,38,38,0.22)' }} />
+            <div style={{ position: 'absolute', width: 540, height: 540, borderRadius: '50%', border: '1px solid rgba(220,38,38,0.12)' }} />
+            
+            {/* Pulse Ring */}
+            <div className="absolute w-[360px] h-[360px] rounded-full border border-red-500/10 animate-ping [animation-duration:6s]" />
 
-            {/* Spinning rings */}
-            <div className="orbit-ring-1" style={{ position:'absolute', width:300, height:300 }}>
-              {tools1.map((t,i) => <OrbitTool key={t.name} tool={t} index={i} total={tools1.length} r={150} counterClass="counter-rotate-1" />)}
-            </div>
-            <div className="orbit-ring-2" style={{ position:'absolute', width:540, height:540 }}>
-              {tools2.map((t,i) => <OrbitTool key={t.name} tool={t} index={i} total={tools2.length} r={270} counterClass="counter-rotate-2" />)}
+            {/* Spinning Orbit Ring 1 (Inner Stack) */}
+            <div className="orbit-ring-1" style={{ position: 'absolute', width: 300, height: 300 }}>
+              {tools1.map((t, i) => <OrbitTool key={t.name} tool={t} index={i} total={tools1.length} r={150} counterClass="counter-rotate-1" />)}
             </div>
 
-            {/* Center KM */}
-            <div style={{
-              position:'absolute', zIndex:20,
-              width:120, height:120, borderRadius:'50%',
-              background:'#FFF',
-              border:'1px solid rgba(220,38,38,0.15)',
-              boxShadow:'0 10px 30px rgba(0,0,0,0.08)',
-              display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center',
-            }}>
-              <span style={{ fontFamily:'Outfit,sans-serif', fontWeight:900, fontSize:30, color:'#111827', letterSpacing:'-0.05em', lineHeight:1 }}>
-                KM<span className="text-red-600">.</span>
-              </span>
-              <span className="text-red-600" style={{ fontFamily:'Space Mono,monospace', fontSize:8, letterSpacing:'0.25em', textTransform:'uppercase', marginTop:4 }}>Engineer</span>
+            {/* Spinning Orbit Ring 2 (Outer Stack) */}
+            <div className="orbit-ring-2" style={{ position: 'absolute', width: 540, height: 540 }}>
+              {tools2.map((t, i) => <OrbitTool key={t.name} tool={t} index={i} total={tools2.length} r={270} counterClass="counter-rotate-2" />)}
+            </div>
+
+            {/* Central KM Quantum Cyber Core */}
+            <div className="relative z-20 group cursor-default">
+              {/* Core Glow Ring */}
+              <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-red-600 to-rose-500 opacity-20 blur-md group-hover:opacity-40 transition-opacity duration-500" />
+              
+              <div style={{
+                position: 'relative',
+                width: 128, height: 128, borderRadius: '50%',
+                background: 'linear-gradient(145deg, #FFFFFF, #FFF5F5)',
+                border: '2px solid rgba(220,38,38,0.25)',
+                boxShadow: '0 12px 36px rgba(220,38,38,0.15), inset 0 0 15px rgba(220,38,38,0.05)',
+                display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+              }}>
+                {/* Tech Orbit Center Marker */}
+                <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-ping absolute top-3" />
+                <span style={{ fontFamily: 'Outfit,sans-serif', fontWeight: 900, fontSize: 32, color: '#0F172A', letterSpacing: '-0.05em', lineHeight: 1 }}>
+                  KM<span className="text-red-600">.</span>
+                </span>
+                <span className="text-red-600 font-mono text-[9px] font-bold tracking-[0.25em] uppercase mt-1 flex items-center gap-1">
+                  CORE <span className="w-1 h-1 rounded-full bg-emerald-500 inline-block" />
+                </span>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Category cards */}
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(240px, 1fr))', gap:24 }}>
-          {cats.map(({ cat, items }) => (
-            <div key={cat} className="glass-card bg-white border border-gray-100 p-8 shadow-sm hover:shadow-md transition-all">
-              <h3 className="font-heading font-bold text-gray-900 mb-4 text-[15px]">{cat}</h3>
-              <ul style={{ display:'flex', flexDirection:'column', gap:8 }}>
-                {items.map(it => (
-                  <li key={it} className="flex items-center gap-2 text-xs text-gray-500">
-                    <span className="w-1.5 h-1.5 rounded-full bg-red-500 flex-shrink-0" />{it}
-                  </li>
-                ))}
-              </ul>
+        {/* ── High-Tech Futuristic Capability Modules (Redesigned Command Console) ── */}
+        <div className="space-y-6">
+          <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+            <div className="flex items-center gap-2">
+              <Activity size={16} className="text-red-600" />
+              <span className="font-mono text-xs font-bold uppercase tracking-wider text-slate-800">Specialized Infrastructure Domains</span>
             </div>
-          ))}
+            <span className="font-mono text-[10px] text-slate-600 bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">
+              5 OF 5 ENGINES OPERATIONAL
+            </span>
+          </div>
+
+          {/* Grid Layout: Balanced & Innovative */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {cats.slice(0, 3).map((item) => {
+              const Icon = item.icon;
+              return (
+                <div 
+                  key={item.id} 
+                  className="relative group bg-white rounded-2xl border border-slate-200/90 p-7 shadow-sm hover:shadow-xl hover:border-red-500/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+                >
+                  {/* Top Red Gradient Corner Accent */}
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-red-500/10 via-transparent to-transparent pointer-events-none rounded-tr-2xl" />
+                  
+                  <div>
+                    {/* Header: ID + Status + Icon */}
+                    <div className="flex items-center justify-between mb-5">
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-[10px] font-bold text-red-600 bg-red-50 border border-red-200/60 px-2 py-0.5 rounded">
+                          {item.id}
+                        </span>
+                        <span className="font-mono text-[9px] font-bold text-slate-600">
+                          {item.status}
+                        </span>
+                      </div>
+                      <div className="w-10 h-10 rounded-xl bg-red-50 border border-red-200/60 text-red-600 flex items-center justify-center shadow-sm group-hover:scale-110 group-hover:bg-red-600 group-hover:text-white transition-all duration-300">
+                        <Icon size={18} />
+                      </div>
+                    </div>
+
+                    {/* Title & Architecture Subtitle */}
+                    <h3 className="font-heading font-black text-slate-900 text-lg mb-1 group-hover:text-red-600 transition-colors">
+                      {item.cat}
+                    </h3>
+                    <p className="text-xs text-slate-600 font-medium mb-6">
+                      {item.tagline}
+                    </p>
+
+                    {/* Skill Tech Chips */}
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {item.items.map((it, idx) => (
+                        <div 
+                          key={idx} 
+                          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200/70 text-slate-700 text-xs font-medium group-hover:bg-red-50/30 group-hover:border-red-100 transition-colors"
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-red-500 flex-shrink-0" />
+                          <span>{it}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Telemetry Metric Footer */}
+                  <div className="pt-4 border-t border-slate-100 flex items-center justify-between font-mono text-[10px] text-slate-600">
+                    <span className="truncate">{item.metric}</span>
+                    <span className="text-red-500 font-bold ml-2">●</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Bottom Row: 2 Wider Balanced Modules */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {cats.slice(3, 5).map((item) => {
+              const Icon = item.icon;
+              return (
+                <div 
+                  key={item.id} 
+                  className="relative group bg-white rounded-2xl border border-slate-200/90 p-7 shadow-sm hover:shadow-xl hover:border-red-500/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+                >
+                  <div className="absolute top-0 right-0 w-28 h-28 bg-gradient-to-bl from-red-500/10 via-transparent to-transparent pointer-events-none rounded-tr-2xl" />
+                  
+                  <div>
+                    <div className="flex items-center justify-between mb-5">
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-[10px] font-bold text-red-600 bg-red-50 border border-red-200/60 px-2 py-0.5 rounded">
+                          {item.id}
+                        </span>
+                        <span className="font-mono text-[9px] font-bold text-slate-600">
+                          {item.status}
+                        </span>
+                      </div>
+                      <div className="w-10 h-10 rounded-xl bg-red-50 border border-red-200/60 text-red-600 flex items-center justify-center shadow-sm group-hover:scale-110 group-hover:bg-red-600 group-hover:text-white transition-all duration-300">
+                        <Icon size={18} />
+                      </div>
+                    </div>
+
+                    <h3 className="font-heading font-black text-slate-900 text-lg mb-1 group-hover:text-red-600 transition-colors">
+                      {item.cat}
+                    </h3>
+                    <p className="text-xs text-slate-600 font-medium mb-6">
+                      {item.tagline}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {item.items.map((it, idx) => (
+                        <div 
+                          key={idx} 
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200/70 text-slate-700 text-xs font-medium group-hover:bg-red-50/30 group-hover:border-red-100 transition-colors"
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-red-500 flex-shrink-0" />
+                          <span>{it}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="pt-4 border-t border-slate-100 flex items-center justify-between font-mono text-[10px] text-slate-600">
+                    <span className="truncate">{item.metric}</span>
+                    <span className="text-red-500 font-bold ml-2">●</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
         </div>
+
       </div>
     </section>
   );
