@@ -9,18 +9,39 @@ export const fadeUp = {
 };
 export const stagger = { show: { transition: { staggerChildren: 0.1 } } };
 
-/* ─────────────── TYPEWRITER ─────────────── */
-const useTypewriter = (words, speed = 100, delay = 2200) => {
-  const [idx, setIdx] = useState(0);
-  const [sub, setSub] = useState(0);
-  const [rev, setRev] = useState(false);
+/* ─────────────── TYPEWRITER (ROBUST & TRANSLATION-SAFE) ─────────────── */
+const useTypewriter = (words, speed = 80, delay = 2200) => {
+  const [text, setText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [loopNum, setLoopNum] = useState(0);
+
   useEffect(() => {
-    if (sub === words[idx].length + 1 && !rev) { setTimeout(() => setRev(true), delay); return; }
-    if (sub === 0 && rev) { setRev(false); setIdx(p => (p + 1) % words.length); return; }
-    const t = setTimeout(() => setSub(p => p + (rev ? -1 : 1)), rev ? speed / 2 : speed);
-    return () => clearTimeout(t);
-  }, [sub, idx, rev, words, speed, delay]);
-  return words[idx].substring(0, sub);
+    const currentWord = words[loopNum % words.length];
+    let timer;
+
+    if (isDeleting) {
+      timer = setTimeout(() => {
+        setText(currentWord.substring(0, text.length - 1));
+      }, speed / 2);
+    } else {
+      timer = setTimeout(() => {
+        setText(currentWord.substring(0, text.length + 1));
+      }, speed);
+    }
+
+    if (!isDeleting && text === currentWord) {
+      timer = setTimeout(() => {
+        setIsDeleting(true);
+      }, delay);
+    } else if (isDeleting && text === '') {
+      setIsDeleting(false);
+      setLoopNum(prev => prev + 1);
+    }
+
+    return () => clearTimeout(timer);
+  }, [text, isDeleting, loopNum, words, speed, delay]);
+
+  return text;
 };
 
 /* ─────────────── NAVBAR ─────────────── */
@@ -41,7 +62,7 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <a href="#about" className="flex items-center gap-2 group">
           <div className="w-10 h-10 bg-gradient-to-tr from-red-800 via-red-600 to-red-500 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-red-600/20 group-hover:scale-105 transition-transform">K</div>
-          <span className="font-heading font-black text-lg tracking-tighter text-slate-900 group-hover:text-red-600 transition-colors">KENZA.</span>
+          <span className="font-heading font-black text-lg tracking-tighter text-slate-900 group-hover:text-red-600 transition-colors">KENZA MAHLEB.</span>
         </a>
 
         {/* Desktop Links */}
@@ -209,29 +230,32 @@ export const Hero = () => {
               </motion.div>
             </div>
 
-            <motion.div variants={fadeUp} className="flex items-center gap-3 mb-6">
-              <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse" />
-              <span className="font-mono text-[11px] font-bold tracking-[0.3em] uppercase text-blue-700 bg-red-50 border border-red-200/80 px-3 py-1 rounded-full">
-                Cisco CCNA (94%) · ESGI Paris
+            <motion.div variants={fadeUp} className="flex items-center gap-3 mb-5">
+              <span className="w-2.5 h-2.5 rounded-full bg-red-600 animate-pulse" />
+              <span className="font-mono text-[11px] font-bold tracking-[0.25em] uppercase text-red-600 bg-red-50 border border-red-200/80 px-3.5 py-1 rounded-full">
+                Kenza Mahleb · Cisco CCNA (94%) · ESGI Paris
               </span>
             </motion.div>
 
-            <motion.h1 variants={fadeUp} className="font-heading font-black tracking-[-0.04em] mb-6 leading-tight text-slate-900" style={{ fontSize: 'clamp(2.5rem,5.5vw,4.5rem)' }}>
-              DRIVING DIGITAL<br />
+            <motion.h1 variants={fadeUp} className="font-heading font-black tracking-[-0.04em] mb-5 leading-[1.05] text-slate-900" style={{ fontSize: 'clamp(2.5rem,5.2vw,4.5rem)' }}>
+              KENZA MAHLEB<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-700 via-red-600 to-rose-500">
-                RESILIENCE.
+                DRIVING DIGITAL RESILIENCE.
               </span>
             </motion.h1>
 
-            <motion.div variants={fadeUp} className="h-10 flex items-center mb-8">
-              <span className="text-xl font-medium text-slate-600">
-                I am a{' '}
-                <span className="font-bold text-red-600 underline decoration-red-200 underline-offset-4">{typed}</span>
+            <motion.div variants={fadeUp} className="h-10 flex items-center mb-7">
+              <span className="text-xl font-medium text-slate-600 flex items-center">
+                I am a&nbsp;
+                <span translate="no" className="notranslate font-bold text-red-600 underline decoration-red-200 underline-offset-4 flex items-center">
+                  {typed}
+                  <span className="inline-block w-[2px] h-5 ml-1 bg-red-600 animate-pulse" />
+                </span>
               </span>
             </motion.div>
 
             <motion.p variants={fadeUp} className="max-w-xl leading-relaxed mb-10 text-lg text-slate-600">
-              Bachelor in Computer Engineering graduate from <strong className="text-slate-900 font-bold">ESGI Paris</strong> and <strong className="text-red-600 font-bold">Cisco CCNA Certified (Score 94%)</strong>. I specialize in architecting resilient cloud infrastructures, automating zero-downtime CI/CD pipelines, and integrating intelligent AI agent systems.
+              Hi, I'm <strong className="text-slate-900 font-bold">Kenza Mahleb</strong> — Bachelor in Computer Engineering graduate from <strong className="text-slate-900 font-bold">ESGI Paris</strong> and <strong className="text-red-600 font-bold">Cisco CCNA Certified (Score 94%)</strong>. I specialize in architecting resilient cloud infrastructures, automating zero-downtime CI/CD pipelines, and integrating intelligent AI agent systems.
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4 items-center">
