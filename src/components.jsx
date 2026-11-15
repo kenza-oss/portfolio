@@ -40,23 +40,23 @@ export const Navbar = () => {
     }`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <a href="#about" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg">K</div>
-          <span className="font-heading font-black text-lg tracking-tighter text-gray-900 group-hover:text-blue-600 transition-colors">KENZA.</span>
+          <div className="w-10 h-10 bg-gradient-to-tr from-blue-700 via-indigo-600 to-sky-500 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-indigo-600/20 group-hover:scale-105 transition-transform">K</div>
+          <span className="font-heading font-black text-lg tracking-tighter text-slate-900 group-hover:text-indigo-600 transition-colors">KENZA.</span>
         </a>
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-7">
           {['About', 'Projects', 'Experience', 'Testimonials', 'Contact'].map(item => (
             <a key={item} href={`#${item.toLowerCase()}`} 
-              className="text-xs font-bold uppercase tracking-widest text-gray-500 hover:text-blue-600 transition-colors">
+              className="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-indigo-600 transition-colors">
               {item}
             </a>
           ))}
           <a href="/cv-kenza-mahleb.pdf" download="CV_Kenza_Mahleb.pdf" target="_blank" rel="noopener noreferrer"
-            className="border border-gray-200 text-gray-700 hover:border-blue-600 hover:text-blue-600 px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-1.5 shadow-sm bg-white">
-            <Download size={13} className="text-blue-600" /> CV
+            className="border border-slate-200 text-slate-700 hover:border-indigo-600 hover:text-indigo-600 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-1.5 shadow-sm bg-white">
+            <Download size={13} className="text-indigo-600" /> CV
           </a>
-          <a href="#contact" className="bg-blue-600 text-white px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-blue-700 transition-all shadow-md">
+          <a href="#contact" className="bg-gradient-to-r from-blue-700 to-indigo-700 text-white px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest hover:from-blue-800 hover:to-indigo-800 transition-all shadow-md shadow-indigo-700/20 hover:scale-[1.02]">
             Hire Me
           </a>
         </div>
@@ -116,116 +116,148 @@ export const Hero = () => {
             transition={{ duration: 0.8 }}
             className="relative group mt-4"
           >
-            <div className="w-40 h-52 xl:w-48 xl:h-64 rounded-xl overflow-hidden border border-gray-200 shadow-lg relative z-10 bg-gray-50">
+            <div className="w-40 h-52 xl:w-48 xl:h-64 rounded-2xl overflow-hidden border border-slate-200/80 shadow-xl relative z-10 bg-slate-900/5 group-hover:shadow-2xl transition-all duration-500">
               <img 
-                src="/profile_v4.webp" 
+                src="/profile_v5.webp" 
                 alt="Kenza Mahleb" 
-                className="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-500" 
+                className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" 
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent pointer-events-none" />
             </div>
             
-            {/* Elegant Accents */}
-            <div className="absolute -top-2 -right-2 w-8 h-8 border-t-2 border-r-2 border-blue-500/30 rounded-tr-lg" />
-            <div className="absolute -bottom-2 -left-2 w-8 h-8 border-b-2 border-l-2 border-blue-500/30 rounded-bl-lg" />
+            {/* Elegant Tech Accents */}
+            <div className="absolute -top-2 -right-2 w-7 h-7 border-t-2 border-r-2 border-indigo-600/50 rounded-tr-xl" />
+            <div className="absolute -bottom-2 -left-2 w-7 h-7 border-b-2 border-l-2 border-blue-600/50 rounded-bl-xl" />
+            <div className="absolute -bottom-3 right-4 px-2.5 py-0.5 rounded-full bg-slate-900 text-white font-mono text-[10px] font-bold shadow-md z-20 flex items-center gap-1.5 border border-slate-700">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Available
+            </div>
           </motion.div>
 
           {/* ── Content area ── */}
           <motion.div variants={stagger} initial="hidden" animate="show" className="pt-4 relative">
             
-            {/* ── Dark Blue Isometric Tech Core (Professional & Subtle) ── */}
-            <div className="lg:absolute lg:-right-10 xl:-right-16 lg:top-32 xl:top-40 w-full max-w-sm mx-auto lg:mx-0 lg:w-80 mt-12 lg:mt-0 pointer-events-none min-h-[300px]">
+            {/* ── Advanced 3D AI Neural Matrix & Live Code Core ── */}
+            <div className="lg:absolute lg:-right-8 xl:-right-14 lg:top-20 xl:top-24 w-full max-w-sm mx-auto lg:mx-0 lg:w-96 mt-12 lg:mt-0 pointer-events-none min-h-[360px] z-20">
               <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="relative w-full h-64 lg:h-80 flex items-center justify-center"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1 }}
+                className="relative w-full h-80 flex items-center justify-center"
               >
-                {/* Subtle Radial Glow */}
-                <div className="absolute inset-0 bg-blue-900/5 blur-[100px] rounded-full" />
+                {/* Deep Ambient Energy Glow */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/10 via-indigo-600/15 to-cyan-500/10 blur-[80px] rounded-full pointer-events-none" />
                 
-                <motion.div
-                  animate={{ 
-                    rotateY: [0, 360],
-                    y: [0, -10, 0]
-                  }}
-                  transition={{ 
-                    rotateY: { duration: 30, repeat: Infinity, ease: "linear" },
-                    y: { duration: 6, repeat: Infinity, ease: "easeInOut" }
-                  }}
-                  style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
-                  className="relative w-40 h-40"
-                >
-                  {/* Isometric Cube Layers (Dark Blue) */}
-                  {[...Array(3)].map((_, i) => (
-                    <div 
-                      key={i}
-                      className="absolute inset-0 border-2 border-blue-900/30 rounded-xl"
-                      style={{ 
-                        transform: `translateZ(${i * 20}px) rotate(${i * 15}deg)`,
-                        background: i === 1 ? 'rgba(30, 58, 138, 0.05)' : 'transparent',
-                        boxShadow: i === 1 ? '0 0 40px rgba(30, 58, 138, 0.1)' : 'none'
-                      }}
-                    >
-                      {/* Internal Grid in Dark Blue */}
-                      <div className="absolute inset-2 bg-[linear-gradient(to_right,#1E3A8A20_1px,transparent_1px),linear-gradient(to_bottom,#1E3A8A20_1px,transparent_1px)] bg-[size:10px_10px] opacity-40" />
-                      
-                      {/* Corner Accents */}
-                      <div className="absolute top-0 left-0 w-2 h-2 bg-blue-900 rounded-full" />
-                      <div className="absolute bottom-0 right-0 w-2 h-2 bg-blue-800 rounded-full" />
-                    </div>
-                  ))}
-
-                  {/* Pulsing Core Node */}
+                {/* 3D Gyroscopic Neural Sphere Stage */}
+                <div className="relative w-56 h-56 flex items-center justify-center [perspective:1000px]">
+                  
+                  {/* Outer Orbital Ring 1 (X/Y Plane Rotation) */}
                   <motion.div 
-                    animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 3, repeat: Infinity }}
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-blue-900 rounded-full z-20 shadow-[0_0_20px_rgba(30,58,138,0.8)]"
-                  />
+                    animate={{ rotateZ: [0, 360], rotateX: [65, 75, 65] }}
+                    transition={{ rotateZ: { duration: 18, repeat: Infinity, ease: "linear" }, rotateX: { duration: 6, repeat: Infinity, ease: "easeInOut" } }}
+                    className="absolute inset-0 rounded-full border-2 border-dashed border-indigo-500/40 shadow-[0_0_20px_rgba(99,102,241,0.2)]"
+                  >
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]" />
+                  </motion.div>
+
+                  {/* Orbital Ring 2 (Y/Z Incline Rotation) */}
+                  <motion.div 
+                    animate={{ rotateZ: [360, 0], rotateY: [60, 70, 60] }}
+                    transition={{ rotateZ: { duration: 24, repeat: Infinity, ease: "linear" }, rotateY: { duration: 8, repeat: Infinity, ease: "easeInOut" } }}
+                    className="absolute inset-3 rounded-full border border-blue-400/30"
+                  >
+                    <div className="absolute bottom-2 right-4 w-2.5 h-2.5 rounded-full bg-indigo-400 shadow-[0_0_8px_#818cf8]" />
+                  </motion.div>
+
+                  {/* Central Neural Quantum Core (AI Processing Center) */}
+                  <motion.div 
+                    animate={{ scale: [1, 1.15, 1], rotate: [0, 90, 180, 270, 360] }}
+                    transition={{ scale: { duration: 3, repeat: Infinity, ease: "easeInOut" }, rotate: { duration: 30, repeat: Infinity, ease: "linear" } }}
+                    className="relative w-20 h-20 rounded-2xl bg-gradient-to-tr from-slate-950 via-blue-900 to-indigo-900 border border-blue-400/50 shadow-[0_0_40px_rgba(37,99,235,0.4)] flex items-center justify-center backdrop-blur-md"
+                  >
+                    <div className="w-10 h-10 rounded-xl border border-cyan-400/40 flex items-center justify-center font-mono text-[9px] text-cyan-300 font-bold bg-cyan-950/40 shadow-inner">
+                      AI_v4
+                    </div>
+                  </motion.div>
+
+                  {/* Synaptic Code Particle Nodes */}
+                  <motion.div 
+                    animate={{ y: [0, -8, 0], opacity: [0.7, 1, 0.7] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute -top-4 left-6 px-3 py-1 rounded-full bg-slate-900/90 border border-indigo-500/40 text-[10px] font-mono text-indigo-300 font-bold shadow-lg backdrop-blur-md"
+                  >
+                    Softmax(QKᵀ / √d)
+                  </motion.div>
+
+                  <motion.div 
+                    animate={{ y: [0, 8, 0], opacity: [0.7, 1, 0.7] }}
+                    transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                    className="absolute -bottom-6 left-2 px-3 py-1 rounded-full bg-slate-900/90 border border-emerald-500/40 text-[10px] font-mono text-emerald-300 font-bold shadow-lg backdrop-blur-md"
+                  >
+                    loss: 0.0014 · loss.backward()
+                  </motion.div>
+
+                </div>
+
+                {/* Floating Glassmorphism Micro-Terminal Card (High-End Coding Proof) */}
+                <motion.div 
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: [0, -6, 0], opacity: 1 }}
+                  transition={{ y: { duration: 5, repeat: Infinity, ease: "easeInOut" }, opacity: { duration: 0.8 } }}
+                  className="absolute -bottom-6 -right-2 w-64 bg-slate-950/90 border border-slate-800 rounded-xl p-3 shadow-2xl backdrop-blur-md font-mono text-[10px] text-slate-300"
+                >
+                  <div className="flex items-center justify-between pb-1.5 mb-1.5 border-b border-slate-800 text-[9px] text-slate-400">
+                    <span className="flex items-center gap-1 text-emerald-400 font-bold">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> AI_KERNEL.ONLINE
+                    </span>
+                    <span>14ms Latency</span>
+                  </div>
+                  <div className="text-blue-400 font-semibold">// Neural Vector Pipeline</div>
+                  <div className="text-slate-400 truncate">const model = new LLM("Qdrant-v2");</div>
+                  <div className="text-emerald-400 font-bold truncate">✓ Zero-Trust Encryption: SHA-256</div>
                 </motion.div>
 
-                {/* Technical Coordinates (Static/Subtle) */}
-                <div className="absolute top-4 right-4 text-[8px] font-mono text-blue-900/40 uppercase tracking-widest leading-tight text-right">
-                  System.Secure_Core<br />
-                  Encrypted_Node.v4<br />
-                  0x7F.00.01
-                </div>
               </motion.div>
             </div>
 
             <motion.div variants={fadeUp} className="flex items-center gap-3 mb-6">
               <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-              <span className="font-mono text-[11px] font-bold tracking-[0.3em] uppercase text-blue-600">Cisco CCNA (94%) · ESGI Paris</span>
-            </motion.div>
-
-            <motion.h1 variants={fadeUp} className="font-heading font-black tracking-[-0.04em] mb-6 leading-tight text-gray-900" style={{ fontSize: 'clamp(2.5rem,5.5vw,4.5rem)' }}>
-              DRIVING DIGITAL<br />
-              <span className="text-blue-600">RESILIENCE.</span>
-            </motion.h1>
-
-            <motion.div variants={fadeUp} className="h-10 flex items-center mb-8">
-              <span className="text-xl font-medium text-gray-600">
-                I am a{' '}
-                <span className="font-bold text-blue-600 underline decoration-blue-200 underline-offset-4">{typed}</span>
+              <span className="font-mono text-[11px] font-bold tracking-[0.3em] uppercase text-slate-700 bg-slate-100 border border-slate-200 px-3 py-1 rounded-full">
+                Cisco CCNA (94%) · ESGI Paris
               </span>
             </motion.div>
 
-            <motion.p variants={fadeUp} className="max-w-xl leading-relaxed mb-10 text-lg text-gray-500">
-              Bachelor in Computer Engineering graduate from <strong className="text-gray-900">ESGI Paris</strong> and <strong className="text-blue-600">Cisco CCNA Certified (94%)</strong>. I specialize in administering complex network architectures, deploying secure cloud environments (Render, Supabase), and building automated CI/CD pipelines.
+            <motion.h1 variants={fadeUp} className="font-heading font-black tracking-[-0.04em] mb-6 leading-tight text-slate-900" style={{ fontSize: 'clamp(2.5rem,5.5vw,4.5rem)' }}>
+              DRIVING DIGITAL<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-indigo-600 to-sky-600">
+                RESILIENCE.
+              </span>
+            </motion.h1>
+
+            <motion.div variants={fadeUp} className="h-10 flex items-center mb-8">
+              <span className="text-xl font-medium text-slate-600">
+                I am a{' '}
+                <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-indigo-600 underline decoration-indigo-200 underline-offset-4">{typed}</span>
+              </span>
+            </motion.div>
+
+            <motion.p variants={fadeUp} className="max-w-xl leading-relaxed mb-10 text-lg text-slate-600">
+              Bachelor in Computer Engineering graduate from <strong className="text-slate-900 font-bold">ESGI Paris</strong> and <strong className="text-indigo-600 font-bold">Cisco CCNA Certified (Score 94%)</strong>. I specialize in architecting resilient cloud infrastructures, automating zero-downtime CI/CD pipelines, and integrating intelligent AI agent systems.
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4 items-center">
-              <a href="#projects" className="bg-blue-600 hover:bg-blue-700 text-white px-7 py-3.5 rounded-lg font-bold text-sm transition-all shadow-md hover:shadow-xl flex items-center gap-2">
-                View My Work <ArrowRight size={16} />
+              <a href="#projects" className="bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-800 hover:to-indigo-800 text-white px-7 py-3.5 rounded-xl font-bold text-sm transition-all shadow-md hover:shadow-xl hover:scale-[1.02] flex items-center gap-2">
+                Explore Projects <ArrowRight size={16} />
               </a>
-              <a href="/cv-kenza-mahleb.pdf" download="CV_Kenza_Mahleb.pdf" target="_blank" rel="noopener noreferrer" className="bg-gray-900 hover:bg-black text-white px-6 py-3.5 rounded-lg font-bold text-sm transition-all shadow-md hover:shadow-xl flex items-center gap-2">
-                <Download size={16} className="text-blue-400" /> Download CV
+              <a href="/cv-kenza-mahleb.pdf" download="CV_Kenza_Mahleb.pdf" target="_blank" rel="noopener noreferrer" className="bg-slate-900 hover:bg-black text-white px-6 py-3.5 rounded-xl font-bold text-sm transition-all shadow-md hover:shadow-xl flex items-center gap-2">
+                <Download size={16} className="text-sky-400" /> Download CV
               </a>
-              <a href="#contact" className="border border-gray-200 hover:border-blue-600 text-gray-700 hover:text-blue-600 px-6 py-3.5 rounded-lg font-bold text-sm transition-all bg-white shadow-sm">
+              <a href="#contact" className="border border-slate-300 hover:border-indigo-600 text-slate-700 hover:text-indigo-600 px-6 py-3.5 rounded-xl font-bold text-sm transition-all bg-white shadow-sm">
                 Contact Me
               </a>
               <div className="flex gap-2.5 ml-2">
                 {[{ Icon: Github, href: 'https://github.com/kenza-oss' }, { Icon: Linkedin, href: 'https://www.linkedin.com/in/kenza-mahleb-9860b5279' }, { Icon: Mail, href: 'mailto:mahlebkenza1@gmail.com' }].map(({ Icon, href }, i) => (
                   <a key={i} href={href} target="_blank" rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-lg border flex items-center justify-center transition-all border-gray-100 text-gray-400 hover:text-blue-600 hover:bg-blue-50 shadow-sm">
+                    className="w-10 h-10 rounded-xl border flex items-center justify-center transition-all border-slate-200 text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 shadow-sm">
                     <Icon size={18} />
                   </a>
                 ))}
