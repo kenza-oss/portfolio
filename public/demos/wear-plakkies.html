@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wear Plakkies — E-Commerce Platform Demo</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',sans-serif;background:#0f0f0f;color:#fff;min-height:100vh}
+  nav{display:flex;justify-content:space-between;align-items:center;padding:20px 60px;background:#111;border-bottom:1px solid #222}
+  .logo{font-size:1.5rem;font-weight:800;letter-spacing:2px;color:#fff}
+  .nav-links{display:flex;gap:32px;list-style:none}
+  .nav-links a{color:#aaa;text-decoration:none;font-size:.9rem;transition:color .2s}
+  .nav-links a:hover{color:#fff}
+  .cart-btn{background:#fff;color:#000;padding:8px 20px;border-radius:4px;font-weight:700;font-size:.85rem;cursor:pointer;border:none}
+  .hero{display:grid;grid-template-columns:1fr 1fr;min-height:80vh;align-items:center;gap:60px;padding:80px 60px;background:linear-gradient(135deg,#111 0%,#1a1a2e 100%)}
+  .hero-text h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:900;line-height:1.1;margin-bottom:24px}
+  .hero-text h1 span{color:#e8b86d}
+  .hero-text p{color:#aaa;font-size:1.1rem;line-height:1.7;margin-bottom:36px}
+  .btn-row{display:flex;gap:16px}
+  .btn-primary{background:#e8b86d;color:#000;padding:14px 32px;border-radius:4px;font-weight:700;font-size:1rem;border:none;cursor:pointer}
+  .btn-secondary{background:transparent;color:#fff;padding:14px 32px;border-radius:4px;font-weight:700;font-size:1rem;border:1px solid #444;cursor:pointer}
+  .hero-image{position:relative}
+  .product-card{background:#1a1a1a;border-radius:12px;overflow:hidden;border:1px solid #222}
+  .product-img{width:100%;height:280px;background:linear-gradient(145deg,#2a2a2a,#1a1a1a);display:flex;align-items:center;justify-content:center;font-size:5rem}
+  .product-info{padding:20px}
+  .product-name{font-size:1.2rem;font-weight:700;margin-bottom:8px}
+  .product-price{color:#e8b86d;font-size:1.4rem;font-weight:800}
+  .product-stars{color:#e8b86d;font-size:.9rem;margin-bottom:12px}
+  .add-to-cart{width:100%;background:#fff;color:#000;padding:12px;border:none;border-radius:6px;font-weight:700;cursor:pointer;margin-top:12px}
+  .products{padding:60px;background:#111}
+  .products h2{font-size:2rem;font-weight:800;margin-bottom:40px;text-align:center}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .p-card{background:#1a1a1a;border-radius:12px;border:1px solid #222;overflow:hidden;transition:transform .2s,border-color .2s}
+  .p-card:hover{transform:translateY(-4px);border-color:#e8b86d}
+  .p-img{height:200px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:linear-gradient(145deg,#252525,#1a1a1a)}
+  .p-info{padding:16px}
+  .p-name{font-weight:700;margin-bottom:6px}
+  .p-price{color:#e8b86d;font-weight:800}
+  .tech-badge{display:inline-block;background:#222;border:1px solid #333;padding:4px 10px;border-radius:4px;font-size:.75rem;color:#aaa;margin:2px}
+  .tags{padding:20px 60px 60px;text-align:center}
+  .back{position:fixed;top:20px;right:20px;background:#e8b86d;color:#000;padding:8px 16px;border-radius:6px;font-weight:700;font-size:.8rem;text-decoration:none;z-index:999}
+</style>
+</head>
+<body>
+<a class="back" href="/">← Back to Portfolio</a>
+<nav>
+  <div class="logo">WEAR PLAKKIES</div>
+  <ul class="nav-links">
+    <li><a href="#">New Arrivals</a></li>
+    <li><a href="#">Collections</a></li>
+    <li><a href="#">Sale</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+  <button class="cart-btn">🛍 Cart (3)</button>
+</nav>
+
+<div class="hero">
+  <div class="hero-text">
+    <h1>Step Into <span>Modern Style</span> With Confidence</h1>
+    <p>High-performance e-commerce platform built with React &amp; Next.js. Responsive UI, optimized checkout flow, and seamless Shopify integration for maximum conversion.</p>
+    <div class="btn-row">
+      <button class="btn-primary">Shop Now</button>
+      <button class="btn-secondary">View Collection</button>
+    </div>
+  </div>
+  <div class="hero-image">
+    <div class="product-card">
+      <div class="product-img">👟</div>
+      <div class="product-info">
+        <div class="product-name">Premium Urban Sneaker</div>
+        <div class="product-stars">★★★★★ (247 reviews)</div>
+        <div class="product-price">$149.99</div>
+        <button class="add-to-cart">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="products">
+  <h2>Featured Collection</h2>
+  <div class="grid">
+    <div class="p-card"><div class="p-img">👠</div><div class="p-info"><div class="p-name">Classic Heel Boot</div><div class="p-price">$189.99</div></div></div>
+    <div class="p-card"><div class="p-img">🥾</div><div class="p-info"><div class="p-name">Outdoor Trail Boot</div><div class="p-price">$219.99</div></div></div>
+    <div class="p-card"><div class="p-img">🩴</div><div class="p-info"><div class="p-name">Summer Slide</div><div class="p-price">$79.99</div></div></div>
+  </div>
+</div>
+
+<div class="tags" style="background:#0f0f0f">
+  <p style="color:#666;margin-bottom:12px">Built with</p>
+  <span class="tech-badge">React</span><span class="tech-badge">Next.js</span><span class="tech-badge">Tailwind CSS</span><span class="tech-badge">Shopify API</span><span class="tech-badge">Node.js</span>
+</div>
+</body>
+</html>

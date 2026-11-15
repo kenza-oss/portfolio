@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Learning Management System — Backend Demo</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',sans-serif;background:#0f1117;color:#e2e8f0;min-height:100vh}
+  .sidebar{position:fixed;left:0;top:0;bottom:0;width:260px;background:#111827;border-right:1px solid #1f2937;padding:24px 0;display:flex;flex-direction:column}
+  .sidebar-logo{padding:0 24px 24px;font-size:1.3rem;font-weight:800;color:#6366f1;border-bottom:1px solid #1f2937}
+  .nav-item{display:flex;align-items:center;gap:12px;padding:12px 24px;cursor:pointer;transition:background .2s;font-size:.9rem;color:#9ca3af}
+  .nav-item:hover,.nav-item.active{background:#1f2937;color:#e2e8f0}
+  .nav-item.active{border-left:3px solid #6366f1;padding-left:21px}
+  .nav-item span:first-child{font-size:1.1rem}
+  .main{margin-left:260px;padding:32px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px}
+  .topbar h1{font-size:1.6rem;font-weight:800}
+  .user-info{display:flex;align-items:center;gap:12px;font-size:.9rem;color:#9ca3af}
+  .avatar{width:36px;height:36px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px}
+  .stat-card{background:#111827;border:1px solid #1f2937;border-radius:12px;padding:20px}
+  .stat-card h3{color:#6b7280;font-size:.8rem;font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+  .stat-card .num{font-size:2rem;font-weight:800;margin-bottom:4px}
+  .stat-card .num.blue{color:#6366f1}.stat-card .num.green{color:#22c55e}.stat-card .num.yellow{color:#f59e0b}.stat-card .num.purple{color:#a855f7}
+  .stat-card .change{font-size:.8rem;color:#22c55e}
+  .row{display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-bottom:20px}
+  .card{background:#111827;border:1px solid #1f2937;border-radius:12px;padding:24px}
+  .card h3{font-size:1rem;font-weight:700;margin-bottom:20px;color:#e2e8f0}
+  .course-item{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #1f2937}
+  .course-item:last-child{border-bottom:none}
+  .course-title{font-size:.9rem;font-weight:600}
+  .course-meta{font-size:.8rem;color:#6b7280;margin-top:3px}
+  .progress-bar{width:100%;height:6px;background:#1f2937;border-radius:3px;overflow:hidden;margin-top:6px}
+  .progress-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#6366f1,#8b5cf6)}
+  .badge{padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:700}
+  .badge.active{background:#065f46;color:#34d399}
+  .badge.pending{background:#78350f;color:#fbbf24}
+  .badge.draft{background:#1f2937;color:#6b7280}
+  .user-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid #1f2937}
+  .user-row:last-child{border-bottom:none}
+  .user-av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0}
+  .user-name{font-size:.9rem;font-weight:600}
+  .user-role{font-size:.75rem;color:#6b7280}
+  .api-box{background:#0d1117;border:1px solid #21262d;border-radius:8px;padding:16px;font-family:monospace;font-size:.8rem;color:#58a6ff;line-height:1.8;margin-top:16px}
+  .method{display:inline-block;padding:2px 8px;border-radius:4px;font-weight:700;margin-right:8px;font-size:.7rem}
+  .get{background:#0d419d;color:#58a6ff}.post{background:#1a4731;color:#3fb950}.delete{background:#5d1f1a;color:#f85149}
+  .back{position:fixed;top:20px;right:20px;background:#6366f1;color:#fff;padding:8px 16px;border-radius:6px;font-weight:700;font-size:.8rem;text-decoration:none;z-index:999}
+</style>
+</head>
+<body>
+<a class="back" href="/">← Back to Portfolio</a>
+
+<div class="sidebar">
+  <div class="sidebar-logo">📚 LMS Platform</div>
+  <div class="nav-item active"><span>📊</span><span>Dashboard</span></div>
+  <div class="nav-item"><span>📖</span><span>Courses</span></div>
+  <div class="nav-item"><span>👥</span><span>Users</span></div>
+  <div class="nav-item"><span>📝</span><span>Assignments</span></div>
+  <div class="nav-item"><span>📈</span><span>Analytics</span></div>
+  <div class="nav-item"><span>🔑</span><span>Access Control</span></div>
+  <div class="nav-item"><span>🔗</span><span>REST API</span></div>
+  <div class="nav-item"><span>⚙️</span><span>Settings</span></div>
+</div>
+
+<div class="main">
+  <div class="topbar">
+    <h1>Admin Dashboard</h1>
+    <div class="user-info">
+      <div class="avatar">KM</div>
+      <span>Kenza Mahleb · Admin</span>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat-card"><h3>Total Students</h3><div class="num blue">3,847</div><div class="change">↑ +12.4% this month</div></div>
+    <div class="stat-card"><h3>Active Courses</h3><div class="num green">64</div><div class="change">↑ +3 new this week</div></div>
+    <div class="stat-card"><h3>Completion Rate</h3><div class="num yellow">78.5%</div><div class="change">↑ +5.2% vs last month</div></div>
+    <div class="stat-card"><h3>API Requests/day</h3><div class="num purple">142K</div><div class="change">↑ p99 latency: 48ms</div></div>
+  </div>
+
+  <div class="row">
+    <div class="card">
+      <h3>📖 Active Courses</h3>
+      <div class="course-item">
+        <div>
+          <div class="course-title">Network Security Fundamentals</div>
+          <div class="course-meta">847 students enrolled · Dr. Mahleb</div>
+          <div class="progress-bar"><div class="progress-fill" style="width:72%"></div></div>
+        </div>
+        <span class="badge active">Active</span>
+      </div>
+      <div class="course-item">
+        <div>
+          <div class="course-title">Cloud Infrastructure with AWS &amp; GCP</div>
+          <div class="course-meta">523 students enrolled · 12 modules</div>
+          <div class="progress-bar"><div class="progress-fill" style="width:58%;background:linear-gradient(90deg,#f59e0b,#f97316)"></div></div>
+        </div>
+        <span class="badge active">Active</span>
+      </div>
+      <div class="course-item">
+        <div>
+          <div class="course-title">Linux &amp; Docker Administration</div>
+          <div class="course-meta">314 students enrolled · 8 modules</div>
+          <div class="progress-bar"><div class="progress-fill" style="width:45%;background:linear-gradient(90deg,#22c55e,#16a34a)"></div></div>
+        </div>
+        <span class="badge pending">In Review</span>
+      </div>
+      <div class="course-item">
+        <div>
+          <div class="course-title">CCNA Prep: Routing &amp; Switching</div>
+          <div class="course-meta">1,203 students enrolled · 20 modules</div>
+          <div class="progress-bar"><div class="progress-fill" style="width:89%;background:linear-gradient(90deg,#a855f7,#7c3aed)"></div></div>
+        </div>
+        <span class="badge active">Active</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>👥 Recent Users</h3>
+      <div class="user-row"><div class="user-av">AH</div><div><div class="user-name">Ali Hamza</div><div class="user-role">Student · 3 courses</div></div></div>
+      <div class="user-row"><div class="user-av">SB</div><div><div class="user-name">Sara Belkacem</div><div class="user-role">Instructor · 2 courses</div></div></div>
+      <div class="user-row"><div class="user-av">MR</div><div><div class="user-name">Mohamed Rahmani</div><div class="user-role">Student · 1 course</div></div></div>
+      <div class="user-row"><div class="user-av">LB</div><div><div class="user-name">Lina Bouazza</div><div class="user-role">Student · 4 courses</div></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🔗 REST API Endpoints — PostgreSQL + JWT Auth</h3>
+    <div class="api-box">
+      <div><span class="method get">GET</span> /api/v1/courses · Returns paginated course list (RBAC protected)</div>
+      <div><span class="method post">POST</span> /api/v1/enroll · Enroll student → triggers progress tracker</div>
+      <div><span class="method get">GET</span> /api/v1/progress/:userId · Fetch completion metrics per module</div>
+      <div><span class="method post">POST</span> /api/v1/auth/login · JWT token issuance (bcrypt + refresh token)</div>
+      <div><span class="method delete">DELETE</span> /api/v1/users/:id · Admin-only user deactivation endpoint</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

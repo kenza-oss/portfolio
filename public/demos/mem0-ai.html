@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mem0.ai — MCP Memory Provider for LLMs Demo</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',sans-serif;background:#09090b;color:#f4f4f5;min-height:100vh}
+  nav{display:flex;justify-content:space-between;align-items:center;padding:18px 40px;background:#111116;border-bottom:1px solid #27272a}
+  .logo{font-size:1.2rem;font-weight:800;color:#a855f7;display:flex;align-items:center;gap:8px}
+  .container{max-width:1150px;margin:0 auto;padding:40px 24px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .card{background:#111116;border:1px solid #27272a;border-radius:12px;padding:24px}
+  .card-title{font-size:1rem;font-weight:700;margin-bottom:16px;color:#e4e4e7;display:flex;justify-content:space-between;align-items:center}
+  .terminal{background:#000;border:1px solid #1f1f23;border-radius:8px;padding:16px;font-family:monospace;font-size:.8rem;color:#a1a1aa;line-height:1.7}
+  .kw{color:#a855f7}.str{color:#4ade80}.fn{color:#38bdf8}
+  .memory-item{background:#18181b;border:1px solid #27272a;border-radius:8px;padding:12px 16px;margin-bottom:12px}
+  .memory-head{display:flex;justify-content:space-between;font-size:.75rem;color:#71717a;margin-bottom:6px}
+  .memory-content{font-size:.9rem;color:#f4f4f5}
+  .score-badge{background:#2e1065;color:#c084fc;padding:2px 8px;border-radius:12px;font-weight:700;font-size:.7rem}
+  .back{position:fixed;top:18px;right:20px;background:#9333ea;color:#fff;padding:8px 16px;border-radius:6px;font-weight:700;font-size:.8rem;text-decoration:none;z-index:999}
+</style>
+</head>
+<body>
+<a class="back" href="/">← Back to Portfolio</a>
+<nav>
+  <div class="logo">🧠 Mem0.ai Context Memory Protocol</div>
+  <div style="font-size:.8rem;color:#a1a1aa">Model Context Protocol (MCP) Server · Connected</div>
+</nav>
+
+<div class="container">
+  <div style="margin-bottom:32px">
+    <h1 style="font-size:2.2rem;font-weight:900;margin-bottom:8px">Persistent Episodic & Semantic AI Memory</h1>
+    <p style="color:#a1a1aa;font-size:1rem">Bridging Autonomous Agents with Long-Term Vector Memory, Graph Knowledge, and Adaptive User Profiles.</p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="card-title">
+        <span>⚡ MCP Tool Invocation</span>
+        <span style="font-size:.75rem;color:#4ade80">● Latency: 14ms</span>
+      </div>
+      <div class="terminal">
+        <span class="kw">POST</span> /mcp/v1/tools/search_memory<br><br>
+        {<br>
+        &nbsp;&nbsp;<span class="str">"query"</span>: <span class="str">"Network security preferences and CCNA certifications"</span>,<br>
+        &nbsp;&nbsp;<span class="str">"user_id"</span>: <span class="str">"kenza_mahleb"</span>,<br>
+        &nbsp;&nbsp;<span class="str">"threshold"</span>: <span class="fn">0.82</span><br>
+        }<br><br>
+        <span class="kw">Response:</span> 3 memories extracted via cosine similarity ranking.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">
+        <span>🗂 Retrieved Long-Term Memory Vectors</span>
+        <span class="score-badge">Qdrant Vector DB</span>
+      </div>
+
+      <div class="memory-item">
+        <div class="memory-head"><span>CATEGORY: PROFESSIONAL BACKGROUND</span><span class="score-badge">Cosine: 0.96</span></div>
+        <div class="memory-content">"Kenza Mahleb holds Cisco CCNA with 94% score, specializing in routing, switching, VLAN, and infrastructure security."</div>
+      </div>
+
+      <div class="memory-item">
+        <div class="memory-head"><span>CATEGORY: ENGINEERING EDUCATION</span><span class="score-badge">Cosine: 0.91</span></div>
+        <div class="memory-content">"Bachelor student in Computer Engineering at ESGI Paris (Graduation 2025)."</div>
+      </div>
+
+      <div class="memory-item">
+        <div class="memory-head"><span>CATEGORY: TECHNICAL STACK</span><span class="score-badge">Cosine: 0.88</span></div>
+        <div class="memory-content">"Extensive experience with Linux, Docker, FastAPI, Python, React, and network security audit tools (OWASP, Wireshark)."</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

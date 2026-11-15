@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Enterprise Microservices & Cloud API Demo</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Courier New',monospace;background:#0d1117;color:#c9d1d9;min-height:100vh}
+  .terminal-header{background:#1f2937;padding:12px 20px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #374151}
+  .dot{width:12px;height:12px;border-radius:50%}
+  .dot.red{background:#ff5f57}.dot.yellow{background:#ffbd2e}.dot.green{background:#28c840}
+  .title{margin:0 auto;font-size:.85rem;color:#9ca3af}
+  .layout{display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:calc(100vh - 44px)}
+  .panel{padding:24px;border-right:1px solid #21262d}
+  .panel h2{font-size:.8rem;text-transform:uppercase;letter-spacing:2px;color:#58a6ff;margin-bottom:20px;padding-bottom:8px;border-bottom:1px solid #21262d}
+  .service-card{background:#161b22;border:1px solid #21262d;border-radius:8px;padding:16px;margin-bottom:12px;transition:border-color .2s}
+  .service-card:hover{border-color:#58a6ff}
+  .svc-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .svc-name{font-weight:700;font-size:.9rem;color:#e6edf3}
+  .status{font-size:.7rem;padding:3px 8px;border-radius:20px;font-weight:700}
+  .status.up{background:#0d4a2f;color:#3fb950}.status.warn{background:#3d2e01;color:#e3b341}
+  .svc-meta{font-size:.75rem;color:#8b949e;line-height:1.6}
+  .metric{display:flex;justify-content:space-between;font-size:.75rem;margin-top:8px}
+  .metric-label{color:#8b949e}.metric-val{color:#58a6ff;font-weight:700}
+  .bar{width:100%;height:4px;background:#21262d;border-radius:2px;margin-top:4px}
+  .bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,#58a6ff,#1f6feb)}
+  .log-box{background:#0d1117;border:1px solid #21262d;border-radius:6px;padding:12px;font-size:.75rem;line-height:2;overflow:hidden;height:200px}
+  .log-line{display:flex;gap:12px}
+  .time{color:#484f58;flex-shrink:0}.info{color:#3fb950}.warn{color:#e3b341}.error-t{color:#f85149}
+  .msg-t{color:#c9d1d9}
+  .arch-box{background:#0d1117;border:1px solid #21262d;border-radius:8px;padding:20px;font-size:.8rem}
+  .arch-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #161b22}
+  .arch-row:last-child{border:none}
+  .svc-box{background:#1f2937;padding:4px 10px;border-radius:4px;color:#58a6ff;font-size:.7rem;font-weight:700}
+  .arrow{color:#484f58}
+  .back{position:fixed;top:20px;right:20px;background:#1f6feb;color:#fff;padding:8px 16px;border-radius:6px;font-weight:700;font-size:.8rem;text-decoration:none;z-index:999;font-family:'Segoe UI',sans-serif}
+  .blinking{animation:blink 1s step-end infinite}@keyframes blink{50%{opacity:0}}
+</style>
+</head>
+<body>
+<a class="back" href="/">← Back to Portfolio</a>
+<div class="terminal-header">
+  <div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div>
+  <div class="title">Enterprise Microservices Dashboard — Docker · Redis · PostgreSQL</div>
+</div>
+
+<div class="layout">
+  <div class="panel">
+    <h2>⚙ Service Registry</h2>
+
+    <div class="service-card">
+      <div class="svc-header"><div class="svc-name">🔐 Auth Service</div><div class="status up">● RUNNING</div></div>
+      <div class="svc-meta">JWT · bcrypt · Refresh tokens · Rate limiting</div>
+      <div class="metric"><span class="metric-label">Requests/min</span><span class="metric-val">4,312</span></div>
+      <div class="bar"><div class="bar-fill" style="width:72%"></div></div>
+    </div>
+
+    <div class="service-card">
+      <div class="svc-header"><div class="svc-name">🗄 Data Service</div><div class="status up">● RUNNING</div></div>
+      <div class="svc-meta">PostgreSQL · Connection pooling · Migrations</div>
+      <div class="metric"><span class="metric-label">Query latency (p99)</span><span class="metric-val">12ms</span></div>
+      <div class="bar"><div class="bar-fill" style="width:30%;background:linear-gradient(90deg,#3fb950,#238636)"></div></div>
+    </div>
+
+    <div class="service-card">
+      <div class="svc-header"><div class="svc-name">⚡ Cache Layer (Redis)</div><div class="status up">● RUNNING</div></div>
+      <div class="svc-meta">Distributed cache · Pub/Sub · Session store</div>
+      <div class="metric"><span class="metric-label">Hit rate</span><span class="metric-val">94.7%</span></div>
+      <div class="bar"><div class="bar-fill" style="width:95%;background:linear-gradient(90deg,#a855f7,#7c3aed)"></div></div>
+    </div>
+
+    <div class="service-card">
+      <div class="svc-header"><div class="svc-name">🌐 API Gateway</div><div class="status up">● RUNNING</div></div>
+      <div class="svc-meta">Load balancing · SSL termination · Rate limit</div>
+      <div class="metric"><span class="metric-label">Throughput</span><span class="metric-val">28K req/s</span></div>
+      <div class="bar"><div class="bar-fill" style="width:60%;background:linear-gradient(90deg,#f59e0b,#d97706)"></div></div>
+    </div>
+
+    <div class="service-card">
+      <div class="svc-header"><div class="svc-name">📨 Message Queue</div><div class="status warn">⚠ HIGH LOAD</div></div>
+      <div class="svc-meta">RabbitMQ · Async processing · Retry logic</div>
+      <div class="metric"><span class="metric-label">Queue depth</span><span class="metric-val">8,431 msgs</span></div>
+      <div class="bar"><div class="bar-fill" style="width:85%;background:linear-gradient(90deg,#f59e0b,#ef4444)"></div></div>
+    </div>
+  </div>
+
+  <div class="panel" style="border-right:none">
+    <h2>📡 Live Logs</h2>
+    <div class="log-box">
+      <div class="log-line"><span class="time">18:47:02</span><span class="info">[INFO]</span><span class="msg-t">Auth: JWT issued for user_id=4821 · exp=3600s</span></div>
+      <div class="log-line"><span class="time">18:47:02</span><span class="info">[INFO]</span><span class="msg-t">Cache: HIT /api/v1/products?page=2 (ttl=240s)</span></div>
+      <div class="log-line"><span class="time">18:47:03</span><span class="info">[INFO]</span><span class="msg-t">DB: SELECT executed in 8ms · rows=50</span></div>
+      <div class="log-line"><span class="time">18:47:04</span><span class="warn">[WARN]</span><span class="msg-t">Queue: Consumer lag detected on orders.created</span></div>
+      <div class="log-line"><span class="time">18:47:04</span><span class="info">[INFO]</span><span class="msg-t">Gateway: → 200 GET /api/v1/users/4821 (11ms)</span></div>
+      <div class="log-line"><span class="time">18:47:05</span><span class="info">[INFO]</span><span class="msg-t">Cache: MISS /api/v1/analytics/week · fetching DB</span></div>
+      <div class="log-line"><span class="time">18:47:05</span><span class="info">[INFO]</span><span class="msg-t">Auth: Refresh token validated · new JWT issued</span></div>
+      <div class="log-line"><span class="time">18:47:06</span><span class="info">[INFO]</span><span class="msg-t">Docker: Container health check ✓ all services OK</span></div>
+      <div class="log-line"><span class="time">18:47:06</span><span class="error-t">[DEBUG]</span><span class="msg-t">Rate limit: 429 → ip=192.168.1.42 (burst exceeded)</span></div>
+      <div class="log-line"><span class="time">18:47:07</span><span class="info">[INFO]</span><span class="msg-t">Gateway: → 201 POST /api/v1/orders (23ms) <span class="blinking">█</span></span></div>
+    </div>
+
+    <br>
+    <h2>🏗 Architecture</h2>
+    <div class="arch-box">
+      <div class="arch-row"><span class="svc-box">Client</span><span class="arrow">──▶</span><span class="svc-box">Nginx Gateway</span><span class="arrow">──▶</span><span class="svc-box">Auth Service</span></div>
+      <div class="arch-row"><span class="svc-box">Auth Service</span><span class="arrow">──▶</span><span class="svc-box">Redis Cache</span><span class="arrow">──▶</span><span class="svc-box">PostgreSQL</span></div>
+      <div class="arch-row"><span class="svc-box">API Gateway</span><span class="arrow">──▶</span><span class="svc-box">RabbitMQ</span><span class="arrow">──▶</span><span class="svc-box">Worker Pool</span></div>
+      <div class="arch-row"><span class="svc-box">Docker Swarm</span><span class="arrow">manages</span><span class="svc-box">5 containers</span><span class="arrow">·</span><span class="svc-box">2 replicas each</span></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Altman Brothers — Luxury Real Estate Portal Demo</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',sans-serif;background:#0f1115;color:#f3f4f6;min-height:100vh}
+  nav{display:flex;justify-content:space-between;align-items:center;padding:24px 50px;background:#14171d;border-bottom:1px solid #232731}
+  .brand{font-size:1.4rem;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:#d4af37}
+  .nav-links{display:flex;gap:32px;list-style:none}
+  .nav-links a{color:#9ca3af;text-decoration:none;font-size:.9rem;letter-spacing:1px;text-transform:uppercase;transition:color .2s}
+  .nav-links a:hover{color:#d4af37}
+  .hero{padding:80px 50px 40px;text-align:center;background:linear-gradient(180deg,#14171d 0%,#0f1115 100%)}
+  .hero h1{font-size:3rem;font-weight:900;letter-spacing:2px;margin-bottom:16px;color:#f9fafb}
+  .hero p{color:#9ca3af;max-width:650px;margin:0 auto 36px;font-size:1.05rem;line-height:1.6}
+  .search-bar{display:flex;max-width:750px;margin:0 auto;background:#1a1e26;border:1px solid #2e3442;border-radius:50px;padding:8px 12px;box-shadow:0 12px 30px rgba(0,0,0,.5)}
+  .search-input{flex:1;background:transparent;border:none;outline:none;color:#fff;padding:12px 20px;font-size:1rem}
+  .search-btn{background:#d4af37;color:#000;border:none;padding:12px 30px;border-radius:50px;font-weight:800;font-size:.9rem;cursor:pointer;letter-spacing:1px;text-transform:uppercase}
+  .container{max-width:1200px;margin:0 auto;padding:40px 50px}
+  .section-title{font-size:1.6rem;font-weight:800;margin-bottom:28px;letter-spacing:1px;display:flex;justify-content:space-between;align-items:flex-end}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .estate-card{background:#161920;border:1px solid #272c38;border-radius:14px;overflow:hidden;transition:transform .3s,box-shadow .3s}
+  .estate-card:hover{transform:translateY(-6px);box-shadow:0 16px 36px rgba(0,0,0,.6);border-color:#d4af37}
+  .estate-img{height:230px;background:linear-gradient(135deg,#20242e,#111317);display:flex;align-items:center;justify-content:center;font-size:4rem;position:relative}
+  .price-tag{position:absolute;bottom:14px;left:14px;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);color:#d4af37;padding:6px 14px;border-radius:30px;font-weight:800;font-size:1.1rem}
+  .estate-body{padding:20px}
+  .estate-title{font-size:1.15rem;font-weight:700;margin-bottom:6px;color:#f9fafb}
+  .estate-loc{color:#9ca3af;font-size:.85rem;margin-bottom:14px}
+  .estate-specs{display:flex;gap:16px;border-top:1px solid #232731;padding-top:14px;color:#cbd5e1;font-size:.85rem}
+  .back{position:fixed;top:20px;right:20px;background:#d4af37;color:#000;padding:8px 16px;border-radius:6px;font-weight:800;font-size:.8rem;text-decoration:none;z-index:999}
+</style>
+</head>
+<body>
+<a class="back" href="/">← Back to Portfolio</a>
+<nav>
+  <div class="brand">The Altman Brothers</div>
+  <ul class="nav-links">
+    <li><a href="#">Exclusive Estates</a></li>
+    <li><a href="#">Bel Air</a></li>
+    <li><a href="#">Beverly Hills</a></li>
+    <li><a href="#">Hollywood Hills</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <h1>Premier Architectural Estates</h1>
+  <p>Ultra-luxury real estate portal with real-time MLS feeds, high-performance responsive UI, and custom client inquiry routing.</p>
+  <div class="search-bar">
+    <input class="search-input" type="text" placeholder="Search by neighborhood, architectural style, or price...">
+    <button class="search-btn">Explore</button>
+  </div>
+</div>
+
+<div class="container">
+  <div class="section-title">
+    <span>Featured Ultra-Prime Listings</span>
+    <span style="font-size:.9rem;color:#d4af37;cursor:pointer">View All (42) →</span>
+  </div>
+
+  <div class="grid">
+    <div class="estate-card">
+      <div class="estate-img">🏛<div class="price-tag">$24,950,000</div></div>
+      <div class="estate-body">
+        <div class="estate-title">The Promontory Residence</div>
+        <div class="estate-loc">📍 Bel Air, Los Angeles, CA</div>
+        <div class="estate-specs"><span>6 Beds</span><span>•</span><span>9 Baths</span><span>•</span><span>11,200 sq ft</span></div>
+      </div>
+    </div>
+    <div class="estate-card">
+      <div class="estate-img">🏰<div class="price-tag">$18,500,000</div></div>
+      <div class="estate-body">
+        <div class="estate-title">Sunset Strip Modern Villa</div>
+        <div class="estate-loc">📍 Hollywood Hills, CA</div>
+        <div class="estate-specs"><span>5 Beds</span><span>•</span><span>7 Baths</span><span>•</span><span>8,450 sq ft</span></div>
+      </div>
+    </div>
+    <div class="estate-card">
+      <div class="estate-img">🏡<div class="price-tag">$32,000,000</div></div>
+      <div class="estate-body">
+        <div class="estate-title">Palisades Oceanfront Estate</div>
+        <div class="estate-loc">📍 Pacific Palisades, CA</div>
+        <div class="estate-specs"><span>7 Beds</span><span>•</span><span>10 Baths</span><span>•</span><span>14,600 sq ft</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

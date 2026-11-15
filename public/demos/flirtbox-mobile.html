@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FlirtBox — Mobile App Demo</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',sans-serif;background:#0a0a0f;color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px}
+  .scene{display:flex;gap:40px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:900px}
+  .phone{width:280px;height:580px;background:#111;border-radius:40px;border:8px solid #222;overflow:hidden;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.8)}
+  .phone-notch{width:100px;height:24px;background:#111;border-radius:0 0 16px 16px;position:absolute;top:0;left:50%;transform:translateX(-50%);z-index:10}
+  .phone-screen{height:100%;display:flex;flex-direction:column;background:#0d0d1a}
+  .tab-bar{display:flex;background:#0d0d1a;border-top:1px solid #1a1a2e;padding:10px 0;position:absolute;bottom:0;left:0;right:0}
+  .tab-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer}
+  .tab-icon{font-size:1.3rem}
+  .tab-label{font-size:.6rem;color:#666}
+  .tab-item.active .tab-label{color:#ff6b9d}
+  .feed{flex:1;overflow:hidden;padding-bottom:60px}
+  .story-row{display:flex;gap:8px;padding:16px 12px 8px;overflow-x:auto;scrollbar-width:none}
+  .story{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0}
+  .story-ring{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#ff6b9d,#ff8c42);padding:2px}
+  .story-av{width:100%;height:100%;border-radius:50%;background:#1a1a2e;display:flex;align-items:center;justify-content:center;font-size:1.3rem;border:2px solid #0d0d1a}
+  .story-name{font-size:.6rem;color:#aaa}
+  .match-card{margin:8px 12px;background:#1a1a2e;border-radius:16px;overflow:hidden;position:relative}
+  .match-img{height:220px;display:flex;align-items:center;justify-content:center;font-size:4rem;background:linear-gradient(135deg,#1a0a2e,#2a1050)}
+  .match-info{padding:12px}
+  .match-name{font-weight:800;font-size:.95rem}
+  .match-tags{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
+  .match-tag{background:#2a1050;color:#ff6b9d;font-size:.6rem;padding:2px 6px;border-radius:20px}
+  .like-btn{position:absolute;bottom:60px;right:12px;background:linear-gradient(135deg,#ff6b9d,#ff4081);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;cursor:pointer;box-shadow:0 4px 16px rgba(255,107,157,.4)}
+  .info-panel{flex:1;max-width:420px}
+  .info-panel h1{font-size:2.5rem;font-weight:900;margin-bottom:16px;line-height:1.2}
+  .info-panel h1 span{background:linear-gradient(135deg,#ff6b9d,#ff8c42);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .info-panel p{color:#888;line-height:1.7;margin-bottom:24px;font-size:.95rem}
+  .feature-list{display:flex;flex-direction:column;gap:12px}
+  .feature{display:flex;align-items:flex-start;gap:12px}
+  .feat-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+  .feat-icon.pink{background:#2a0a1a}.feat-icon.orange{background:#2a1a0a}.feat-icon.blue{background:#0a1a2a}
+  .feat-title{font-size:.9rem;font-weight:700;margin-bottom:3px}
+  .feat-desc{font-size:.8rem;color:#666}
+  .tech-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
+  .tech{background:#1a1a2e;border:1px solid #2a2a4e;padding:4px 10px;border-radius:20px;font-size:.75rem;color:#888}
+  .back{position:fixed;top:20px;right:20px;background:linear-gradient(135deg,#ff6b9d,#ff4081);color:#fff;padding:8px 16px;border-radius:6px;font-weight:700;font-size:.8rem;text-decoration:none;z-index:999}
+</style>
+</head>
+<body>
+<a class="back" href="/">← Back to Portfolio</a>
+<div class="scene">
+  <div class="phone">
+    <div class="phone-notch"></div>
+    <div class="phone-screen">
+      <div class="feed">
+        <div class="story-row">
+          <div class="story"><div class="story-ring"><div class="story-av">👩</div></div><div class="story-name">Leila</div></div>
+          <div class="story"><div class="story-ring"><div class="story-av">👨</div></div><div class="story-name">Karim</div></div>
+          <div class="story"><div class="story-ring"><div class="story-av">👩</div></div><div class="story-name">Sara</div></div>
+          <div class="story"><div class="story-ring"><div class="story-av">👦</div></div><div class="story-name">Amine</div></div>
+        </div>
+        <div class="match-card">
+          <div class="match-img">👩</div>
+          <div class="match-info">
+            <div class="match-name">Nadia, 24 · Alger</div>
+            <div class="match-tags">
+              <span class="match-tag">🎵 Music</span>
+              <span class="match-tag">✈️ Travel</span>
+              <span class="match-tag">🎨 Art</span>
+            </div>
+          </div>
+          <div class="like-btn">❤️</div>
+        </div>
+      </div>
+      <div class="tab-bar">
+        <div class="tab-item active"><div class="tab-icon">🏠</div><div class="tab-label">Home</div></div>
+        <div class="tab-item"><div class="tab-icon">🔍</div><div class="tab-label">Discover</div></div>
+        <div class="tab-item"><div class="tab-icon">💬</div><div class="tab-label">Chat</div></div>
+        <div class="tab-item"><div class="tab-icon">🎙</div><div class="tab-label">Rooms</div></div>
+        <div class="tab-item"><div class="tab-icon">👤</div><div class="tab-label">Profile</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-panel">
+    <h1>FlirtBox<br><span>Mobile App</span></h1>
+    <p>Matchmaking app with real-time audio rooms, live streams, and low-latency WebRTC infrastructure. Built with Flutter &amp; Firebase.</p>
+
+    <div class="feature-list">
+      <div class="feature">
+        <div class="feat-icon pink">❤️</div>
+        <div><div class="feat-title">Smart Matching Algorithm</div><div class="feat-desc">ML-powered compatibility scoring based on preferences &amp; activity</div></div>
+      </div>
+      <div class="feature">
+        <div class="feat-icon orange">🎙</div>
+        <div><div class="feat-title">Live Audio Rooms</div><div class="feat-desc">Real-time WebRTC audio rooms with sub-50ms latency</div></div>
+      </div>
+      <div class="feature">
+        <div class="feat-icon blue">📡</div>
+        <div><div class="feat-title">Live Streaming</div><div class="feat-desc">In-app live video with Firebase Realtime Database sync</div></div>
+      </div>
+    </div>
+
+    <div class="tech-row">
+      <span class="tech">Flutter</span><span class="tech">Dart</span><span class="tech">Firebase</span><span class="tech">WebRTC</span><span class="tech">PostgreSQL</span><span class="tech">React Native</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

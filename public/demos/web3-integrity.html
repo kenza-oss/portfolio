@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RAE Engineering — Web3 Asset Integrity Verification</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',sans-serif;background:#060d17;color:#d1e4ff;min-height:100vh}
+  nav{display:flex;justify-content:space-between;align-items:center;padding:18px 40px;background:#091424;border-bottom:1px solid #142a47}
+  .logo{font-size:1.25rem;font-weight:800;color:#38bdf8;letter-spacing:1px;display:flex;align-items:center;gap:10px}
+  .badge-chain{background:#0d2d4d;color:#38bdf8;font-size:.7rem;padding:4px 10px;border-radius:20px;border:1px solid #1d4ed8}
+  .container{max-width:1150px;margin:0 auto;padding:40px 24px}
+  .hero{margin-bottom:36px}
+  .hero h1{font-size:2.2rem;font-weight:900;color:#f0f7ff;margin-bottom:12px}
+  .hero p{color:#8ba3c7;max-width:700px;font-size:1rem;line-height:1.6}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px}
+  .stat-box{background:#0a192e;border:1px solid #173257;border-radius:12px;padding:20px}
+  .stat-label{font-size:.75rem;text-transform:uppercase;color:#6d8cb0;font-weight:700;margin-bottom:6px}
+  .stat-val{font-size:1.6rem;font-weight:800;color:#38bdf8}
+  .stat-sub{font-size:.75rem;color:#22c55e;margin-top:4px}
+  .main-card{background:#09172a;border:1px solid #193863;border-radius:14px;padding:28px;margin-bottom:28px}
+  .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid #152d50}
+  .card-title{font-size:1.1rem;font-weight:700;color:#e2eeff}
+  table{width:100%;border-collapse:collapse;font-size:.85rem}
+  th{text-align:left;padding:12px 14px;color:#7c9ec4;border-bottom:1px solid #173257;font-weight:600;font-size:.75rem;text-transform:uppercase}
+  td{padding:14px;border-bottom:1px solid #112540;color:#cbd5e1}
+  .hash{font-family:monospace;color:#38bdf8;font-size:.8rem}
+  .status-verified{display:inline-flex;align-items:center;gap:6px;background:#063524;color:#34d399;padding:4px 10px;border-radius:20px;font-size:.75rem;font-weight:700}
+  .audit-panel{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .code-block{background:#040910;border:1px solid #102642;border-radius:10px;padding:18px;font-family:monospace;font-size:.8rem;color:#7dd3fc;line-height:1.7;overflow-x:auto}
+  .back{position:fixed;top:18px;right:20px;background:#0284c7;color:#fff;padding:8px 16px;border-radius:6px;font-weight:700;font-size:.8rem;text-decoration:none;z-index:999}
+</style>
+</head>
+<body>
+<a class="back" href="/">← Back to Portfolio</a>
+<nav>
+  <div class="logo">
+    <span>⬡ RAE Engineering</span>
+    <span class="badge-chain">Ethereum Sepolia · Contract v2.4</span>
+  </div>
+  <div style="font-size:.85rem;color:#94a3b8">Smart Contract Hash: 0x8F9a...4B2e</div>
+</nav>
+
+<div class="container">
+  <div class="hero">
+    <h1>Decentralized Asset & Equipment Integrity Registry</h1>
+    <p>Tamper-proof certification and ultrasonic thickness test records anchored directly on Ethereum smart contracts. Engineered for critical pressure piping and industrial assets.</p>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-box"><div class="stat-label">Certified Equipment</div><div class="stat-val">1,420</div><div class="stat-sub">100% on-chain audit trail</div></div>
+    <div class="stat-box"><div class="stat-label">Smart Contracts</div><div class="stat-val">12 Deployed</div><div class="stat-sub">Audited & Verified</div></div>
+    <div class="stat-box"><div class="stat-label">Gas Optimization</div><div class="stat-val">-38%</div><div class="stat-sub">Via calldata encoding</div></div>
+    <div class="stat-box"><div class="stat-label">Integrity Status</div><div class="stat-val" style="color:#34d399">Zero Breaches</div><div class="stat-sub">Merkle tree proof system</div></div>
+  </div>
+
+  <div class="main-card">
+    <div class="card-header">
+      <div class="card-title">🛡 Verified Asset Inspections</div>
+      <div style="font-size:.8rem;color:#38bdf8">Live Block: #5,821,904</div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Asset ID</th>
+          <th>Equipment Type</th>
+          <th>Inspector</th>
+          <th>Merkle Root Hash</th>
+          <th>Inspection Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>#RAE-TK-092</strong></td>
+          <td>Pressure Vessel 400L</td>
+          <td>Lead Auditor Kenza M.</td>
+          <td class="hash">0x4a9e2f...73b1</td>
+          <td>2026-10-18</td>
+          <td><span class="status-verified">✓ On-Chain Verified</span></td>
+        </tr>
+        <tr>
+          <td><strong>#RAE-PP-104</strong></td>
+          <td>Corrosion Line B2</td>
+          <td>Ing. Technicien N2</td>
+          <td class="hash">0x81df6c...a904</td>
+          <td>2026-11-02</td>
+          <td><span class="status-verified">✓ On-Chain Verified</span></td>
+        </tr>
+        <tr>
+          <td><strong>#RAE-VL-048</strong></td>
+          <td>Cryogenic Valve 12"</td>
+          <td>Bureau Veritas Audit</td>
+          <td class="hash">0x14bc59...d761</td>
+          <td>2026-11-10</td>
+          <td><span class="status-verified">✓ On-Chain Verified</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="audit-panel">
+    <div class="main-card" style="margin-bottom:0">
+      <div class="card-title" style="margin-bottom:14px">📜 Solidity Smart Contract</div>
+      <div class="code-block">
+// SPDX-License-Identifier: MIT<br>
+pragma solidity ^0.8.20;<br><br>
+contract AssetIntegrityRegistry {<br>
+&nbsp;&nbsp;struct Record {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bytes32 inspectionMerkleRoot;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;uint256 timestamp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;address auditor;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bool isCompliant;<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;mapping(bytes32 => Record) public assets;<br>
+&nbsp;&nbsp;event AssetCertified(bytes32 indexed id, address auditor);<br>
+}
+      </div>
+    </div>
+
+    <div class="main-card" style="margin-bottom:0">
+      <div class="card-title" style="margin-bottom:14px">⚙ Architecture & Security</div>
+      <p style="font-size:.88rem;color:#8ba3c7;line-height:1.8">
+        • Decentralized storage using IPFS for raw sensor logs.<br>
+        • Zero-Knowledge verification pipeline for proprietary manufacturing tolerance limits.<br>
+        • Role-Based Access Control (OpenZeppelin AccessControl) enforcing accredited inspector signatures.<br>
+        • Web3 React interface connected via ethers.js &amp; MetaMask.
+      </p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

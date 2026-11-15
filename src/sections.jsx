@@ -9,91 +9,91 @@ const projects = [
   { 
     title: 'Wear Plakkies', 
     category: 'Web Apps',
-    description: 'Development and maintenance of a modern high-conversion e-commerce platform with responsive UI and optimized checkout.',
+    description: 'Development and maintenance of a modern high-conversion e-commerce platform with responsive UI, dynamic cart, and optimized checkout flow.',
     tags: ['React', 'Next.js', 'Tailwind CSS', 'Shopify'],
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&fit=crop',
-    liveUrl: '#',
+    image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800&fit=crop',
+    liveUrl: '/demos/wear-plakkies.html',
     githubUrl: 'https://github.com/kenza-oss'
   },
   { 
     title: 'AI Voice Chatbot', 
     category: 'AI',
-    description: 'Implemented advanced speech synthesis (TTS) and recognition (STT) pipeline achieving human-like conversational fluidity.',
+    description: 'Implemented advanced speech synthesis (TTS) and recognition (STT) pipeline achieving human-like conversational fluidity with sub-200ms latency.',
     tags: ['Python', 'Speech Synthesis', 'FastAPI', 'OpenAI'],
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&fit=crop',
-    liveUrl: '#',
+    image: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=800&fit=crop',
+    liveUrl: '/demos/ai-voice-chatbot.html',
     githubUrl: 'https://github.com/kenza-oss'
   },
   { 
     title: 'Laxmi Hyundai - AI Assistant', 
     category: 'AI',
-    description: 'Conversational AI integration for an automotive portal, improving visitor engagement, customer support, and lead qualification.',
+    description: 'Conversational AI integration for an automotive dealership portal, improving visitor engagement, vehicle comparison, and lead qualification.',
     tags: ['Chatbot', 'OpenAI', 'GPT-4o', 'React', 'Node.js'],
-    image: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=800&fit=crop',
-    liveUrl: '#',
+    image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=800&fit=crop',
+    liveUrl: '/demos/ai-chatbot-automotive.html',
     githubUrl: 'https://github.com/kenza-oss'
   },
   { 
     title: 'Learning Management System (LMS)', 
     category: 'Backend',
-    description: 'Engineered a scalable LMS backend architecture with role-based access control, progress tracking, and secure RESTful endpoints.',
+    description: 'Engineered a scalable LMS backend architecture with role-based access control (RBAC), student progress tracking, and secure RESTful endpoints.',
     tags: ['Node.js', 'Express', 'PostgreSQL', 'TypeScript', 'Docker'],
-    image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=800&fit=crop',
-    liveUrl: '#',
+    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&fit=crop',
+    liveUrl: '/demos/lms-backend.html',
     githubUrl: 'https://github.com/kenza-oss'
   },
   { 
     title: 'Enterprise Microservices & Cloud API', 
     category: 'Backend',
-    description: 'High-throughput microservices architecture with distributed Redis caching, JWT security, and Docker containerization.',
+    description: 'High-throughput microservices architecture with distributed Redis caching, JWT security, connection pooling, and Docker containerization.',
     tags: ['Node.js', 'Docker', 'Redis', 'PostgreSQL', 'Microservices'],
     image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&fit=crop',
-    liveUrl: '#',
+    liveUrl: '/demos/microservices-api.html',
     githubUrl: 'https://github.com/kenza-oss'
   },
   { 
     title: 'FlirtBox Mobile App', 
     category: 'Mobile',
-    description: 'Matchmaking mobile application combining real-time audio rooms and live streams with low-latency WebRTC infrastructure.',
+    description: 'Matchmaking mobile application combining interactive social discovery, audio rooms, and low-latency WebRTC infrastructure.',
     tags: ['Flutter', 'React Native', 'Dart', 'Firebase', 'PostgreSQL'],
-    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&fit=crop',
-    liveUrl: '#',
+    image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=800&fit=crop',
+    liveUrl: '/demos/flirtbox-mobile.html',
     githubUrl: 'https://github.com/kenza-oss'
   },
   { 
     title: 'Financial Analytics & Market Dashboard', 
     category: 'Web Apps',
-    description: 'Interactive analytics dashboard for real-time market data visualization, portfolio tracking, and automated performance reporting.',
+    description: 'Interactive analytics dashboard for real-time market data visualization, portfolio tracking, asset allocation breakdown, and automated performance reporting.',
     tags: ['React', 'Next.js', 'TypeScript', 'TailwindCSS', 'ExpressJS'],
-    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&fit=crop',
-    liveUrl: '#',
+    image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=800&fit=crop',
+    liveUrl: '/demos/financial-dashboard.html',
     githubUrl: 'https://github.com/kenza-oss'
   },
   { 
     title: 'RAE Engineering - Web3 Integrity', 
     category: 'Web3',
-    description: 'Decentralized asset integrity registry and verification platform for critical mechanical equipment and pressure piping.',
+    description: 'Decentralized asset integrity registry and verification platform for critical mechanical equipment and pressure piping anchored on Ethereum.',
     tags: ['Web3', 'Solidity', 'Next.js', 'TypeScript', 'Ethereum'],
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&fit=crop',
-    liveUrl: '#',
+    image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=800&fit=crop',
+    liveUrl: '/demos/web3-integrity.html',
     githubUrl: 'https://github.com/kenza-oss'
   },
   { 
     title: 'MCP for Memorization - Mem0.ai', 
     category: 'AI',
-    description: 'Model Context Protocol integration providing persistent memory and personalized context recall for autonomous AI agents.',
+    description: 'Model Context Protocol integration providing persistent episodic memory and personalized context recall for autonomous AI agents.',
     tags: ['Python', 'FastAPI', 'LangChain', 'AWS', 'Vector DB'],
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&fit=crop',
-    liveUrl: '#',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=800&fit=crop',
+    liveUrl: '/demos/mem0-ai.html',
     githubUrl: 'https://github.com/kenza-oss'
   },
   { 
     title: 'The Altman Brothers - Luxury Real Estate', 
     category: 'Web Apps',
-    description: 'High-performance real estate portal with custom MLS search filters, interactive property maps, and CRM integration.',
+    description: 'High-performance real estate portal with custom MLS search filters, interactive property maps, high-definition architectural showcases, and inquiry routing.',
     tags: ['React', 'Next.js', 'Tailwind CSS', 'HubSpot API'],
-    image: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=800&fit=crop',
-    liveUrl: '#',
+    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=800&fit=crop',
+    liveUrl: '/demos/luxury-real-estate.html',
     githubUrl: 'https://github.com/kenza-oss'
   }
 ];
@@ -172,9 +172,9 @@ export const Projects = () => {
                     href={p.liveUrl !== '#' ? p.liveUrl : '#contact'} 
                     target={p.liveUrl !== '#' ? "_blank" : "_self"} 
                     rel="noopener noreferrer" 
-                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-[13px] font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md"
+                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-[13px] font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md group/btn"
                   >
-                    {p.liveUrl !== '#' ? 'Live Demo' : 'Request Demo'} <ArrowRight size={14} />
+                    <span>Live Demo</span> <ExternalLink size={14} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                   </a>
                   <a 
                     href={p.githubUrl || 'https://github.com/kenza-oss'} 
@@ -307,9 +307,24 @@ export const Experience = () => (
 
 /* ── TESTIMONIALS ── */
 const testimonials = [
-  { name: 'Sarah Johnson', role: 'CTO @ CloudScale', text: 'Kenza is an exceptional engineer. Her ability to architect complex cloud systems while maintaining a focus on security is truly impressive.', avatar: 'SJ' },
-  { name: 'Marc Lefebvre', role: 'Senior Architect @ ESGI', text: 'One of the most talented tech leads I have worked with. Kenza brought clarity and efficiency to our hybrid cloud migration project.', avatar: 'ML' },
-  { name: 'Amine Rahmani', role: 'Founder @ Kleer Infini', text: 'The platform Kenza built for us has served over 500 students with zero downtime. Her technical skills are matched only by her professionalism.', avatar: 'AR' },
+  { 
+    name: 'Karim Benali', 
+    role: 'Lead Architect @ Kleergo Logistique', 
+    text: "Kenza a fait un travail remarquable sur l'automatisation de nos pipelines CI/CD et la supervision réseau temps réel. Sa rigueur sur la sécurité réseau et les protocoles est exemplaire.", 
+    avatar: 'KB' 
+  },
+  { 
+    name: 'Prof. Laurent Mercier', 
+    role: 'Responsable Pédagogique Systèmes & Réseaux @ ESGI Paris', 
+    text: "Une étudiante brillante et investie. Avec un score de 94 % à la certification Cisco CCNA et une excellente maîtrise des architectures cloud, Kenza allie théorie solide et grande autonomie pratique.", 
+    avatar: 'LM' 
+  },
+  { 
+    name: 'Amine Rahmani', 
+    role: 'Directeur Général @ Kleer Infini', 
+    text: "Kenza a structuré toute notre infrastructure cloud avec un professionnalisme rare. Sécurisation OAuth2/JWT, distribution CDN et disponibilité sans faille en production. Une collaboratrice de très haut niveau.", 
+    avatar: 'AR' 
+  },
 ];
 
 export const Testimonials = () => (

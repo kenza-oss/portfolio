@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Financial Analytics Dashboard Demo</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',sans-serif;background:#0b0e1a;color:#e2e8f0;min-height:100vh}
+  nav{background:#0f1322;border-bottom:1px solid #1e2440;padding:16px 32px;display:flex;justify-content:space-between;align-items:center}
+  .logo{font-size:1.2rem;font-weight:800;color:#22d3ee}
+  .nav-tabs{display:flex;gap:24px}
+  .tab{font-size:.85rem;color:#64748b;cursor:pointer;padding-bottom:4px}
+  .tab.active{color:#22d3ee;border-bottom:2px solid #22d3ee}
+  .content{padding:28px 32px}
+  .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+  .kpi{background:#0f1322;border:1px solid #1e2440;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+  .kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+  .kpi.cyan::before{background:#22d3ee}.kpi.green::before{background:#22c55e}.kpi.red::before{background:#ef4444}.kpi.purple::before{background:#a855f7}
+  .kpi-label{font-size:.75rem;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+  .kpi-val{font-size:1.8rem;font-weight:800;margin-bottom:4px}
+  .kpi.cyan .kpi-val{color:#22d3ee}.kpi.green .kpi-val{color:#22c55e}.kpi.red .kpi-val{color:#ef4444}.kpi.purple .kpi-val{color:#a855f7}
+  .kpi-change{font-size:.8rem}.up{color:#22c55e}.down{color:#ef4444}
+  .row{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:16px}
+  .card{background:#0f1322;border:1px solid #1e2440;border-radius:12px;padding:24px}
+  .card-title{font-size:.9rem;font-weight:700;margin-bottom:20px;color:#94a3b8}
+  .chart{height:200px;display:flex;align-items:flex-end;gap:4px;padding:0 4px}
+  .chart-bar{flex:1;border-radius:4px 4px 0 0;position:relative;cursor:pointer;transition:opacity .2s}
+  .chart-bar:hover{opacity:.8}
+  .chart-bar.gain{background:linear-gradient(to top,#166534,#22c55e)}.chart-bar.loss{background:linear-gradient(to top,#991b1b,#ef4444)}
+  .chart-labels{display:flex;gap:4px;padding:8px 4px 0;border-top:1px solid #1e2440;margin-top:4px}
+  .chart-labels span{flex:1;text-align:center;font-size:.65rem;color:#64748b}
+  .asset-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #1e2440}
+  .asset-row:last-child{border:none}
+  .asset-name{font-size:.9rem;font-weight:600}
+  .asset-ticker{font-size:.75rem;color:#64748b;margin-top:2px}
+  .asset-price{text-align:right;font-size:.9rem;font-weight:700}
+  .asset-change{font-size:.75rem;text-align:right;margin-top:2px}
+  .pie{width:140px;height:140px;border-radius:50%;background:conic-gradient(#22d3ee 0deg 115deg,#a855f7 115deg 205deg,#22c55e 205deg 275deg,#f59e0b 275deg 310deg,#ef4444 310deg 360deg);margin:0 auto 16px}
+  .legend-item{display:flex;align-items:center;gap:8px;font-size:.8rem;padding:4px 0}
+  .legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+  .back{position:fixed;top:20px;right:20px;background:#22d3ee;color:#000;padding:8px 16px;border-radius:6px;font-weight:700;font-size:.8rem;text-decoration:none;z-index:999}
+</style>
+</head>
+<body>
+<a class="back" href="/">← Back to Portfolio</a>
+<nav>
+  <div class="logo">📈 FinanceBoard</div>
+  <div class="nav-tabs">
+    <div class="tab active">Overview</div>
+    <div class="tab">Portfolio</div>
+    <div class="tab">Markets</div>
+    <div class="tab">Reports</div>
+  </div>
+  <div style="font-size:.8rem;color:#64748b">Last updated: live</div>
+</nav>
+
+<div class="content">
+  <div class="kpi-row">
+    <div class="kpi cyan"><div class="kpi-label">Portfolio Value</div><div class="kpi-val">$284,650</div><div class="kpi-change up">↑ +2.34% today</div></div>
+    <div class="kpi green"><div class="kpi-label">Total Gain</div><div class="kpi-val">+$41,230</div><div class="kpi-change up">↑ +16.9% all time</div></div>
+    <div class="kpi red"><div class="kpi-label">Day Loss</div><div class="kpi-val">-$1,042</div><div class="kpi-change down">↓ -0.37% vs yesterday</div></div>
+    <div class="kpi purple"><div class="kpi-label">Sharpe Ratio</div><div class="kpi-val">1.84</div><div class="kpi-change up">↑ Excellent risk/return</div></div>
+  </div>
+
+  <div class="row">
+    <div class="card">
+      <div class="card-title">📊 Portfolio Performance — 12 Months</div>
+      <div class="chart">
+        <div class="chart-bar gain" style="height:45%"></div>
+        <div class="chart-bar gain" style="height:52%"></div>
+        <div class="chart-bar loss" style="height:38%"></div>
+        <div class="chart-bar gain" style="height:65%"></div>
+        <div class="chart-bar gain" style="height:71%"></div>
+        <div class="chart-bar loss" style="height:55%"></div>
+        <div class="chart-bar gain" style="height:80%"></div>
+        <div class="chart-bar gain" style="height:85%"></div>
+        <div class="chart-bar loss" style="height:60%"></div>
+        <div class="chart-bar gain" style="height:92%"></div>
+        <div class="chart-bar gain" style="height:88%"></div>
+        <div class="chart-bar gain" style="height:100%"></div>
+      </div>
+      <div class="chart-labels">
+        <span>Dec</span><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🥧 Asset Allocation</div>
+      <div class="pie"></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#22d3ee"></div><span>Tech Stocks — 32%</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#a855f7"></div><span>Crypto — 25%</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#22c55e"></div><span>Bonds — 19%</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div><span>Commodities — 10%</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div><span>Cash — 14%</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📋 Top Holdings</div>
+    <div class="asset-row"><div><div class="asset-name">Apple Inc.</div><div class="asset-ticker">AAPL · NASDAQ</div></div><div><div class="asset-price">$189.42</div><div class="asset-change up">+2.1%</div></div></div>
+    <div class="asset-row"><div><div class="asset-name">NVIDIA Corporation</div><div class="asset-ticker">NVDA · NASDAQ</div></div><div><div class="asset-price">$495.72</div><div class="asset-change up">+4.7%</div></div></div>
+    <div class="asset-row"><div><div class="asset-name">Bitcoin</div><div class="asset-ticker">BTC · Crypto</div></div><div><div class="asset-price">$67,420</div><div class="asset-change down">-1.3%</div></div></div>
+    <div class="asset-row"><div><div class="asset-name">Microsoft Corp</div><div class="asset-ticker">MSFT · NASDAQ</div></div><div><div class="asset-price">$374.51</div><div class="asset-change up">+0.8%</div></div></div>
+  </div>
+</div>
+</body>
+</html>
