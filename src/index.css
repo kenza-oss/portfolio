@@ -12,11 +12,11 @@
   --bg-card-hover: rgba(0, 0, 0, 0.04);
 
   --border:        rgba(0, 0, 0, 0.08);
-  --border-accent: rgba(59, 130, 246, 0.2);
+  --border-accent: rgba(220, 38, 38, 0.2);
 
-  --neon-blue:     #2563EB; /* Slightly darker for readability on white */
-  --neon-cyan:     #0891B2;
-  --neon-glow:     rgba(37, 99, 235, 0.1);
+  --neon-blue:     #DC2626; /* Vivid Red primary */
+  --neon-cyan:     #EF4444;
+  --neon-glow:     rgba(220, 38, 38, 0.1);
 
   --text-primary:   #111827;
   --text-secondary: #4B5563;

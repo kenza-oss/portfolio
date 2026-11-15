@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Github, Linkedin, Mail, ArrowRight, Code2, Shield, Cpu, Cloud, Menu, X, FileText, Download } from 'lucide-react';
 
@@ -40,23 +40,23 @@ export const Navbar = () => {
     }`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <a href="#about" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 bg-gradient-to-tr from-blue-800 via-blue-600 to-sky-500 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-blue-600/20 group-hover:scale-105 transition-transform">K</div>
-          <span className="font-heading font-black text-lg tracking-tighter text-slate-900 group-hover:text-blue-600 transition-colors">KENZA.</span>
+          <div className="w-10 h-10 bg-gradient-to-tr from-red-800 via-red-600 to-red-500 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-red-600/20 group-hover:scale-105 transition-transform">K</div>
+          <span className="font-heading font-black text-lg tracking-tighter text-slate-900 group-hover:text-red-600 transition-colors">KENZA.</span>
         </a>
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-7">
           {['About', 'Projects', 'Experience', 'Testimonials', 'Contact'].map(item => (
             <a key={item} href={`#${item.toLowerCase()}`} 
-              className="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-blue-600 transition-colors">
+              className="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-red-600 transition-colors">
               {item}
             </a>
           ))}
           <a href="/cv-kenza-mahleb.pdf" download="CV_Kenza_Mahleb.pdf" target="_blank" rel="noopener noreferrer"
-            className="border border-slate-200 text-slate-700 hover:border-blue-600 hover:text-blue-600 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-1.5 shadow-sm bg-white">
-            <Download size={13} className="text-blue-600" /> CV
+            className="border border-slate-200 text-slate-700 hover:border-red-600 hover:text-red-600 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-1.5 shadow-sm bg-white">
+            <Download size={13} className="text-red-600" /> CV
           </a>
-          <a href="#contact" className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all shadow-md shadow-blue-600/20 hover:scale-[1.02]">
+          <a href="#contact" className="bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all shadow-md shadow-red-600/20 hover:scale-[1.02]">
             Hire Me
           </a>
         </div>
@@ -74,12 +74,12 @@ export const Navbar = () => {
             className="absolute top-full left-0 w-full bg-white border-b border-gray-100 p-6 flex flex-col gap-4 md:hidden shadow-xl">
             {['About', 'Projects', 'Experience', 'Testimonials', 'Contact'].map(item => (
               <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setIsOpen(false)}
-                className="text-sm font-bold uppercase tracking-widest text-gray-500 hover:text-blue-600 transition-colors">
+                className="text-sm font-bold uppercase tracking-widest text-gray-500 hover:text-red-600 transition-colors">
                 {item}
               </a>
             ))}
             <a href="/cv-kenza-mahleb.pdf" download="CV_Kenza_Mahleb.pdf" target="_blank" rel="noopener noreferrer" onClick={() => setIsOpen(false)}
-              className="border border-blue-200 text-blue-600 px-4 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 bg-blue-50/50">
+              className="border border-red-200 text-red-600 px-4 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 bg-red-50/50">
               <Download size={15} /> Download CV (PDF)
             </a>
           </motion.div>
@@ -109,19 +109,17 @@ export const Hero = () => {
       <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
         <div className="grid lg:grid-cols-[auto_1fr] gap-16 items-start">
           
-          {/* ── Circular Profile Photo at TOP LEFT ── */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-            className="relative mt-2"
-          >
-            <div className="w-44 h-44 xl:w-52 xl:h-52 rounded-full overflow-hidden border-4 border-white shadow-2xl ring-2 ring-slate-200/80 bg-slate-50 relative z-10 group">
-              <img 
-                src="/profile_v5.webp" 
-                alt="Kenza Mahleb" 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-              />
+          {/* ── Rectangular Profile Card ── */}
+          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} className="relative group mt-4">
+            <div className="w-40 h-52 xl:w-48 xl:h-64 rounded-2xl overflow-hidden border border-slate-200/80 shadow-xl relative z-10 bg-slate-900/5 group-hover:shadow-2xl transition-all duration-500">
+              <img src="/profile_v6.webp" alt="Kenza Mahleb" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent pointer-events-none" />
+            </div>
+            {/* Corner accents */}
+            <div className="absolute -top-2 -right-2 w-7 h-7 border-t-2 border-r-2 border-red-600/50 rounded-tr-xl" />
+            <div className="absolute -bottom-2 -left-2 w-7 h-7 border-b-2 border-l-2 border-red-600/50 rounded-bl-xl" />
+            <div className="absolute -bottom-3 right-4 px-2.5 py-0.5 rounded-full bg-slate-900 text-white font-mono text-[10px] font-bold shadow-md z-20 flex items-center gap-1.5 border border-slate-700">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Available
             </div>
           </motion.div>
 
@@ -137,7 +135,7 @@ export const Hero = () => {
                 className="relative w-full h-80 flex items-center justify-center"
               >
                 {/* Deep Ambient Energy Glow */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/10 via-sky-600/10 to-blue-900/10 blur-[80px] rounded-full pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-tr from-red-600/10 via-red-500/10 to-red-900/10 blur-[80px] rounded-full pointer-events-none" />
                 
                 {/* 3D Gyroscopic Neural Sphere Stage */}
                 <div className="relative w-56 h-56 flex items-center justify-center [perspective:1000px]">
@@ -146,7 +144,7 @@ export const Hero = () => {
                   <motion.div 
                     animate={{ rotateZ: [0, 360], rotateX: [65, 75, 65] }}
                     transition={{ rotateZ: { duration: 18, repeat: Infinity, ease: "linear" }, rotateX: { duration: 6, repeat: Infinity, ease: "easeInOut" } }}
-                    className="absolute inset-0 rounded-full border-2 border-dashed border-blue-500/40 shadow-[0_0_20px_rgba(37,99,235,0.2)]"
+                    className="absolute inset-0 rounded-full border-2 border-dashed border-red-500/40 shadow-[0_0_20px_rgba(220,38,38,0.2)]"
                   >
                     <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-cyan-400 shadow-[0_0_10px_#22d3ee]" />
                   </motion.div>
@@ -155,7 +153,7 @@ export const Hero = () => {
                   <motion.div 
                     animate={{ rotateZ: [360, 0], rotateY: [60, 70, 60] }}
                     transition={{ rotateZ: { duration: 24, repeat: Infinity, ease: "linear" }, rotateY: { duration: 8, repeat: Infinity, ease: "easeInOut" } }}
-                    className="absolute inset-3 rounded-full border border-blue-400/30"
+                    className="absolute inset-3 rounded-full border border-red-400/30"
                   >
                     <div className="absolute bottom-2 right-4 w-2.5 h-2.5 rounded-full bg-sky-400 shadow-[0_0_8px_#38bdf8]" />
                   </motion.div>
@@ -164,9 +162,9 @@ export const Hero = () => {
                   <motion.div 
                     animate={{ scale: [1, 1.15, 1], rotate: [0, 90, 180, 270, 360] }}
                     transition={{ scale: { duration: 3, repeat: Infinity, ease: "easeInOut" }, rotate: { duration: 30, repeat: Infinity, ease: "linear" } }}
-                    className="relative w-20 h-20 rounded-2xl bg-gradient-to-tr from-slate-950 via-slate-900 to-blue-950 border border-blue-400/50 shadow-[0_0_40px_rgba(37,99,235,0.4)] flex items-center justify-center backdrop-blur-md"
+                    className="relative w-20 h-20 rounded-2xl bg-gradient-to-tr from-slate-950 via-slate-900 to-red-950 border border-red-400/50 shadow-[0_0_40px_rgba(220,38,38,0.4)] flex items-center justify-center backdrop-blur-md"
                   >
-                    <div className="w-10 h-10 rounded-xl border border-cyan-400/40 flex items-center justify-center font-mono text-[9px] text-cyan-300 font-bold bg-cyan-950/40 shadow-inner">
+                    <div className="w-10 h-10 rounded-xl border border-red-400/40 flex items-center justify-center font-mono text-[9px] text-red-300 font-bold bg-red-950/40 shadow-inner">
                       AI_v4
                     </div>
                   </motion.div>
@@ -175,7 +173,7 @@ export const Hero = () => {
                   <motion.div 
                     animate={{ y: [0, -8, 0], opacity: [0.7, 1, 0.7] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute -top-4 left-6 px-3 py-1 rounded-full bg-slate-900/90 border border-blue-500/40 text-[10px] font-mono text-sky-300 font-bold shadow-lg backdrop-blur-md"
+                    className="absolute -top-4 left-6 px-3 py-1 rounded-full bg-slate-900/90 border border-red-500/40 text-[10px] font-mono text-red-300 font-bold shadow-lg backdrop-blur-md"
                   >
                     Softmax(QKᵀ / √d)
                   </motion.div>
@@ -203,7 +201,7 @@ export const Hero = () => {
                     </span>
                     <span>14ms Latency</span>
                   </div>
-                  <div className="text-blue-400 font-semibold">// Neural Vector Pipeline</div>
+                  <div className="text-red-400 font-semibold">// Neural Vector Pipeline</div>
                   <div className="text-slate-400 truncate">const model = new LLM("Qdrant-v2");</div>
                   <div className="text-emerald-400 font-bold truncate">✓ Zero-Trust Encryption: SHA-256</div>
                 </motion.div>
@@ -212,15 +210,15 @@ export const Hero = () => {
             </div>
 
             <motion.div variants={fadeUp} className="flex items-center gap-3 mb-6">
-              <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-              <span className="font-mono text-[11px] font-bold tracking-[0.3em] uppercase text-blue-700 bg-blue-50 border border-blue-200/80 px-3 py-1 rounded-full">
+              <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse" />
+              <span className="font-mono text-[11px] font-bold tracking-[0.3em] uppercase text-blue-700 bg-red-50 border border-red-200/80 px-3 py-1 rounded-full">
                 Cisco CCNA (94%) · ESGI Paris
               </span>
             </motion.div>
 
             <motion.h1 variants={fadeUp} className="font-heading font-black tracking-[-0.04em] mb-6 leading-tight text-slate-900" style={{ fontSize: 'clamp(2.5rem,5.5vw,4.5rem)' }}>
               DRIVING DIGITAL<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-blue-600 to-sky-600">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-700 via-red-600 to-rose-500">
                 RESILIENCE.
               </span>
             </motion.h1>
@@ -228,28 +226,28 @@ export const Hero = () => {
             <motion.div variants={fadeUp} className="h-10 flex items-center mb-8">
               <span className="text-xl font-medium text-slate-600">
                 I am a{' '}
-                <span className="font-bold text-blue-600 underline decoration-blue-200 underline-offset-4">{typed}</span>
+                <span className="font-bold text-red-600 underline decoration-red-200 underline-offset-4">{typed}</span>
               </span>
             </motion.div>
 
             <motion.p variants={fadeUp} className="max-w-xl leading-relaxed mb-10 text-lg text-slate-600">
-              Bachelor in Computer Engineering graduate from <strong className="text-slate-900 font-bold">ESGI Paris</strong> and <strong className="text-blue-600 font-bold">Cisco CCNA Certified (Score 94%)</strong>. I specialize in architecting resilient cloud infrastructures, automating zero-downtime CI/CD pipelines, and integrating intelligent AI agent systems.
+              Bachelor in Computer Engineering graduate from <strong className="text-slate-900 font-bold">ESGI Paris</strong> and <strong className="text-red-600 font-bold">Cisco CCNA Certified (Score 94%)</strong>. I specialize in architecting resilient cloud infrastructures, automating zero-downtime CI/CD pipelines, and integrating intelligent AI agent systems.
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4 items-center">
-              <a href="#projects" className="bg-blue-600 hover:bg-blue-700 text-white px-7 py-3.5 rounded-xl font-bold text-sm transition-all shadow-md hover:shadow-xl hover:scale-[1.02] flex items-center gap-2">
+              <a href="#projects" className="bg-red-600 hover:bg-red-700 text-white px-7 py-3.5 rounded-xl font-bold text-sm transition-all shadow-md hover:shadow-xl hover:scale-[1.02] flex items-center gap-2">
                 Explore Projects <ArrowRight size={16} />
               </a>
               <a href="/cv-kenza-mahleb.pdf" download="CV_Kenza_Mahleb.pdf" target="_blank" rel="noopener noreferrer" className="bg-slate-900 hover:bg-black text-white px-6 py-3.5 rounded-xl font-bold text-sm transition-all shadow-md hover:shadow-xl flex items-center gap-2">
                 <Download size={16} className="text-sky-400" /> Download CV
               </a>
-              <a href="#contact" className="border border-slate-300 hover:border-indigo-600 text-slate-700 hover:text-indigo-600 px-6 py-3.5 rounded-xl font-bold text-sm transition-all bg-white shadow-sm">
+              <a href="#contact" className="border border-slate-300 hover:border-red-600 text-slate-700 hover:text-red-600 px-6 py-3.5 rounded-xl font-bold text-sm transition-all bg-white shadow-sm">
                 Contact Me
               </a>
               <div className="flex gap-2.5 ml-2">
                 {[{ Icon: Github, href: 'https://github.com/kenza-oss' }, { Icon: Linkedin, href: 'https://www.linkedin.com/in/kenza-mahleb-9860b5279' }, { Icon: Mail, href: 'mailto:mahlebkenza1@gmail.com' }].map(({ Icon, href }, i) => (
                   <a key={i} href={href} target="_blank" rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-xl border flex items-center justify-center transition-all border-slate-200 text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 shadow-sm">
+                    className="w-10 h-10 rounded-xl border flex items-center justify-center transition-all border-slate-200 text-slate-500 hover:text-red-600 hover:bg-red-50 shadow-sm">
                     <Icon size={18} />
                   </a>
                 ))}
@@ -328,7 +326,7 @@ export const Skills = () => {
     <section id="skills" className="relative py-32 overflow-hidden border-t border-gray-100 bg-gray-50">
       <div style={{ maxWidth:1280, margin:'0 auto', padding:'0 24px', position: 'relative', zIndex: 10 }}>
         <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }} style={{ textAlign:'center', marginBottom:80 }}>
-          <motion.p variants={fadeUp} className="font-mono text-[11px] font-bold tracking-[0.3em] uppercase text-blue-600 mb-6" style={{ display:'flex', justifyContent:'center' }}>Capabilities</motion.p>
+          <motion.p variants={fadeUp} className="font-mono text-[11px] font-bold tracking-[0.3em] uppercase text-red-600 mb-6" style={{ display:'flex', justifyContent:'center' }}>Capabilities</motion.p>
           <motion.h2 variants={fadeUp} className="font-heading font-black text-gray-900 tracking-[-0.04em]" style={{ fontSize:'clamp(2.5rem,5vw,5rem)' }}>TECHNICAL STACK</motion.h2>
           <motion.p variants={fadeUp} className="text-gray-500 text-sm max-w-md mx-auto mt-4">
             An ecosystem of tools, protocols, and technologies powering my infrastructure and security architecture.
@@ -355,14 +353,14 @@ export const Skills = () => {
               position:'absolute', zIndex:20,
               width:120, height:120, borderRadius:'50%',
               background:'#FFF',
-              border:'1px solid rgba(59,130,246,0.15)',
+              border:'1px solid rgba(220,38,38,0.15)',
               boxShadow:'0 10px 30px rgba(0,0,0,0.08)',
               display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center',
             }}>
               <span style={{ fontFamily:'Outfit,sans-serif', fontWeight:900, fontSize:30, color:'#111827', letterSpacing:'-0.05em', lineHeight:1 }}>
-                KM<span className="text-blue-600">.</span>
+                KM<span className="text-red-600">.</span>
               </span>
-              <span className="text-blue-600" style={{ fontFamily:'Space Mono,monospace', fontSize:8, letterSpacing:'0.25em', textTransform:'uppercase', marginTop:4 }}>Engineer</span>
+              <span className="text-red-600" style={{ fontFamily:'Space Mono,monospace', fontSize:8, letterSpacing:'0.25em', textTransform:'uppercase', marginTop:4 }}>Engineer</span>
             </div>
           </div>
         </div>
@@ -375,7 +373,7 @@ export const Skills = () => {
               <ul style={{ display:'flex', flexDirection:'column', gap:8 }}>
                 {items.map(it => (
                   <li key={it} className="flex items-center gap-2 text-xs text-gray-500">
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500 flex-shrink-0" />{it}
+                    <span className="w-1.5 h-1.5 rounded-full bg-red-500 flex-shrink-0" />{it}
                   </li>
                 ))}
               </ul>
@@ -407,3 +405,4 @@ export const TagsBanner = () => {
     </div>
   );
 };
+
