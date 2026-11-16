@@ -230,3 +230,21 @@ img { display: block; max-width: 100%; }
                     linear-gradient(to bottom, rgba(34, 211, 238, 0.05) 1px, transparent 1px);
   animation: moving-mesh 30s linear infinite;
 }
+
+/* ======================= WAVE HAND ANIMATION ======================= */
+@keyframes wave-hand {
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(14deg); }
+  20% { transform: rotate(-8deg); }
+  30% { transform: rotate(14deg); }
+  40% { transform: rotate(-4deg); }
+  50% { transform: rotate(10deg); }
+  60% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.animate-wave-hand {
+  display: inline-block;
+  transform-origin: 70% 70%;
+  animation: wave-hand 2.2s infinite;
+}

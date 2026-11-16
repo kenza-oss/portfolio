@@ -452,7 +452,28 @@ export const Hero = () => {
         <div className="grid lg:grid-cols-[auto_1fr] gap-16 items-start">
           
           {/* ── Rectangular Profile Card ── */}
+                    {/* ── Rectangular Profile Card ── */}
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} className="relative group mt-4">
+            {/* ── Floating "Hi!" Sticker (Autocollant Devant la Photo) ── */}
+            <motion.div 
+              initial={{ scale: 0, rotate: -20 }}
+              animate={{ scale: 1, rotate: -8 }}
+              whileHover={{ scale: 1.15, rotate: 2 }}
+              transition={{ type: "spring", stiffness: 280, damping: 16 }}
+              className="absolute -top-4 -left-3 z-30 cursor-pointer select-none"
+            >
+              <div className="relative px-3 py-1 rounded-2xl bg-white/95 backdrop-blur-md border-2 border-cyan-400 shadow-[0_10px_25px_rgba(6,182,212,0.35)] flex items-center gap-1.5 hover:shadow-[0_14px_32px_rgba(6,182,212,0.55)] transition-all">
+                <span className="text-lg animate-wave-hand inline-block">👋</span>
+                <span className="font-heading font-black text-xs sm:text-sm tracking-tight text-slate-900 flex items-center">
+                  Hi<span className="text-cyan-500">!</span>
+                </span>
+                {/* Micro glowing ping dot */}
+                <span className="absolute -top-1 -right-1 flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+                </span>
+              </div>
+            </motion.div>
             <div className="w-40 h-52 xl:w-48 xl:h-64 rounded-2xl overflow-hidden border border-slate-200/80 shadow-xl relative z-10 bg-slate-900/5 group-hover:shadow-2xl transition-all duration-500">
               <img src="/profile_v6.webp" alt="Kenza Mahleb" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent pointer-events-none" />
