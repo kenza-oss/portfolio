@@ -62,23 +62,23 @@ export const Navbar = () => {
     }`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <a href="#about" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 bg-gradient-to-tr from-red-800 via-red-600 to-red-500 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-red-600/20 group-hover:scale-105 transition-transform">K</div>
-          <span className="font-heading font-black text-lg tracking-tighter text-slate-900 group-hover:text-red-600 transition-colors">KENZA MAHLEB.</span>
+          <div className="w-10 h-10 bg-gradient-to-tr from-blue-950 via-blue-700 to-cyan-500 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">K</div>
+          <span className="font-heading font-black text-lg tracking-tighter text-slate-900 group-hover:text-cyan-600 transition-colors">KENZA MAHLEB.</span>
         </a>
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-7">
           {['About', 'Projects', 'Experience', 'Testimonials', 'Contact'].map(item => (
             <a key={item} href={`#${item.toLowerCase()}`} 
-              className="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-red-600 transition-colors">
+              className="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-cyan-600 transition-colors">
               {item}
             </a>
           ))}
           <a href="/cv-kenza-mahleb.pdf" download="CV_Kenza_Mahleb.pdf" target="_blank" rel="noopener noreferrer"
-            className="border border-slate-200 text-slate-700 hover:border-red-600 hover:text-red-600 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-1.5 shadow-sm bg-white">
-            <Download size={13} className="text-red-600" /> CV
+            className="border border-slate-200 text-slate-700 hover:border-cyan-600 hover:text-cyan-600 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-1.5 shadow-sm bg-white">
+            <Download size={13} className="text-cyan-600" /> CV
           </a>
-          <a href="#contact" className="bg-red-600 hover:bg-red-700 text-white px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all shadow-md shadow-red-600/20 hover:scale-[1.02]">
+          <a href="#contact" className="bg-gradient-to-r from-blue-700 to-cyan-600 hover:from-blue-800 hover:to-cyan-700 text-white px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest transition-all shadow-md shadow-cyan-500/20 hover:scale-[1.02]">
             Hire Me
           </a>
         </div>
@@ -96,12 +96,12 @@ export const Navbar = () => {
             className="absolute top-full left-0 w-full bg-white border-b border-gray-100 p-6 flex flex-col gap-4 md:hidden shadow-xl">
             {['About', 'Projects', 'Experience', 'Testimonials', 'Contact'].map(item => (
               <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setIsOpen(false)}
-                className="text-sm font-bold uppercase tracking-widest text-gray-500 hover:text-red-600 transition-colors">
+                className="text-sm font-bold uppercase tracking-widest text-gray-500 hover:text-cyan-600 transition-colors">
                 {item}
               </a>
             ))}
             <a href="/cv-kenza-mahleb.pdf" download="CV_Kenza_Mahleb.pdf" target="_blank" rel="noopener noreferrer" onClick={() => setIsOpen(false)}
-              className="border border-red-200 text-red-600 px-4 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 bg-red-50/50">
+              className="border border-cyan-200 text-cyan-600 px-4 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest transition-all flex items-center justify-center gap-2 bg-cyan-50/50">
               <Download size={15} /> Download CV (PDF)
             </a>
           </motion.div>
@@ -111,8 +111,8 @@ export const Navbar = () => {
   );
 };
 
-/* ─────────────── SENIOR 3D MATHEMATICAL OPTIMIZATION MANIFOLD ─────────────── */
-export const MathSurface3D = () => {
+/* ─────────────── 3D HYDRODYNAMIC OCEAN WAVE SIMULATION ─────────────── */
+export const OceanWave3D = () => {
   const mountRef = React.useRef(null);
   const [fps, setFps] = useState(60);
 
@@ -123,184 +123,111 @@ export const MathSurface3D = () => {
     const width = container.clientWidth || 400;
     const height = container.clientHeight || 400;
 
-    // 1. Scene & Camera Setup
+    // 1. Scene & Perspective Camera
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 100);
-    camera.position.set(0, 3.2, 5.8);
-    camera.lookAt(0, -0.2, 0);
+    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
+    camera.position.set(0, 3.4, 5.6);
+    camera.lookAt(0, -0.1, 0);
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'high-performance' });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
-    // 2. Lighting Setup
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
+    // 2. Oceanic Lighting (Deep Sea Glow + Cyan Sunlight Refraction)
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
     scene.add(ambientLight);
 
-    const redLight = new THREE.PointLight(0xdc2626, 4.0, 20);
-    redLight.position.set(3, 4, 3);
-    scene.add(redLight);
+    const oceanSunLight = new THREE.DirectionalLight(0x38bdf8, 2.5);
+    oceanSunLight.position.set(4, 8, 4);
+    scene.add(oceanSunLight);
 
-    const fillLight = new THREE.PointLight(0xf87171, 2.5, 20);
-    fillLight.position.set(-3, 2, -2);
-    scene.add(fillLight);
+    const cyanBiolumLight = new THREE.PointLight(0x06b6d4, 4.0, 16);
+    cyanBiolumLight.position.set(-2, 2, 2);
+    scene.add(cyanBiolumLight);
 
-    // Master Axonometric Group
-    const mathGroup = new THREE.Group();
-    mathGroup.rotation.y = -0.45;
-    scene.add(mathGroup);
+    const deepNavyLight = new THREE.PointLight(0x1e3a8a, 3.0, 18);
+    deepNavyLight.position.set(0, -3, -2);
+    scene.add(deepNavyLight);
 
-    // 3. Coordinate Base Grid (Cartesian Floor)
-    const floorGrid = new THREE.GridHelper(3.8, 16, 0xdc2626, 0x475569);
-    floorGrid.position.y = -1.1;
-    // Lower grid opacity
-    floorGrid.material.transparent = true;
-    floorGrid.material.opacity = 0.35;
-    mathGroup.add(floorGrid);
+    // Master Wave Group
+    const waveGroup = new THREE.Group();
+    waveGroup.rotation.y = -0.35;
+    scene.add(waveGroup);
 
-    // 4. Coordinate Axes System (X, Y, Z) with Arrow Indicators
-    const axesGroup = new THREE.Group();
-    axesGroup.position.set(-1.9, -1.1, -1.9);
+    // 3. Deep Sea Ocean Bed Grid
+    const oceanGrid = new THREE.GridHelper(4.2, 18, 0x0284c7, 0x1e293b);
+    oceanGrid.position.y = -1.25;
+    oceanGrid.material.transparent = true;
+    oceanGrid.material.opacity = 0.45;
+    waveGroup.add(oceanGrid);
 
-    const createAxisLine = (dir, length, colorHex) => {
-      const lineMat = new THREE.LineBasicMaterial({ color: colorHex, linewidth: 2 });
-      const points = [new THREE.Vector3(0, 0, 0), dir.clone().multiplyScalar(length)];
-      const lineGeo = new THREE.BufferGeometry().setFromPoints(points);
-      const line = new THREE.Line(lineGeo, lineMat);
-      
-      const coneGeo = new THREE.ConeGeometry(0.06, 0.16, 12);
-      const coneMat = new THREE.MeshBasicMaterial({ color: colorHex });
-      const cone = new THREE.Mesh(coneGeo, coneMat);
-      cone.position.copy(dir.clone().multiplyScalar(length));
-      if (dir.x === 1) cone.rotation.z = -Math.PI / 2;
-      if (dir.z === 1) cone.rotation.x = Math.PI / 2;
-      
-      const g = new THREE.Group();
-      g.add(line);
-      g.add(cone);
-      return g;
-    };
+    // 4. High-Detail Oceanic Fluid Surface (44x44 mesh = 2,025 vertices)
+    const segments = 44;
+    const waveGeo = new THREE.PlaneGeometry(4.0, 4.0, segments, segments);
+    waveGeo.rotateX(-Math.PI / 2); // Lay flat on XZ plane
 
-    axesGroup.add(createAxisLine(new THREE.Vector3(1, 0, 0), 3.8, 0xdc2626)); // X axis (Red)
-    axesGroup.add(createAxisLine(new THREE.Vector3(0, 1, 0), 2.2, 0x10b981)); // Y axis (Green / Loss)
-    axesGroup.add(createAxisLine(new THREE.Vector3(0, 0, 1), 3.8, 0x38bdf8)); // Z axis (Cyan)
-    mathGroup.add(axesGroup);
-
-    // 5. Mathematical Loss Manifold Surface: z = f(x, y)
-    const gridSize = 32;
-    const planeGeo = new THREE.PlaneGeometry(3.6, 3.6, gridSize, gridSize);
-    planeGeo.rotateX(-Math.PI / 2); // Lay flat on XZ plane
-
-    // Calculate initial mathematical elevation
-    const posAttr = planeGeo.attributes.position;
-    const originalY = new Float32Array(posAttr.count);
-    for (let i = 0; i < posAttr.count; i++) {
-      const x = posAttr.getX(i);
-      const z = posAttr.getZ(i);
-      const r = Math.sqrt(x * x + z * z);
-      // Classic damped oscillatory Loss Surface (Gaussian wave packet / loss landscape)
-      const y = 0.85 * Math.exp(-(r * r) / 2.2) * Math.cos(2.1 * r) - 0.15;
-      posAttr.setY(i, y);
-      originalY[i] = y;
-    }
-    planeGeo.computeVertexNormals();
-
-    // Wireframe High-Tech Grid
+    // 4.1 Bioluminescent Cyan Wave Crest Wireframe (Water surface grid)
     const wireMat = new THREE.MeshStandardMaterial({
-      color: 0xdc2626,
+      color: 0x06b6d4, // Cyan bioluminescent crests
       wireframe: true,
-      roughness: 0.2,
-      metalness: 0.8,
-      emissive: 0x991b1b,
-      emissiveIntensity: 0.4
+      roughness: 0.1,
+      metalness: 0.85,
+      emissive: 0x0284c7,
+      emissiveIntensity: 0.45
     });
-    const wireMesh = new THREE.Mesh(planeGeo, wireMat);
-    mathGroup.add(wireMesh);
+    const waveWireMesh = new THREE.Mesh(waveGeo, wireMat);
+    waveGroup.add(waveWireMesh);
 
-    // Translucent Solid Skin
-    const skinMat = new THREE.MeshStandardMaterial({
-      color: 0x0f172a,
-      roughness: 0.4,
+    // 4.2 Deep Navy Water Body
+    const waterSkinMat = new THREE.MeshStandardMaterial({
+      color: 0x0a192f, // Midnight Navy
+      roughness: 0.25,
       metalness: 0.9,
       transparent: true,
-      opacity: 0.75,
+      opacity: 0.82,
       side: THREE.DoubleSide
     });
-    const skinMesh = new THREE.Mesh(planeGeo, skinMat);
-    mathGroup.add(skinMesh);
+    const waveSkinMesh = new THREE.Mesh(waveGeo, waterSkinMat);
+    waveGroup.add(waveSkinMesh);
 
-    // 6. Gradient Descent Trajectory Path (Convergence towards Global Minimum)
-    const pathPoints = [];
-    const stepCount = 28;
-    for (let s = 0; s <= stepCount; s++) {
-      const t = s / stepCount;
-      const angle = t * Math.PI * 2.2;
-      const radius = 1.6 * (1 - t * 0.92);
-      const px = Math.cos(angle) * radius;
-      const pz = Math.sin(angle) * radius;
-      const r = Math.sqrt(px * px + pz * pz);
-      const py = (0.85 * Math.exp(-(r * r) / 2.2) * Math.cos(2.1 * r) - 0.15) + 0.05;
-      pathPoints.push(new THREE.Vector3(px, py, pz));
-    }
+    // 5. Sea Spray / Foam Droplets System (Bioluminescent plankton/droplets)
+    const sprayCount = 65;
+    const sprayPositions = new Float32Array(sprayCount * 3);
+    const spraySeeds = [];
 
-    const pathGeo = new THREE.BufferGeometry().setFromPoints(pathPoints);
-    const pathMat = new THREE.LineBasicMaterial({
-      color: 0x22c55e, // Emerald convergence path
-      linewidth: 3
-    });
-    const pathLine = new THREE.Line(pathGeo, pathMat);
-    mathGroup.add(pathLine);
+    for (let i = 0; i < sprayCount; i++) {
+      const sx = (Math.random() - 0.5) * 3.6;
+      const sz = (Math.random() - 0.5) * 3.6;
+      sprayPositions[i * 3] = sx;
+      sprayPositions[i * 3 + 1] = 0;
+      sprayPositions[i * 3 + 2] = sz;
 
-    // Path Step Node Beads (Evaluation checkpoints)
-    const beadGeo = new THREE.SphereGeometry(0.035, 12, 12);
-    const beadMat = new THREE.MeshBasicMaterial({ color: 0x4ade80 });
-    pathPoints.forEach((pt, idx) => {
-      if (idx % 3 === 0) {
-        const bead = new THREE.Mesh(beadGeo, beadMat);
-        bead.position.copy(pt);
-        mathGroup.add(bead);
-      }
-    });
-
-    // 7. Global Minimum Optimal Point (Target Beacon)
-    const minPoint = pathPoints[pathPoints.length - 1];
-    const beaconGeo = new THREE.SphereGeometry(0.08, 16, 16);
-    const beaconMat = new THREE.MeshBasicMaterial({ color: 0xef4444 });
-    const beaconMesh = new THREE.Mesh(beaconGeo, beaconMat);
-    beaconMesh.position.copy(minPoint);
-    mathGroup.add(beaconMesh);
-
-    // Dotted projection line from minimum to floor grid
-    const dropPoints = [minPoint, new THREE.Vector3(minPoint.x, -1.1, minPoint.z)];
-    const dropGeo = new THREE.BufferGeometry().setFromPoints(dropPoints);
-    const dropMat = new THREE.LineDashedMaterial({
-      color: 0xef4444,
-      dashSize: 0.1,
-      gapSize: 0.05
-    });
-    const dropLine = new THREE.Line(dropGeo, dropMat);
-    dropLine.computeLineDistances();
-    mathGroup.add(dropLine);
-
-    // Iso-Level Contour Rings on Floor (Level curves: f(x,z) = c)
-    for (let cr = 0.5; cr <= 1.5; cr += 0.5) {
-      const ringGeo = new THREE.RingGeometry(cr, cr + 0.015, 48);
-      const ringMat = new THREE.MeshBasicMaterial({
-        color: 0xdc2626,
-        side: THREE.DoubleSide,
-        transparent: true,
-        opacity: 0.3
+      spraySeeds.push({
+        x: sx,
+        z: sz,
+        hoverOffset: 0.12 + Math.random() * 0.25,
+        speed: 0.8 + Math.random() * 0.5
       });
-      const cRing = new THREE.Mesh(ringGeo, ringMat);
-      cRing.rotation.x = -Math.PI / 2;
-      cRing.position.y = -1.09;
-      mathGroup.add(cRing);
     }
 
-    // 8. Interactive Mouse / Touch Parallax & Drag
-    let targetRotY = -0.45;
+    const sprayGeo = new THREE.BufferGeometry();
+    sprayGeo.setAttribute('position', new THREE.BufferAttribute(sprayPositions, 3));
+    const sprayMat = new THREE.PointsMaterial({
+      color: 0x38bdf8,
+      size: 0.07,
+      transparent: true,
+      opacity: 0.9
+    });
+    const sprayMesh = new THREE.Points(sprayGeo, sprayMat);
+    waveGroup.add(sprayMesh);
+
+    // 6. Interactive Mouse Ripple & Wave Turbulence
+    let targetRotY = -0.35;
     let targetRotX = 0;
+    let mouseImpactX = 0;
+    let mouseImpactZ = 0;
+    let mouseActive = false;
     let isDragging = false;
     let prevX = 0;
     let prevY = 0;
@@ -310,14 +237,18 @@ export const MathSurface3D = () => {
       const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       const y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
 
-      targetRotY = -0.45 + x * 0.6;
-      targetRotX = y * 0.4;
+      targetRotY = -0.35 + x * 0.5;
+      targetRotX = y * 0.35;
+
+      mouseImpactX = x * 1.8;
+      mouseImpactZ = y * 1.8;
+      mouseActive = true;
 
       if (isDragging) {
         const deltaX = e.clientX - prevX;
         const deltaY = e.clientY - prevY;
-        mathGroup.rotation.y += deltaX * 0.01;
-        mathGroup.rotation.x += deltaY * 0.01;
+        waveGroup.rotation.y += deltaX * 0.01;
+        waveGroup.rotation.x += deltaY * 0.01;
         prevX = e.clientX;
         prevY = e.clientY;
       }
@@ -337,7 +268,7 @@ export const MathSurface3D = () => {
     container.addEventListener('pointerdown', handlePointerDown);
     window.addEventListener('pointerup', handlePointerUp);
 
-    // 9. Animation Loop
+    // 7. Hydrodynamic Wave Animation Loop
     let reqId;
     let frameCount = 0;
     let lastFpsUpdate = performance.now();
@@ -353,28 +284,49 @@ export const MathSurface3D = () => {
         lastFpsUpdate = now;
       }
 
-      // Mathematical harmonic oscillation: partial derivatives undulating slowly
-      const time = now * 0.0015;
-      const positions = planeGeo.attributes.position;
+      const t = now * 0.0022;
+      const positions = waveGeo.attributes.position;
+
+      // Gerstner + Airy Interference Wave Formulation
       for (let i = 0; i < positions.count; i++) {
         const x = positions.getX(i);
         const z = positions.getZ(i);
-        const r = Math.sqrt(x * x + z * z);
-        const dynamicY = (0.85 * Math.exp(-(r * r) / 2.2) * Math.cos(2.1 * r + Math.sin(time * 0.6) * 0.2)) +
-                         Math.sin(x * 1.5 + time) * 0.04 - 0.15;
-        positions.setY(i, dynamicY);
+
+        // Wave 1: Primary oceanic swell rolling across diagonal
+        const w1 = 0.55 * Math.sin(x * 1.4 + z * 0.8 + t * 2.2);
+        // Wave 2: Secondary cross-chop swell creating realistic ocean peaks
+        const w2 = 0.35 * Math.cos(x * 1.1 - z * 1.5 + t * 1.8);
+        // Wave 3: Fine ripple turbulence
+        const w3 = 0.12 * Math.sin(x * 3.2 + t * 3.5) * Math.cos(z * 3.2 + t * 2.8);
+
+        // Optional mouse ripple disturbance
+        let ripple = 0;
+        if (mouseActive) {
+          const mDist = Math.sqrt((x - mouseImpactX) ** 2 + (z - mouseImpactZ) ** 2);
+          ripple = 0.18 * Math.sin(mDist * 6.0 - t * 6.0) * Math.exp(-mDist * 1.2);
+        }
+
+        const elevation = w1 + w2 + w3 + ripple - 0.2;
+        positions.setY(i, elevation);
       }
       positions.needsUpdate = true;
-      planeGeo.computeVertexNormals();
+      waveGeo.computeVertexNormals();
 
-      // Beacon pulsating
-      const beaconScale = 1 + Math.sin(time * 4) * 0.25;
-      beaconMesh.scale.set(beaconScale, beaconScale, beaconScale);
+      // Update Spray / Foam droplet positions based on local wave elevation
+      const spArr = sprayGeo.attributes.position.array;
+      for (let i = 0; i < sprayCount; i++) {
+        const s = spraySeeds[i];
+        const w1 = 0.55 * Math.sin(s.x * 1.4 + s.z * 0.8 + t * 2.2);
+        const w2 = 0.35 * Math.cos(s.x * 1.1 - s.z * 1.5 + t * 1.8);
+        const elevation = w1 + w2 - 0.2 + s.hoverOffset + Math.sin(t * s.speed + i) * 0.05;
+        spArr[i * 3 + 1] = elevation;
+      }
+      sprayGeo.attributes.position.needsUpdate = true;
 
       // Parallax smooth interpolation
       if (!isDragging) {
-        mathGroup.rotation.y += (targetRotY - mathGroup.rotation.y) * 0.05;
-        mathGroup.rotation.x += (targetRotX - mathGroup.rotation.x) * 0.05;
+        waveGroup.rotation.y += (targetRotY - waveGroup.rotation.y) * 0.05;
+        waveGroup.rotation.x += (targetRotX - waveGroup.rotation.x) * 0.05;
       }
 
       renderer.render(scene, camera);
@@ -392,7 +344,6 @@ export const MathSurface3D = () => {
     };
     window.addEventListener('resize', handleResize);
 
-    // Cleanup
     return () => {
       cancelAnimationFrame(reqId);
       window.removeEventListener('resize', handleResize);
@@ -400,18 +351,12 @@ export const MathSurface3D = () => {
       container.removeEventListener('pointerdown', handlePointerDown);
       window.removeEventListener('pointerup', handlePointerUp);
 
-      floorGrid.geometry.dispose();
-      planeGeo.dispose();
+      oceanGrid.geometry.dispose();
+      waveGeo.dispose();
       wireMat.dispose();
-      skinMat.dispose();
-      pathGeo.dispose();
-      pathMat.dispose();
-      beadGeo.dispose();
-      beadMat.dispose();
-      beaconGeo.dispose();
-      beaconMat.dispose();
-      dropGeo.dispose();
-      dropMat.dispose();
+      waterSkinMat.dispose();
+      sprayGeo.dispose();
+      sprayMat.dispose();
       renderer.dispose();
 
       if (renderer.domElement && container.contains(renderer.domElement)) {
@@ -422,64 +367,64 @@ export const MathSurface3D = () => {
 
   return (
     <div className="relative w-full max-w-sm sm:max-w-md lg:max-w-none lg:w-[420px] select-none">
-      {/* 3D Tech Glow Aura */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-red-600/15 via-rose-500/10 to-transparent blur-[80px] rounded-full pointer-events-none" />
+      {/* 3D Oceanic Bioluminescent Cyan/Navy Glow */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/20 via-cyan-500/15 to-transparent blur-[80px] rounded-full pointer-events-none" />
 
       {/* Real Three.js Canvas Container */}
       <div 
         ref={mountRef} 
         className="relative w-full h-[360px] sm:h-[400px] cursor-grab active:cursor-grabbing flex items-center justify-center rounded-2xl touch-none"
-        title="Interactive 3D Loss Manifold: Drag to inspect mathematical surface and gradient descent path"
+        title="Interactive 3D Ocean Wave: Drag or hover to interact with fluid waves"
       />
 
-      {/* ── Mathematical Architecture HUD Overlays ── */}
+      {/* ── Oceanic Fluid Mechanics HUD Overlays ── */}
       {/* Top Telemetry Header */}
-      <div className="absolute top-2 left-2 right-2 flex items-center justify-between px-3 py-1.5 rounded-xl bg-slate-950/85 border border-slate-800/80 backdrop-blur-md text-[10px] font-mono text-slate-300 pointer-events-none shadow-lg">
+      <div className="absolute top-2 left-2 right-2 flex items-center justify-between px-3 py-1.5 rounded-xl bg-slate-950/85 border border-cyan-900/60 backdrop-blur-md text-[10px] font-mono text-cyan-200 pointer-events-none shadow-lg">
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-          <span className="font-bold text-white tracking-wider">3D_LOSS_MANIFOLD</span>
+          <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+          <span className="font-bold text-white tracking-wider">3D_OCEAN_SURFACE.GL</span>
         </div>
-        <div className="flex items-center gap-3 text-slate-400">
-          <span>DIM: <strong className="text-red-400">ℝ² → ℝ</strong></span>
-          <span>GRADIENT: <strong className="text-emerald-400">CONVERGED</strong></span>
-          <span className="text-emerald-400 font-bold bg-emerald-950/40 px-1.5 py-0.5 rounded border border-emerald-500/30">
+        <div className="flex items-center gap-3 text-slate-300">
+          <span>FLUID: <strong className="text-cyan-400">GERSTNER</strong></span>
+          <span>SWELL: <strong className="text-emerald-400">1.4m</strong></span>
+          <span className="text-cyan-300 font-bold bg-cyan-950/60 px-1.5 py-0.5 rounded border border-cyan-500/30">
             {fps} FPS
           </span>
         </div>
       </div>
 
-      {/* Floating Mathematical Equations */}
+      {/* Floating Fluid Dynamic Equations */}
       <motion.div 
         animate={{ y: [0, -6, 0] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-14 -left-2 px-3 py-1 rounded-full bg-slate-950/90 border border-red-500/40 text-[10px] font-mono text-red-300 font-bold shadow-xl backdrop-blur-md pointer-events-none flex items-center gap-1.5"
+        className="absolute top-14 -left-2 px-3 py-1 rounded-full bg-slate-950/90 border border-cyan-500/40 text-[10px] font-mono text-cyan-300 font-bold shadow-xl backdrop-blur-md pointer-events-none flex items-center gap-1.5"
       >
-        <span className="text-red-500">∇</span> L(θ) = 𝔼[log p(x|θ)]
+        <span className="text-cyan-400">🌊</span> Navier-Stokes: ∂u/∂t + (u·∇)u
       </motion.div>
 
       <motion.div 
         animate={{ y: [0, 6, 0] }}
         transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        className="absolute top-24 -right-2 px-3 py-1 rounded-full bg-slate-950/90 border border-emerald-500/40 text-[10px] font-mono text-emerald-300 font-bold shadow-xl backdrop-blur-md pointer-events-none flex items-center gap-1.5"
+        className="absolute top-24 -right-2 px-3 py-1 rounded-full bg-slate-950/90 border border-sky-500/40 text-[10px] font-mono text-sky-300 font-bold shadow-xl backdrop-blur-md pointer-events-none flex items-center gap-1.5"
       >
-        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-        θ* = argmin L(θ) · (loss: 0.0014)
+        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
+        ω² = gk · tanh(kh) · (T=3.2s)
       </motion.div>
 
       {/* Interactive Micro-Terminal Card */}
-      <div className="absolute -bottom-4 left-3 right-3 bg-slate-950/90 border border-slate-800 rounded-xl p-3 shadow-2xl backdrop-blur-md font-mono text-[10px] text-slate-300 pointer-events-none">
-        <div className="flex items-center justify-between pb-1.5 mb-1.5 border-b border-slate-800/80 text-[9px] text-slate-400">
-          <span className="flex items-center gap-1.5 text-red-400 font-bold">
-            <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-            CARTESIAN_MANIFOLD // ℝ³
+      <div className="absolute -bottom-4 left-3 right-3 bg-slate-950/90 border border-cyan-950/80 rounded-xl p-3 shadow-2xl backdrop-blur-md font-mono text-[10px] text-slate-300 pointer-events-none">
+        <div className="flex items-center justify-between pb-1.5 mb-1.5 border-b border-slate-800 text-[9px] text-slate-400">
+          <span className="flex items-center gap-1.5 text-cyan-400 font-bold">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+            OCEANIC_TENSOR // HYDRODYNAMICS
           </span>
-          <span className="text-slate-400">Axes: [X, Y, Z]</span>
+          <span className="text-slate-400">Bioluminescent Deep Sea</span>
         </div>
-        <div className="text-red-400 font-semibold truncate">// Gradient Descent Path: η = 0.001</div>
-        <div className="text-slate-400 truncate">Hessian Matrix: ∇²L(θ*) ≻ 0 (Strict Local Minimum)</div>
+        <div className="text-sky-400 font-semibold truncate">// Multi-Harmonic Wave Interference</div>
+        <div className="text-slate-400 truncate">Hover to create ripple waves · Drag to rotate</div>
         <div className="flex items-center justify-between mt-1 text-[9px]">
-          <span className="text-emerald-400 font-bold">✓ Convex Optimization Verified</span>
-          <span className="text-slate-400 italic">Drag to rotate 3D view</span>
+          <span className="text-cyan-400 font-bold">✓ Continuous Hydrodynamic Simulation</span>
+          <span className="text-slate-400 italic">60 FPS Real-Time</span>
         </div>
       </div>
     </div>
@@ -513,8 +458,8 @@ export const Hero = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent pointer-events-none" />
             </div>
             {/* Corner accents */}
-            <div className="absolute -top-2 -right-2 w-7 h-7 border-t-2 border-r-2 border-red-600/50 rounded-tr-xl" />
-            <div className="absolute -bottom-2 -left-2 w-7 h-7 border-b-2 border-l-2 border-red-600/50 rounded-bl-xl" />
+            <div className="absolute -top-2 -right-2 w-7 h-7 border-t-2 border-r-2 border-cyan-500/50 rounded-tr-xl" />
+            <div className="absolute -bottom-2 -left-2 w-7 h-7 border-b-2 border-l-2 border-cyan-500/50 rounded-bl-xl" />
             <div className="absolute -bottom-3 right-4 px-2.5 py-0.5 rounded-full bg-slate-900 text-white font-mono text-[10px] font-bold shadow-md z-20 flex items-center gap-1.5 border border-slate-700">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Available
             </div>
@@ -523,21 +468,21 @@ export const Hero = () => {
           {/* ── Content area ── */}
           <motion.div variants={stagger} initial="hidden" animate="show" className="pt-4 relative">
             
-            {/* ── Senior 3D Mathematical Optimization Manifold (Cartesian Loss Surface & Gradient Descent) ── */}
+            {/* ── 3D Hydrodynamic Ocean Wave Simulation (Fluid Mechanics & Real-Time Wave Physics) ── */}
             <div className="lg:absolute lg:-right-10 xl:-right-16 lg:top-12 xl:top-14 w-full max-w-sm sm:max-w-md mx-auto lg:mx-0 lg:w-[420px] mt-12 lg:mt-0 z-20">
-              <MathSurface3D />
+              <OceanWave3D />
             </div>
 
             <motion.div variants={fadeUp} className="flex items-center gap-3 mb-5">
-              <span className="w-2.5 h-2.5 rounded-full bg-red-600 animate-pulse" />
-              <span className="font-mono text-[11px] font-bold tracking-[0.25em] uppercase text-red-600 bg-red-50 border border-red-200/80 px-3.5 py-1 rounded-full">
+              <span className="w-2.5 h-2.5 rounded-full bg-cyan-600 animate-pulse" />
+              <span className="font-mono text-[11px] font-bold tracking-[0.25em] uppercase text-cyan-600 bg-sky-50 border border-cyan-200/80 px-3.5 py-1 rounded-full">
                 Kenza Mahleb · Cisco CCNA (94%) · ESGI Paris
               </span>
             </motion.div>
 
             <motion.h1 variants={fadeUp} className="font-heading font-black tracking-[-0.04em] mb-5 leading-[1.05] text-slate-900" style={{ fontSize: 'clamp(2.5rem,5.2vw,4.5rem)' }}>
               KENZA MAHLEB<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-700 via-red-600 to-rose-500">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-900 via-sky-600 to-cyan-400">
                 DRIVING DIGITAL RESILIENCE.
               </span>
             </motion.h1>
@@ -545,31 +490,31 @@ export const Hero = () => {
             <motion.div variants={fadeUp} className="h-10 flex items-center mb-7">
               <span className="text-xl font-medium text-slate-600 flex items-center">
                 I am a&nbsp;
-                <span translate="no" className="notranslate font-bold text-red-600 underline decoration-red-200 underline-offset-4 flex items-center">
+                <span translate="no" className="notranslate font-bold text-cyan-600 underline decoration-cyan-200 underline-offset-4 flex items-center">
                   {typed}
-                  <span className="inline-block w-[2px] h-5 ml-1 bg-red-600 animate-pulse" />
+                  <span className="inline-block w-[2px] h-5 ml-1 bg-cyan-600 animate-pulse" />
                 </span>
               </span>
             </motion.div>
 
             <motion.p variants={fadeUp} className="max-w-xl leading-relaxed mb-10 text-lg text-slate-600">
-              Hi, I'm <strong className="text-slate-900 font-bold">Kenza Mahleb</strong> — Bachelor in Computer Engineering graduate from <strong className="text-slate-900 font-bold">ESGI Paris</strong> and <strong className="text-red-600 font-bold">Cisco CCNA Certified (Score 94%)</strong>. I specialize in architecting resilient cloud infrastructures, automating zero-downtime CI/CD pipelines, and integrating intelligent AI agent systems.
+              Hi, I'm <strong className="text-slate-900 font-bold">Kenza Mahleb</strong> — Bachelor in Computer Engineering graduate from <strong className="text-slate-900 font-bold">ESGI Paris</strong> and <strong className="text-cyan-600 font-bold">Cisco CCNA Certified (Score 94%)</strong>. I specialize in architecting resilient cloud infrastructures, automating zero-downtime CI/CD pipelines, and integrating intelligent AI agent systems.
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4 items-center">
-              <a href="#projects" className="bg-red-600 hover:bg-red-700 text-white px-7 py-3.5 rounded-xl font-bold text-sm transition-all shadow-md hover:shadow-xl hover:scale-[1.02] flex items-center gap-2">
+              <a href="#projects" className="bg-gradient-to-r from-blue-700 to-cyan-600 hover:from-blue-800 hover:to-cyan-700 text-white px-7 py-3.5 rounded-xl font-bold text-sm transition-all shadow-md hover:shadow-xl hover:scale-[1.02] flex items-center gap-2">
                 Explore Projects <ArrowRight size={16} />
               </a>
               <a href="/cv-kenza-mahleb.pdf" download="CV_Kenza_Mahleb.pdf" target="_blank" rel="noopener noreferrer" className="bg-slate-900 hover:bg-black text-white px-6 py-3.5 rounded-xl font-bold text-sm transition-all shadow-md hover:shadow-xl flex items-center gap-2">
                 <Download size={16} className="text-sky-400" /> Download CV
               </a>
-              <a href="#contact" className="border border-slate-300 hover:border-red-600 text-slate-700 hover:text-red-600 px-6 py-3.5 rounded-xl font-bold text-sm transition-all bg-white shadow-sm">
+              <a href="#contact" className="border border-slate-300 hover:border-cyan-600 text-slate-700 hover:text-cyan-600 px-6 py-3.5 rounded-xl font-bold text-sm transition-all bg-white shadow-sm">
                 Contact Me
               </a>
               <div className="flex gap-2.5 ml-2">
                 {[{ Icon: Github, href: 'https://github.com/kenza-oss' }, { Icon: Linkedin, href: 'https://www.linkedin.com/in/kenza-mahleb-9860b5279' }, { Icon: Mail, href: 'mailto:mahlebkenza1@gmail.com' }].map(({ Icon, href }, i) => (
                   <a key={i} href={href} target="_blank" rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-xl border flex items-center justify-center transition-all border-slate-200 text-slate-500 hover:text-red-600 hover:bg-red-50 shadow-sm">
+                    className="w-10 h-10 rounded-xl border flex items-center justify-center transition-all border-slate-200 text-slate-500 hover:text-cyan-600 hover:bg-sky-50 shadow-sm">
                     <Icon size={18} />
                   </a>
                 ))}
@@ -691,24 +636,24 @@ export const Skills = () => {
       {/* ── High-Degree AI Neural Matrix & Cybernetic Lattice Background ── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         {/* Deep Ambient AI Red Glow */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-red-600/10 via-rose-500/5 to-transparent blur-[140px] rounded-full" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-tr from-blue-900/20 via-cyan-500/10 to-transparent blur-[140px] rounded-full" />
         
         {/* Subtle Tech Cyber Grid */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#00000006_1px,transparent_1px),linear-gradient(to_bottom,#00000006_1px,transparent_1px)] bg-[size:32px_32px]" />
 
         {/* Concentric AI Radar Rings & Crosshairs behind Orbit */}
-        <div className="absolute top-[380px] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[750px] rounded-full border border-red-500/10 flex items-center justify-center">
-          <div className="w-[600px] h-[600px] rounded-full border border-dashed border-red-500/15 animate-[spin_120s_linear_infinite]" />
-          <div className="w-[450px] h-[450px] rounded-full border border-red-500/10" />
+        <div className="absolute top-[380px] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[750px] rounded-full border border-cyan-500/20 flex items-center justify-center">
+          <div className="w-[600px] h-[600px] rounded-full border border-dashed border-cyan-500/25 animate-[spin_120s_linear_infinite]" />
+          <div className="w-[450px] h-[450px] rounded-full border border-cyan-500/20" />
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-red-500/20 to-transparent" />
             <div className="absolute h-full w-[1px] bg-gradient-to-b from-transparent via-red-500/20 to-transparent" />
           </div>
           {/* Radar Telemetry Labels */}
-          <span className="absolute top-4 left-1/2 -translate-x-1/2 font-mono text-[9px] text-red-600/50 tracking-[0.3em] font-bold">RADAR // 000° TENSOR_SPACE</span>
-          <span className="absolute bottom-4 left-1/2 -translate-x-1/2 font-mono text-[9px] text-red-600/50 tracking-[0.3em] font-bold">DIM: 1536 · METRIC: COSINE</span>
-          <span className="absolute left-4 top-1/2 -translate-y-1/2 font-mono text-[9px] text-red-600/50 tracking-[0.3em] -rotate-90 font-bold">WEIGHTS: SYNC</span>
-          <span className="absolute right-4 top-1/2 -translate-y-1/2 font-mono text-[9px] text-red-600/50 tracking-[0.3em] rotate-90 font-bold">NEURAL_BUS: ONLINE</span>
+          <span className="absolute top-4 left-1/2 -translate-x-1/2 font-mono text-[9px] text-cyan-600/50 tracking-[0.3em] font-bold">RADAR // 000° TENSOR_SPACE</span>
+          <span className="absolute bottom-4 left-1/2 -translate-x-1/2 font-mono text-[9px] text-cyan-600/50 tracking-[0.3em] font-bold">DIM: 1536 · METRIC: COSINE</span>
+          <span className="absolute left-4 top-1/2 -translate-y-1/2 font-mono text-[9px] text-cyan-600/50 tracking-[0.3em] -rotate-90 font-bold">WEIGHTS: SYNC</span>
+          <span className="absolute right-4 top-1/2 -translate-y-1/2 font-mono text-[9px] text-cyan-600/50 tracking-[0.3em] rotate-90 font-bold">NEURAL_BUS: ONLINE</span>
         </div>
       </div>
 
@@ -716,9 +661,9 @@ export const Skills = () => {
         
         {/* ── Section Header ── */}
         <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once: true }} style={{ textAlign: 'center', marginBottom: 60 }}>
-          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200/80 mb-5">
-            <Sparkles size={12} className="text-red-600 animate-pulse" />
-            <span className="font-mono text-[11px] font-bold tracking-[0.25em] uppercase text-red-700">High-Performance Ecosystem</span>
+          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 border border-cyan-200/80 mb-5">
+            <Sparkles size={12} className="text-cyan-600 animate-pulse" />
+            <span className="font-mono text-[11px] font-bold tracking-[0.25em] uppercase text-cyan-800">High-Performance Ecosystem</span>
           </motion.div>
           <motion.h2 variants={fadeUp} className="font-heading font-black text-slate-900 tracking-[-0.04em]" style={{ fontSize: 'clamp(2.5rem,5vw,5rem)' }}>
             TECHNICAL ARCHITECTURE
@@ -732,15 +677,15 @@ export const Skills = () => {
         <div className="relative w-full h-[440px] sm:h-[540px] md:h-[620px] flex items-center justify-center mb-24 overflow-hidden">
           
           {/* Orbital Depth Glow */}
-          <div className="absolute w-[400px] h-[400px] rounded-full bg-red-600/5 blur-[90px] pointer-events-none" />
+          <div className="absolute w-[400px] h-[400px] rounded-full bg-cyan-500/10 blur-[90px] pointer-events-none" />
 
           <div className="scale-[0.55] sm:scale-75 md:scale-100 transition-transform origin-center flex items-center justify-center relative w-[560px] h-[560px]">
             {/* Geometric Ring Guides with High-Tech Dash Marks */}
-            <div style={{ position: 'absolute', width: 300, height: 300, borderRadius: '50%', border: '1.5px dashed rgba(220,38,38,0.22)' }} />
-            <div style={{ position: 'absolute', width: 540, height: 540, borderRadius: '50%', border: '1px solid rgba(220,38,38,0.12)' }} />
+            <div style={{ position: 'absolute', width: 300, height: 300, borderRadius: '50%', border: '1.5px dashed rgba(6,182,212,0.3)' }} />
+            <div style={{ position: 'absolute', width: 540, height: 540, borderRadius: '50%', border: '1px solid rgba(2,132,199,0.2)' }} />
             
             {/* Pulse Ring */}
-            <div className="absolute w-[360px] h-[360px] rounded-full border border-red-500/10 animate-ping [animation-duration:6s]" />
+            <div className="absolute w-[360px] h-[360px] rounded-full border border-cyan-500/20 animate-ping [animation-duration:6s]" />
 
             {/* Spinning Orbit Ring 1 (Inner Stack) */}
             <div className="orbit-ring-1" style={{ position: 'absolute', width: 300, height: 300 }}>
@@ -755,22 +700,22 @@ export const Skills = () => {
             {/* Central KM Quantum Cyber Core */}
             <div className="relative z-20 group cursor-default">
               {/* Core Glow Ring */}
-              <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-red-600 to-rose-500 opacity-20 blur-md group-hover:opacity-40 transition-opacity duration-500" />
+              <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-blue-700 to-cyan-500 opacity-20 blur-md group-hover:opacity-40 transition-opacity duration-500" />
               
               <div style={{
                 position: 'relative',
                 width: 128, height: 128, borderRadius: '50%',
                 background: 'linear-gradient(145deg, #FFFFFF, #FFF5F5)',
-                border: '2px solid rgba(220,38,38,0.25)',
-                boxShadow: '0 12px 36px rgba(220,38,38,0.15), inset 0 0 15px rgba(220,38,38,0.05)',
+                border: '2px solid rgba(6,182,212,0.35)',
+                boxShadow: '0 12px 36px rgba(2,132,199,0.25), inset 0 0 15px rgba(6,182,212,0.08)',
                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
               }}>
                 {/* Tech Orbit Center Marker */}
-                <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-ping absolute top-3" />
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-600 animate-ping absolute top-3" />
                 <span style={{ fontFamily: 'Outfit,sans-serif', fontWeight: 900, fontSize: 32, color: '#0F172A', letterSpacing: '-0.05em', lineHeight: 1 }}>
-                  KM<span className="text-red-600">.</span>
+                  KM<span className="text-cyan-600">.</span>
                 </span>
-                <span className="text-red-600 font-mono text-[9px] font-bold tracking-[0.25em] uppercase mt-1 flex items-center gap-1">
+                <span className="text-cyan-600 font-mono text-[9px] font-bold tracking-[0.25em] uppercase mt-1 flex items-center gap-1">
                   CORE <span className="w-1 h-1 rounded-full bg-emerald-500 inline-block" />
                 </span>
               </div>
@@ -782,7 +727,7 @@ export const Skills = () => {
         <div className="space-y-6">
           <div className="flex items-center justify-between border-b border-slate-200 pb-3">
             <div className="flex items-center gap-2">
-              <Activity size={16} className="text-red-600" />
+              <Activity size={16} className="text-cyan-600" />
               <span className="font-mono text-xs font-bold uppercase tracking-wider text-slate-800">Specialized Infrastructure Domains</span>
             </div>
             <span className="font-mono text-[10px] text-slate-600 bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200">
@@ -797,29 +742,29 @@ export const Skills = () => {
               return (
                 <div 
                   key={item.id} 
-                  className="relative group bg-white rounded-2xl border border-slate-200/90 p-7 shadow-sm hover:shadow-xl hover:border-red-500/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+                  className="relative group bg-white rounded-2xl border border-slate-200/90 p-7 shadow-sm hover:shadow-xl hover:border-cyan-500/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
                 >
                   {/* Top Red Gradient Corner Accent */}
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-red-500/10 via-transparent to-transparent pointer-events-none rounded-tr-2xl" />
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-cyan-500/10 via-transparent to-transparent pointer-events-none rounded-tr-2xl" />
                   
                   <div>
                     {/* Header: ID + Status + Icon */}
                     <div className="flex items-center justify-between mb-5">
                       <div className="flex items-center gap-2">
-                        <span className="font-mono text-[10px] font-bold text-red-600 bg-red-50 border border-red-200/60 px-2 py-0.5 rounded">
+                        <span className="font-mono text-[10px] font-bold text-cyan-600 bg-sky-50 border border-cyan-200/60 px-2 py-0.5 rounded">
                           {item.id}
                         </span>
                         <span className="font-mono text-[9px] font-bold text-slate-600">
                           {item.status}
                         </span>
                       </div>
-                      <div className="w-10 h-10 rounded-xl bg-red-50 border border-red-200/60 text-red-600 flex items-center justify-center shadow-sm group-hover:scale-110 group-hover:bg-red-600 group-hover:text-white transition-all duration-300">
+                      <div className="w-10 h-10 rounded-xl bg-sky-50 border border-cyan-200/60 text-cyan-600 flex items-center justify-center shadow-sm group-hover:scale-110 group-hover:bg-cyan-600 group-hover:text-white transition-all duration-300">
                         <Icon size={18} />
                       </div>
                     </div>
 
                     {/* Title & Architecture Subtitle */}
-                    <h3 className="font-heading font-black text-slate-900 text-lg mb-1 group-hover:text-red-600 transition-colors">
+                    <h3 className="font-heading font-black text-slate-900 text-lg mb-1 group-hover:text-cyan-600 transition-colors">
                       {item.cat}
                     </h3>
                     <p className="text-xs text-slate-600 font-medium mb-6">
@@ -831,9 +776,9 @@ export const Skills = () => {
                       {item.items.map((it, idx) => (
                         <div 
                           key={idx} 
-                          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200/70 text-slate-700 text-xs font-medium group-hover:bg-red-50/30 group-hover:border-red-100 transition-colors"
+                          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-50 border border-slate-200/70 text-slate-700 text-xs font-medium group-hover:bg-sky-50/30 group-hover:border-cyan-100 transition-colors"
                         >
-                          <span className="w-1.5 h-1.5 rounded-full bg-red-500 flex-shrink-0" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-sky-500 flex-shrink-0" />
                           <span>{it}</span>
                         </div>
                       ))}
@@ -843,7 +788,7 @@ export const Skills = () => {
                   {/* Telemetry Metric Footer */}
                   <div className="pt-4 border-t border-slate-100 flex items-center justify-between font-mono text-[10px] text-slate-600">
                     <span className="truncate">{item.metric}</span>
-                    <span className="text-red-500 font-bold ml-2">●</span>
+                    <span className="text-cyan-500 font-bold ml-2">●</span>
                   </div>
                 </div>
               );
@@ -857,26 +802,26 @@ export const Skills = () => {
               return (
                 <div 
                   key={item.id} 
-                  className="relative group bg-white rounded-2xl border border-slate-200/90 p-7 shadow-sm hover:shadow-xl hover:border-red-500/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+                  className="relative group bg-white rounded-2xl border border-slate-200/90 p-7 shadow-sm hover:shadow-xl hover:border-cyan-500/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
                 >
-                  <div className="absolute top-0 right-0 w-28 h-28 bg-gradient-to-bl from-red-500/10 via-transparent to-transparent pointer-events-none rounded-tr-2xl" />
+                  <div className="absolute top-0 right-0 w-28 h-28 bg-gradient-to-bl from-cyan-500/10 via-transparent to-transparent pointer-events-none rounded-tr-2xl" />
                   
                   <div>
                     <div className="flex items-center justify-between mb-5">
                       <div className="flex items-center gap-2">
-                        <span className="font-mono text-[10px] font-bold text-red-600 bg-red-50 border border-red-200/60 px-2 py-0.5 rounded">
+                        <span className="font-mono text-[10px] font-bold text-cyan-600 bg-sky-50 border border-cyan-200/60 px-2 py-0.5 rounded">
                           {item.id}
                         </span>
                         <span className="font-mono text-[9px] font-bold text-slate-600">
                           {item.status}
                         </span>
                       </div>
-                      <div className="w-10 h-10 rounded-xl bg-red-50 border border-red-200/60 text-red-600 flex items-center justify-center shadow-sm group-hover:scale-110 group-hover:bg-red-600 group-hover:text-white transition-all duration-300">
+                      <div className="w-10 h-10 rounded-xl bg-sky-50 border border-cyan-200/60 text-cyan-600 flex items-center justify-center shadow-sm group-hover:scale-110 group-hover:bg-cyan-600 group-hover:text-white transition-all duration-300">
                         <Icon size={18} />
                       </div>
                     </div>
 
-                    <h3 className="font-heading font-black text-slate-900 text-lg mb-1 group-hover:text-red-600 transition-colors">
+                    <h3 className="font-heading font-black text-slate-900 text-lg mb-1 group-hover:text-cyan-600 transition-colors">
                       {item.cat}
                     </h3>
                     <p className="text-xs text-slate-600 font-medium mb-6">
@@ -887,9 +832,9 @@ export const Skills = () => {
                       {item.items.map((it, idx) => (
                         <div 
                           key={idx} 
-                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200/70 text-slate-700 text-xs font-medium group-hover:bg-red-50/30 group-hover:border-red-100 transition-colors"
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200/70 text-slate-700 text-xs font-medium group-hover:bg-sky-50/30 group-hover:border-cyan-100 transition-colors"
                         >
-                          <span className="w-1.5 h-1.5 rounded-full bg-red-500 flex-shrink-0" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-sky-500 flex-shrink-0" />
                           <span>{it}</span>
                         </div>
                       ))}
@@ -898,7 +843,7 @@ export const Skills = () => {
 
                   <div className="pt-4 border-t border-slate-100 flex items-center justify-between font-mono text-[10px] text-slate-600">
                     <span className="truncate">{item.metric}</span>
-                    <span className="text-red-500 font-bold ml-2">●</span>
+                    <span className="text-cyan-500 font-bold ml-2">●</span>
                   </div>
                 </div>
               );

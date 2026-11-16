@@ -256,10 +256,10 @@ const BehanceProjectCard = ({ project, index }) => {
       <div className="flex flex-col lg:flex-row justify-between items-start gap-8 mb-10 pb-8 border-b border-white/10 relative z-10">
         <div className="max-w-xl">
           <div className="flex items-center gap-3 mb-2">
-            <span className="text-red-400 font-mono text-sm tracking-widest uppercase font-bold">
+            <span className="text-cyan-400 font-mono text-sm tracking-widest uppercase font-bold">
               {project.id} / CASE STUDY
             </span>
-            <span className="w-1.5 h-1.5 rounded-full bg-red-500" />
+            <span className="w-1.5 h-1.5 rounded-full bg-sky-500" />
             <span className="text-gray-400 text-xs font-semibold uppercase tracking-wider">
               {project.category}
             </span>
@@ -270,7 +270,7 @@ const BehanceProjectCard = ({ project, index }) => {
           <h3 className="font-heading font-black text-white text-3xl sm:text-4xl lg:text-5xl tracking-tight mb-2">
             {project.behanceTitle}
           </h3>
-          <p className="text-red-300 font-medium text-sm sm:text-base">
+          <p className="text-cyan-300 font-medium text-sm sm:text-base">
             {project.tagline}
           </p>
         </div>
@@ -311,7 +311,7 @@ const BehanceProjectCard = ({ project, index }) => {
           {/* Otter OS-Style Screen View Pills (Interactive Switcher) */}
           <div className="mb-6">
             <span className="text-gray-400 text-[11px] font-mono tracking-widest uppercase mb-3 block font-semibold flex items-center gap-1.5">
-              <Layers size={13} className="text-red-400" /> Multi-Screen Viewport Selector
+              <Layers size={13} className="text-cyan-400" /> Multi-Screen Viewport Selector
             </span>
             <div className="flex flex-col gap-2">
               {project.screens.map((screen, sIdx) => {
@@ -322,7 +322,7 @@ const BehanceProjectCard = ({ project, index }) => {
                     onClick={() => setActiveScreenIndex(sIdx)}
                     className={`text-left px-4 py-2.5 rounded-full text-xs font-semibold transition-all flex items-center justify-between border ${
                       isSelected
-                        ? 'border-red-400 bg-red-500/20 text-white shadow-md shadow-red-500/20'
+                        ? 'border-red-400 bg-sky-500/20 text-white shadow-md shadow-red-500/20'
                         : 'border-white/20 bg-white/[0.03] text-gray-300 hover:border-white/40 hover:text-white'
                     }`}
                   >
@@ -362,7 +362,7 @@ const BehanceProjectCard = ({ project, index }) => {
               href={project.liveUrl} 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="flex-1 sm:flex-initial bg-red-600 hover:bg-red-500 text-white text-sm font-bold px-7 py-3 rounded-full flex items-center justify-center gap-2 transition-all shadow-lg shadow-red-600/30 hover:scale-[1.02]"
+              className="flex-1 sm:flex-initial bg-cyan-600 hover:bg-sky-500 text-white text-sm font-bold px-7 py-3 rounded-full flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-900/30/30 hover:scale-[1.02]"
             >
               <span>Explore Live Demo</span>
               <ExternalLink size={15} />
@@ -419,7 +419,7 @@ const BehanceProjectCard = ({ project, index }) => {
                   href={project.liveUrl} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="px-3.5 py-1 rounded-full bg-red-600 hover:bg-red-500 text-white font-bold text-[11px] flex items-center gap-1 shadow-lg"
+                  className="px-3.5 py-1 rounded-full bg-cyan-600 hover:bg-sky-500 text-white font-bold text-[11px] flex items-center gap-1 shadow-lg"
                 >
                   Test Demo <ArrowRight size={11} />
                 </a>
@@ -435,7 +435,7 @@ const BehanceProjectCard = ({ project, index }) => {
           >
             <div className="bg-[#1f2434] px-3 py-1.5 border-b border-white/10 flex items-center justify-between text-[10px] text-gray-300 font-mono">
               <span className="truncate">{nextScreen1.badge}</span>
-              <span className="text-red-400 font-bold">View ↗</span>
+              <span className="text-cyan-400 font-bold">View ↗</span>
             </div>
             <div className="aspect-[16/10] bg-black overflow-hidden relative">
               <img src={nextScreen1.image} alt={nextScreen1.label} className="w-full h-full object-cover" />
@@ -451,7 +451,7 @@ const BehanceProjectCard = ({ project, index }) => {
           >
             <div className="bg-[#181d2a] px-3 py-1 border-b border-white/10 flex items-center justify-between text-[10px] text-gray-300 font-mono">
               <span className="truncate">{nextScreen2.badge}</span>
-              <span className="text-red-400 font-bold">View ↗</span>
+              <span className="text-cyan-400 font-bold">View ↗</span>
             </div>
             <div className="aspect-[16/10] bg-black overflow-hidden relative">
               <img src={nextScreen2.image} alt={nextScreen2.label} className="w-full h-full object-cover" />
@@ -478,15 +478,15 @@ export const Projects = () => {
     <section id="projects" className="relative py-28 z-10 border-t border-gray-100 bg-[#07090e] text-white overflow-hidden">
       {/* Background Ambient Glows & Tech Grid */}
       <div className="absolute inset-0 opacity-15 pointer-events-none bg-[radial-gradient(#2563eb_1px,transparent_1px)] [background-size:24px_24px]" />
-      <div className="absolute top-1/4 -right-40 w-96 h-96 bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 -right-40 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 -left-40 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
 
       <div style={{ maxWidth:1320, margin:'0 auto', padding:'0 24px' }} className="relative z-10">
         
         {/* Header Section */}
         <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }} className="flex flex-col items-center text-center mb-16">
-          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-red-500/30 bg-red-500/10 text-red-400 text-xs font-bold tracking-widest uppercase mb-4 shadow-inner">
-            <Sparkles size={14} className="text-red-400" /> Executive Engineering Case Studies
+          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-sky-500/10 text-cyan-400 text-xs font-bold tracking-widest uppercase mb-4 shadow-inner">
+            <Sparkles size={14} className="text-cyan-400" /> Executive Engineering Case Studies
           </motion.div>
           
           <motion.h2 variants={fadeUp} className="font-heading font-black tracking-tight mb-4" style={{ fontSize:'clamp(2.2rem,4.5vw,3.8rem)' }}>
@@ -504,7 +504,7 @@ export const Projects = () => {
                 onClick={() => setFilter(f)}
                 className={`px-5 py-2 rounded-full text-xs font-bold transition-all border ${
                   filter === f 
-                  ? 'bg-red-600 border-red-500 text-white shadow-lg shadow-red-600/30 scale-105' 
+                  ? 'bg-cyan-600 border-cyan-500 text-white shadow-lg shadow-blue-900/30/30 scale-105' 
                   : 'bg-white/5 border-white/10 text-gray-400 hover:text-white hover:border-white/30'
                 }`}>
                 {f} {f === 'All Projects' && `(${projects.length})`}
@@ -569,9 +569,9 @@ export const Experience = () => (
   <section id="experience" className="relative py-32 z-10 border-t border-gray-100 bg-transparent">
     <div style={{ maxWidth:1280, margin:'0 auto', padding:'0 24px' }}>
       <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }} style={{ marginBottom:80 }}>
-        <motion.p variants={fadeUp} className="section-label text-red-600" style={{ marginBottom:20 }}>Career Path</motion.p>
+        <motion.p variants={fadeUp} className="section-label text-cyan-600" style={{ marginBottom:20 }}>Career Path</motion.p>
         <motion.h2 variants={fadeUp} className="font-heading font-black text-gray-900 tracking-[-0.04em]" style={{ fontSize:'clamp(2.5rem,5vw,5rem)' }}>
-          PROFESSIONAL<br /><span className="text-red-600">EXPERIENCE</span>
+          PROFESSIONAL<br /><span className="text-cyan-600">EXPERIENCE</span>
         </motion.h2>
       </motion.div>
       <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-12 lg:gap-16">
@@ -583,7 +583,7 @@ export const Experience = () => (
             { Icon:MapPin, title:'Alger, Algérie', sub:'Sidi M\'Hamed, Birtouta · Remote disponible monde entier' },
           ].map(({ Icon, title, sub }) => (
             <div key={title} className="glass-card bg-gray-50 border border-gray-200" style={{ padding:20 }}>
-              <Icon size={24} className="text-red-600 mb-2" />
+              <Icon size={24} className="text-cyan-600 mb-2" />
               <p className="font-heading font-bold text-gray-900 mb-1 text-sm">{title}</p>
               <p className="text-xs text-gray-500 leading-relaxed">{sub}</p>
             </div>
@@ -592,7 +592,7 @@ export const Experience = () => (
             {[['94%','Cisco CCNA Score'],['100%','Uptime & Security'],['3+','Years Tech Practice']].map(([n,l]) => (
               <div key={l} style={{ display:'flex', justifyContent:'space-between', alignItems:'center', padding:'8px 0', borderBottom:'1px solid rgba(0,0,0,0.05)' }}>
                 <span className="text-xs text-gray-500">{l}</span>
-                <span className="font-heading font-black text-lg text-red-600">{n}</span>
+                <span className="font-heading font-black text-lg text-cyan-600">{n}</span>
               </div>
             ))}
           </div>
@@ -615,7 +615,7 @@ export const Experience = () => (
                     <p className="text-[13px] text-gray-500 mt-1 font-medium">{e.company}</p>
                   </div>
                   <div style={{ textAlign:'right' }}>
-                    <span style={{ ...S }} className="text-[11px] text-red-600 font-bold block">{e.period}</span>
+                    <span style={{ ...S }} className="text-[11px] text-cyan-600 font-bold block">{e.period}</span>
                     <span style={{ ...S }} className="text-[10px] text-gray-400 block mt-[2px]">{e.type}</span>
                   </div>
                 </div>
@@ -662,9 +662,9 @@ export const Testimonials = () => (
   <section id="testimonials" className="relative py-32 z-10 border-t border-gray-100 bg-transparent">
     <div style={{ maxWidth:1280, margin:'0 auto', padding:'0 24px' }}>
       <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }} className="flex flex-col items-center text-center mb-20">
-        <motion.p variants={fadeUp} className="section-label text-red-600 mb-6">Social Proof</motion.p>
+        <motion.p variants={fadeUp} className="section-label text-cyan-600 mb-6">Social Proof</motion.p>
         <motion.h2 variants={fadeUp} className="font-heading font-black text-gray-900 tracking-tight" style={{ fontSize:'clamp(2.5rem,5vw,4.5rem)' }}>
-          CLIENT <span className="text-red-600">REVIEWS</span>
+          CLIENT <span className="text-cyan-600">REVIEWS</span>
         </motion.h2>
       </motion.div>
 
@@ -673,13 +673,13 @@ export const Testimonials = () => (
           <motion.div key={i}
             initial={{ opacity:0, y:30 }} whileInView={{ opacity:1, y:0 }}
             viewport={{ once:true }} transition={{ delay: i * 0.1 }}
-            className="glass-card p-10 rounded-2xl border border-gray-100 bg-gray-50 hover:border-red-600/30 hover:shadow-lg transition-all duration-500 relative group">
+            className="glass-card p-10 rounded-2xl border border-gray-100 bg-gray-50 hover:border-cyan-600/30 hover:shadow-lg transition-all duration-500 relative group">
             <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
-              <Mail size={40} className="text-red-600" />
+              <Mail size={40} className="text-cyan-600" />
             </div>
             <p className="text-gray-700 italic mb-8 leading-relaxed text-[15px]">"{t.text}"</p>
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-red-100 border border-red-200 flex items-center justify-center text-red-600 font-bold text-[14px]">
+              <div className="w-12 h-12 rounded-full bg-red-100 border border-cyan-200 flex items-center justify-center text-cyan-600 font-bold text-[14px]">
                 {t.avatar}
               </div>
               <div>
@@ -760,12 +760,12 @@ export const Certifications = () => {
               key={idx} 
               variants={fadeUp} 
               onClick={() => setSelectedImage(src)}
-              className="glass-card flex-1 w-full rounded-2xl overflow-hidden group border border-gray-200 hover:border-red-600 transition-all cursor-pointer shadow-md hover:shadow-xl p-2.5 bg-gray-50 relative"
+              className="glass-card flex-1 w-full rounded-2xl overflow-hidden group border border-gray-200 hover:border-cyan-600 transition-all cursor-pointer shadow-md hover:shadow-xl p-2.5 bg-gray-50 relative"
             >
               <div className="relative overflow-hidden rounded-xl">
                 <img src={src} alt={`Certification Preview ${idx + 1}`} className="w-full h-auto object-contain rounded-xl group-hover:scale-[1.03] transition-transform duration-500" />
                 <div className="absolute inset-0 bg-red-900/0 group-hover:bg-red-900/20 transition-all flex items-center justify-center">
-                  <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-white/90 text-red-600 px-3.5 py-1.5 rounded-full text-xs font-bold shadow-md flex items-center gap-1.5">
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-white/90 text-cyan-600 px-3.5 py-1.5 rounded-full text-xs font-bold shadow-md flex items-center gap-1.5">
                     <ZoomIn size={14} /> Agrandir
                   </span>
                 </div>
@@ -804,7 +804,7 @@ export const Certifications = () => {
         </AnimatePresence>
 
         <motion.div variants={stagger} initial="hidden" whileInView="show" viewport={{ once:true }} style={{ marginBottom:80 }}>
-          <motion.p variants={fadeUp} className="section-label text-red-600" style={{ marginBottom:20 }}>Credentials</motion.p>
+          <motion.p variants={fadeUp} className="section-label text-cyan-600" style={{ marginBottom:20 }}>Credentials</motion.p>
           <motion.h2 variants={fadeUp} className="font-heading font-black text-gray-900 tracking-[-0.04em]" style={{ fontSize:'clamp(2.5rem,5vw,5rem)' }}>CERTIFICATIONS</motion.h2>
         </motion.div>
         
@@ -812,13 +812,13 @@ export const Certifications = () => {
           {certs.map((c,i) => (
             <motion.div key={i} initial={{ opacity:0, y:24 }} whileInView={{ opacity:1, y:0 }}
               viewport={{ once:true }} transition={{ delay:i*0.08 }}
-              className="glass-card group bg-white border border-gray-100 shadow-sm hover:border-red-600/40 hover:shadow-lg transition-all" style={{ padding:28, position:'relative', overflow:'hidden' }}>
+              className="glass-card group bg-white border border-gray-100 shadow-sm hover:border-cyan-600/40 hover:shadow-lg transition-all" style={{ padding:28, position:'relative', overflow:'hidden' }}>
               <div style={{ position:'absolute', top:0, left:0, right:0, height:3, borderRadius:'14px 14px 0 0', background:c.accent }} />
               <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:18 }}>
                 <Award size={28} style={{ color:c.accent }} />
-                <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-red-50 text-red-600 border border-red-100">{c.score}</span>
+                <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-sky-50 text-cyan-600 border border-cyan-100">{c.score}</span>
               </div>
-              <h3 className="font-heading font-bold text-gray-900 mb-2 leading-[1.3] text-[15px] group-hover:text-red-600 transition-colors">{c.title}</h3>
+              <h3 className="font-heading font-bold text-gray-900 mb-2 leading-[1.3] text-[15px] group-hover:text-cyan-600 transition-colors">{c.title}</h3>
               <p style={{ ...S }} className="text-[10px] text-gray-500 uppercase tracking-[0.15em] mb-3">{c.issuer} · {c.year}</p>
               <p className="text-xs text-gray-600 leading-relaxed">{c.desc}</p>
             </motion.div>
@@ -888,7 +888,7 @@ const ContactForm = () => {
     <div className="bg-white border border-gray-200 rounded-2xl p-8 flex flex-col gap-4 shadow-sm relative overflow-hidden">
       <div className="flex justify-between items-center mb-1">
         <h3 className="font-heading font-bold text-[20px] text-gray-900">Send a Message</h3>
-        <span className="text-[11px] font-mono text-red-600 font-bold bg-red-50 px-2.5 py-1 rounded-full border border-red-100">
+        <span className="text-[11px] font-mono text-cyan-600 font-bold bg-sky-50 px-2.5 py-1 rounded-full border border-cyan-100">
           Direct Email
         </span>
       </div>
@@ -924,7 +924,7 @@ const ContactForm = () => {
               placeholder="Your Name *"
               value={formState.name}
               onChange={e => setFormState({ ...formState, name: e.target.value })}
-              className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-[13px] text-gray-900 outline-none focus:border-red-600 focus:bg-white transition-all" 
+              className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-[13px] text-gray-900 outline-none focus:border-cyan-600 focus:bg-white transition-all" 
             />
           </div>
           <div>
@@ -934,7 +934,7 @@ const ContactForm = () => {
               placeholder="Email Address *"
               value={formState.email}
               onChange={e => setFormState({ ...formState, email: e.target.value })}
-              className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-[13px] text-gray-900 outline-none focus:border-red-600 focus:bg-white transition-all" 
+              className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-[13px] text-gray-900 outline-none focus:border-cyan-600 focus:bg-white transition-all" 
             />
           </div>
           <div>
@@ -944,16 +944,16 @@ const ContactForm = () => {
               placeholder="Tell me about your project, timeline, or inquiry... *"
               value={formState.message}
               onChange={e => setFormState({ ...formState, message: e.target.value })}
-              className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-[13px] text-gray-900 outline-none resize-none focus:border-red-600 focus:bg-white transition-all" 
+              className="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-[13px] text-gray-900 outline-none resize-none focus:border-cyan-600 focus:bg-white transition-all" 
             />
           </div>
           {status === 'error' && (
-            <p className="text-xs text-red-600 font-medium">{errorMessage}</p>
+            <p className="text-xs text-cyan-600 font-medium">{errorMessage}</p>
           )}
           <button 
             type="submit"
             disabled={status === 'sending'}
-            className="bg-red-600 hover:bg-red-700 text-white border-none rounded-lg p-3.5 font-heading font-bold text-[13px] tracking-[0.06em] uppercase cursor-pointer flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg disabled:opacity-70"
+            className="bg-gradient-to-r from-blue-700 to-cyan-600 hover:from-blue-800 hover:to-cyan-700 text-white border-none rounded-lg p-3.5 font-heading font-bold text-[13px] tracking-[0.06em] uppercase cursor-pointer flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg disabled:opacity-70"
           >
             {status === 'sending' ? 'Envoi en cours...' : 'Send Message'} <Send size={15} />
           </button>
@@ -969,9 +969,9 @@ export const Footer = () => (
     <div style={{ maxWidth:1280, margin:'0 auto', padding:'0 24px' }}>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start mb-20">
         <div>
-          <p className="section-label text-red-600 mb-6">Let's Connect</p>
+          <p className="section-label text-cyan-600 mb-6">Let's Connect</p>
           <h2 className="font-heading font-black text-gray-900 leading-none mb-10 tracking-[-0.04em]" style={{ fontSize:'clamp(2.5rem,6vw,5rem)' }}>
-            LET'S BUILD<br /><span className="text-red-600">SECURE & SCALABLE</span><br />SYSTEMS.
+            LET'S BUILD<br /><span className="text-cyan-600">SECURE & SCALABLE</span><br />SYSTEMS.
           </h2>
           <div className="space-y-3.5 mb-8">
             {[{ Icon:Phone, label:'+213 660 17 28 78', href:'tel:+213660172878' },
@@ -981,9 +981,9 @@ export const Footer = () => (
               { Icon:MapPin, label:'Sidi M\'Hamed, Birtouta · Alger, Algérie', href:'#about' },
             ].map(({ Icon, label, href }) => (
               <a key={label} href={href} target={href.startsWith('http') ? '_blank' : '_self'} rel="noopener noreferrer" 
-                className="flex items-center gap-4 text-gray-600 transition-all hover:text-red-600 text-[14px]">
+                className="flex items-center gap-4 text-gray-600 transition-all hover:text-cyan-600 text-[14px]">
                 <span className="w-10 h-10 border border-gray-200 rounded-lg flex items-center justify-center flex-shrink-0 bg-white shadow-sm">
-                  <Icon size={16} className="text-red-600" />
+                  <Icon size={16} className="text-cyan-600" />
                 </span>
                 <span className="font-medium">{label}</span>
               </a>
@@ -995,7 +995,7 @@ export const Footer = () => (
       <div className="border-t border-gray-200 pt-6 flex justify-between items-center flex-wrap gap-3">
         <p style={{ ...S }} className="text-[11px] text-gray-400">© 2026 Kenza Mahleb · Administratrice Systèmes, Réseaux & Cloud · Alger & Paris</p>
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-red-600 animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-cyan-600 animate-pulse" />
           <span style={{ ...S }} className="text-[11px] text-gray-500">Disponible pour missions, CDI & projets internationaux</span>
         </div>
       </div>
