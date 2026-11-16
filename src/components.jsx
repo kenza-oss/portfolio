@@ -117,7 +117,6 @@ export const OceanWave3D = () => {
   const mountRef = React.useRef(null);
   const [activeTab, setActiveTab] = useState('resilience');
   const [codeText, setCodeText] = useState('');
-  const [codeIndex, setCodeIndex] = useState(0);
 
   const snippets = {
     resilience: `// Kenza Mahleb · Cloud Resilience Engine
@@ -151,289 +150,365 @@ class NeuralResilienceCore:
 # Real-Time Neural Stream: 60 FPS Latency Verified`
   };
 
-  // Live Typing Effect for Code
+  // Live Typing Effect
   useEffect(() => {
     const fullText = snippets[activeTab];
     setCodeText('');
-    let currentIdx = 0;
-
+    let idx = 0;
     const timer = setInterval(() => {
-      if (currentIdx < fullText.length) {
-        currentIdx += 2;
-        setCodeText(fullText.substring(0, currentIdx));
+      if (idx < fullText.length) {
+        idx += 2;
+        setCodeText(fullText.substring(0, idx));
       } else {
         clearInterval(timer);
       }
     }, 28);
-
     return () => clearInterval(timer);
   }, [activeTab]);
 
-  // Three.js Photorealistic Ocean Wave Ripple Canvas
+  // Three.js Ocean Wave — pure coded geometry, no photo texture
   useEffect(() => {
     const container = mountRef.current;
     if (!container) return;
 
-    const width = container.clientWidth || 480;
-    const height = container.clientHeight || 320;
+    const W = container.clientWidth || 480;
+    const H = 320;
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 100);
-    camera.position.set(0, 0, 3.8);
+    scene.fog = new THREE.FogExp2(0x020c1f, 0.08);
+
+    const camera = new THREE.PerspectiveCamera(55, W / H, 0.1, 100);
+    camera.position.set(0, 1.6, 5.2);
+    camera.lookAt(0, 0.6, 0);
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'high-performance' });
-    renderer.setSize(width, height);
+    renderer.setSize(W, H);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.1;
     container.appendChild(renderer.domElement);
 
-    // Texture Loader with Kenza's real wave photograph
-    const textureLoader = new THREE.TextureLoader();
-    const waveTexture = textureLoader.load('/ocean_wave_real.webp');
-    waveTexture.generateMipmaps = true;
-    waveTexture.minFilter = THREE.LinearMipmapLinearFilter;
+    // ── WAVE SURFACE ───────────────────────────────────────────────
+    // Build a parametric surface: NX columns (wave profile) × NZ rows (depth)
+    const NX = 120;   // horizontal resolution (wave shape)
+    const NZ = 60;    // lateral depth resolution
+    const WAVE_W = 6.0;
+    const WAVE_D = 3.5;
 
-    // Subdivided Plane for Real Fluid Water Displacements
-    const segX = 48;
-    const segY = 32;
-    const geometry = new THREE.PlaneGeometry(4.4, 2.7, segX, segY);
-    const pos = geometry.attributes.position;
-    const basePositions = pos.array.slice();
+    const totalVerts = (NX + 1) * (NZ + 1);
+    const positions = new Float32Array(totalVerts * 3);
+    const colors    = new Float32Array(totalVerts * 3);
+    const uvs       = new Float32Array(totalVerts * 2);
 
-    const material = new THREE.MeshStandardMaterial({
-      map: waveTexture,
-      roughness: 0.18,
-      metalness: 0.22,
-      side: THREE.DoubleSide
-    });
-
-    const mesh = new THREE.Mesh(geometry, material);
-    scene.add(mesh);
-
-    // Oceanic Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
-    scene.add(ambientLight);
-
-    const sunGleam = new THREE.DirectionalLight(0x38bdf8, 2.2);
-    sunGleam.position.set(2, 4, 3);
-    scene.add(sunGleam);
-
-    // Sea Spray & Mist Particle System blowing off the wave
-    const sprayCount = 120;
-    const sprayGeo = new THREE.BufferGeometry();
-    const sprayPos = new Float32Array(sprayCount * 3);
-    const sprayData = [];
-
-    for (let i = 0; i < sprayCount; i++) {
-      const sx = (Math.random() - 0.5) * 3.8;
-      const sy = 0.2 + Math.random() * 0.9;
-      const sz = 0.1 + Math.random() * 0.4;
-      sprayPos[i * 3] = sx;
-      sprayPos[i * 3 + 1] = sy;
-      sprayPos[i * 3 + 2] = sz;
-      sprayData.push({
-        baseX: sx,
-        baseY: sy,
-        baseZ: sz,
-        vx: -0.3 - Math.random() * 0.5,
-        vy: 0.2 + Math.random() * 0.4,
-        life: Math.random()
-      });
+    // Helper: wave profile at normalised u ∈ [0,1]
+    // Returns {x, y} in world space (x = horizontal, y = height)
+    // The wave rises steeply and curls at the crest (barrel shape)
+    function waveProfile(u) {
+      let x = (u - 0.5) * WAVE_W;
+      let y;
+      if (u < 0.30) {
+        // deep trough — calm dark water
+        y = -0.6 + u * 0.5;
+      } else if (u < 0.62) {
+        // rising face — steep slope
+        const t = (u - 0.30) / 0.32;
+        y = -0.45 + t * t * 2.6;
+      } else if (u < 0.82) {
+        // crest arch — the barrel curl
+        const t = (u - 0.62) / 0.20;
+        const angle = t * Math.PI * 0.72;   // 0 → ~130°
+        const R = 0.55;
+        x = (0.62 - 0.5) * WAVE_W + R * Math.sin(angle) * 0.9;
+        y = 1.95 + R - R * Math.cos(angle);
+      } else {
+        // back slope / splash zone
+        const t = (u - 0.82) / 0.18;
+        x = (0.62 - 0.5) * WAVE_W + 0.55 * Math.sin(0.72 * Math.PI) * 0.9 + t * 0.5;
+        y = 1.95 + 0.55 - 0.55 * Math.cos(0.72 * Math.PI) - t * 0.9;
+      }
+      return { x, y };
     }
 
-    sprayGeo.setAttribute('position', new THREE.BufferAttribute(sprayPos, 3));
-    const sprayMat = new THREE.PointsMaterial({
-      color: 0xffffff,
-      size: 0.05,
+    // Vertex colours keyed by height ratio h ∈ [0,1]
+    function waveColor(u, h) {
+      // Deep water / trough → dark navy
+      const deep   = { r: 0.01, g: 0.07, b: 0.28 };
+      // Mid face → turquoise cyan
+      const face   = { r: 0.05, g: 0.52, b: 0.72 };
+      // Crest / foam → bright cyan-white
+      const foam   = { r: 0.78, g: 0.96, b: 1.00 };
+
+      let t;
+      if (h < 0.45) {
+        t = h / 0.45;
+        return { r: deep.r+(face.r-deep.r)*t, g: deep.g+(face.g-deep.g)*t, b: deep.b+(face.b-deep.b)*t };
+      } else {
+        t = (h - 0.45) / 0.55;
+        return { r: face.r+(foam.r-face.r)*t, g: face.g+(foam.g-face.g)*t, b: face.b+(foam.b-face.b)*t };
+      }
+    }
+
+    // Fill vertex arrays
+    for (let iz = 0; iz <= NZ; iz++) {
+      const v = iz / NZ;
+      const z = (v - 0.5) * WAVE_D;
+      for (let ix = 0; ix <= NX; ix++) {
+        const u = ix / NX;
+        const { x, y } = waveProfile(u);
+        const idx3 = (iz * (NX + 1) + ix) * 3;
+        const idx2 = (iz * (NX + 1) + ix) * 2;
+
+        positions[idx3]     = x;
+        positions[idx3 + 1] = y;
+        positions[idx3 + 2] = z;
+
+        // height ratio for colouring
+        const hNorm = Math.max(0, Math.min(1, (y + 0.6) / 2.8));
+        const col = waveColor(u, hNorm);
+        colors[idx3]     = col.r;
+        colors[idx3 + 1] = col.g;
+        colors[idx3 + 2] = col.b;
+
+        uvs[idx2]     = u;
+        uvs[idx2 + 1] = v;
+      }
+    }
+
+    // Build index buffer
+    const indices = [];
+    for (let iz = 0; iz < NZ; iz++) {
+      for (let ix = 0; ix < NX; ix++) {
+        const a = iz * (NX + 1) + ix;
+        const b = a + 1;
+        const c = a + (NX + 1);
+        const d = c + 1;
+        indices.push(a, c, b, b, c, d);
+      }
+    }
+
+    const wavGeo = new THREE.BufferGeometry();
+    wavGeo.setAttribute('position', new THREE.BufferAttribute(positions.slice(), 3));
+    wavGeo.setAttribute('color',    new THREE.BufferAttribute(colors,    3));
+    wavGeo.setAttribute('uv',       new THREE.BufferAttribute(uvs,       2));
+    wavGeo.setIndex(indices);
+    wavGeo.computeVertexNormals();
+
+    // Store original positions for animation
+    const basePos = positions.slice();
+
+    const wavMat = new THREE.MeshPhongMaterial({
+      vertexColors: true,
+      side: THREE.DoubleSide,
+      shininess: 90,
+      specular: new THREE.Color(0x88ddff),
       transparent: true,
-      opacity: 0.7,
-      blending: THREE.AdditiveBlending
+      opacity: 0.92,
     });
+
+    const waveMesh = new THREE.Mesh(wavGeo, wavMat);
+    scene.add(waveMesh);
+
+    // ── FOAM RIBBON at the crest ───────────────────────────────────
+    const foamCount = 180;
+    const foamPositions = new Float32Array(foamCount * 3);
+    for (let i = 0; i < foamCount; i++) {
+      const u = 0.60 + (i / foamCount) * 0.26;
+      const { x, y } = waveProfile(u);
+      const z = (Math.random() - 0.5) * WAVE_D;
+      foamPositions[i * 3]     = x + (Math.random() - 0.5) * 0.08;
+      foamPositions[i * 3 + 1] = y + (Math.random() - 0.5) * 0.06;
+      foamPositions[i * 3 + 2] = z;
+    }
+    const foamGeo = new THREE.BufferGeometry();
+    foamGeo.setAttribute('position', new THREE.BufferAttribute(foamPositions, 3));
+    const foamMat = new THREE.PointsMaterial({ color: 0xeaf8ff, size: 0.045, transparent: true, opacity: 0.85 });
+    const foamPoints = new THREE.Points(foamGeo, foamMat);
+    scene.add(foamPoints);
+
+    // ── SEA SPRAY PARTICLES ────────────────────────────────────────
+    const sprayCount = 420;
+    const sprayPos   = new Float32Array(sprayCount * 3);
+    const sprayVel   = new Float32Array(sprayCount * 3);
+
+    function resetSpray(i) {
+      const u = 0.65 + Math.random() * 0.18;
+      const { x, y } = waveProfile(u);
+      sprayPos[i * 3]     = x + (Math.random() - 0.5) * 0.15;
+      sprayPos[i * 3 + 1] = y;
+      sprayPos[i * 3 + 2] = (Math.random() - 0.5) * WAVE_D * 0.8;
+      sprayVel[i * 3]     = (Math.random() - 0.5) * 0.025;
+      sprayVel[i * 3 + 1] = 0.012 + Math.random() * 0.028;
+      sprayVel[i * 3 + 2] = (Math.random() - 0.5) * 0.012;
+    }
+
+    for (let i = 0; i < sprayCount; i++) {
+      resetSpray(i);
+      // scatter them at random phase
+      sprayPos[i * 3 + 1] += Math.random() * 0.5;
+    }
+
+    const sprayGeo = new THREE.BufferGeometry();
+    sprayGeo.setAttribute('position', new THREE.BufferAttribute(sprayPos, 3));
+    const sprayMat = new THREE.PointsMaterial({ color: 0xd0f0ff, size: 0.025, transparent: true, opacity: 0.7 });
     const sprayPoints = new THREE.Points(sprayGeo, sprayMat);
     scene.add(sprayPoints);
 
-    // Mouse parallax tilt
-    let targetRotY = 0;
-    let targetRotX = 0;
+    // ── OCEAN FLOOR / TROUGH PLANE ─────────────────────────────────
+    const seaGeo = new THREE.PlaneGeometry(WAVE_W * 1.4, WAVE_D * 1.3, 1, 1);
+    seaGeo.rotateX(-Math.PI / 2);
+    const seaMat = new THREE.MeshPhongMaterial({ color: 0x010b1f, shininess: 20, transparent: true, opacity: 0.6 });
+    const seaMesh = new THREE.Mesh(seaGeo, seaMat);
+    seaMesh.position.set(0, -0.65, 0);
+    scene.add(seaMesh);
 
-    const handleMouseMove = (e) => {
-      const rect = container.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      const y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
-      targetRotY = x * 0.15;
-      targetRotX = -y * 0.12;
-    };
+    // ── LIGHTING ───────────────────────────────────────────────────
+    const ambient = new THREE.AmbientLight(0x112244, 1.2);
+    scene.add(ambient);
 
-    container.addEventListener('pointermove', handleMouseMove);
+    const sun = new THREE.DirectionalLight(0x88ccff, 2.8);
+    sun.position.set(3, 6, 4);
+    scene.add(sun);
 
-    let reqId;
-    let clock = new THREE.Clock();
+    const rimLight = new THREE.DirectionalLight(0x00aaff, 1.4);
+    rimLight.position.set(-4, 2, -3);
+    scene.add(rimLight);
 
-    const animate = () => {
-      reqId = requestAnimationFrame(animate);
-      const t = clock.getElapsedTime();
+    const fillLight = new THREE.PointLight(0x00e5ff, 1.5, 8);
+    fillLight.position.set(0, 2.5, 2);
+    scene.add(fillLight);
 
-      // Fluid Wave Undulation on the Real Photograph Mesh
-      const arr = pos.array;
-      for (let i = 0; i < arr.length; i += 3) {
-        const bx = basePositions[i];
-        const by = basePositions[i + 1];
+    // ── ANIMATION LOOP ─────────────────────────────────────────────
+    let animId;
+    let t = 0;
+    const posAttr = wavGeo.attributes.position;
 
-        // Complex multi-harmonic ocean swells
-        const swell1 = Math.sin(bx * 2.2 + by * 1.5 + t * 2.4) * 0.08;
-        const swell2 = Math.cos(bx * 3.5 - by * 2.1 + t * 3.1) * 0.04;
-        const chop = Math.sin(bx * 7.0 + t * 4.5) * 0.02;
+    function animate() {
+      animId = requestAnimationFrame(animate);
+      t += 0.012;
 
-        arr[i + 2] = swell1 + swell2 + chop;
-      }
-      pos.needsUpdate = true;
-      geometry.computeVertexNormals();
+      // Animate wave vertices: phase-travel + swell breathing
+      for (let iz = 0; iz <= NZ; iz++) {
+        const v = iz / NZ;
+        for (let ix = 0; ix <= NX; ix++) {
+          const u = ix / NX;
+          const vidx = iz * (NX + 1) + ix;
+          const b3 = vidx * 3;
 
-      // Update Sea Spray particles
-      const spArr = sprayGeo.attributes.position.array;
-      for (let k = 0; k < sprayCount; k++) {
-        const p = sprayData[k];
-        p.life += 0.015;
-        if (p.life > 1.0) {
-          p.life = 0;
-          spArr[k * 3] = p.baseX + (Math.random() - 0.5) * 0.4;
-          spArr[k * 3 + 1] = p.baseY;
-          spArr[k * 3 + 2] = p.baseZ;
-        } else {
-          spArr[k * 3] += p.vx * 0.012;
-          spArr[k * 3 + 1] += p.vy * 0.01 - 0.003;
+          const bx = basePos[b3];
+          const by = basePos[b3 + 1];
+          const bz = basePos[b3 + 2];
+
+          // Travel phase along x (wave moves forward), swell along z
+          const phase = t - bx * 0.35;
+          const dy = Math.sin(phase * 1.1) * 0.08
+                   + Math.sin(phase * 2.3 + bz * 0.9) * 0.04
+                   + Math.sin(phase * 0.5 + bz * 1.5) * 0.06;
+
+          // Crest amplification: more motion near the top
+          const crAmp = u > 0.55 ? 1.0 + (u - 0.55) * 2.5 : 1.0;
+
+          posAttr.setXYZ(vidx, bx, by + dy * crAmp, bz);
         }
       }
-      sprayGeo.attributes.position.needsUpdate = true;
+      posAttr.needsUpdate = true;
+      wavGeo.computeVertexNormals();
 
-      // Smooth Parallax Rotation
-      mesh.rotation.y += (targetRotY - mesh.rotation.y) * 0.06;
-      mesh.rotation.x += (targetRotX - mesh.rotation.x) * 0.06;
+      // Animate foam ribbon
+      const fPos = foamGeo.attributes.position;
+      for (let i = 0; i < foamCount; i++) {
+        const u = 0.60 + (i / foamCount) * 0.26;
+        const { x, y } = waveProfile(u);
+        const phase = t - x * 0.35;
+        const dy = Math.sin(phase * 1.1) * 0.08 + Math.sin(phase * 0.5) * 0.06;
+        fPos.setY(i, y + dy * 1.6 + (Math.random() - 0.5) * 0.03);
+      }
+      fPos.needsUpdate = true;
+
+      // Update spray particles
+      const sPos = sprayGeo.attributes.position;
+      for (let i = 0; i < sprayCount; i++) {
+        sprayPos[i * 3]     += sprayVel[i * 3];
+        sprayPos[i * 3 + 1] += sprayVel[i * 3 + 1];
+        sprayPos[i * 3 + 2] += sprayVel[i * 3 + 2];
+        sprayVel[i * 3 + 1] -= 0.0004; // gravity
+        // Reset if fallen below crest
+        if (sprayPos[i * 3 + 1] < -0.3) resetSpray(i);
+      }
+      sPos.array.set(sprayPos);
+      sPos.needsUpdate = true;
+
+      // Slow camera sway for life
+      camera.position.x = Math.sin(t * 0.07) * 0.3;
+      camera.position.y = 1.6 + Math.sin(t * 0.11) * 0.08;
+      camera.lookAt(0, 0.6, 0);
 
       renderer.render(scene, camera);
-    };
+    }
+    animate();
 
-    reqId = requestAnimationFrame(animate);
-
-    const handleResize = () => {
-      if (!container) return;
-      const w = container.clientWidth;
-      const h = container.clientHeight;
-      camera.aspect = w / h;
+    // Resize handler
+    const onResize = () => {
+      const nW = container.clientWidth || 480;
+      camera.aspect = nW / H;
       camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
+      renderer.setSize(nW, H);
     };
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', onResize);
 
     return () => {
-      cancelAnimationFrame(reqId);
-      window.removeEventListener('resize', handleResize);
-      container.removeEventListener('pointermove', handleMouseMove);
-      geometry.dispose();
-      material.dispose();
-      sprayGeo.dispose();
-      sprayMat.dispose();
+      cancelAnimationFrame(animId);
+      window.removeEventListener('resize', onResize);
       renderer.dispose();
-      if (renderer.domElement && container.contains(renderer.domElement)) {
-        container.removeChild(renderer.domElement);
-      }
+      if (container.contains(renderer.domElement)) container.removeChild(renderer.domElement);
     };
   }, []);
 
   return (
-    <div className="relative w-full max-w-sm sm:max-w-md lg:w-[460px] xl:w-[500px] select-none">
-      {/* Bioluminescent Deep Ocean Glow Atmosphere */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/30 via-cyan-500/20 to-transparent blur-[80px] rounded-3xl pointer-events-none" />
+    <div className="flex flex-col gap-3 w-full">
+      {/* 3D Wave canvas */}
+      <div
+        ref={mountRef}
+        className="w-full rounded-xl overflow-hidden border border-cyan-500/20"
+        style={{ height: 320, background: 'linear-gradient(180deg,#020c1f 0%,#041628 100%)' }}
+      />
 
-      {/* Main Glassmorphic Showcase Card */}
-      <div className="relative rounded-3xl overflow-hidden border border-cyan-500/30 bg-slate-950/90 shadow-[0_20px_50px_rgba(2,132,199,0.25)] backdrop-blur-xl">
-        
-        {/* Card Header with Terminal Controls */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-cyan-900/40 bg-slate-900/80">
-          <div className="flex items-center gap-2">
-            <span className="w-3 h-3 rounded-full bg-rose-500/80" />
-            <span className="w-3 h-3 rounded-full bg-amber-500/80" />
-            <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
-            <span className="ml-2 font-mono text-[11px] font-bold text-slate-300 flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-              kenza@ocean-core: ~
-            </span>
-          </div>
-
-          {/* Interactive File Tabs */}
-          <div className="flex items-center gap-1.5 bg-black/40 p-1 rounded-xl border border-white/5">
+      {/* Live code terminal */}
+      <div className="rounded-xl border border-cyan-500/20 overflow-hidden"
+           style={{ background: 'rgba(2,12,31,0.95)' }}>
+        {/* Tab bar */}
+        <div className="flex border-b border-cyan-500/20">
+          {[
+            { id: 'resilience', label: 'Mesh.ts' },
+            { id: 'ai',         label: 'AI_Core.py' },
+          ].map(tab => (
             <button
-              onClick={() => setActiveTab('resilience')}
-              className={`px-2.5 py-1 rounded-lg font-mono text-[10px] font-bold transition-all ${
-                activeTab === 'resilience'
-                  ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-sm'
-                  : 'text-slate-400 hover:text-white'
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`px-4 py-2 text-xs font-mono transition-colors ${
+                activeTab === tab.id
+                  ? 'text-cyan-300 border-b-2 border-cyan-400 bg-cyan-900/20'
+                  : 'text-slate-500 hover:text-slate-300'
               }`}
             >
-              🌊 Mesh.ts
+              {tab.label}
             </button>
-            <button
-              onClick={() => setActiveTab('ai')}
-              className={`px-2.5 py-1 rounded-lg font-mono text-[10px] font-bold transition-all ${
-                activeTab === 'ai'
-                  ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-sm'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              ⚡ AI_Core.py
-            </button>
+          ))}
+          <div className="ml-auto flex items-center gap-1 px-3">
+            <span className="w-2 h-2 rounded-full bg-red-500/70" />
+            <span className="w-2 h-2 rounded-full bg-yellow-500/70" />
+            <span className="w-2 h-2 rounded-full bg-green-500/70" />
           </div>
         </div>
-
-        {/* 1. Real Ocean Wave with Fluid Motion */}
-        <div className="relative w-full h-[220px] sm:h-[240px] overflow-hidden bg-slate-950">
-          <div 
-            ref={mountRef} 
-            className="w-full h-full cursor-grab active:cursor-grabbing flex items-center justify-center"
-            title="Real Ocean Wave · Moving with live fluid physics"
-          />
-          {/* Subtle bottom gradient to blend wave into code terminal */}
-          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent pointer-events-none" />
-          
-          {/* Floating Ocean Badge */}
-          <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-slate-950/80 border border-cyan-500/40 backdrop-blur-md text-[10px] font-mono text-cyan-300 flex items-center gap-1.5 shadow-lg pointer-events-none">
-            <span className="text-cyan-400">🌊</span>
-            <span className="font-bold">Real Ocean Swell</span>
-            <span className="text-emerald-400">· 60 FPS Fluid Motion</span>
-          </div>
-        </div>
-
-        {/* 2. Live Interactive Code Terminal (Le Code Qui S'écrit) */}
-        <div className="p-4 bg-slate-950 border-t border-cyan-900/40">
-          <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-800/80 text-[10px] font-mono text-slate-400">
-            <span className="flex items-center gap-1.5 text-cyan-400 font-bold">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              LIVE ARCHITECTURE STREAM
-            </span>
-            <span className="text-slate-500">Cisco CCNA (94%)</span>
-          </div>
-
-          <pre className="font-mono text-[11px] leading-relaxed text-slate-200 overflow-x-auto whitespace-pre-wrap max-h-[160px] scrollbar-thin select-text">
-            <code>
-              {codeText}
-              <span className="inline-block w-2 h-3.5 ml-0.5 bg-cyan-400 animate-pulse align-middle" />
-            </code>
-          </pre>
-
-          {/* Terminal Footer Status Pills */}
-          <div className="flex items-center justify-between pt-2.5 mt-2 border-t border-slate-800/80 font-mono text-[9px] text-slate-400">
-            <span className="text-emerald-400 font-bold flex items-center gap-1">
-              ✓ ZERO-TRUST ENFORCED
-            </span>
-            <span className="text-cyan-400">LATENCY: 12ms</span>
-            <span className="text-slate-400">ESGI PARIS</span>
-          </div>
-        </div>
-
+        {/* Code area */}
+        <pre className="p-4 text-xs font-mono text-cyan-300/90 leading-relaxed overflow-auto"
+             style={{ minHeight: 110, maxHeight: 140, whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>
+          {codeText}
+          <span className="inline-block w-1.5 h-3.5 bg-cyan-400 ml-0.5 animate-pulse align-middle" />
+        </pre>
       </div>
     </div>
   );
 };
-
 
 /* ─────────────── HERO ─────────────── */
 export const Hero = () => {
