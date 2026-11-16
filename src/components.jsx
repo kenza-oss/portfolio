@@ -434,25 +434,31 @@ export const OceanWave3D = () => {
 /* ─────────────── HERO ─────────────── */
 export const Hero = () => {
   const typed = useTypewriter([
-    'Systems & Cloud Administrator',
-    'Network & Security Engineer',
-    'Cisco CCNA Certified (Score 94%)',
+    'DevOps & Cloud Systems Engineer',
+    'Network & Infrastructure Specialist',
+    'AI & Automation Architect',
     'DevOps & Infrastructure Lead',
     'Full-Stack Developer (Django, React)'
   ]);
   
   return (
-    <section id="about" className="relative min-h-[90vh] flex items-center pt-32 pb-16 overflow-hidden">
+    <section id="about" className="relative min-h-[90vh] flex items-center pt-28 pb-16 overflow-hidden">
       {/* ── Light Artistic Background ── */}
       <div className="absolute inset-0 z-0 opacity-10">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,var(--neon-blue),transparent_50%)]" />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
-        <div className="grid lg:grid-cols-[auto_1fr] gap-6 lg:gap-8 xl:gap-10 items-start">
+        {/* ── 3-Column Clean Responsive Grid: [Photo] [Text] [3D Wave] ── */}
+        <div className="grid lg:grid-cols-[auto_1fr_auto] gap-8 xl:gap-10 items-center">
           
-          {/* ── Rectangular Profile Card ── */}
-          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} className="relative group mt-4 flex-shrink-0">
+          {/* ── 1. Profile Photo Card (Left) ── */}
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }} 
+            animate={{ opacity: 1, x: 0 }} 
+            transition={{ duration: 0.8 }} 
+            className="relative group flex-shrink-0 mx-auto lg:mx-0"
+          >
             {/* ── Floating "Hi!" Sticker (Autocollant Devant la Photo) ── */}
             <motion.div 
               initial={{ scale: 0, rotate: -20 }}
@@ -473,7 +479,8 @@ export const Hero = () => {
                 </span>
               </div>
             </motion.div>
-            <div className="w-40 h-52 xl:w-48 xl:h-64 rounded-2xl overflow-hidden border border-slate-200/80 shadow-xl relative z-10 bg-slate-900/5 group-hover:shadow-2xl transition-all duration-500">
+
+            <div className="w-40 h-52 xl:w-44 xl:h-60 rounded-2xl overflow-hidden border border-slate-200/80 shadow-xl relative z-10 bg-slate-900/5 group-hover:shadow-2xl transition-all duration-500">
               <img src="/profile_v6.webp" alt="Kenza Mahleb" className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent pointer-events-none" />
             </div>
@@ -485,62 +492,70 @@ export const Hero = () => {
             </div>
           </motion.div>
 
-          {/* ── Content area ── */}
-          <motion.div variants={stagger} initial="hidden" animate="show" className="pt-2 relative max-w-2xl">
-            
-            {/* ── 3D Hydrodynamic Ocean Wave Simulation (Fluid Mechanics & Real-Time Wave Physics) ── */}
-            <div className="lg:absolute lg:-right-4 xl:-right-10 lg:top-8 xl:top-10 w-full max-w-sm sm:max-w-md mx-auto lg:mx-0 lg:w-[390px] xl:w-[430px] mt-10 lg:mt-0 z-20">
-              <OceanWave3D />
-            </div>
-
-            <motion.div variants={fadeUp} className="flex items-center gap-3 mb-5">
-              <span className="w-2.5 h-2.5 rounded-full bg-cyan-600 animate-pulse" />
-              <span className="font-mono text-[11px] font-bold tracking-[0.25em] uppercase text-cyan-600 bg-sky-50 border border-cyan-200/80 px-3.5 py-1 rounded-full">
+          {/* ── 2. Content Area (Center / Main) ── */}
+          <motion.div variants={stagger} initial="hidden" animate="show" className="relative z-10 min-w-0">
+            <motion.div variants={fadeUp} className="flex items-center gap-2.5 mb-3.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-cyan-600 animate-pulse flex-shrink-0" />
+              <span className="font-mono text-[10px] sm:text-[11px] font-bold tracking-[0.2em] uppercase text-cyan-600 bg-sky-50 border border-cyan-200/80 px-3 py-1 rounded-full truncate">
                 Kenza Mahleb · Cisco CCNA (94%) · ESGI Paris
               </span>
             </motion.div>
 
-            <motion.h1 variants={fadeUp} className="font-heading font-bold tracking-tight mb-4 leading-[1.1] text-slate-900" style={{ fontSize: 'clamp(2rem, 3.8vw, 3.4rem)' }}>
+            {/* ── Heading: Refined font-weight and clear line spacing ── */}
+            <motion.h1 
+              variants={fadeUp} 
+              className="font-heading font-bold tracking-tight mb-3 text-slate-900" 
+              style={{ fontSize: 'clamp(1.75rem, 3.2vw, 2.75rem)', lineHeight: 1.15 }}
+            >
               KENZA MAHLEB<br />
               <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-900 via-sky-600 to-cyan-400">
                 DRIVING DIGITAL RESILIENCE.
               </span>
             </motion.h1>
 
-            <motion.div variants={fadeUp} className="h-10 flex items-center mb-7">
-              <span className="text-xl font-medium text-slate-600 flex items-center">
+            {/* ── Typewriter Subtitle ── */}
+            <motion.div variants={fadeUp} className="h-8 flex items-center mb-4">
+              <span className="text-base sm:text-lg font-medium text-slate-600 flex items-center">
                 I am a&nbsp;
-                <span translate="no" className="notranslate font-bold text-cyan-600 underline decoration-cyan-200 underline-offset-4 flex items-center">
+                <span translate="no" className="notranslate font-semibold text-cyan-600 underline decoration-cyan-200 underline-offset-4 flex items-center">
                   {typed}
-                  <span className="inline-block w-[2px] h-5 ml-1 bg-cyan-600 animate-pulse" />
+                  <span className="inline-block w-[2px] h-4 ml-1 bg-cyan-600 animate-pulse" />
                 </span>
               </span>
             </motion.div>
 
-            <motion.p variants={fadeUp} className="max-w-xl leading-relaxed mb-10 text-lg text-slate-600">
-              Hi, I'm <strong className="text-slate-900 font-bold">Kenza Mahleb</strong> — Bachelor in Computer Engineering graduate from <strong className="text-slate-900 font-bold">ESGI Paris</strong> and <strong className="text-cyan-600 font-bold">Cisco CCNA Certified (Score 94%)</strong>. I specialize in architecting resilient cloud infrastructures, automating zero-downtime CI/CD pipelines, and integrating intelligent AI agent systems.
+            {/* ── Bio Paragraph ── */}
+            <motion.p variants={fadeUp} className="leading-relaxed mb-6 text-sm sm:text-base text-slate-600 max-w-xl">
+              Hi, I'm <strong className="text-slate-900 font-semibold">Kenza Mahleb</strong> — Bachelor in Computer Engineering graduate from <strong className="text-slate-900 font-semibold">ESGI Paris</strong> and <strong className="text-cyan-600 font-semibold">Cisco CCNA Certified (Score 94%)</strong>. I specialize in architecting resilient cloud infrastructures, automating zero-downtime CI/CD pipelines, and integrating intelligent AI agent systems.
             </motion.p>
 
-            <motion.div variants={fadeUp} className="flex flex-wrap gap-4 items-center">
-              <a href="#projects" className="bg-gradient-to-r from-blue-700 to-cyan-600 hover:from-blue-800 hover:to-cyan-700 text-white px-7 py-3.5 rounded-xl font-bold text-sm transition-all shadow-md hover:shadow-xl hover:scale-[1.02] flex items-center gap-2">
-                Explore Projects <ArrowRight size={16} />
+            {/* ── Action Buttons ── */}
+            <motion.div variants={fadeUp} className="flex flex-wrap gap-3 items-center">
+              <a href="#projects" className="bg-gradient-to-r from-blue-700 to-cyan-600 hover:from-blue-800 hover:to-cyan-700 text-white px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all shadow-md hover:shadow-xl hover:scale-[1.02] flex items-center gap-1.5">
+                Explore Projects <ArrowRight size={15} />
               </a>
-              <a href="/cv-kenza-mahleb.pdf" download="CV_Kenza_Mahleb.pdf" target="_blank" rel="noopener noreferrer" className="bg-slate-900 hover:bg-black text-white px-6 py-3.5 rounded-xl font-bold text-sm transition-all shadow-md hover:shadow-xl flex items-center gap-2">
-                <Download size={16} className="text-sky-400" /> Download CV
+              <a href="/cv-kenza-mahleb.pdf" download="CV_Kenza_Mahleb.pdf" target="_blank" rel="noopener noreferrer" className="bg-slate-900 hover:bg-black text-white px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all shadow-md hover:shadow-xl flex items-center gap-1.5">
+                <Download size={15} className="text-sky-400" /> Download CV
               </a>
-              <a href="#contact" className="border border-slate-300 hover:border-cyan-600 text-slate-700 hover:text-cyan-600 px-6 py-3.5 rounded-xl font-bold text-sm transition-all bg-white shadow-sm">
+              <a href="#contact" className="border border-slate-300 hover:border-cyan-600 text-slate-700 hover:text-cyan-600 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all bg-white shadow-sm">
                 Contact Me
               </a>
-              <div className="flex gap-2.5 ml-2">
+              <div className="flex gap-2 ml-1">
                 {[{ Icon: Github, href: 'https://github.com/kenza-oss' }, { Icon: Linkedin, href: 'https://www.linkedin.com/in/kenza-mahleb-9860b5279' }, { Icon: Mail, href: 'mailto:mahlebkenza1@gmail.com' }].map(({ Icon, href }, i) => (
                   <a key={i} href={href} target="_blank" rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-xl border flex items-center justify-center transition-all border-slate-200 text-slate-500 hover:text-cyan-600 hover:bg-sky-50 shadow-sm">
-                    <Icon size={18} />
+                    className="w-9 h-9 rounded-xl border flex items-center justify-center transition-all border-slate-200 text-slate-500 hover:text-cyan-600 hover:bg-sky-50 shadow-sm">
+                    <Icon size={16} />
                   </a>
                 ))}
               </div>
             </motion.div>
           </motion.div>
+
+          {/* ── 3. 3D Hydrodynamic Ocean Wave Simulation (Right Column — Completely Separate) ── */}
+          <div className="w-full max-w-sm sm:max-w-md lg:w-[340px] xl:w-[390px] flex-shrink-0 mx-auto lg:mx-0 mt-8 lg:mt-0 z-10">
+            <OceanWave3D />
+          </div>
+
         </div>
       </div>
     </section>
