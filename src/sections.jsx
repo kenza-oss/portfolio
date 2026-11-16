@@ -284,7 +284,7 @@ const BehanceProjectCard = ({ project, index }) => {
             {project.tags.map((tag) => (
               <div 
                 key={tag}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-red-400/50 hover:bg-white/10 transition-all shadow-sm"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-400/50 hover:bg-white/10 transition-all shadow-sm"
               >
                 <img 
                   src={getTechIcon(tag)} 
@@ -322,12 +322,12 @@ const BehanceProjectCard = ({ project, index }) => {
                     onClick={() => setActiveScreenIndex(sIdx)}
                     className={`text-left px-4 py-2.5 rounded-full text-xs font-semibold transition-all flex items-center justify-between border ${
                       isSelected
-                        ? 'border-red-400 bg-sky-500/20 text-white shadow-md shadow-red-500/20'
+                        ? 'border-cyan-400 bg-cyan-500/20 text-white shadow-md shadow-cyan-500/20'
                         : 'border-white/20 bg-white/[0.03] text-gray-300 hover:border-white/40 hover:text-white'
                     }`}
                   >
                     <div className="flex items-center gap-2.5">
-                      <span className={`w-2 h-2 rounded-full ${isSelected ? 'bg-red-400 animate-pulse' : 'bg-gray-500'}`} />
+                      <span className={`w-2 h-2 rounded-full ${isSelected ? 'bg-cyan-400 animate-pulse' : 'bg-gray-500'}`} />
                       <span>{screen.label}</span>
                     </div>
                     <span className="text-[10px] font-mono uppercase text-gray-400 tracking-wider">
@@ -446,7 +446,7 @@ const BehanceProjectCard = ({ project, index }) => {
           {/* Tertiary Floating Device (Bottom-Right Angle) - Clickable to switch */}
           <div 
             onClick={() => setActiveScreenIndex((activeScreenIndex + 2) % project.screens.length)}
-            className="absolute -bottom-4 right-4 sm:right-6 w-[42%] sm:w-[38%] rounded-xl overflow-hidden border border-white/25 bg-[#121622] shadow-2xl z-30 cursor-pointer transform hover:scale-105 transition-all duration-300 hover:border-red-400"
+            className="absolute -bottom-4 right-4 sm:right-6 w-[42%] sm:w-[38%] rounded-xl overflow-hidden border border-white/25 bg-[#121622] shadow-2xl z-30 cursor-pointer transform hover:scale-105 transition-all duration-300 hover:border-cyan-400"
             title="Click to view this screen"
           >
             <div className="bg-[#181d2a] px-3 py-1 border-b border-white/10 flex items-center justify-between text-[10px] text-gray-300 font-mono">
@@ -490,7 +490,7 @@ export const Projects = () => {
           </motion.div>
           
           <motion.h2 variants={fadeUp} className="font-heading font-black tracking-tight mb-4" style={{ fontSize:'clamp(2.2rem,4.5vw,3.8rem)' }}>
-            Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-rose-300 to-red-400">Engineering Work</span>
+            Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-cyan-400">Engineering Work</span>
           </motion.h2>
 
           <motion.p variants={fadeUp} className="text-gray-400 text-[15px] max-w-2xl leading-relaxed mb-8">
@@ -679,7 +679,7 @@ export const Testimonials = () => (
             </div>
             <p className="text-gray-700 italic mb-8 leading-relaxed text-[15px]">"{t.text}"</p>
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-red-100 border border-cyan-200 flex items-center justify-center text-cyan-600 font-bold text-[14px]">
+              <div className="w-12 h-12 rounded-full bg-cyan-900/40 border border-cyan-400/40 flex items-center justify-center text-cyan-600 font-bold text-[14px]">
                 {t.avatar}
               </div>
               <div>
@@ -764,7 +764,7 @@ export const Certifications = () => {
             >
               <div className="relative overflow-hidden rounded-xl">
                 <img src={src} alt={`Certification Preview ${idx + 1}`} className="w-full h-auto object-contain rounded-xl group-hover:scale-[1.03] transition-transform duration-500" />
-                <div className="absolute inset-0 bg-red-900/0 group-hover:bg-red-900/20 transition-all flex items-center justify-center">
+                <div className="absolute inset-0 bg-cyan-900/0 group-hover:bg-cyan-900/20 transition-all flex items-center justify-center">
                   <span className="opacity-0 group-hover:opacity-100 transition-opacity bg-white/90 text-cyan-600 px-3.5 py-1.5 rounded-full text-xs font-bold shadow-md flex items-center gap-1.5">
                     <ZoomIn size={14} /> Agrandir
                   </span>

@@ -646,8 +646,8 @@ export const Skills = () => {
           <div className="w-[600px] h-[600px] rounded-full border border-dashed border-cyan-500/25 animate-[spin_120s_linear_infinite]" />
           <div className="w-[450px] h-[450px] rounded-full border border-cyan-500/20" />
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-red-500/20 to-transparent" />
-            <div className="absolute h-full w-[1px] bg-gradient-to-b from-transparent via-red-500/20 to-transparent" />
+            <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
+            <div className="absolute h-full w-[1px] bg-gradient-to-b from-transparent via-cyan-500/20 to-transparent" />
           </div>
           {/* Radar Telemetry Labels */}
           <span className="absolute top-4 left-1/2 -translate-x-1/2 font-mono text-[9px] text-cyan-600/50 tracking-[0.3em] font-bold">RADAR // 000° TENSOR_SPACE</span>
