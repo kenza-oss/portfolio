@@ -449,11 +449,10 @@ export const Hero = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
-        <div className="grid lg:grid-cols-[auto_1fr] gap-16 items-start">
+        <div className="grid lg:grid-cols-[auto_1fr] gap-6 lg:gap-8 xl:gap-10 items-start">
           
           {/* ── Rectangular Profile Card ── */}
-                    {/* ── Rectangular Profile Card ── */}
-          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} className="relative group mt-4">
+          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8 }} className="relative group mt-4 flex-shrink-0">
             {/* ── Floating "Hi!" Sticker (Autocollant Devant la Photo) ── */}
             <motion.div 
               initial={{ scale: 0, rotate: -20 }}
@@ -487,10 +486,10 @@ export const Hero = () => {
           </motion.div>
 
           {/* ── Content area ── */}
-          <motion.div variants={stagger} initial="hidden" animate="show" className="pt-4 relative">
+          <motion.div variants={stagger} initial="hidden" animate="show" className="pt-2 relative max-w-2xl">
             
             {/* ── 3D Hydrodynamic Ocean Wave Simulation (Fluid Mechanics & Real-Time Wave Physics) ── */}
-            <div className="lg:absolute lg:-right-10 xl:-right-16 lg:top-12 xl:top-14 w-full max-w-sm sm:max-w-md mx-auto lg:mx-0 lg:w-[420px] mt-12 lg:mt-0 z-20">
+            <div className="lg:absolute lg:-right-4 xl:-right-10 lg:top-8 xl:top-10 w-full max-w-sm sm:max-w-md mx-auto lg:mx-0 lg:w-[390px] xl:w-[430px] mt-10 lg:mt-0 z-20">
               <OceanWave3D />
             </div>
 
@@ -501,9 +500,9 @@ export const Hero = () => {
               </span>
             </motion.div>
 
-            <motion.h1 variants={fadeUp} className="font-heading font-black tracking-[-0.04em] mb-5 leading-[1.05] text-slate-900" style={{ fontSize: 'clamp(2.5rem,5.2vw,4.5rem)' }}>
+            <motion.h1 variants={fadeUp} className="font-heading font-bold tracking-tight mb-4 leading-[1.1] text-slate-900" style={{ fontSize: 'clamp(2rem, 3.8vw, 3.4rem)' }}>
               KENZA MAHLEB<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-900 via-sky-600 to-cyan-400">
+              <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-900 via-sky-600 to-cyan-400">
                 DRIVING DIGITAL RESILIENCE.
               </span>
             </motion.h1>
