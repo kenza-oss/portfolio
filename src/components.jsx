@@ -111,11 +111,10 @@ export const Navbar = () => {
   );
 };
 
-/* ─────────────── SENIOR 3D WEBGL NEURAL TENSOR CORE ─────────────── */
-export const Neural3DCore = () => {
+/* ─────────────── SENIOR 3D MATHEMATICAL OPTIMIZATION MANIFOLD ─────────────── */
+export const MathSurface3D = () => {
   const mountRef = React.useRef(null);
   const [fps, setFps] = useState(60);
-  const [activeNodes, setActiveNodes] = useState(64);
 
   useEffect(() => {
     const container = mountRef.current;
@@ -126,128 +125,182 @@ export const Neural3DCore = () => {
 
     // 1. Scene & Camera Setup
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-    camera.position.set(0, 0, 6.4);
+    const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 100);
+    camera.position.set(0, 3.2, 5.8);
+    camera.lookAt(0, -0.2, 0);
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'high-performance' });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
-    // 2. High-Tech Dynamic Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.85);
+    // 2. Lighting Setup
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
     scene.add(ambientLight);
 
-    const redCoreLight = new THREE.PointLight(0xdc2626, 4.5, 18);
-    redCoreLight.position.set(2, 3, 4);
-    scene.add(redCoreLight);
+    const redLight = new THREE.PointLight(0xdc2626, 4.0, 20);
+    redLight.position.set(3, 4, 3);
+    scene.add(redLight);
 
-    const rimLight = new THREE.PointLight(0xef4444, 3.5, 20);
-    rimLight.position.set(-3, -3, 3);
-    scene.add(rimLight);
+    const fillLight = new THREE.PointLight(0xf87171, 2.5, 20);
+    fillLight.position.set(-3, 2, -2);
+    scene.add(fillLight);
 
-    // Master 3D Group
-    const masterGroup = new THREE.Group();
-    scene.add(masterGroup);
+    // Master Axonometric Group
+    const mathGroup = new THREE.Group();
+    mathGroup.rotation.y = -0.45;
+    scene.add(mathGroup);
 
-    // 3. Central Quantum Torus Knot (Tensor Contraction Core)
-    const knotGeo = new THREE.TorusKnotGeometry(0.95, 0.26, 128, 24, 2, 3);
-    const knotMat = new THREE.MeshStandardMaterial({
+    // 3. Coordinate Base Grid (Cartesian Floor)
+    const floorGrid = new THREE.GridHelper(3.8, 16, 0xdc2626, 0x475569);
+    floorGrid.position.y = -1.1;
+    // Lower grid opacity
+    floorGrid.material.transparent = true;
+    floorGrid.material.opacity = 0.35;
+    mathGroup.add(floorGrid);
+
+    // 4. Coordinate Axes System (X, Y, Z) with Arrow Indicators
+    const axesGroup = new THREE.Group();
+    axesGroup.position.set(-1.9, -1.1, -1.9);
+
+    const createAxisLine = (dir, length, colorHex) => {
+      const lineMat = new THREE.LineBasicMaterial({ color: colorHex, linewidth: 2 });
+      const points = [new THREE.Vector3(0, 0, 0), dir.clone().multiplyScalar(length)];
+      const lineGeo = new THREE.BufferGeometry().setFromPoints(points);
+      const line = new THREE.Line(lineGeo, lineMat);
+      
+      const coneGeo = new THREE.ConeGeometry(0.06, 0.16, 12);
+      const coneMat = new THREE.MeshBasicMaterial({ color: colorHex });
+      const cone = new THREE.Mesh(coneGeo, coneMat);
+      cone.position.copy(dir.clone().multiplyScalar(length));
+      if (dir.x === 1) cone.rotation.z = -Math.PI / 2;
+      if (dir.z === 1) cone.rotation.x = Math.PI / 2;
+      
+      const g = new THREE.Group();
+      g.add(line);
+      g.add(cone);
+      return g;
+    };
+
+    axesGroup.add(createAxisLine(new THREE.Vector3(1, 0, 0), 3.8, 0xdc2626)); // X axis (Red)
+    axesGroup.add(createAxisLine(new THREE.Vector3(0, 1, 0), 2.2, 0x10b981)); // Y axis (Green / Loss)
+    axesGroup.add(createAxisLine(new THREE.Vector3(0, 0, 1), 3.8, 0x38bdf8)); // Z axis (Cyan)
+    mathGroup.add(axesGroup);
+
+    // 5. Mathematical Loss Manifold Surface: z = f(x, y)
+    const gridSize = 32;
+    const planeGeo = new THREE.PlaneGeometry(3.6, 3.6, gridSize, gridSize);
+    planeGeo.rotateX(-Math.PI / 2); // Lay flat on XZ plane
+
+    // Calculate initial mathematical elevation
+    const posAttr = planeGeo.attributes.position;
+    const originalY = new Float32Array(posAttr.count);
+    for (let i = 0; i < posAttr.count; i++) {
+      const x = posAttr.getX(i);
+      const z = posAttr.getZ(i);
+      const r = Math.sqrt(x * x + z * z);
+      // Classic damped oscillatory Loss Surface (Gaussian wave packet / loss landscape)
+      const y = 0.85 * Math.exp(-(r * r) / 2.2) * Math.cos(2.1 * r) - 0.15;
+      posAttr.setY(i, y);
+      originalY[i] = y;
+    }
+    planeGeo.computeVertexNormals();
+
+    // Wireframe High-Tech Grid
+    const wireMat = new THREE.MeshStandardMaterial({
       color: 0xdc2626,
-      roughness: 0.15,
-      metalness: 0.88,
       wireframe: true,
+      roughness: 0.2,
+      metalness: 0.8,
       emissive: 0x991b1b,
-      emissiveIntensity: 0.55
+      emissiveIntensity: 0.4
     });
-    const knotMesh = new THREE.Mesh(knotGeo, knotMat);
-    masterGroup.add(knotMesh);
+    const wireMesh = new THREE.Mesh(planeGeo, wireMat);
+    mathGroup.add(wireMesh);
 
-    // 4. Geodesic Icosahedron Outer Lattice
-    const icoGeo = new THREE.IcosahedronGeometry(2.1, 1);
-    const icoMat = new THREE.MeshBasicMaterial({
-      color: 0xef4444,
-      wireframe: true,
+    // Translucent Solid Skin
+    const skinMat = new THREE.MeshStandardMaterial({
+      color: 0x0f172a,
+      roughness: 0.4,
+      metalness: 0.9,
       transparent: true,
-      opacity: 0.22
+      opacity: 0.75,
+      side: THREE.DoubleSide
     });
-    const icoMesh = new THREE.Mesh(icoGeo, icoMat);
-    masterGroup.add(icoMesh);
+    const skinMesh = new THREE.Mesh(planeGeo, skinMat);
+    mathGroup.add(skinMesh);
 
-    // 5. Dynamic Synaptic Plexus System (Particles & Connecting Synaptic Lines)
-    const nodeCount = 58;
-    const nodePositions = new Float32Array(nodeCount * 3);
-    const nodeVelocities = [];
-    const maxDistance = 1.15;
-
-    for (let i = 0; i < nodeCount; i++) {
-      const u = Math.random();
-      const v = Math.random();
-      const theta = u * 2.0 * Math.PI;
-      const phi = Math.acos(2.0 * v - 1.0);
-      const r = 1.45 + Math.random() * 1.1;
-
-      const x = r * Math.sin(phi) * Math.cos(theta);
-      const y = r * Math.sin(phi) * Math.sin(theta);
-      const z = r * Math.cos(phi);
-
-      nodePositions[i * 3] = x;
-      nodePositions[i * 3 + 1] = y;
-      nodePositions[i * 3 + 2] = z;
-
-      nodeVelocities.push({
-        x: (Math.random() - 0.5) * 0.007,
-        y: (Math.random() - 0.5) * 0.007,
-        z: (Math.random() - 0.5) * 0.007
-      });
+    // 6. Gradient Descent Trajectory Path (Convergence towards Global Minimum)
+    const pathPoints = [];
+    const stepCount = 28;
+    for (let s = 0; s <= stepCount; s++) {
+      const t = s / stepCount;
+      const angle = t * Math.PI * 2.2;
+      const radius = 1.6 * (1 - t * 0.92);
+      const px = Math.cos(angle) * radius;
+      const pz = Math.sin(angle) * radius;
+      const r = Math.sqrt(px * px + pz * pz);
+      const py = (0.85 * Math.exp(-(r * r) / 2.2) * Math.cos(2.1 * r) - 0.15) + 0.05;
+      pathPoints.push(new THREE.Vector3(px, py, pz));
     }
 
-    const pointsGeo = new THREE.BufferGeometry();
-    pointsGeo.setAttribute('position', new THREE.BufferAttribute(nodePositions, 3));
-    const pointsMat = new THREE.PointsMaterial({
-      color: 0xffffff,
-      size: 0.065,
-      transparent: true,
-      opacity: 0.95
+    const pathGeo = new THREE.BufferGeometry().setFromPoints(pathPoints);
+    const pathMat = new THREE.LineBasicMaterial({
+      color: 0x22c55e, // Emerald convergence path
+      linewidth: 3
     });
-    const pointsMesh = new THREE.Points(pointsGeo, pointsMat);
-    masterGroup.add(pointsMesh);
+    const pathLine = new THREE.Line(pathGeo, pathMat);
+    mathGroup.add(pathLine);
 
-    // Dynamic Line Segments
-    const maxLines = (nodeCount * (nodeCount - 1)) / 2;
-    const linePositions = new Float32Array(maxLines * 6);
-    const linesGeo = new THREE.BufferGeometry();
-    linesGeo.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
-    const linesMat = new THREE.LineBasicMaterial({
+    // Path Step Node Beads (Evaluation checkpoints)
+    const beadGeo = new THREE.SphereGeometry(0.035, 12, 12);
+    const beadMat = new THREE.MeshBasicMaterial({ color: 0x4ade80 });
+    pathPoints.forEach((pt, idx) => {
+      if (idx % 3 === 0) {
+        const bead = new THREE.Mesh(beadGeo, beadMat);
+        bead.position.copy(pt);
+        mathGroup.add(bead);
+      }
+    });
+
+    // 7. Global Minimum Optimal Point (Target Beacon)
+    const minPoint = pathPoints[pathPoints.length - 1];
+    const beaconGeo = new THREE.SphereGeometry(0.08, 16, 16);
+    const beaconMat = new THREE.MeshBasicMaterial({ color: 0xef4444 });
+    const beaconMesh = new THREE.Mesh(beaconGeo, beaconMat);
+    beaconMesh.position.copy(minPoint);
+    mathGroup.add(beaconMesh);
+
+    // Dotted projection line from minimum to floor grid
+    const dropPoints = [minPoint, new THREE.Vector3(minPoint.x, -1.1, minPoint.z)];
+    const dropGeo = new THREE.BufferGeometry().setFromPoints(dropPoints);
+    const dropMat = new THREE.LineDashedMaterial({
       color: 0xef4444,
-      transparent: true,
-      opacity: 0.3,
-      blending: THREE.AdditiveBlending
+      dashSize: 0.1,
+      gapSize: 0.05
     });
-    const linesMesh = new THREE.LineSegments(linesGeo, linesMat);
-    masterGroup.add(linesMesh);
+    const dropLine = new THREE.Line(dropGeo, dropMat);
+    dropLine.computeLineDistances();
+    mathGroup.add(dropLine);
 
-    // 6. Tilted Orbital Hologram Radar Rings
-    const ringGeo = new THREE.RingGeometry(2.7, 2.73, 64);
-    const ringMat = new THREE.MeshBasicMaterial({
-      color: 0xdc2626,
-      side: THREE.DoubleSide,
-      transparent: true,
-      opacity: 0.4
-    });
-    const ring1 = new THREE.Mesh(ringGeo, ringMat);
-    ring1.rotation.x = Math.PI / 2.7;
-    ring1.rotation.y = Math.PI / 6;
-    masterGroup.add(ring1);
+    // Iso-Level Contour Rings on Floor (Level curves: f(x,z) = c)
+    for (let cr = 0.5; cr <= 1.5; cr += 0.5) {
+      const ringGeo = new THREE.RingGeometry(cr, cr + 0.015, 48);
+      const ringMat = new THREE.MeshBasicMaterial({
+        color: 0xdc2626,
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity: 0.3
+      });
+      const cRing = new THREE.Mesh(ringGeo, ringMat);
+      cRing.rotation.x = -Math.PI / 2;
+      cRing.position.y = -1.09;
+      mathGroup.add(cRing);
+    }
 
-    const ring2 = new THREE.Mesh(ringGeo, ringMat);
-    ring2.rotation.x = -Math.PI / 3.1;
-    ring2.rotation.y = -Math.PI / 5;
-    masterGroup.add(ring2);
-
-    // 7. Interactive Mouse / Touch Parallax & Drag
-    let targetX = 0;
-    let targetY = 0;
+    // 8. Interactive Mouse / Touch Parallax & Drag
+    let targetRotY = -0.45;
+    let targetRotX = 0;
     let isDragging = false;
     let prevX = 0;
     let prevY = 0;
@@ -257,14 +310,14 @@ export const Neural3DCore = () => {
       const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       const y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
 
-      targetX = y * 0.7;
-      targetY = x * 0.7;
+      targetRotY = -0.45 + x * 0.6;
+      targetRotX = y * 0.4;
 
       if (isDragging) {
         const deltaX = e.clientX - prevX;
         const deltaY = e.clientY - prevY;
-        masterGroup.rotation.y += deltaX * 0.01;
-        masterGroup.rotation.x += deltaY * 0.01;
+        mathGroup.rotation.y += deltaX * 0.01;
+        mathGroup.rotation.x += deltaY * 0.01;
         prevX = e.clientX;
         prevY = e.clientY;
       }
@@ -284,7 +337,7 @@ export const Neural3DCore = () => {
     container.addEventListener('pointerdown', handlePointerDown);
     window.addEventListener('pointerup', handlePointerUp);
 
-    // 8. Animation Loop
+    // 9. Animation Loop
     let reqId;
     let frameCount = 0;
     let lastFpsUpdate = performance.now();
@@ -300,62 +353,29 @@ export const Neural3DCore = () => {
         lastFpsUpdate = now;
       }
 
-      // Rotations
-      knotMesh.rotation.x += 0.007;
-      knotMesh.rotation.y += 0.011;
+      // Mathematical harmonic oscillation: partial derivatives undulating slowly
+      const time = now * 0.0015;
+      const positions = planeGeo.attributes.position;
+      for (let i = 0; i < positions.count; i++) {
+        const x = positions.getX(i);
+        const z = positions.getZ(i);
+        const r = Math.sqrt(x * x + z * z);
+        const dynamicY = (0.85 * Math.exp(-(r * r) / 2.2) * Math.cos(2.1 * r + Math.sin(time * 0.6) * 0.2)) +
+                         Math.sin(x * 1.5 + time) * 0.04 - 0.15;
+        positions.setY(i, dynamicY);
+      }
+      positions.needsUpdate = true;
+      planeGeo.computeVertexNormals();
 
-      icoMesh.rotation.y -= 0.0035;
-      icoMesh.rotation.z += 0.0025;
-
-      ring1.rotation.z += 0.004;
-      ring2.rotation.z -= 0.0035;
-
-      // Tensor Core Sinusoidal Pulse
-      const scale = 1 + Math.sin(now * 0.002) * 0.06;
-      knotMesh.scale.set(scale, scale, scale);
+      // Beacon pulsating
+      const beaconScale = 1 + Math.sin(time * 4) * 0.25;
+      beaconMesh.scale.set(beaconScale, beaconScale, beaconScale);
 
       // Parallax smooth interpolation
       if (!isDragging) {
-        masterGroup.rotation.x += (targetX - masterGroup.rotation.x) * 0.05;
-        masterGroup.rotation.y += (targetY - masterGroup.rotation.y) * 0.05;
+        mathGroup.rotation.y += (targetRotY - mathGroup.rotation.y) * 0.05;
+        mathGroup.rotation.x += (targetRotX - mathGroup.rotation.x) * 0.05;
       }
-
-      // Update Synaptic Nodes & Lines
-      const pos = pointsGeo.attributes.position.array;
-      let lineIdx = 0;
-
-      for (let i = 0; i < nodeCount; i++) {
-        pos[i * 3] += nodeVelocities[i].x;
-        pos[i * 3 + 1] += nodeVelocities[i].y;
-        pos[i * 3 + 2] += nodeVelocities[i].z;
-
-        const d = Math.sqrt(pos[i * 3] ** 2 + pos[i * 3 + 1] ** 2 + pos[i * 3 + 2] ** 2);
-        if (d > 2.5 || d < 1.3) {
-          nodeVelocities[i].x *= -1;
-          nodeVelocities[i].y *= -1;
-          nodeVelocities[i].z *= -1;
-        }
-
-        for (let j = i + 1; j < nodeCount; j++) {
-          const dx = pos[i * 3] - pos[j * 3];
-          const dy = pos[i * 3 + 1] - pos[j * 3 + 1];
-          const dz = pos[i * 3 + 2] - pos[j * 3 + 2];
-          const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
-
-          if (dist < maxDistance) {
-            linePositions[lineIdx++] = pos[i * 3];
-            linePositions[lineIdx++] = pos[i * 3 + 1];
-            linePositions[lineIdx++] = pos[i * 3 + 2];
-            linePositions[lineIdx++] = pos[j * 3];
-            linePositions[lineIdx++] = pos[j * 3 + 1];
-            linePositions[lineIdx++] = pos[j * 3 + 2];
-          }
-        }
-      }
-
-      pointsGeo.attributes.position.needsUpdate = true;
-      linesGeo.setDrawRange(0, lineIdx / 3);
-      linesGeo.attributes.position.needsUpdate = true;
 
       renderer.render(scene, camera);
     };
@@ -380,16 +400,18 @@ export const Neural3DCore = () => {
       container.removeEventListener('pointerdown', handlePointerDown);
       window.removeEventListener('pointerup', handlePointerUp);
 
-      knotGeo.dispose();
-      knotMat.dispose();
-      icoGeo.dispose();
-      icoMat.dispose();
-      pointsGeo.dispose();
-      pointsMat.dispose();
-      linesGeo.dispose();
-      linesMat.dispose();
-      ringGeo.dispose();
-      ringMat.dispose();
+      floorGrid.geometry.dispose();
+      planeGeo.dispose();
+      wireMat.dispose();
+      skinMat.dispose();
+      pathGeo.dispose();
+      pathMat.dispose();
+      beadGeo.dispose();
+      beadMat.dispose();
+      beaconGeo.dispose();
+      beaconMat.dispose();
+      dropGeo.dispose();
+      dropMat.dispose();
       renderer.dispose();
 
       if (renderer.domElement && container.contains(renderer.domElement)) {
@@ -399,40 +421,40 @@ export const Neural3DCore = () => {
   }, []);
 
   return (
-    <div className="relative w-full max-w-sm sm:max-w-md lg:max-w-none lg:w-[410px] select-none">
-      {/* 3D Energy Glow Aura */}
+    <div className="relative w-full max-w-sm sm:max-w-md lg:max-w-none lg:w-[420px] select-none">
+      {/* 3D Tech Glow Aura */}
       <div className="absolute inset-0 bg-gradient-to-tr from-red-600/15 via-rose-500/10 to-transparent blur-[80px] rounded-full pointer-events-none" />
 
       {/* Real Three.js Canvas Container */}
       <div 
         ref={mountRef} 
-        className="relative w-full h-[360px] sm:h-[390px] cursor-grab active:cursor-grabbing flex items-center justify-center rounded-2xl touch-none"
-        title="Interactive 3D Neural Tensor: Click and drag to inspect 3D geometry"
+        className="relative w-full h-[360px] sm:h-[400px] cursor-grab active:cursor-grabbing flex items-center justify-center rounded-2xl touch-none"
+        title="Interactive 3D Loss Manifold: Drag to inspect mathematical surface and gradient descent path"
       />
 
-      {/* ── High-End Senior Developer HUD Overlays ── */}
-      {/* Top Telemetry Bar */}
+      {/* ── Mathematical Architecture HUD Overlays ── */}
+      {/* Top Telemetry Header */}
       <div className="absolute top-2 left-2 right-2 flex items-center justify-between px-3 py-1.5 rounded-xl bg-slate-950/85 border border-slate-800/80 backdrop-blur-md text-[10px] font-mono text-slate-300 pointer-events-none shadow-lg">
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-          <span className="font-bold text-white tracking-wider">3D_TENSOR.GL</span>
+          <span className="font-bold text-white tracking-wider">3D_LOSS_MANIFOLD</span>
         </div>
         <div className="flex items-center gap-3 text-slate-400">
-          <span>NODES: <strong className="text-red-400">58</strong></span>
-          <span>SYNAPSES: <strong className="text-emerald-400">ACTIVE</strong></span>
+          <span>DIM: <strong className="text-red-400">ℝ² → ℝ</strong></span>
+          <span>GRADIENT: <strong className="text-emerald-400">CONVERGED</strong></span>
           <span className="text-emerald-400 font-bold bg-emerald-950/40 px-1.5 py-0.5 rounded border border-emerald-500/30">
             {fps} FPS
           </span>
         </div>
       </div>
 
-      {/* Floating Mathematical Formula Pills */}
+      {/* Floating Mathematical Equations */}
       <motion.div 
         animate={{ y: [0, -6, 0] }}
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
         className="absolute top-14 -left-2 px-3 py-1 rounded-full bg-slate-950/90 border border-red-500/40 text-[10px] font-mono text-red-300 font-bold shadow-xl backdrop-blur-md pointer-events-none flex items-center gap-1.5"
       >
-        <span className="text-red-500">λ</span> Softmax(QKᵀ / √d_k)
+        <span className="text-red-500">∇</span> L(θ) = 𝔼[log p(x|θ)]
       </motion.div>
 
       <motion.div 
@@ -441,7 +463,7 @@ export const Neural3DCore = () => {
         className="absolute top-24 -right-2 px-3 py-1 rounded-full bg-slate-950/90 border border-emerald-500/40 text-[10px] font-mono text-emerald-300 font-bold shadow-xl backdrop-blur-md pointer-events-none flex items-center gap-1.5"
       >
         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-        ∇L_θ · AdamW (lr=3e-4)
+        θ* = argmin L(θ) · (loss: 0.0014)
       </motion.div>
 
       {/* Interactive Micro-Terminal Card */}
@@ -449,15 +471,15 @@ export const Neural3DCore = () => {
         <div className="flex items-center justify-between pb-1.5 mb-1.5 border-b border-slate-800/80 text-[9px] text-slate-400">
           <span className="flex items-center gap-1.5 text-red-400 font-bold">
             <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-            AI_CORE // WEBGL_ACCELERATED
+            CARTESIAN_MANIFOLD // ℝ³
           </span>
-          <span className="text-slate-400">Interactive 3D Parallax</span>
+          <span className="text-slate-400">Axes: [X, Y, Z]</span>
         </div>
-        <div className="text-red-400 font-semibold truncate">// Multi-Head Synaptic Contraction</div>
-        <div className="text-slate-400 truncate">const tensor = new TensorCore(&#123; dim: 1536, heads: 24 &#125;);</div>
+        <div className="text-red-400 font-semibold truncate">// Gradient Descent Path: η = 0.001</div>
+        <div className="text-slate-400 truncate">Hessian Matrix: ∇²L(θ*) ≻ 0 (Strict Local Minimum)</div>
         <div className="flex items-center justify-between mt-1 text-[9px]">
-          <span className="text-emerald-400 font-bold">✓ Zero-Trust Hardware Isolation</span>
-          <span className="text-slate-400 italic">Drag to rotate 3D</span>
+          <span className="text-emerald-400 font-bold">✓ Convex Optimization Verified</span>
+          <span className="text-slate-400 italic">Drag to rotate 3D view</span>
         </div>
       </div>
     </div>
@@ -501,9 +523,9 @@ export const Hero = () => {
           {/* ── Content area ── */}
           <motion.div variants={stagger} initial="hidden" animate="show" className="pt-4 relative">
             
-            {/* ── Senior 3D WebGL Neural Tensor Hologram Engine ── */}
-            <div className="lg:absolute lg:-right-10 xl:-right-16 lg:top-12 xl:top-14 w-full max-w-sm sm:max-w-md mx-auto lg:mx-0 lg:w-[410px] mt-12 lg:mt-0 z-20">
-              <Neural3DCore />
+            {/* ── Senior 3D Mathematical Optimization Manifold (Cartesian Loss Surface & Gradient Descent) ── */}
+            <div className="lg:absolute lg:-right-10 xl:-right-16 lg:top-12 xl:top-14 w-full max-w-sm sm:max-w-md mx-auto lg:mx-0 lg:w-[420px] mt-12 lg:mt-0 z-20">
+              <MathSurface3D />
             </div>
 
             <motion.div variants={fadeUp} className="flex items-center gap-3 mb-5">
