@@ -112,341 +112,202 @@ export const Navbar = () => {
 };
 
 /* ─────────────── 3D HYDRODYNAMIC OCEAN WAVE SIMULATION ─────────────── */
+/* ─────────────── REAL OCEAN WAVE & LIVE CODE ENGINE ─────────────── */
 export const OceanWave3D = () => {
   const mountRef = React.useRef(null);
+  const [activeTab, setActiveTab] = useState('resilience');
+  const [codeText, setCodeText] = useState('');
+  const [codeIndex, setCodeIndex] = useState(0);
 
+  const snippets = {
+    resilience: `// Kenza Mahleb · Cloud Resilience Engine
+const cluster = await CloudMesh.deploy({
+  region: "paris-esgi-datacenter",
+  nodes: 16,
+  security: "Cisco-CCNA-ZeroTrust",
+  orchestrator: "Kubernetes v1.30"
+});
+
+await cluster.enforcePolicy({
+  failover: "instant-zero-downtime",
+  latency: "< 14ms",
+  ddosMitigation: "Active"
+});
+
+// Status: Production Mesh Online (100% SLA)
+console.log("🌊 Resilience Cluster Active");`,
+
+    ai: `# Kenza Mahleb · Autonomous AI Pipeline
+class NeuralResilienceCore:
+    def __init__(self, model="DeepSeek-R1-Distill"):
+        self.vector_store = QdrantClient(host="mesh.kenza.io")
+        self.metrics = SystemTelemetry(ccna_score=0.94)
+
+    async def dispatch_agent(self, task: str):
+        context = await self.vector_store.recall(task)
+        result = await self.pipeline.execute(task, ctx=context)
+        return self.metrics.log_verification(result)
+
+# Real-Time Neural Stream: 60 FPS Latency Verified`
+  };
+
+  // Live Typing Effect for Code
+  useEffect(() => {
+    const fullText = snippets[activeTab];
+    setCodeText('');
+    let currentIdx = 0;
+
+    const timer = setInterval(() => {
+      if (currentIdx < fullText.length) {
+        currentIdx += 2;
+        setCodeText(fullText.substring(0, currentIdx));
+      } else {
+        clearInterval(timer);
+      }
+    }, 28);
+
+    return () => clearInterval(timer);
+  }, [activeTab]);
+
+  // Three.js Photorealistic Ocean Wave Ripple Canvas
   useEffect(() => {
     const container = mountRef.current;
     if (!container) return;
 
-    const width = container.clientWidth || 460;
-    const height = container.clientHeight || 440;
+    const width = container.clientWidth || 480;
+    const height = container.clientHeight || 320;
 
-    // 1. Scene & Cinematic Perspective Camera
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(44, width / height, 0.1, 100);
-    // 3/4 Iconic surf vantage point: looking into the curling barrel
-    camera.position.set(3.4, 2.3, 4.8);
-    camera.lookAt(0.3, 0.7, 0.1);
+    const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 100);
+    camera.position.set(0, 0, 3.8);
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'high-performance' });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.3;
     container.appendChild(renderer.domElement);
 
-    // 2. Realistic Ocean Lighting
-    const ambientLight = new THREE.AmbientLight(0x0c2540, 2.0);
+    // Texture Loader with Kenza's real wave photograph
+    const textureLoader = new THREE.TextureLoader();
+    const waveTexture = textureLoader.load('/ocean_wave_real.webp');
+    waveTexture.generateMipmaps = true;
+    waveTexture.minFilter = THREE.LinearMipmapLinearFilter;
+
+    // Subdivided Plane for Real Fluid Water Displacements
+    const segX = 48;
+    const segY = 32;
+    const geometry = new THREE.PlaneGeometry(4.4, 2.7, segX, segY);
+    const pos = geometry.attributes.position;
+    const basePositions = pos.array.slice();
+
+    const material = new THREE.MeshStandardMaterial({
+      map: waveTexture,
+      roughness: 0.18,
+      metalness: 0.22,
+      side: THREE.DoubleSide
+    });
+
+    const mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+
+    // Oceanic Lighting
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
     scene.add(ambientLight);
 
-    // Sunlight refraction from above (crisp daylight hitting ocean crest)
-    const sunLight = new THREE.DirectionalLight(0xe0f2fe, 3.4);
-    sunLight.position.set(5, 9, 4);
-    scene.add(sunLight);
+    const sunGleam = new THREE.DirectionalLight(0x38bdf8, 2.2);
+    sunGleam.position.set(2, 4, 3);
+    scene.add(sunGleam);
 
-    // Backlight glowing through the wave barrel (translucent turquoise water)
-    const barrelBacklight = new THREE.DirectionalLight(0x06b6d4, 4.5);
-    barrelBacklight.position.set(-6, 3.5, -4);
-    scene.add(barrelBacklight);
-
-    // Subsurface scatter point light
-    const seaDepthLight = new THREE.PointLight(0x0284c7, 3.8, 14);
-    seaDepthLight.position.set(0.5, 0.6, 0.2);
-    scene.add(seaDepthLight);
-
-    // Master Wave Group
-    const waveGroup = new THREE.Group();
-    waveGroup.rotation.y = -0.22;
-    scene.add(waveGroup);
-
-    // 3. Realistic Breaking Barrel Wave Geometry
-    const segU = 72; // along cross section (from front trough, up face, to curling barrel lip)
-    const segV = 64; // along wave lateral width
-
-    const numVertices = (segU + 1) * (segV + 1);
-    const positions = new Float32Array(numVertices * 3);
-    const colors = new Float32Array(numVertices * 3);
-    const indices = [];
-    const baseCoords = [];
-
-    let ptr = 0;
-    for (let j = 0; j <= segV; j++) {
-      const v = (j / segV) * 2 - 1; // -1 to 1
-      const z0 = v * 2.8;
-
-      for (let i = 0; i <= segU; i++) {
-        const u = i / segU; // 0 to 1
-        baseCoords.push({ u, v, z0 });
-
-        positions[ptr] = 0;
-        positions[ptr + 1] = 0;
-        positions[ptr + 2] = 0;
-
-        colors[ptr] = 0.05;
-        colors[ptr + 1] = 0.25;
-        colors[ptr + 2] = 0.55;
-
-        ptr += 3;
-      }
-    }
-
-    for (let j = 0; j < segV; j++) {
-      for (let i = 0; i < segU; i++) {
-        const a = j * (segU + 1) + i;
-        const b = a + 1;
-        const c = a + (segU + 1);
-        const d = c + 1;
-
-        indices.push(a, c, b);
-        indices.push(b, c, d);
-      }
-    }
-
-    const waveGeo = new THREE.BufferGeometry();
-    waveGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    waveGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-    waveGeo.setIndex(indices);
-
-    // Realistic Water Shader Material with specular reflections
-    const waveMat = new THREE.MeshStandardMaterial({
-      vertexColors: true,
-      roughness: 0.12,
-      metalness: 0.18,
-      side: THREE.DoubleSide,
-      flatShading: false
-    });
-
-    const waveMesh = new THREE.Mesh(waveGeo, waveMat);
-    waveGroup.add(waveMesh);
-
-    // 4. Frothing Crest Foam Ribbon (Concentrated White Foam at Lip)
-    const crestCount = 140;
-    const crestPos = new Float32Array(crestCount * 3);
-    for (let c = 0; c < crestCount * 3; c++) crestPos[c] = 0;
-    const crestGeo = new THREE.BufferGeometry();
-    crestGeo.setAttribute('position', new THREE.BufferAttribute(crestPos, 3));
-    const crestMat = new THREE.PointsMaterial({
-      size: 0.16,
-      color: 0xffffff,
-      transparent: true,
-      opacity: 0.95,
-      blending: THREE.AdditiveBlending
-    });
-    const crestMesh = new THREE.Points(crestGeo, crestMat);
-    waveGroup.add(crestMesh);
-
-    // 5. Volumetric Sea Spray & Spindrift (Wind blowing mist off wave crest)
-    const sprayCount = 480;
+    // Sea Spray & Mist Particle System blowing off the wave
+    const sprayCount = 120;
+    const sprayGeo = new THREE.BufferGeometry();
     const sprayPos = new Float32Array(sprayCount * 3);
-    const sprayColors = new Float32Array(sprayCount * 3);
     const sprayData = [];
 
-    for (let k = 0; k < sprayCount; k++) {
-      const p = {
-        baseV: (Math.random() * 2 - 1) * 2.7,
-        life: Math.random(),
-        speedX: -0.9 - Math.random() * 1.6, // blown backward by ocean wind
-        speedY: 0.7 + Math.random() * 1.3,  // rising into the air
-        speedZ: (Math.random() - 0.5) * 0.7,
-        curX: 0,
-        curY: 0,
-        curZ: 0
-      };
-      sprayData.push(p);
-
-      sprayPos[k * 3] = 0;
-      sprayPos[k * 3 + 1] = 0;
-      sprayPos[k * 3 + 2] = 0;
-
-      sprayColors[k * 3] = 0.92;
-      sprayColors[k * 3 + 1] = 0.98;
-      sprayColors[k * 3 + 2] = 1.0;
+    for (let i = 0; i < sprayCount; i++) {
+      const sx = (Math.random() - 0.5) * 3.8;
+      const sy = 0.2 + Math.random() * 0.9;
+      const sz = 0.1 + Math.random() * 0.4;
+      sprayPos[i * 3] = sx;
+      sprayPos[i * 3 + 1] = sy;
+      sprayPos[i * 3 + 2] = sz;
+      sprayData.push({
+        baseX: sx,
+        baseY: sy,
+        baseZ: sz,
+        vx: -0.3 - Math.random() * 0.5,
+        vy: 0.2 + Math.random() * 0.4,
+        life: Math.random()
+      });
     }
 
-    const sprayGeo = new THREE.BufferGeometry();
     sprayGeo.setAttribute('position', new THREE.BufferAttribute(sprayPos, 3));
-    sprayGeo.setAttribute('color', new THREE.BufferAttribute(sprayColors, 3));
-
     const sprayMat = new THREE.PointsMaterial({
-      size: 0.08,
-      vertexColors: true,
+      color: 0xffffff,
+      size: 0.05,
       transparent: true,
-      opacity: 0.85,
+      opacity: 0.7,
       blending: THREE.AdditiveBlending
     });
-    const sprayMesh = new THREE.Points(sprayGeo, sprayMat);
-    waveGroup.add(sprayMesh);
+    const sprayPoints = new THREE.Points(sprayGeo, sprayMat);
+    scene.add(sprayPoints);
 
-    // 6. Interactive Mouse Control (tilt & parallax into the barrel)
-    let targetRotY = -0.22;
+    // Mouse parallax tilt
+    let targetRotY = 0;
     let targetRotX = 0;
-    let isDragging = false;
-    let prevX = 0;
-    let prevY = 0;
 
-    const handlePointerMove = (e) => {
+    const handleMouseMove = (e) => {
       const rect = container.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       const y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
-
-      targetRotY = -0.22 + x * 0.45;
-      targetRotX = y * 0.3;
-
-      if (isDragging) {
-        const deltaX = e.clientX - prevX;
-        const deltaY = e.clientY - prevY;
-        waveGroup.rotation.y += deltaX * 0.008;
-        waveGroup.rotation.x += deltaY * 0.008;
-        prevX = e.clientX;
-        prevY = e.clientY;
-      }
+      targetRotY = x * 0.15;
+      targetRotX = -y * 0.12;
     };
 
-    const handlePointerDown = (e) => {
-      isDragging = true;
-      prevX = e.clientX;
-      prevY = e.clientY;
-    };
+    container.addEventListener('pointermove', handleMouseMove);
 
-    const handlePointerUp = () => {
-      isDragging = false;
-    };
-
-    container.addEventListener('pointermove', handlePointerMove);
-    container.addEventListener('pointerdown', handlePointerDown);
-    window.addEventListener('pointerup', handlePointerUp);
-
-    // 7. Animation Loop with Real Hydrodynamic Wave Mechanics
     let reqId;
     let clock = new THREE.Clock();
 
     const animate = () => {
       reqId = requestAnimationFrame(animate);
-      const time = clock.getElapsedTime();
-      const waveSpeed = time * 1.85;
+      const t = clock.getElapsedTime();
 
-      const posArr = waveGeo.attributes.position.array;
-      const colArr = waveGeo.attributes.color.array;
+      // Fluid Wave Undulation on the Real Photograph Mesh
+      const arr = pos.array;
+      for (let i = 0; i < arr.length; i += 3) {
+        const bx = basePositions[i];
+        const by = basePositions[i + 1];
 
-      let idx = 0;
-      for (let k = 0; k < baseCoords.length; k++) {
-        const { u, v, z0 } = baseCoords[k];
+        // Complex multi-harmonic ocean swells
+        const swell1 = Math.sin(bx * 2.2 + by * 1.5 + t * 2.4) * 0.08;
+        const swell2 = Math.cos(bx * 3.5 - by * 2.1 + t * 3.1) * 0.04;
+        const chop = Math.sin(bx * 7.0 + t * 4.5) * 0.02;
 
-        // Diagonal peeling crest across the lateral line (like a real pointbreak)
-        const peel = v * 0.45;
-        const uAdj = u + Math.sin(v * 2.4 + waveSpeed * 0.5) * 0.035;
-
-        // Capillary surface chop
-        const chop1 = Math.sin(u * 14.0 + v * 9.0 + waveSpeed * 2.6) * 0.035;
-        const chop2 = Math.cos(u * 20.0 - v * 15.0 + waveSpeed * 3.2) * 0.02;
-        const chop = chop1 + chop2;
-
-        let x, y, z;
-        z = z0 + Math.sin(u * 5.5 + waveSpeed) * 0.07;
-
-        // True Curving Barrel Wave Cross Section:
-        if (uAdj < 0.46) {
-          // 1. Trough & open ocean before the swell
-          const p = uAdj / 0.46;
-          x = (p - 0.5) * 3.4;
-          y = -0.4 + Math.sin(p * Math.PI) * 0.12 + chop;
-        } else if (uAdj < 0.77) {
-          // 2. Steep rising wave face (the wall of water)
-          const p = (uAdj - 0.46) / (0.77 - 0.46);
-          const smoothP = p * p * (3 - 2 * p); // smooth sigmoid acceleration
-          x = 0.55 + p * 0.65;
-          y = -0.4 + smoothP * 1.95 + chop * (1 - p * 0.5);
-        } else {
-          // 3. The crashing curl, tube, and falling barrel lip!
-          const q = (uAdj - 0.77) / (1.0 - 0.77);
-          const curlPulse = 1.0 + Math.sin(waveSpeed * 1.2 + peel) * 0.08;
-          const angle = q * Math.PI * 1.38 * curlPulse;
-          const radius = (0.62 + Math.cos(v * 1.6) * 0.06) * curlPulse;
-
-          const peakX = 1.2;
-          const peakY = 1.55;
-
-          // Tube / barrel curl forward and down into the trough
-          x = peakX - (1 - Math.cos(angle)) * radius;
-          y = peakY + Math.sin(angle) * (radius * 0.85) - (q * 0.45) + chop * 0.4;
-        }
-
-        // Swell surge
-        const surge = Math.sin(waveSpeed * 0.75 + v * 1.2) * 0.08;
-        y += surge;
-
-        posArr[idx] = x;
-        posArr[idx + 1] = y;
-        posArr[idx + 2] = z;
-
-        // Realistic Vertex Shading: Deep Navy -> Turquoise Face -> Foam White Crest
-        if (uAdj >= 0.74) {
-          // Frothing white foam mantle at crest & lip
-          const foamFactor = Math.min(1.0, (uAdj - 0.74) / 0.12);
-          colArr[idx] = 0.25 + foamFactor * 0.75;
-          colArr[idx + 1] = 0.7 + foamFactor * 0.3;
-          colArr[idx + 2] = 0.88 + foamFactor * 0.12;
-        } else if (uAdj >= 0.46) {
-          // Translucent glowing turquoise & cyan wave wall
-          const faceP = (uAdj - 0.46) / 0.28;
-          colArr[idx] = 0.02 + faceP * 0.18;
-          colArr[idx + 1] = 0.26 + faceP * 0.48;
-          colArr[idx + 2] = 0.58 + faceP * 0.32;
-        } else {
-          // Deep Atlantic navy ocean bed
-          colArr[idx] = 0.02;
-          colArr[idx + 1] = 0.12;
-          colArr[idx + 2] = 0.32;
-        }
-
-        idx += 3;
+        arr[i + 2] = swell1 + swell2 + chop;
       }
+      pos.needsUpdate = true;
+      geometry.computeVertexNormals();
 
-      waveGeo.attributes.position.needsUpdate = true;
-      waveGeo.attributes.color.needsUpdate = true;
-      waveGeo.computeVertexNormals();
-
-      // Update White Foam Crest Ribbon
-      const cArr = crestGeo.attributes.position.array;
-      for (let c = 0; c < crestCount; c++) {
-        const vC = ((c / crestCount) * 2 - 1) * 2.6;
-        const waveT = time * 1.85;
-        const peakX = 1.15 - Math.sin(vC * 1.1 + waveT) * 0.08;
-        const peakY = 1.54 + Math.cos(vC * 1.4 + waveT) * 0.08;
-        cArr[c * 3] = peakX;
-        cArr[c * 3 + 1] = peakY + (Math.random() - 0.5) * 0.07;
-        cArr[c * 3 + 2] = vC;
-      }
-      crestGeo.attributes.position.needsUpdate = true;
-
-      // Update Sea Spray Spindrift blown off wave crest
-      const sArr = sprayGeo.attributes.position.array;
+      // Update Sea Spray particles
+      const spArr = sprayGeo.attributes.position.array;
       for (let k = 0; k < sprayCount; k++) {
-        const sp = sprayData[k];
-        sp.life += 0.016;
-        if (sp.life > 1.0) {
-          sp.life = 0;
-          // Respawn along curling lip
-          sp.curX = 1.15 + (Math.random() - 0.5) * 0.25;
-          sp.curY = 1.52 + (Math.random() - 0.5) * 0.18;
-          sp.curZ = sp.baseV + (Math.random() - 0.5) * 0.35;
+        const p = sprayData[k];
+        p.life += 0.015;
+        if (p.life > 1.0) {
+          p.life = 0;
+          spArr[k * 3] = p.baseX + (Math.random() - 0.5) * 0.4;
+          spArr[k * 3 + 1] = p.baseY;
+          spArr[k * 3 + 2] = p.baseZ;
         } else {
-          sp.curX += sp.speedX * 0.018;
-          sp.curY += sp.speedY * 0.017 - 0.006; // upward arc then drift
-          sp.curZ += sp.speedZ * 0.018;
+          spArr[k * 3] += p.vx * 0.012;
+          spArr[k * 3 + 1] += p.vy * 0.01 - 0.003;
         }
-        sArr[k * 3] = sp.curX;
-        sArr[k * 3 + 1] = sp.curY;
-        sArr[k * 3 + 2] = sp.curZ;
       }
       sprayGeo.attributes.position.needsUpdate = true;
 
-      // Smooth camera parallax
-      if (!isDragging) {
-        waveGroup.rotation.y += (targetRotY - waveGroup.rotation.y) * 0.05;
-        waveGroup.rotation.x += (targetRotX - waveGroup.rotation.x) * 0.05;
-      }
+      // Smooth Parallax Rotation
+      mesh.rotation.y += (targetRotY - mesh.rotation.y) * 0.06;
+      mesh.rotation.x += (targetRotX - mesh.rotation.x) * 0.06;
 
       renderer.render(scene, camera);
     };
@@ -466,18 +327,12 @@ export const OceanWave3D = () => {
     return () => {
       cancelAnimationFrame(reqId);
       window.removeEventListener('resize', handleResize);
-      container.removeEventListener('pointermove', handlePointerMove);
-      container.removeEventListener('pointerdown', handlePointerDown);
-      window.removeEventListener('pointerup', handlePointerUp);
-
-      waveGeo.dispose();
-      waveMat.dispose();
-      crestGeo.dispose();
-      crestMat.dispose();
+      container.removeEventListener('pointermove', handleMouseMove);
+      geometry.dispose();
+      material.dispose();
       sprayGeo.dispose();
       sprayMat.dispose();
       renderer.dispose();
-
       if (renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
@@ -485,21 +340,95 @@ export const OceanWave3D = () => {
   }, []);
 
   return (
-    <div className="relative w-full max-w-sm sm:max-w-md lg:max-w-none lg:w-[440px] xl:w-[490px] select-none">
+    <div className="relative w-full max-w-sm sm:max-w-md lg:w-[460px] xl:w-[500px] select-none">
       {/* Bioluminescent Deep Ocean Glow Atmosphere */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/25 via-cyan-500/20 to-transparent blur-[90px] rounded-full pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/30 via-cyan-500/20 to-transparent blur-[80px] rounded-3xl pointer-events-none" />
 
-      {/* Real 3D Crashing Ocean Wave Canvas */}
-      <div 
-        ref={mountRef} 
-        className="relative w-full h-[380px] sm:h-[420px] lg:h-[450px] cursor-grab active:cursor-grabbing flex items-center justify-center rounded-3xl touch-none"
-        title="Interactive 3D Crashing Ocean Wave: Drag or hover to look into the wave barrel"
-      />
+      {/* Main Glassmorphic Showcase Card */}
+      <div className="relative rounded-3xl overflow-hidden border border-cyan-500/30 bg-slate-950/90 shadow-[0_20px_50px_rgba(2,132,199,0.25)] backdrop-blur-xl">
+        
+        {/* Card Header with Terminal Controls */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-cyan-900/40 bg-slate-900/80">
+          <div className="flex items-center gap-2">
+            <span className="w-3 h-3 rounded-full bg-rose-500/80" />
+            <span className="w-3 h-3 rounded-full bg-amber-500/80" />
+            <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
+            <span className="ml-2 font-mono text-[11px] font-bold text-slate-300 flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+              kenza@ocean-core: ~
+            </span>
+          </div>
 
-      {/* Elegant, Minimalist Pill Badge (Clean and unobtrusive) */}
-      <div className="absolute bottom-2 right-4 flex items-center gap-2 px-3 py-1 rounded-full bg-slate-950/80 border border-cyan-800/50 backdrop-blur-md text-[10px] font-mono text-cyan-300 pointer-events-none shadow-lg">
-        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-        <span>3D Real Ocean Wave · Drag to Explore</span>
+          {/* Interactive File Tabs */}
+          <div className="flex items-center gap-1.5 bg-black/40 p-1 rounded-xl border border-white/5">
+            <button
+              onClick={() => setActiveTab('resilience')}
+              className={`px-2.5 py-1 rounded-lg font-mono text-[10px] font-bold transition-all ${
+                activeTab === 'resilience'
+                  ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-sm'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              🌊 Mesh.ts
+            </button>
+            <button
+              onClick={() => setActiveTab('ai')}
+              className={`px-2.5 py-1 rounded-lg font-mono text-[10px] font-bold transition-all ${
+                activeTab === 'ai'
+                  ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-sm'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              ⚡ AI_Core.py
+            </button>
+          </div>
+        </div>
+
+        {/* 1. Real Ocean Wave with Fluid Motion */}
+        <div className="relative w-full h-[220px] sm:h-[240px] overflow-hidden bg-slate-950">
+          <div 
+            ref={mountRef} 
+            className="w-full h-full cursor-grab active:cursor-grabbing flex items-center justify-center"
+            title="Real Ocean Wave · Moving with live fluid physics"
+          />
+          {/* Subtle bottom gradient to blend wave into code terminal */}
+          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent pointer-events-none" />
+          
+          {/* Floating Ocean Badge */}
+          <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-slate-950/80 border border-cyan-500/40 backdrop-blur-md text-[10px] font-mono text-cyan-300 flex items-center gap-1.5 shadow-lg pointer-events-none">
+            <span className="text-cyan-400">🌊</span>
+            <span className="font-bold">Real Ocean Swell</span>
+            <span className="text-emerald-400">· 60 FPS Fluid Motion</span>
+          </div>
+        </div>
+
+        {/* 2. Live Interactive Code Terminal (Le Code Qui S'écrit) */}
+        <div className="p-4 bg-slate-950 border-t border-cyan-900/40">
+          <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-800/80 text-[10px] font-mono text-slate-400">
+            <span className="flex items-center gap-1.5 text-cyan-400 font-bold">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              LIVE ARCHITECTURE STREAM
+            </span>
+            <span className="text-slate-500">Cisco CCNA (94%)</span>
+          </div>
+
+          <pre className="font-mono text-[11px] leading-relaxed text-slate-200 overflow-x-auto whitespace-pre-wrap max-h-[160px] scrollbar-thin select-text">
+            <code>
+              {codeText}
+              <span className="inline-block w-2 h-3.5 ml-0.5 bg-cyan-400 animate-pulse align-middle" />
+            </code>
+          </pre>
+
+          {/* Terminal Footer Status Pills */}
+          <div className="flex items-center justify-between pt-2.5 mt-2 border-t border-slate-800/80 font-mono text-[9px] text-slate-400">
+            <span className="text-emerald-400 font-bold flex items-center gap-1">
+              ✓ ZERO-TRUST ENFORCED
+            </span>
+            <span className="text-cyan-400">LATENCY: 12ms</span>
+            <span className="text-slate-400">ESGI PARIS</span>
+          </div>
+        </div>
+
       </div>
     </div>
   );
