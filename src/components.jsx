@@ -448,9 +448,9 @@ export const Hero = () => {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,var(--neon-blue),transparent_50%)]" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
+      <div className="w-full max-w-[1700px] mx-auto px-6 sm:px-8 lg:px-10 xl:px-12 relative z-10">
         {/* ── 3-Column Clean Responsive Grid: [Photo] [Text] [3D Wave] ── */}
-        <div className="grid lg:grid-cols-[auto_1fr_auto] gap-8 xl:gap-10 items-center">
+        <div className="grid lg:grid-cols-[auto_1fr_auto] gap-6 lg:gap-8 xl:gap-12 items-center justify-between w-full">
           
           {/* ── 1. Profile Photo Card (Left) ── */}
           <motion.div 
@@ -552,7 +552,7 @@ export const Hero = () => {
           </motion.div>
 
           {/* ── 3. 3D Hydrodynamic Ocean Wave Simulation (Right Column — Completely Separate) ── */}
-          <div className="w-full max-w-sm sm:max-w-md lg:w-[340px] xl:w-[390px] flex-shrink-0 mx-auto lg:mx-0 mt-8 lg:mt-0 z-10">
+          <div className="w-full max-w-sm sm:max-w-md lg:w-[390px] xl:w-[450px] 2xl:w-[490px] flex-shrink-0 ml-auto justify-self-end mt-8 lg:mt-0 z-10 lg:translate-x-3 xl:translate-x-6">
             <OceanWave3D />
           </div>
 
