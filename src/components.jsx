@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import * as THREE from 'three';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Github, Linkedin, Mail, ArrowRight, Code2, Shield, Cpu, Cloud, Menu, X, FileText, Download, Server, Terminal, Network, ShieldCheck, Sparkles, Activity } from 'lucide-react';
@@ -533,8 +533,8 @@ export const Hero = () => {
             {/* ── Heading: Refined font-weight and clear line spacing ── */}
             <motion.h1 
               variants={fadeUp} 
-              className="font-heading font-bold tracking-tight mb-3 text-slate-900" 
-              style={{ fontSize: 'clamp(1.75rem, 3.2vw, 2.75rem)', lineHeight: 1.15 }}
+              className="font-heading font-black tracking-tight mb-3 text-slate-900" 
+              style={{ fontSize: 'clamp(2.6rem, 5vw, 4.2rem)', lineHeight: 1.08 }}
             >
               KENZA MAHLEB<br />
               <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-900 via-sky-600 to-cyan-400">
