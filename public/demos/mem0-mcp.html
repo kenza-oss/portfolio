@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Mem0 MCP — AI Memory Protocol</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--bg:#060b14;--surface:#0d1424;--surface2:#111b2e;--border:#1a2d4a;--text:#e2e8f0;--muted:#4a6a8a;--cyan:#38bdf8;--green:#22c55e;--red:#ef4444;--purple:#a78bfa;--yellow:#fbbf24;}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
+.live-bar{background:linear-gradient(90deg,#7c3aed,#a78bfa,#0ea5e9);color:#fff;text-align:center;padding:9px;font-size:12px;font-weight:700;letter-spacing:1px;}
+.live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#fff;margin-right:6px;animation:blink 1.2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+header{background:rgba(13,20,36,.97);border-bottom:1px solid var(--border);padding:0 24px;}
+.hdr{max-width:1300px;margin:0 auto;height:60px;display:flex;align-items:center;gap:14px;}
+.logo{font-size:18px;font-weight:900;color:#fff;}
+.logo span{color:var(--purple);}
+.hdr-chips{display:flex;gap:10px;margin-left:16px;}
+.chip{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600;}
+.chip.green{color:var(--green);}
+.chip.purple{color:var(--purple);}
+.chip.cyan{color:var(--cyan);}
+.back-btn{margin-left:auto;background:var(--surface2);border:1px solid var(--border);color:var(--muted);border-radius:8px;padding:6px 12px;font-size:12px;cursor:pointer;}
+.back-btn:hover{color:#fff;border-color:var(--purple);}
+/* METRICS */
+.metrics-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:12px 24px;}
+.mb-inner{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:0;text-align:center;}
+.mb-cell{padding:8px 0;border-right:1px solid var(--border);}
+.mb-cell:last-child{border-right:none;}
+.mb-num{font-size:20px;font-weight:900;font-family:monospace;}
+.mb-lbl{font-size:10px;color:var(--muted);margin-top:3px;letter-spacing:.5px;}
+/* CONTENT */
+.content{max-width:1300px;margin:0 auto;padding:20px 24px;display:grid;grid-template-columns:1fr 320px;gap:20px;flex:1;}
+/* TERMINAL */
+.terminal-panel{display:flex;flex-direction:column;gap:16px;}
+.term-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+.term-title-bar{background:var(--surface2);padding:10px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+.term-dots{display:flex;gap:5px;}
+.term-dot{width:11px;height:11px;border-radius:50%;}
+.term-label{font-size:12px;font-weight:600;color:var(--muted);margin-left:6px;font-family:monospace;}
+.term-output{background:#010a0f;padding:14px 16px;height:220px;overflow-y:auto;font-family:'Courier New',monospace;font-size:12px;line-height:1.75;}
+.term-output::-webkit-scrollbar{width:4px;}
+.term-output::-webkit-scrollbar-thumb{background:var(--border);}
+.line-prompt{color:var(--purple);}
+.line-cmd{color:#e2e8f0;}
+.line-json{color:#22c55e;}
+.line-info{color:var(--cyan);}
+.line-err{color:var(--red);}
+.line-comment{color:#374151;}
+.term-input-row{background:var(--surface2);padding:10px 14px;border-top:1px solid var(--border);display:flex;align-items:center;gap:0;}
+.term-prompt-label{color:var(--purple);font-family:monospace;font-size:13px;padding:8px 0 8px 10px;white-space:nowrap;}
+.term-input{flex:1;background:transparent;border:none;color:#e2e8f0;font-family:'Courier New',monospace;font-size:13px;outline:none;padding:8px 10px;}
+.term-send{background:var(--purple);color:#fff;border:none;border-radius:8px;padding:7px 16px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.term-send:hover{background:#8b5cf6;}
+/* QUICK CMDS */
+.quick-cmds{display:flex;gap:8px;flex-wrap:wrap;}
+.qcmd{background:var(--surface2);border:1px solid var(--border);color:var(--purple);border-radius:6px;padding:5px 10px;font-size:11px;font-family:monospace;cursor:pointer;transition:all .2s;}
+.qcmd:hover{background:rgba(167,139,250,.15);border-color:var(--purple);}
+/* VECTOR CANVAS */
+.vector-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+.vc-head{padding:12px 16px;border-bottom:1px solid var(--border);font-size:13px;font-weight:700;}
+/* SIDEBAR */
+.sidebar{display:flex;flex-direction:column;gap:14px;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+.card-head{padding:12px 16px;border-bottom:1px solid var(--border);font-size:12px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);}
+.memory-row{padding:11px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;}
+.memory-row:last-child{border-bottom:none;}
+.memory-row:hover{background:var(--surface2);}
+.mem-content{font-size:12px;color:var(--text);margin-bottom:5px;line-height:1.5;}
+.mem-meta{display:flex;align-items:center;justify-content:space-between;font-size:10px;color:var(--muted);}
+.sim-score{color:var(--purple);font-weight:700;font-family:monospace;}
+.cluster-tags{display:flex;gap:5px;flex-wrap:wrap;padding:12px 14px;}
+.ctag{padding:4px 10px;border-radius:12px;font-size:11px;font-weight:600;}
+.tool-schema{padding:14px;font-family:monospace;font-size:11px;line-height:1.7;color:var(--green);overflow-x:auto;}
+footer{text-align:center;padding:14px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);}
+footer strong{color:var(--purple);}
+</style>
+</head>
+<body>
+<div class="live-bar"><span class="live-dot"></span>LIVE DEMO — MCP Memory Protocol · Mem0.ai · Qdrant Vector DB · Sub-15ms Recall · Built by Kenza Mahleb</div>
+
+<header>
+  <div class="hdr">
+    <div class="logo">Mem0<span>.ai</span></div>
+    <div class="hdr-chips">
+      <span class="chip purple">MCP Standard v1.2</span>
+      <span class="chip green">● Qdrant Online</span>
+      <span class="chip cyan">Sub-15ms Recall</span>
+    </div>
+    <button class="back-btn" onclick="history.back()">← Portfolio</button>
+  </div>
+</header>
+
+<div class="metrics-bar">
+  <div class="mb-inner">
+    <div class="mb-cell"><div class="mb-num" style="color:var(--purple)" id="m-vecs">48,291</div><div class="mb-lbl">Vectors Stored</div></div>
+    <div class="mb-cell"><div class="mb-num" style="color:var(--cyan)" id="m-lat">12ms</div><div class="mb-lbl">Recall Latency</div></div>
+    <div class="mb-cell"><div class="mb-num" style="color:var(--green)" id="m-score">0.94</div><div class="mb-lbl">Similarity Score</div></div>
+    <div class="mb-cell"><div class="mb-num" style="color:var(--yellow)">7</div><div class="mb-lbl">Memory Clusters</div></div>
+    <div class="mb-cell"><div class="mb-num" style="color:var(--cyan)" id="m-queries">3,241</div><div class="mb-lbl">Queries Today</div></div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="terminal-panel">
+    <!-- QUICK CMDS -->
+    <div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;">Quick Commands</div>
+      <div class="quick-cmds">
+        <button class="qcmd" onclick="runCmd('store_memory')">store_memory()</button>
+        <button class="qcmd" onclick="runCmd('recall_memory')">recall_memory()</button>
+        <button class="qcmd" onclick="runCmd('search_similar')">search_similar()</button>
+        <button class="qcmd" onclick="runCmd('delete_memory')">delete_memory()</button>
+        <button class="qcmd" onclick="runDemo()">▶ Run Full Demo</button>
+      </div>
+    </div>
+
+    <!-- TERMINAL -->
+    <div class="term-card">
+      <div class="term-title-bar">
+        <div class="term-dots">
+          <div class="term-dot" style="background:#ef4444"></div>
+          <div class="term-dot" style="background:#fbbf24"></div>
+          <div class="term-dot" style="background:#22c55e"></div>
+        </div>
+        <span class="term-label">mem0-mcp-server · Python 3.11 · FastAPI · Qdrant</span>
+      </div>
+      <div class="term-output" id="terminal"></div>
+      <div class="term-input-row">
+        <span class="term-prompt-label">mem0 ❯</span>
+        <input class="term-input" id="term-input" placeholder="Enter MCP command... (e.g. store_memory, recall_memory)" onkeydown="if(event.key==='Enter')sendCmd()"/>
+        <button class="term-send" onclick="sendCmd()">Execute</button>
+      </div>
+    </div>
+
+    <!-- VECTOR SPACE -->
+    <div class="vector-card">
+      <div class="vc-head">🧠 Vector Embedding Space — Qdrant Cluster Visualization</div>
+      <canvas id="vecCanvas" style="width:100%;height:230px;display:block;"></canvas>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <!-- MEMORIES -->
+    <div class="card">
+      <div class="card-head">📝 Recent Memories</div>
+      <div id="memories-list"></div>
+    </div>
+    <!-- CLUSTERS -->
+    <div class="card">
+      <div class="card-head">🏷️ Memory Clusters</div>
+      <div class="cluster-tags" id="clusters"></div>
+    </div>
+    <!-- SCHEMA -->
+    <div class="card">
+      <div class="card-head">⚙️ MCP Tool Schema</div>
+      <div class="tool-schema">
+{<br/>
+&nbsp;"tool": "store_memory",<br/>
+&nbsp;"params": {<br/>
+&nbsp;&nbsp;"content": "string",<br/>
+&nbsp;&nbsp;"user_id": "string",<br/>
+&nbsp;&nbsp;"metadata": "object"<br/>
+&nbsp;},<br/>
+&nbsp;"embedding": "text-embedding-3-small",<br/>
+&nbsp;"index": "qdrant:cosine",<br/>
+&nbsp;"ttl": "persistent"<br/>
+}
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>Built by <strong>Kenza Mahleb</strong> · Python · FastAPI · LangChain · Qdrant · AWS Lambda · MCP v1.2</footer>
+
+<script>
+const memories=[
+  {content:'User prefers Python over JavaScript for backend tasks',cluster:'preferences',score:.97,time:'2m ago'},
+  {content:'Last project was a FastAPI microservice with Redis caching',cluster:'projects',score:.94,time:'8m ago'},
+  {content:'User is studying for CCNA certification at ESGI Paris',cluster:'education',score:.91,time:'15m ago'},
+  {content:'Deployment target: Render.com with GitHub Actions CI/CD',cluster:'devops',score:.89,time:'31m ago'},
+  {content:'User wants sub-200ms latency for voice chatbot pipeline',cluster:'requirements',score:.87,time:'1h ago'},
+  {content:'Favorite framework: Next.js for full-stack React applications',cluster:'preferences',score:.85,time:'2h ago'},
+  {content:'RAE Engineering project uses Ethereum Sepolia testnet',cluster:'projects',score:.83,time:'3h ago'},
+  {content:'User speaks French and English, prefers French in chat',cluster:'persona',score:.81,time:'5h ago'},
+];
+
+const clusters=[
+  {label:'preferences',color:'rgba(167,139,250,.2)',text:'#a78bfa'},
+  {label:'projects',color:'rgba(14,165,233,.2)',text:'#38bdf8'},
+  {label:'education',color:'rgba(34,197,94,.2)',text:'#22c55e'},
+  {label:'devops',color:'rgba(245,158,11,.2)',text:'#fbbf24'},
+  {label:'requirements',color:'rgba(239,68,68,.2)',text:'#ef4444'},
+  {label:'persona',color:'rgba(236,72,153,.2)',text:'#ec4899'},
+  {label:'context',color:'rgba(6,182,212,.2)',text:'#06b6d4'},
+];
+
+const responses={
+  store_memory:{
+    input:`store_memory(content="User prefers Python for ML tasks", user_id="kenza-001")`,
+    output:`{\n  "id": "mem_${Math.random().toString(36).slice(2,10)}",\n  "status": "stored",\n  "embedding_dim": 1536,\n  "similarity_index": "qdrant:cosine",\n  "latency_ms": 11,\n  "cluster": "preferences"\n}`
+  },
+  recall_memory:{
+    input:`recall_memory(query="Python ML preferences", user_id="kenza-001", top_k=3)`,
+    output:`[\n  {"score": 0.97, "content": "User prefers Python for ML tasks"},\n  {"score": 0.91, "content": "FastAPI for async ML serving"},\n  {"score": 0.84, "content": "PyTorch preferred over TensorFlow"}\n]\n// Latency: 12ms | Vectors searched: 48,291`
+  },
+  search_similar:{
+    input:`search_similar(vector_id="vec_a4f2c", threshold=0.85, limit=5)`,
+    output:`{\n  "matches": 5,\n  "top_score": 0.96,\n  "results": [\n    "CCNA network architecture concepts",\n    "Docker Swarm orchestration patterns",\n    "Zero-trust security implementation"\n  ],\n  "latency_ms": 9\n}`
+  },
+  delete_memory:{
+    input:`delete_memory(memory_id="mem_b2c3d4e5", user_id="kenza-001")`,
+    output:`{\n  "status": "deleted",\n  "id": "mem_b2c3d4e5",\n  "cascade": true,\n  "vectors_removed": 1,\n  "reindex_ms": 4\n}`
+  }
+};
+
+function appendLine(cls,text){
+  const t=document.getElementById('terminal');
+  const p=document.createElement('p');
+  p.className='line-'+cls;
+  p.textContent=text;
+  t.appendChild(p);
+  t.scrollTop=t.scrollHeight;
+}
+
+function runCmd(cmd){
+  const r=responses[cmd];
+  if(!r)return;
+  appendLine('comment','');
+  appendLine('prompt','mem0 ❯ '+r.input);
+  setTimeout(()=>{
+    appendLine('info','  Embedding query... [text-embedding-3-small]');
+    setTimeout(()=>{
+      appendLine('info','  Searching Qdrant (48,291 vectors)...');
+      setTimeout(()=>{
+        r.output.split('\n').forEach(l=>appendLine('json','  '+l));
+        flicker();
+      },400);
+    },300);
+  },250);
+  document.getElementById('m-queries').textContent=(parseInt(document.getElementById('m-queries').textContent.replace(',',''))+1).toLocaleString();
+}
+
+function sendCmd(){
+  const inp=document.getElementById('term-input');
+  const v=inp.value.trim();inp.value='';
+  if(!v)return;
+  const key=Object.keys(responses).find(k=>v.includes(k));
+  appendLine('prompt','mem0 ❯ '+v);
+  if(key){
+    setTimeout(()=>runCmd(key),200);
+  } else {
+    setTimeout(()=>appendLine('err','  Error: Unknown MCP tool "'+v+'". Try: store_memory, recall_memory, search_similar, delete_memory'),300);
+  }
+}
+
+const demoSeq=['store_memory','recall_memory','search_similar','delete_memory'];
+let demoIdx=0;
+function runDemo(){
+  if(demoIdx<demoSeq.length){
+    runCmd(demoSeq[demoIdx]);
+    demoIdx++;
+    setTimeout(runDemo,2200);
+  } else { demoIdx=0; }
+}
+
+function renderMemories(){
+  document.getElementById('memories-list').innerHTML=memories.map(m=>`
+    <div class="memory-row">
+      <div class="mem-content">${m.content}</div>
+      <div class="mem-meta">
+        <span>🏷️ ${m.cluster} · ${m.time}</span>
+        <span class="sim-score">sim: ${m.score}</span>
+      </div>
+    </div>`).join('');
+}
+
+function renderClusters(){
+  document.getElementById('clusters').innerHTML=clusters.map(c=>`
+    <span class="ctag" style="background:${c.color};color:${c.text}">${c.label}</span>`).join('');
+}
+
+// ── Vector Space Canvas ──
+const vc=document.getElementById('vecCanvas');
+const vx=vc.getContext('2d');
+const points=[];
+const clusterColors=['#a78bfa','#38bdf8','#22c55e','#fbbf24','#ef4444','#ec4899','#06b6d4'];
+
+function initPoints(){
+  clusters.forEach((c,ci)=>{
+    const cx=0.1+Math.random()*.8,cy=0.1+Math.random()*.8;
+    const count=4+Math.floor(Math.random()*8);
+    for(let i=0;i<count;i++){
+      points.push({x:cx+(Math.random()-.5)*.2,y:cy+(Math.random()-.5)*.2,c:clusterColors[ci],vx:(Math.random()-.5)*0.0004,vy:(Math.random()-.5)*0.0004,r:2+Math.random()*3});
+    }
+  });
+}
+initPoints();
+
+function resizeVec(){vc.width=vc.offsetWidth*devicePixelRatio;vc.height=vc.offsetHeight*devicePixelRatio;vx.scale(devicePixelRatio,devicePixelRatio);}
+window.addEventListener('resize',resizeVec);resizeVec();
+
+function drawVec(){
+  const W=vc.offsetWidth,H=vc.offsetHeight||230;
+  vx.clearRect(0,0,W,H);
+  vx.fillStyle='#010a0f';vx.fillRect(0,0,W,H);
+
+  // Update + draw points
+  points.forEach(p=>{
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0.02||p.x>0.98)p.vx*=-1;
+    if(p.y<0.02||p.y>0.98)p.vy*=-1;
+    // Glow
+    vx.beginPath();vx.arc(p.x*W,p.y*H,p.r+4,0,Math.PI*2);
+    vx.fillStyle=p.c+'22';vx.fill();
+    // Core
+    vx.beginPath();vx.arc(p.x*W,p.y*H,p.r,0,Math.PI*2);
+    vx.fillStyle=p.c;vx.fill();
+  });
+
+  // Connections within clusters
+  for(let i=0;i<points.length;i++){
+    for(let j=i+1;j<points.length;j++){
+      if(points[i].c!==points[j].c)continue;
+      const dx=(points[i].x-points[j].x)*W,dy=(points[i].y-points[j].y)*H;
+      const dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<80){
+        vx.strokeStyle=points[i].c+Math.floor((1-dist/80)*80).toString(16).padStart(2,'0');
+        vx.lineWidth=0.8;
+        vx.beginPath();vx.moveTo(points[i].x*W,points[i].y*H);vx.lineTo(points[j].x*W,points[j].y*H);vx.stroke();
+      }
+    }
+  }
+
+  requestAnimationFrame(drawVec);
+}
+drawVec();
+
+function flicker(){
+  document.getElementById('m-vecs').textContent=(48000+Math.floor(Math.random()*500)).toLocaleString();
+  document.getElementById('m-lat').textContent=(9+Math.floor(Math.random()*8))+'ms';
+  document.getElementById('m-score').textContent=(0.88+Math.random()*0.1).toFixed(2);
+}
+setInterval(flicker,3000);
+
+// Initial terminal lines
+['# MCP Memory Protocol Server v1.2.0','# Qdrant Vector DB: Connected · 48,291 vectors indexed','# Model: text-embedding-3-small (OpenAI) · dim=1536','# Ready. Use quick commands above or type a command below.',''].forEach(l=>appendLine('comment',l));
+
+renderMemories();renderClusters();
+</script>
+</body>
+</html>

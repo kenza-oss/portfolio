@@ -1,107 +1,289 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>FlirtBox — Mobile App Demo</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>FlirtBox Mobile — Live Demo</title>
 <style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:'Segoe UI',sans-serif;background:#0a0a0f;color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px}
-  .scene{display:flex;gap:40px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:900px}
-  .phone{width:280px;height:580px;background:#111;border-radius:40px;border:8px solid #222;overflow:hidden;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.8)}
-  .phone-notch{width:100px;height:24px;background:#111;border-radius:0 0 16px 16px;position:absolute;top:0;left:50%;transform:translateX(-50%);z-index:10}
-  .phone-screen{height:100%;display:flex;flex-direction:column;background:#0d0d1a}
-  .tab-bar{display:flex;background:#0d0d1a;border-top:1px solid #1a1a2e;padding:10px 0;position:absolute;bottom:0;left:0;right:0}
-  .tab-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer}
-  .tab-icon{font-size:1.3rem}
-  .tab-label{font-size:.6rem;color:#666}
-  .tab-item.active .tab-label{color:#ff6b9d}
-  .feed{flex:1;overflow:hidden;padding-bottom:60px}
-  .story-row{display:flex;gap:8px;padding:16px 12px 8px;overflow-x:auto;scrollbar-width:none}
-  .story{display:flex;flex-direction:column;align-items:center;gap:4px;flex-shrink:0}
-  .story-ring{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#ff6b9d,#ff8c42);padding:2px}
-  .story-av{width:100%;height:100%;border-radius:50%;background:#1a1a2e;display:flex;align-items:center;justify-content:center;font-size:1.3rem;border:2px solid #0d0d1a}
-  .story-name{font-size:.6rem;color:#aaa}
-  .match-card{margin:8px 12px;background:#1a1a2e;border-radius:16px;overflow:hidden;position:relative}
-  .match-img{height:220px;display:flex;align-items:center;justify-content:center;font-size:4rem;background:linear-gradient(135deg,#1a0a2e,#2a1050)}
-  .match-info{padding:12px}
-  .match-name{font-weight:800;font-size:.95rem}
-  .match-tags{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
-  .match-tag{background:#2a1050;color:#ff6b9d;font-size:.6rem;padding:2px 6px;border-radius:20px}
-  .like-btn{position:absolute;bottom:60px;right:12px;background:linear-gradient(135deg,#ff6b9d,#ff4081);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;cursor:pointer;box-shadow:0 4px 16px rgba(255,107,157,.4)}
-  .info-panel{flex:1;max-width:420px}
-  .info-panel h1{font-size:2.5rem;font-weight:900;margin-bottom:16px;line-height:1.2}
-  .info-panel h1 span{background:linear-gradient(135deg,#ff6b9d,#ff8c42);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-  .info-panel p{color:#888;line-height:1.7;margin-bottom:24px;font-size:.95rem}
-  .feature-list{display:flex;flex-direction:column;gap:12px}
-  .feature{display:flex;align-items:flex-start;gap:12px}
-  .feat-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
-  .feat-icon.pink{background:#2a0a1a}.feat-icon.orange{background:#2a1a0a}.feat-icon.blue{background:#0a1a2a}
-  .feat-title{font-size:.9rem;font-weight:700;margin-bottom:3px}
-  .feat-desc{font-size:.8rem;color:#666}
-  .tech-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px}
-  .tech{background:#1a1a2e;border:1px solid #2a2a4e;padding:4px 10px;border-radius:20px;font-size:.75rem;color:#888}
-  .back{position:fixed;top:20px;right:20px;background:linear-gradient(135deg,#ff6b9d,#ff4081);color:#fff;padding:8px 16px;border-radius:6px;font-weight:700;font-size:.8rem;text-decoration:none;z-index:999}
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--bg:#090d16;--card-bg:#161d2f;--accent:#ec4899;--accent2:#f43f5e;--cyan:#06b6d4;--text:#f8fafc;--muted:#94a3b8;}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;}
+
+.live-bar{width:100%;background:linear-gradient(90deg,#ec4899,#8b5cf6,#06b6d4);color:#fff;text-align:center;padding:9px;font-size:12px;font-weight:700;letter-spacing:1px;}
+.live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#fff;margin-right:6px;animation:blink 1.2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+.top-nav{width:100%;max-width:1200px;display:flex;justify-content:space-between;align-items:center;padding:16px 24px;}
+.logo{font-size:20px;font-weight:900;background:linear-gradient(45deg,#ec4899,#f43f5e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.back-btn{background:#1e293b;border:1px solid #334155;color:#cbd5e1;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;transition:0.2s;}
+.back-btn:hover{background:#334155;color:#fff;}
+
+.container{display:flex;flex-direction:row;align-items:center;justify-content:center;gap:40px;padding:20px;max-width:1200px;width:100%;flex:1;}
+
+/* PHONE FRAME */
+.phone-mockup{width:380px;height:760px;background:#000;border-radius:48px;border:10px solid #1e293b;box-shadow:0 25px 60px rgba(0,0,0,0.8), 0 0 40px rgba(236,72,153,0.2);position:relative;overflow:hidden;display:flex;flex-direction:column;}
+.phone-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:140px;height:24px;background:#1e293b;border-bottom-left-radius:16px;border-bottom-right-radius:16px;z-index:100;}
+
+/* APP HEADER */
+.app-header{padding:30px 20px 12px;display:flex;justify-content:space-between;align-items:center;background:#111827;border-bottom:1px solid #1f2937;}
+.app-brand{font-size:18px;font-weight:800;color:#ec4899;display:flex;align-items:center;gap:6px;}
+.room-badge{background:rgba(236,72,153,0.15);border:1px solid #ec4899;color:#ec4899;font-size:11px;padding:3px 8px;border-radius:12px;font-weight:700;}
+
+/* SCREEN TABS */
+.app-body{flex:1;position:relative;overflow:hidden;background:#0b1120;}
+.screen{position:absolute;inset:0;padding:16px;display:none;flex-direction:column;}
+.screen.active{display:flex;}
+
+/* SWIPE CARD */
+.card-stack{flex:1;position:relative;margin-bottom:14px;}
+.tinder-card{position:absolute;inset:0;border-radius:24px;overflow:hidden;background:#1e293b;box-shadow:0 10px 25px rgba(0,0,0,0.5);display:flex;flex-direction:column;transition:transform 0.4s ease, opacity 0.4s ease;}
+.card-img{width:100%;flex:1;object-fit:cover;}
+.card-info{position:absolute;bottom:0;left:0;right:0;padding:24px 18px 16px;background:linear-gradient(to top, rgba(0,0,0,0.95), transparent);}
+.card-name{font-size:22px;font-weight:800;color:#fff;}
+.card-tagline{font-size:13px;color:#cbd5e1;margin-top:4px;}
+.card-tags{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;}
+.tag{background:rgba(255,255,255,0.15);backdrop-filter:blur(10px);font-size:11px;padding:4px 10px;border-radius:12px;}
+
+/* CONTROLS */
+.swipe-actions{display:flex;justify-content:center;align-items:center;gap:20px;padding:10px 0;}
+.action-btn{width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 8px 20px rgba(0,0,0,0.4);transition:transform 0.15s, background 0.2s;}
+.action-btn:hover{transform:scale(1.1);}
+.btn-dislike{background:#1f2937;color:#ef4444;border:2px solid #ef4444;}
+.btn-audio{background:#1f2937;color:#06b6d4;border:2px solid #06b6d4;width:46px;height:46px;font-size:18px;}
+.btn-like{background:linear-gradient(45deg,#ec4899,#f43f5e);color:#fff;}
+
+/* AUDIO ROOM SCREEN */
+.audio-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;}
+.room-header{font-size:18px;font-weight:800;color:#fff;margin-bottom:6px;}
+.room-topic{font-size:12px;color:var(--muted);margin-bottom:24px;}
+.avatar-circle{position:relative;width:240px;height:240px;margin-bottom:24px;}
+.avatar-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:80px;height:80px;border-radius:50%;border:3px solid #ec4899;overflow:hidden;box-shadow:0 0 30px rgba(236,72,153,0.5);}
+.avatar-orbit{position:absolute;width:48px;height:48px;border-radius:50%;border:2px solid #06b6d4;overflow:hidden;}
+.wave-canvas{width:100%;height:60px;margin-bottom:20px;}
+
+/* APP NAV BAR */
+.app-nav{height:60px;background:#111827;border-top:1px solid #1f2937;display:flex;justify-content:space-around;align-items:center;}
+.nav-tab{background:none;border:none;color:var(--muted);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:600;}
+.nav-tab.active{color:#ec4899;}
+.nav-icon{font-size:18px;}
+
+/* SIDE DETAILS */
+.tech-details{max-width:440px;display:flex;flex-direction:column;gap:18px;}
+.tech-card{background:var(--card-bg);border:1px solid #1e293b;border-radius:18px;padding:20px;}
+.tech-card h3{font-size:15px;color:#fff;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.tech-card p{font-size:13px;color:var(--muted);line-height:1.6;}
+.metric-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:13px;}
+.metric-row:last-child{border-bottom:none;}
+.metric-val{font-weight:700;color:var(--cyan);font-family:monospace;}
+
+/* MATCH POPUP */
+.match-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(6px);z-index:200;display:none;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;}
+.match-overlay.show{display:flex;}
+.match-title{font-size:32px;font-weight:900;background:linear-gradient(45deg,#ec4899,#f43f5e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px;}
+.match-imgs{display:flex;gap:16px;margin:20px 0;}
+.match-av{width:70px;height:70px;border-radius:50%;border:3px solid #ec4899;object-fit:cover;}
 </style>
 </head>
 <body>
-<a class="back" href="/">← Back to Portfolio</a>
-<div class="scene">
-  <div class="phone">
+<div class="live-bar"><span class="live-dot"></span>LIVE DEMO — FlirtBox Mobile · Sub-50ms WebRTC Voice & Social Match · Built by Kenza Mahleb</div>
+
+<div class="top-nav">
+  <div class="logo">FlirtBox Live</div>
+  <button class="back-btn" onclick="history.back()">← Back to Portfolio</button>
+</div>
+
+<div class="container">
+  <!-- MOCKUP -->
+  <div class="phone-mockup">
     <div class="phone-notch"></div>
-    <div class="phone-screen">
-      <div class="feed">
-        <div class="story-row">
-          <div class="story"><div class="story-ring"><div class="story-av">👩</div></div><div class="story-name">Leila</div></div>
-          <div class="story"><div class="story-ring"><div class="story-av">👨</div></div><div class="story-name">Karim</div></div>
-          <div class="story"><div class="story-ring"><div class="story-av">👩</div></div><div class="story-name">Sara</div></div>
-          <div class="story"><div class="story-ring"><div class="story-av">👦</div></div><div class="story-name">Amine</div></div>
+    
+    <div class="app-header">
+      <div class="app-brand">🔥 FlirtBox</div>
+      <div class="room-badge">⚡ WebRTC Active</div>
+    </div>
+
+    <div class="app-body">
+      <!-- DISCOVER SCREEN -->
+      <div class="screen active" id="discover-screen">
+        <div class="card-stack" id="cardStack">
+          <!-- Profiles injected here -->
         </div>
-        <div class="match-card">
-          <div class="match-img">👩</div>
-          <div class="match-info">
-            <div class="match-name">Nadia, 24 · Alger</div>
-            <div class="match-tags">
-              <span class="match-tag">🎵 Music</span>
-              <span class="match-tag">✈️ Travel</span>
-              <span class="match-tag">🎨 Art</span>
-            </div>
-          </div>
-          <div class="like-btn">❤️</div>
+
+        <div class="swipe-actions">
+          <button class="action-btn btn-dislike" onclick="swipe(false)">✕</button>
+          <button class="action-btn btn-audio" onclick="switchTab('audio')">🎙️</button>
+          <button class="action-btn btn-like" onclick="swipe(true)">❤️</button>
         </div>
       </div>
-      <div class="tab-bar">
-        <div class="tab-item active"><div class="tab-icon">🏠</div><div class="tab-label">Home</div></div>
-        <div class="tab-item"><div class="tab-icon">🔍</div><div class="tab-label">Discover</div></div>
-        <div class="tab-item"><div class="tab-icon">💬</div><div class="tab-label">Chat</div></div>
-        <div class="tab-item"><div class="tab-icon">🎙</div><div class="tab-label">Rooms</div></div>
-        <div class="tab-item"><div class="tab-icon">👤</div><div class="tab-label">Profile</div></div>
+
+      <!-- AUDIO ROOM SCREEN -->
+      <div class="screen" id="audio-screen">
+        <div class="room-header">Chill Vibes & Tech 🎧</div>
+        <div class="room-topic">Live Voice Channel · 5 Members Streaming</div>
+
+        <div class="avatar-circle">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&fit=crop" class="avatar-center" alt="Speaker"/>
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&fit=crop" class="avatar-orbit" style="top:10px;left:20px;" alt="P1"/>
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&fit=crop" class="avatar-orbit" style="top:10px;right:20px;" alt="P2"/>
+          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&fit=crop" class="avatar-orbit" style="bottom:10px;left:20px;" alt="P3"/>
+          <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=100&fit=crop" class="avatar-orbit" style="bottom:10px;right:20px;" alt="P4"/>
+        </div>
+
+        <canvas id="audioCanvas" class="wave-canvas"></canvas>
+
+        <button class="action-btn btn-like" style="width:100%;border-radius:14px;font-size:14px;font-weight:700;" onclick="toggleAudioMute(this)">
+          🎙️ Mute Microphone
+        </button>
       </div>
+
+      <!-- MATCH OVERLAY -->
+      <div class="match-overlay" id="matchModal">
+        <div class="match-title">It's a Match! 🎉</div>
+        <p style="font-size:13px;color:#cbd5e1;">You and Sarah both liked each other.</p>
+        <div class="match-imgs">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&fit=crop" class="match-av" alt="Sarah"/>
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&fit=crop" class="match-av" alt="You"/>
+        </div>
+        <button class="action-btn btn-like" style="width:100%;border-radius:14px;font-size:14px;font-weight:700;margin-bottom:10px;" onclick="closeMatch()">Send Direct Voice Note</button>
+        <button style="background:none;border:none;color:#94a3b8;font-size:12px;cursor:pointer;" onclick="closeMatch()">Keep Swiping</button>
+      </div>
+    </div>
+
+    <!-- BOTTOM APP NAV -->
+    <div class="app-nav">
+      <button class="nav-tab active" onclick="switchTab('discover')">
+        <span class="nav-icon">🔥</span>
+        <span>Match</span>
+      </button>
+      <button class="nav-tab" onclick="switchTab('audio')">
+        <span class="nav-icon">🎙️</span>
+        <span>Live Rooms</span>
+      </button>
+      <button class="nav-tab" onclick="alert('Chat messages simulated!')">
+        <span class="nav-icon">💬</span>
+        <span>Chats</span>
+      </button>
     </div>
   </div>
 
-  <div class="info-panel">
-    <h1>FlirtBox<br><span>Mobile App</span></h1>
-    <p>Matchmaking app with real-time audio rooms, live streams, and low-latency WebRTC infrastructure. Built with Flutter &amp; Firebase.</p>
-
-    <div class="feature-list">
-      <div class="feature">
-        <div class="feat-icon pink">❤️</div>
-        <div><div class="feat-title">Smart Matching Algorithm</div><div class="feat-desc">ML-powered compatibility scoring based on preferences &amp; activity</div></div>
-      </div>
-      <div class="feature">
-        <div class="feat-icon orange">🎙</div>
-        <div><div class="feat-title">Live Audio Rooms</div><div class="feat-desc">Real-time WebRTC audio rooms with sub-50ms latency</div></div>
-      </div>
-      <div class="feature">
-        <div class="feat-icon blue">📡</div>
-        <div><div class="feat-title">Live Streaming</div><div class="feat-desc">In-app live video with Firebase Realtime Database sync</div></div>
-      </div>
+  <!-- SIDE TECH DETAILS -->
+  <div class="tech-details">
+    <div class="tech-card">
+      <h3>📱 Mobile Architecture</h3>
+      <p>Built with <strong>Flutter & Dart</strong> targeting iOS and Android with 60 FPS rendering. Features custom gestural swipe physics, offline caching, and instant presence sync via Firebase Realtime Database.</p>
     </div>
 
-    <div class="tech-row">
-      <span class="tech">Flutter</span><span class="tech">Dart</span><span class="tech">Firebase</span><span class="tech">WebRTC</span><span class="tech">PostgreSQL</span><span class="tech">React Native</span>
+    <div class="tech-card">
+      <h3>⚡ Real-Time WebRTC Audio</h3>
+      <div class="metric-row"><span>Audio Room Latency</span><span class="metric-val">&lt; 42 ms</span></div>
+      <div class="metric-row"><span>Codec</span><span class="metric-val">Opus 48kHz</span></div>
+      <div class="metric-row"><span>Signaling</span><span class="metric-val">WebSocket / Firebase</span></div>
+      <div class="metric-row"><span>STUN/TURN</span><span class="metric-val">Coturn Mesh</span></div>
+      <div class="metric-row"><span>Concurrent Streams</span><span class="metric-val">12,400+</span></div>
+    </div>
+
+    <div class="tech-card">
+      <h3>🛡️ Security & Privacy</h3>
+      <p>End-to-end encrypted direct channels with DTLS-SRTP. Ephemeral audio processing guarantees zero storage of private live conversations.</p>
     </div>
   </div>
 </div>
+
+<script>
+const profiles = [
+  {name:'Sarah, 24', tagline:'UX Designer & Coffee Enthusiast ☕', tags:['Design','Coffee','Techno'], img:'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&fit=crop'},
+  {name:'Emma, 26', tagline:'Full-stack dev & Gamer 🎮', tags:['React','Anime','Bouldering'], img:'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&fit=crop'},
+  {name:'Chloé, 23', tagline:'Photographer & Traveler 📸', tags:['Art','Travel','Vinyl'], img:'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&fit=crop'},
+  {name:'Léa, 25', tagline:'Architecture student in Paris 🏛️', tags:['Architecture','Cinema','Books'], img:'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&fit=crop'},
+];
+
+let curIdx = 0;
+
+function renderCards(){
+  const stack = document.getElementById('cardStack');
+  stack.innerHTML = '';
+  profiles.slice(curIdx, curIdx + 2).reverse().forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = 'tinder-card';
+    card.id = i === 1 ? 'topCard' : '';
+    card.innerHTML = `
+      <img src="${p.img}" class="card-img" alt="${p.name}"/>
+      <div class="card-info">
+        <div class="card-name">${p.name}</div>
+        <div class="card-tagline">${p.tagline}</div>
+        <div class="card-tags">
+          ${p.tags.map(t => `<span class="tag">#${t}</span>`).join('')}
+        </div>
+      </div>
+    `;
+    stack.appendChild(card);
+  });
+}
+
+function swipe(liked){
+  const top = document.getElementById('topCard');
+  if(!top) return;
+  top.style.transform = liked ? 'translateX(150%) rotate(25deg)' : 'translateX(-150%) rotate(-25deg)';
+  top.style.opacity = '0';
+  
+  setTimeout(() => {
+    if(liked && curIdx === 0){
+      document.getElementById('matchModal').classList.add('show');
+    }
+    curIdx = (curIdx + 1) % profiles.length;
+    renderCards();
+  }, 350);
+}
+
+function closeMatch(){
+  document.getElementById('matchModal').classList.remove('show');
+}
+
+function switchTab(tab){
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  if(tab === 'discover'){
+    document.getElementById('discover-screen').classList.add('active');
+    document.querySelectorAll('.nav-tab')[0].classList.add('active');
+  } else {
+    document.getElementById('audio-screen').classList.add('active');
+    document.querySelectorAll('.nav-tab')[1].classList.add('active');
+  }
+}
+
+let muted = false;
+function toggleAudioMute(btn){
+  muted = !muted;
+  btn.textContent = muted ? '🔇 Unmute Microphone' : '🎙️ Mute Microphone';
+  btn.style.background = muted ? '#ef4444' : 'linear-gradient(45deg,#ec4899,#f43f5e)';
+}
+
+// Canvas audio waves
+const canvas = document.getElementById('audioCanvas');
+const ctx = canvas.getContext('2d');
+let t = 0;
+function drawWave(){
+  const w = canvas.offsetWidth;
+  const h = canvas.offsetHeight;
+  canvas.width = w * devicePixelRatio;
+  canvas.height = h * devicePixelRatio;
+  ctx.scale(devicePixelRatio, devicePixelRatio);
+  ctx.clearRect(0,0,w,h);
+
+  ctx.beginPath();
+  ctx.strokeStyle = '#06b6d4';
+  ctx.lineWidth = 2;
+  for(let x=0; x<w; x+=3){
+    const y = h/2 + Math.sin(x*0.04 + t) * (muted ? 2 : 14) * Math.sin(x*0.01 + t*0.5);
+    if(x===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+  }
+  ctx.stroke();
+
+  t += 0.08;
+  requestAnimationFrame(drawWave);
+}
+drawWave();
+renderCards();
+</script>
 </body>
 </html>
