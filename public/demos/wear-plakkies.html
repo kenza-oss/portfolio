@@ -58,17 +58,16 @@
 
   /* ── LIVE DEMO BADGE BAR (PRO REFINED) ── */
   .live-bar{
-    background: #292524;
+    background: #1c1917;
     color: #e7dfd5;
     text-align: center;
-    padding: 7px 16px;
+    padding: 8px 24px;
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
     border-bottom: 1px solid rgba(255,255,255,0.08);
   }
   .live-dot{
@@ -80,6 +79,128 @@
     animation: pulse 1.8s infinite;
   }
   @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.85)}}
+
+  .mode-pill{
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    border: none;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .mode-pill:hover{
+    color: #fff;
+    background: rgba(255,255,255,0.12);
+  }
+  .mode-pill.active{
+    background: #fff;
+    color: #000;
+    font-weight: 700;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  }
+
+  /* Omnichannel Fleet Overlays (Kiosk, POS, KDS) */
+  .omni-modal{
+    position: fixed;
+    inset: 0;
+    background: #0c0b09;
+    z-index: 1000;
+    display: none;
+    flex-direction: column;
+    overflow-y: auto;
+    color: #fff;
+  }
+  .omni-modal.active{
+    display: flex;
+  }
+  .kiosk-header-bar{
+    background: #facc15;
+    color: #000;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    font-size: 14px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  .kiosk-top-bar{
+    background: #1c1917;
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .kiosk-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+    padding: 32px;
+    max-width: 1300px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .kiosk-card{
+    background: #181614;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .kiosk-card:hover{
+    transform: translateY(-4px);
+    border-color: #facc15;
+    box-shadow: 0 12px 30px rgba(250,204,21,0.15);
+  }
+  .kiosk-card img{
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+  }
+  .kiosk-card-body{
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+  .kds-board{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 28px;
+    max-width: 1350px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .kds-col{
+    background: #151311;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .kds-card{
+    border-radius: 12px;
+    padding: 14px;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  .kds-red{ background: #dc2626; }
+  .kds-blue{ background: #2563eb; }
+  .kds-amber{ background: #d97706; }
 
   /* ── NAVBAR ── */
   nav{
@@ -1096,10 +1217,20 @@
 </head>
 <body>
 
-<!-- Live Bar -->
+<!-- Live Bar with Omnichannel Switcher -->
 <div class="live-bar">
-  <span class="live-dot"></span>
-  LIVE DEMO — Wear Plakkies Modern Footwear Architecture · Built by Kenza Mahleb
+  <div style="display:flex; align-items:center; justify-content:space-between; max-width:1400px; width:100%; margin:0 auto; flex-wrap:wrap; gap:10px;">
+    <div style="display:flex; align-items:center; gap:8px;">
+      <span class="live-dot"></span>
+      <span style="font-weight:700; letter-spacing:1px; text-transform:uppercase;">Wear Plakkies · Omnichannel Retail Fleet</span>
+    </div>
+    <div style="display:inline-flex; background:rgba(0,0,0,0.5); padding:3px; border-radius:30px; border:1px solid rgba(255,255,255,0.15); gap:4px;">
+      <button class="mode-pill active" onclick="switchOmniMode('storefront', this)">🛍️ Storefront</button>
+      <button class="mode-pill" onclick="switchOmniMode('kiosk', this)">🖥️ Self-Order Kiosk</button>
+      <button class="mode-pill" onclick="switchOmniMode('pos', this)">💳 Cashier POS</button>
+      <button class="mode-pill" onclick="switchOmniMode('kds', this)">📋 KDS Dispatch</button>
+    </div>
+  </div>
 </div>
 
 <!-- Top Bar -->
@@ -1138,10 +1269,10 @@
 
     <!-- Featured large cell: top-left 2×2 -->
     <div class="hero-grid-item hero-featured">
-      <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=900&auto=format&fit=crop&q=80" alt="Exclusive Sneaker" loading="lazy"/>
+      <img src="https://images.unsplash.com/photo-1533867617858-e7b97e060509?w=900&auto=format&fit=crop&q=80" alt="Exclusive Luxury Leather Footwear" loading="lazy"/>
       <div class="hero-grid-overlay">
         <span class="hero-grid-tag">Exclusive</span>
-        <span class="hero-grid-sub">New Arrivals · SS25</span>
+        <span class="hero-grid-sub">Artisan Handcrafted · SS25</span>
       </div>
     </div>
 
@@ -1345,7 +1476,7 @@
 
 <script>
 const products = [
-  {id:1,brand:'Nike Atelier',name:'Air Max 270 React ENG',price:189,oldPrice:220,rating:4.8,reviews:342,badge:'new',cat:'men',sizes:['40','41','42','43','44'],img:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&fit=crop'},
+  {id:1,brand:'Atelier Luxe',name:'Heritage Cap-Toe Derby Cognac',price:245,oldPrice:280,rating:4.9,reviews:412,badge:'new',cat:'men',sizes:['40','41','42','43','44'],img:'https://images.unsplash.com/photo-1533867617858-e7b97e060509?w=600&fit=crop'},
   {id:2,brand:'Adidas Prime',name:'Ultraboost 23 DNA Raw',price:165,oldPrice:null,rating:4.9,reviews:521,badge:'hot',cat:'women',sizes:['36','37','38','39','40'],img:'https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&fit=crop'},
   {id:3,brand:'New Balance',name:'990v6 Heritage Sand',price:215,oldPrice:260,rating:4.7,reviews:198,badge:'sale',cat:'men',sizes:['40','41','42','43'],img:'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=600&fit=crop'},
   {id:4,brand:'Jordan Craft',name:'Air Jordan 1 Retro Parchment',price:299,oldPrice:null,rating:5.0,reviews:876,badge:'hot',cat:'men',sizes:['40','41','42','43','44'],img:'https://images.unsplash.com/photo-1556906781-9a412961a28c?w=600&fit=crop'},
@@ -1544,8 +1675,201 @@ function toggleWishlist(id, btn){
   else{wishlist.add(id);btn.textContent='❤️';btn.classList.add('liked');}
 }
 
+<!-- ── OMNICHANNEL FLEET VIEWPORT MODALS (OTTER SUITE) ── -->
+
+<!-- 1. KIOSK VIEWPORT MODAL -->
+<div id="kiosk-modal" class="omni-modal">
+  <div class="kiosk-header-bar">
+    <span>⚡ ORDER HERE · TOUCH TO SELECT · WEAR PLAKKIES ATELIER</span>
+    <span style="font-size:11px; font-weight:700; background:#000; color:#facc15; padding:4px 12px; border-radius:20px;">VISA • MC • APPLE PAY</span>
+  </div>
+  <div class="kiosk-top-bar">
+    <div style="display:flex; align-items:center; gap:16px;">
+      <h2 style="font-family:var(--font-heading); font-size:24px; color:#fff;">Touchscreen Kiosk Station #01</h2>
+      <span style="background:rgba(74,222,128,0.2); border:1px solid #4ade80; color:#4ade80; font-size:11px; padding:3px 10px; border-radius:12px; font-weight:700;">● Online</span>
+    </div>
+    <div style="display:flex; gap:12px;">
+      <button class="mode-pill" style="background:#292524; color:#fff;" onclick="toggleCart()">🛒 Review Cart (<span id="kiosk-cart-count">0</span>)</button>
+      <button class="mode-pill" style="background:#dc2626; color:#fff;" onclick="switchOmniMode('storefront')">✕ Exit Kiosk</button>
+    </div>
+  </div>
+  <div class="kiosk-grid" id="kiosk-items-grid"></div>
+</div>
+
+<!-- 2. CASHIER POS VIEWPORT MODAL -->
+<div id="pos-modal" class="omni-modal">
+  <div style="background:#18181b; padding:16px 32px; border-bottom:1px solid rgba(255,255,255,0.1); display:flex; justify-content:space-between; align-items:center;">
+    <div style="display:flex; align-items:center; gap:16px;">
+      <h2 style="font-family:var(--font-heading); font-size:22px; color:#fff;">Cashier POS Register · Fast Checkout</h2>
+      <span style="font-family:monospace; font-size:11px; color:#a1a1aa; background:#27272a; padding:4px 10px; border-radius:6px;">SESSION #8492</span>
+    </div>
+    <button class="mode-pill" style="background:#dc2626; color:#fff;" onclick="switchOmniMode('storefront')">✕ Exit POS</button>
+  </div>
+  <div style="display:grid; grid-template-columns: 1.8fr 1.2fr; gap:24px; padding:28px; max-width:1400px; margin:0 auto; width:100%;">
+    <div style="background:#18181b; border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:24px;">
+      <h3 style="font-size:14px; text-transform:uppercase; letter-spacing:1px; color:#a1a1aa; margin-bottom:16px;">Quick Register Items</h3>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:14px;" id="pos-quick-grid"></div>
+    </div>
+    <div style="background:#18181b; border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:24px; display:flex; flex-direction:column; justify-content:space-between;">
+      <div>
+        <h3 style="font-size:14px; text-transform:uppercase; letter-spacing:1px; color:#a1a1aa; margin-bottom:16px;">Active Order Ledger</h3>
+        <div id="pos-ledger-items" style="display:flex; flex-direction:column; gap:10px; max-height:300px; overflow-y:auto;">
+          <p style="color:#71717a; font-size:13px;">No items selected yet. Tap products on the left to add to register.</p>
+        </div>
+      </div>
+      <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:16px; margin-top:20px;">
+        <div style="display:flex; justify-content:space-between; font-size:18px; font-weight:700; margin-bottom:16px;">
+          <span>Subtotal Due:</span>
+          <span id="pos-total-due">$0.00</span>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <button style="background:#22c55e; color:#000; font-weight:800; padding:14px; border:none; border-radius:10px; cursor:pointer;" onclick="posCharge('CARD')">💳 Charge Card</button>
+          <button style="background:#facc15; color:#000; font-weight:800; padding:14px; border:none; border-radius:10px; cursor:pointer;" onclick="posCharge('CASH')">💵 Exact Cash</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 3. KDS VIEWPORT MODAL -->
+<div id="kds-modal" class="omni-modal">
+  <div style="background:#1c1917; padding:16px 32px; border-bottom:1px solid rgba(255,255,255,0.1); display:flex; justify-content:space-between; align-items:center;">
+    <div style="display:flex; align-items:center; gap:16px;">
+      <h2 style="font-family:var(--font-heading); font-size:22px; color:#fff;">KDS · Fulfillment Dispatch</h2>
+      <span style="font-family:monospace; font-size:11px; color:#22c55e; background:rgba(34,197,94,0.15); border:1px solid #22c55e; padding:4px 10px; border-radius:6px;">LIVE WEBSOCKET STREAM</span>
+    </div>
+    <button class="mode-pill" style="background:#dc2626; color:#fff;" onclick="switchOmniMode('storefront')">✕ Exit KDS</button>
+  </div>
+  <div class="kds-board">
+    <div class="kds-col">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:8px;">
+        <span style="font-weight:700; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:#ef4444;">🔴 Urgent Orders (3)</span>
+      </div>
+      <div class="kds-card kds-red">
+        <div style="display:flex; justify-content:space-between; font-size:11px; font-weight:700;">
+          <span>ORDER #1042 · KIOSK #01</span>
+          <span>02:14</span>
+        </div>
+        <div style="margin-top:8px; font-size:13px; font-weight:600;">Heritage Cap-Toe Derby Cognac (Size 42)</div>
+        <div style="margin-top:4px; font-size:11px; opacity:0.85;">Packaging: Express Luxury Box</div>
+      </div>
+      <div class="kds-card kds-red">
+        <div style="display:flex; justify-content:space-between; font-size:11px; font-weight:700;">
+          <span>ORDER #1043 · ONLINE</span>
+          <span>04:48</span>
+        </div>
+        <div style="margin-top:8px; font-size:13px; font-weight:600;">990v6 Heritage Sand (Size 41)</div>
+        <div style="margin-top:4px; font-size:11px; opacity:0.85;">Packaging: Standard Eco</div>
+      </div>
+    </div>
+    <div class="kds-col">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:8px;">
+        <span style="font-weight:700; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:#3b82f6;">🔵 In Preparation (2)</span>
+      </div>
+      <div class="kds-card kds-blue">
+        <div style="display:flex; justify-content:space-between; font-size:11px; font-weight:700;">
+          <span>ORDER #1040 · POS #02</span>
+          <span>06:12</span>
+        </div>
+        <div style="margin-top:8px; font-size:13px; font-weight:600;">Ultraboost 23 DNA Raw (Size 38)</div>
+      </div>
+    </div>
+    <div class="kds-col">
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:8px;">
+        <span style="font-weight:700; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:#22c55e;">🟢 Completed / Dispatched (18)</span>
+      </div>
+      <div class="kds-card" style="background:#15803d;">
+        <div style="display:flex; justify-content:space-between; font-size:11px; font-weight:700;">
+          <span>ORDER #1039 · KIOSK #02</span>
+          <span>✓ DISPATCHED</span>
+        </div>
+        <div style="margin-top:8px; font-size:13px; font-weight:600;">Club C 85 Vintage Chalk (Size 39)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
 renderProducts(products);
 selectedSizes = Object.fromEntries(products.map(p=>[p.id,p.sizes[0]]));
+
+function switchOmniMode(mode, btn){
+  document.querySelectorAll('.mode-pill').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  document.querySelectorAll('.omni-modal').forEach(m=>m.classList.remove('active'));
+  if(mode === 'kiosk'){
+    document.getElementById('kiosk-modal').classList.add('active');
+    renderKioskItems();
+  } else if(mode === 'pos'){
+    document.getElementById('pos-modal').classList.add('active');
+    renderPOSItems();
+  } else if(mode === 'kds'){
+    document.getElementById('kds-modal').classList.add('active');
+  }
+}
+
+function renderKioskItems(){
+  const g = document.getElementById('kiosk-items-grid');
+  g.innerHTML = products.map(p => `
+    <div class="kiosk-card" onclick="addToCart(${p.id}); showToast('⚡ Added to Kiosk Order: ${p.name}');">
+      <img src="${p.img}" alt="${p.name}" />
+      <div class="kiosk-card-body">
+        <span style="font-size:10px; color:#facc15; font-weight:700; text-transform:uppercase; letter-spacing:1px;">${p.brand}</span>
+        <h4 style="font-size:15px; font-weight:700; color:#fff;">${p.name}</h4>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:8px;">
+          <span style="font-size:18px; font-weight:800; color:#fff;">$${p.price}</span>
+          <span style="background:#facc15; color:#000; font-weight:800; padding:6px 14px; border-radius:20px; font-size:11px;">+ TAP TO ADD</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+let posItems = [];
+function renderPOSItems(){
+  const g = document.getElementById('pos-quick-grid');
+  g.innerHTML = products.slice(0, 8).map(p => `
+    <button style="background:#27272a; border:1px solid rgba(255,255,255,0.1); border-radius:10px; padding:12px; color:#fff; text-align:left; cursor:pointer;" onclick="posAddItem(${p.id})">
+      <div style="font-size:11px; color:#a1a1aa;">${p.brand}</div>
+      <div style="font-weight:700; font-size:12px; margin:4px 0;">${p.name.slice(0, 20)}...</div>
+      <div style="font-weight:800; color:#22c55e;">$${p.price}</div>
+    </button>
+  `).join('');
+}
+
+function posAddItem(id){
+  const p = products.find(x => x.id === id);
+  posItems.push(p);
+  updatePOSLedger();
+}
+
+function updatePOSLedger(){
+  const l = document.getElementById('pos-ledger-items');
+  const t = document.getElementById('pos-total-due');
+  if(!posItems.length){
+    l.innerHTML = '<p style="color:#71717a; font-size:13px;">No items selected yet. Tap products on the left to add to register.</p>';
+    t.textContent = '$0.00';
+    return;
+  }
+  const total = posItems.reduce((acc, x) => acc + x.price, 0);
+  l.innerHTML = posItems.map((item, idx) => `
+    <div style="display:flex; justify-content:space-between; align-items:center; background:#27272a; padding:8px 12px; border-radius:8px; font-size:13px;">
+      <span>${item.name}</span>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span style="font-weight:700;">$${item.price}</span>
+        <button onclick="posItems.splice(${idx},1);updatePOSLedger();" style="background:transparent; border:none; color:#ef4444; cursor:pointer;">✕</button>
+      </div>
+    </div>
+  `).join('');
+  t.textContent = '$' + total.toFixed(2);
+}
+
+function posCharge(type){
+  if(!posItems.length) return alert('Register is empty! Add items first.');
+  alert(`✓ SUCCESS: ${type} payment authorized in <0.6s! Receipt generated.`);
+  posItems = [];
+  updatePOSLedger();
+}
 </script>
 </body>
 </html>
