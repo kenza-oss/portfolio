@@ -50,9 +50,9 @@ const projects = [
     tags: ['React', 'Next.js', 'Tailwind CSS', 'Shopify', 'Node.js'],
     metric: '< 0.8s Checkout Speed',
     screens: [
-      { label: 'Storefront & Hero Catalog', badge: 'Primary Kiosk', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800&fit=crop' },
-      { label: 'Dynamic Cart & Checkout Flow', badge: 'POS Terminal', image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=800&fit=crop' },
-      { label: 'Mobile Responsive Experience', badge: 'Mobile View', image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800&fit=crop' }
+      { label: 'Storefront & Hero Catalog', badge: 'Desktop View', image: '/screenshots/wear-plakkies-desktop.png' },
+      { label: 'Dynamic Cart & Checkout Flow', badge: 'Cart Drawer', image: '/screenshots/wear-plakkies-cart.png' },
+      { label: 'Mobile Responsive Experience', badge: 'Mobile View', image: '/screenshots/wear-plakkies-mobile.png' }
     ],
     liveUrl: '/demos/wear-plakkies.html',
     githubUrl: 'https://github.com/kenza-oss'
