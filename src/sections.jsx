@@ -44,18 +44,15 @@ const projects = [
     title: 'Wear Plakkies',
     behanceTitle: '— Wear Plakkies.',
     category: 'Web Apps',
-    tagline: 'Omnichannel Retail & E-Commerce Ecosystem · POS, Kiosk & KDS Fleet',
-    description: 'Wear Plakkies is an **end-to-end modern retail & e-commerce ecosystem** built for high-throughput multi-terminal operations. Engineered with **React & Next.js**, featuring self-order kiosk stations, cashier POS terminals, kitchen/fulfillment dispatch (KDS), and headless Shopify GraphQL APIs with **100% data consistency** across devices.',
-    pills: ['Sub-Second Checkout Flow', 'Headless Shopify GraphQL', 'Omnichannel Kiosk Fleet', 'Multi-Terminal Cart Sync'],
+    tagline: 'High-Conversion Modern E-Commerce Platform',
+    description: 'Wear Plakkies is an **end-to-end modern e-commerce ecosystem** built for seamless retail operations. Engineered with **React & Next.js**, featuring instant cart synchronization, sub-second checkout, and headless Shopify GraphQL APIs with **100% data consistency** across devices.',
+    pills: ['Sub-Second Checkout Flow', 'Headless Shopify GraphQL', 'Dynamic Cart State Sync', 'Multi-Device Responsive'],
     tags: ['React', 'Next.js', 'Tailwind CSS', 'Shopify', 'Node.js'],
     metric: '< 0.8s Checkout Speed',
-    isHardwareFleet: true,
-    fleetImage: '/images/kiosk-multi-device.jpg',
     screens: [
-      { label: 'Counter POS & Fast Checkout', badge: 'Cashier', image: '/screenshots/wear-plakkies-cart.png', desc: 'High-speed cashier register with split payment and real-time inventory deduction.' },
-      { label: 'Primary Self-Order Kiosk', badge: 'Kiosk', image: '/screenshots/wear-plakkies-desktop.png', desc: 'Interactive customer-facing ordering station with instant payment terminal.' },
-      { label: 'Floor Map & Table Orders', badge: 'Table Management', image: '/screenshots/wear-plakkies-mobile.png', desc: 'Real-time floor layout with active table status and order dispatching.' },
-      { label: 'Kitchen & Fulfillment Display', badge: 'KDS / Live View', image: '/screenshots/wear-plakkies-desktop.png', desc: 'Real-time kitchen order tickets dispatch system with color-coded countdowns.' }
+      { label: 'Storefront & Hero Catalog', badge: 'Desktop View', image: '/screenshots/wear-plakkies-desktop.png' },
+      { label: 'Dynamic Cart & Checkout Flow', badge: 'Cart Drawer', image: '/screenshots/wear-plakkies-cart.png' },
+      { label: 'Mobile Responsive Experience', badge: 'Mobile View', image: '/screenshots/wear-plakkies-mobile.png' }
     ],
     liveUrl: '/demos/wear-plakkies.html',
     githubUrl: 'https://github.com/kenza-oss'
@@ -311,30 +308,30 @@ const BehanceProjectCard = ({ project, index }) => {
             {renderFormattedText(project.description)}
           </div>
 
-          {/* Otter POS-Style Screen View Pills (Interactive Switcher) */}
+          {/* Otter OS-Style Screen View Pills (Interactive Switcher) */}
           <div className="mb-6">
             <span className="text-gray-400 text-[11px] font-mono tracking-widest uppercase mb-3 block font-semibold flex items-center gap-1.5">
               <Layers size={13} className="text-cyan-400" /> Multi-Screen Viewport Selector
             </span>
-            <div className="flex flex-col gap-2.5">
+            <div className="flex flex-col gap-2">
               {project.screens.map((screen, sIdx) => {
                 const isSelected = activeScreenIndex === sIdx;
                 return (
                   <button
                     key={sIdx}
                     onClick={() => setActiveScreenIndex(sIdx)}
-                    className={`text-left px-5 py-3 rounded-full text-xs font-semibold tracking-wide transition-all flex items-center justify-between border ${
+                    className={`text-left px-4 py-2.5 rounded-full text-xs font-semibold transition-all flex items-center justify-between border ${
                       isSelected
-                        ? 'border-white bg-white text-black shadow-xl shadow-white/10 font-bold scale-[1.02]'
-                        : 'border-white/30 bg-black/80 text-gray-200 hover:border-white hover:text-white'
+                        ? 'border-cyan-400 bg-cyan-500/20 text-white shadow-md shadow-cyan-500/20'
+                        : 'border-white/20 bg-white/[0.03] text-gray-300 hover:border-white/40 hover:text-white'
                     }`}
                   >
-                    <div className="flex items-center gap-3">
-                      <span className={`w-2.5 h-2.5 rounded-full ${isSelected ? 'bg-black animate-pulse' : 'bg-gray-500'}`} />
-                      <span className="font-mono uppercase text-xs sm:text-sm tracking-wider font-bold">{screen.badge}</span>
+                    <div className="flex items-center gap-2.5">
+                      <span className={`w-2 h-2 rounded-full ${isSelected ? 'bg-cyan-400 animate-pulse' : 'bg-gray-500'}`} />
+                      <span>{screen.label}</span>
                     </div>
-                    <span className={`text-[11px] ${isSelected ? 'text-gray-800 font-semibold' : 'text-gray-400'}`}>
-                      {screen.label}
+                    <span className="text-[10px] font-mono uppercase text-gray-400 tracking-wider">
+                      {screen.badge}
                     </span>
                   </button>
                 );
@@ -365,7 +362,7 @@ const BehanceProjectCard = ({ project, index }) => {
               href={project.liveUrl} 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="flex-1 sm:flex-initial bg-cyan-600 hover:bg-sky-500 text-white text-sm font-bold px-7 py-3 rounded-full flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-900/30 hover:scale-[1.02]"
+              className="flex-1 sm:flex-initial bg-cyan-600 hover:bg-sky-500 text-white text-sm font-bold px-7 py-3 rounded-full flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-900/30/30 hover:scale-[1.02]"
             >
               <span>Explore Live Demo</span>
               <ExternalLink size={15} />
@@ -381,136 +378,87 @@ const BehanceProjectCard = ({ project, index }) => {
           </div>
         </div>
 
-        {/* Right Column: Otter POS Multi-Device Stage */}
-        <div className="lg:col-span-7 relative min-h-[460px] sm:min-h-[520px] flex items-center justify-center p-2 sm:p-4">
-          {project.isHardwareFleet ? (
-            <div className="relative w-full rounded-2xl overflow-hidden border border-white/20 bg-black shadow-2xl group/fleet">
-              {/* Master Fleet Showcase Image (Otter Reference Photo) */}
-              <div className="relative aspect-[16/9] w-full overflow-hidden bg-black">
-                <img 
-                  src={project.fleetImage || '/images/kiosk-multi-device.jpg'} 
-                  alt="Otter POS Fleet Overview" 
-                  className="w-full h-full object-cover filter brightness-[0.98] contrast-[1.04]"
-                />
-                
-                {/* Subtle dark vignette */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/25 pointer-events-none" />
-
-                {/* Hotspot 1: Cashier POS Terminal (Center) */}
-                <div 
-                  onClick={() => setActiveScreenIndex(0)}
-                  style={{ top: '44%', left: '55%' }}
-                  className="absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer z-30 transition-transform duration-300 hover:scale-110 flex flex-col items-center group/pin"
-                >
-                  <div className={`px-2.5 py-1 rounded-full text-[10px] font-mono font-bold uppercase shadow-xl flex items-center gap-1.5 transition-all ${
-                    activeScreenIndex === 0 
-                      ? 'bg-white text-black ring-2 ring-cyan-400 scale-105' 
-                      : 'bg-black/85 backdrop-blur-md text-white border border-white/30 group-hover/pin:bg-white group-hover/pin:text-black'
-                  }`}>
-                    <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                    Cashier POS
-                  </div>
-                  <div className={`w-0.5 h-3.5 ${activeScreenIndex === 0 ? 'bg-cyan-400' : 'bg-white/40'}`} />
-                </div>
-
-                {/* Hotspot 2: Primary Kiosk (Left on Pole) */}
-                <div 
-                  onClick={() => setActiveScreenIndex(1)}
-                  style={{ top: '24%', left: '26%' }}
-                  className="absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer z-30 transition-transform duration-300 hover:scale-110 flex flex-col items-center group/pin"
-                >
-                  <div className={`px-2.5 py-1 rounded-full text-[10px] font-mono font-bold uppercase shadow-xl flex items-center gap-1.5 transition-all ${
-                    activeScreenIndex === 1 
-                      ? 'bg-amber-400 text-black ring-2 ring-white scale-105' 
-                      : 'bg-black/85 backdrop-blur-md text-white border border-white/30 group-hover/pin:bg-white group-hover/pin:text-black'
-                  }`}>
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    Kiosk
-                  </div>
-                  <div className={`w-0.5 h-3.5 ${activeScreenIndex === 1 ? 'bg-amber-400' : 'bg-white/40'}`} />
-                </div>
-
-                {/* Hotspot 3: Table Management (Bottom Right Tablet) */}
-                <div 
-                  onClick={() => setActiveScreenIndex(2)}
-                  style={{ top: '74%', left: '76%' }}
-                  className="absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer z-30 transition-transform duration-300 hover:scale-110 flex flex-col items-center group/pin"
-                >
-                  <div className={`px-2.5 py-1 rounded-full text-[10px] font-mono font-bold uppercase shadow-xl flex items-center gap-1.5 transition-all ${
-                    activeScreenIndex === 2 
-                      ? 'bg-emerald-400 text-black ring-2 ring-white scale-105' 
-                      : 'bg-black/85 backdrop-blur-md text-white border border-white/30 group-hover/pin:bg-white group-hover/pin:text-black'
-                  }`}>
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    Table Management
-                  </div>
-                  <div className={`w-0.5 h-3.5 ${activeScreenIndex === 2 ? 'bg-emerald-400' : 'bg-white/40'}`} />
-                </div>
-
-                {/* Hotspot 4: KDS (Top Right Tablet) */}
-                <div 
-                  onClick={() => setActiveScreenIndex(3)}
-                  style={{ top: '16%', left: '84%' }}
-                  className="absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer z-30 transition-transform duration-300 hover:scale-110 flex flex-col items-center group/pin"
-                >
-                  <div className={`px-2.5 py-1 rounded-full text-[10px] font-mono font-bold uppercase shadow-xl flex items-center gap-1.5 transition-all ${
-                    activeScreenIndex === 3 
-                      ? 'bg-rose-400 text-black ring-2 ring-white scale-105' 
-                      : 'bg-black/85 backdrop-blur-md text-white border border-white/30 group-hover/pin:bg-white group-hover/pin:text-black'
-                  }`}>
-                    <span className="w-2 h-2 rounded-full bg-rose-400 animate-pulse" />
-                    KDS / Live View
-                  </div>
-                  <div className={`w-0.5 h-3.5 ${activeScreenIndex === 3 ? 'bg-rose-400' : 'bg-white/40'}`} />
-                </div>
-
-                {/* Bottom Active Terminal Card & Quick Action */}
-                <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between bg-black/90 backdrop-blur-md border border-white/20 px-4 py-2.5 rounded-xl">
-                  <div className="flex items-center gap-3">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
-                    <div>
-                      <div className="text-white font-mono text-xs font-bold uppercase tracking-wider flex items-center gap-2">
-                        <span>{project.screens[activeScreenIndex]?.badge}</span>
-                        <span className="text-gray-400 text-[10px] lowercase font-normal">({project.screens[activeScreenIndex]?.label})</span>
-                      </div>
-                      <p className="text-gray-400 text-[10px] hidden sm:block">
-                        {project.screens[activeScreenIndex]?.desc || 'Omnichannel GraphQL state sync in under 0.8s.'}
-                      </p>
-                    </div>
-                  </div>
-                  <a 
-                    href={project.liveUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="px-4 py-1.5 rounded-full bg-cyan-600 hover:bg-sky-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-lg transition-transform hover:scale-105 whitespace-nowrap"
-                  >
-                    Launch Live Demo <ExternalLink size={12} />
-                  </a>
-                </div>
+        {/* Right Column: Otter OS Multi-Device Collage Stage */}
+        <div className="lg:col-span-7 relative min-h-[380px] sm:min-h-[460px] flex items-center justify-center">
+          
+          {/* Main Primary Screen (Center-Left) */}
+          <div className="w-[85%] sm:w-[80%] rounded-2xl overflow-hidden border border-white/20 bg-[#12151e] shadow-2xl relative z-20 transition-all duration-500">
+            {/* Window Top Bar */}
+            <div className="bg-[#181c28] px-4 py-2.5 border-b border-white/10 flex items-center justify-between">
+              <div className="flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-rose-500/90" />
+                <span className="w-2.5 h-2.5 rounded-full bg-amber-500/90" />
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/90" />
+              </div>
+              <div className="bg-black/50 border border-white/10 text-gray-400 text-[10px] font-mono px-3 py-0.5 rounded-full truncate max-w-[200px]">
+                {activeScreen.badge} · {project.title}
+              </div>
+              <div className="flex items-center gap-1.5 text-emerald-400 text-[10px] font-bold">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Live View
               </div>
             </div>
-          ) : (
-            <div className="relative w-full h-full flex items-end justify-center pt-8 pb-8">
-              {/* Default multi-device collage for other projects */}
-              <div 
-                onClick={() => setActiveScreenIndex(0)}
-                className={`relative z-20 transition-all duration-500 cursor-pointer flex flex-col items-center ${
-                  activeScreenIndex === 0 ? 'scale-105 z-30' : 'scale-95 opacity-85 hover:opacity-100 hover:scale-100'
-                }`}
-                style={{ width: '70%' }}
-              >
-                <div className="w-full rounded-2xl p-2.5 bg-gradient-to-b from-[#222838] to-[#121622] border border-white/20 shadow-2xl">
-                  <div className="relative rounded-xl overflow-hidden bg-black aspect-[16/10]">
-                    <img 
-                      src={project.screens[activeScreenIndex]?.image || project.screens[0]?.image} 
-                      alt={project.screens[activeScreenIndex]?.label} 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
+
+            {/* Screen Image with smooth transition */}
+            <div className="relative aspect-[16/10] overflow-hidden bg-black">
+              <motion.img 
+                key={activeScreen.image}
+                src={activeScreen.image} 
+                alt={activeScreen.label} 
+                initial={{ opacity:0, scale:1.04 }}
+                animate={{ opacity:1, scale:1 }}
+                transition={{ duration:0.4 }}
+                className="w-full h-full object-cover filter brightness-[0.95]" 
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-50" />
+              
+              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                <span className="px-3 py-1 rounded-full bg-black/85 backdrop-blur-md border border-white/20 text-white font-mono text-[11px] font-bold">
+                  {activeScreen.label}
+                </span>
+                <a 
+                  href={project.liveUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="px-3.5 py-1 rounded-full bg-cyan-600 hover:bg-sky-500 text-white font-bold text-[11px] flex items-center gap-1 shadow-lg"
+                >
+                  Test Demo <ArrowRight size={11} />
+                </a>
               </div>
             </div>
-          )}
+          </div>
+
+          {/* Secondary Floating Screen (Top-Right Angle) - Clickable to switch */}
+          <div 
+            onClick={() => setActiveScreenIndex((activeScreenIndex + 1) % project.screens.length)}
+            className="absolute top-2 right-0 w-[48%] sm:w-[45%] rounded-xl overflow-hidden border border-white/20 bg-[#161a26] shadow-2xl z-10 cursor-pointer transform hover:scale-105 hover:z-30 transition-all duration-300 opacity-90 hover:opacity-100"
+            title="Click to view this screen"
+          >
+            <div className="bg-[#1f2434] px-3 py-1.5 border-b border-white/10 flex items-center justify-between text-[10px] text-gray-300 font-mono">
+              <span className="truncate">{nextScreen1.badge}</span>
+              <span className="text-cyan-400 font-bold">View ↗</span>
+            </div>
+            <div className="aspect-[16/10] bg-black overflow-hidden relative">
+              <img src={nextScreen1.image} alt={nextScreen1.label} className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-black/30 hover:bg-transparent transition-colors" />
+            </div>
+          </div>
+
+          {/* Tertiary Floating Device (Bottom-Right Angle) - Clickable to switch */}
+          <div 
+            onClick={() => setActiveScreenIndex((activeScreenIndex + 2) % project.screens.length)}
+            className="absolute -bottom-4 right-4 sm:right-6 w-[42%] sm:w-[38%] rounded-xl overflow-hidden border border-white/25 bg-[#121622] shadow-2xl z-30 cursor-pointer transform hover:scale-105 transition-all duration-300 hover:border-cyan-400"
+            title="Click to view this screen"
+          >
+            <div className="bg-[#181d2a] px-3 py-1 border-b border-white/10 flex items-center justify-between text-[10px] text-gray-300 font-mono">
+              <span className="truncate">{nextScreen2.badge}</span>
+              <span className="text-cyan-400 font-bold">View ↗</span>
+            </div>
+            <div className="aspect-[16/10] bg-black overflow-hidden relative">
+              <img src={nextScreen2.image} alt={nextScreen2.label} className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-black/25 hover:bg-transparent transition-colors" />
+            </div>
+          </div>
+
         </div>
 
       </div>
